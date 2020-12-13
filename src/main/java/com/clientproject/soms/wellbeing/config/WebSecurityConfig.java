@@ -1,4 +1,4 @@
-package com.clientproject.soms.wellbeing;
+package com.clientproject.soms.wellbeing.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.authorizeRequests()
                 .mvcMatchers("/*").permitAll()
                 .mvcMatchers("/").permitAll()
+                .mvcMatchers("/bootstrap/*").permitAll()
                 .and()
                 .formLogin();
     }
