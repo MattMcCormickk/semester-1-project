@@ -10,4 +10,9 @@ public class GeneralController {
     public String rootRedirect() {
         return "Fragments";
     }
+
+    @RequestMapping("/uregister")
+    public String userRegistration(){
+        return "UserRegistration";
+    }
 }
