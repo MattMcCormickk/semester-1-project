@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.Thymeleaf.org">
+<head th:replace="Fragments::siteHead">
+    <meta charset="UTF-8">
+    <title>Create Activity</title>
+</head>
+<body>
+    <header th:replace="Fragments::siteHeader"></header>
+
+    <main>
+      <form class="text-center">
+          <div class="form-group">
+              <label>Activity ID</label>
+              <input type="text" class="form-control"  placeholder="ActivityID">
+          </div>
+          <div class="form-group">
+            <label for="Description">Description</label><br>
+                <textarea id="Description" name="Description"
+                  rows="5" cols="50">
+                    Enter Description here...
+                </textarea>
+          </div>
+          <div class="form-group">
+            <label for="Location">Location</label><br>
+                <textarea id="Location" name="Location"
+                  rows="5" cols="50">
+                    Enter Location here...
+                </textarea>
+          </div>
+          <div class="form-group">
+            <label for="Keywords">Keywords</label><br>
+                <textarea id="Keywords" name="Keywords"
+                  rows="5" cols="50">
+                    Enter Keywords here...
+                </textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </main>
+
+    <footer th:replace="Fragments::siteFooter"></footer>
+    <span th:replace="Fragments::endSpan"> </span>
+</body>
+</html>
