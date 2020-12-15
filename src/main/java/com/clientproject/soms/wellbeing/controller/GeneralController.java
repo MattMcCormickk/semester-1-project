@@ -8,11 +8,27 @@ public class GeneralController {
 
     @RequestMapping(path = "/")
     public String rootRedirect() {
-        return "Fragments";
+        return "Home";
     }
 
-    @RequestMapping("/uregister")
-    public String userRegistration(){
-        return "UserRegistration";
+    @RequestMapping(path = "/Home")
+    public String displayHome() {
+        return "Home";
     }
+
+    @RequestMapping("/ActivityDataCapture")
+    public String activityDataCapture(){
+        return "ActivityDataCapture";
+    }
+
+    @RequestMapping("/CustomizableDataCapture")
+    public String customizableDataCapture(){
+        return "CustomizableDataCapture";
+    }
+
+    @RequestMapping("/Dashboard")
+    public String dashboard(){
+        return "Dashboard";
+    }
+
 }

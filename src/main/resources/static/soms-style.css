@@ -1,0 +1,146 @@
+*{
+    margin: -1px;
+}
+body h1{
+    font-size: 1.5rem;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.navbar h1{
+   font-size: 1.2rem;
+}
+.navbar{
+    display: flex;
+    float: left;
+    background-color: #660066;
+    color: white;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.container-fluid{
+    background-color: #660066;
+}
+
+#navbarDropdownMenuLink1, #navbarDropdownMenuLink2, #appName, #home, #reports{
+    color: white;
+}
+
+
+.soms-footer{
+    display: flex;
+    float: left;
+    background-color: #a6a6a6;
+    color: black;
+    width: 100%;
+    padding-left: 20px;
+    font-size: 0.8rem;
+    margin-top: 50px;
+}
+.footer-content{
+    padding-left: 20px;
+    color: white;
+    flex: 2;
+}
+.footer-content a{
+    padding-left: 20px;
+}
+
+.dropbtn {
+    background-color: black;
+    color: white;
+    padding-right: 100px;
+    font-size: 16px;
+    border: solid 1px white;
+}
+
+.dropbtn a{
+    background-color: black;
+    color: white;
+}
+.dropbtn a:hover{
+    background-color: #0099cc;
+}
+.nav-item{
+    padding-left: 80px;
+}
+.nav-item a:hover{
+    background-color: #0099cc;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #0099cc; color: black;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+/*.dropdown:hover .dropbtn {background-color: #0099cc;}*/
+
+.logo{
+    /* display: flex; */
+    width: 175px;
+    height: 100px;
+    float: left;
+}
+.slides{
+    /* width: 80%; */
+    /* height: 70%; */
+    /* padding-left: 100px; */
+    /* flex: 2; */
+}
+.hidden{
+    visibility: hidden;
+}
+.flexContainer{
+    flex: 3;
+    padding-left: 400px;
+    width: 50%;
+}
+
+.flexContainer h1 {
+    padding-bottom: 20px;
+}
+
+.submitButton{
+    background-color: #660066;
+    color: white;
+    width: 100px;
+    height: 40px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+}
+
+#submitButton:hover{
+    background-color: #0099cc;
+    color: black;
+}
+
+.logo{
+    width: 100px;
+    height: 50px;
+}
+
+.carouselContainer {
+    width: 70%;
+    height: 50%;
+    margin-left: 200px;
+}
