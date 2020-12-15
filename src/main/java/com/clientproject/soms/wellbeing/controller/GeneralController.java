@@ -31,4 +31,14 @@ public class GeneralController {
         return "Dashboard";
     }
 
+    @RequestMapping("/CreateActivity")
+    public String createActivity(){
+        return "CreateActivity";
+    }
+
+    @RequestMapping("/ServiceProviderRegistration")
+    public String serviceProviderRegistration(){
+        return "ServiceProviderRegistration";
+    }
+
 }
