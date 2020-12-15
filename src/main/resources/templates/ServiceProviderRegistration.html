@@ -21,7 +21,7 @@ Activity Output ("Activity Outputs" SQL table / GitLab issue #17)
     <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<header th:replace="fragments/header :: header"></header>
 <div class="dropdown">
     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         Dropdown
@@ -64,7 +64,7 @@ Activity Output ("Activity Outputs" SQL table / GitLab issue #17)
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 
-</script>
 </html>

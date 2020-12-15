@@ -5,7 +5,7 @@
     <title>Create Activity</title>
 </head>
 <body>
-    <header th:replace="Fragments::siteHeader"></header>
+    <header th:replace="fragments/header :: header"></header>
 
     <main>
       <form class="text-center">
@@ -38,7 +38,6 @@
       </form>
     </main>
 
-    <footer th:replace="Fragments::siteFooter"></footer>
-    <span th:replace="Fragments::endSpan"> </span>
+    <footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
