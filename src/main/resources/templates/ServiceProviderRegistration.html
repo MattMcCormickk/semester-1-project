@@ -24,7 +24,7 @@ Activity Output ("Activity Outputs" SQL table / GitLab issue #17)
 
 </head>
 <body>
-<header th:replace="Fragments::siteHeader"></header>
+<header th:replace="fragments/header :: header"></header>
 
 <ul class="nav nav-tabs nav-justified">
     <li role="presentation" class="active"><a href="#">Service Provider Registration</a></li>
@@ -69,7 +69,7 @@ Activity Output ("Activity Outputs" SQL table / GitLab issue #17)
     </form>
 </main>
 
-<footer th:replace="Fragments::siteFooter"></footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 <span th:replace="Fragments::endSpan"> </span>
 
 </body>
