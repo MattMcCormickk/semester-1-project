@@ -16,7 +16,7 @@ body h1{
 .navbar{
     display: flex;
     float: left;
-    background-color: #660066;
+    background-color: #4d004d;
     color: white;
     width: 100%;
     margin-bottom: 20px;
@@ -77,14 +77,17 @@ body h1{
     /* color: black; */
     color: white;
     border-radius: 5px;
-    /* font-weight: bold; */
+    /*font-weight: bold;*/
     font-size: 1.2rem;
     /* border: solid 1px white; */
 }
 
 .nav-item a:hover{
     background-color: #0099cc;
+    color: black;
     border: solid 2px white;
+    /*font-weight: bold;*/
+    font-size: 1.2rem;
 }
 
 .dropdown {
