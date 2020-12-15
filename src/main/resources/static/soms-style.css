@@ -116,6 +116,16 @@ body h1{
     width: 50%;
 }
 
+.flexContainerCustomize {
+    flex: 5;
+    padding-left: 300px;
+}
+
+.flexDashboard {
+    flex: 5;
+    padding-left: 50px;
+}
+
 .flexContainer h1 {
     padding-bottom: 20px;
 }
