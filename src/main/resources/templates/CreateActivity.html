@@ -16,7 +16,7 @@
 
     <main>
 
-      <form class="text-center">
+      <form class="text-center" method = "post" action="#">
           <div class="form-group">
               <label>Activity Name</label>
               <input type="text" class="form-control"  placeholder="ActivityName">
@@ -49,12 +49,15 @@
           <button type="save" class="btn btn-primary">Save</button>
       </form>
 
-        <div>
-            <h3>Activity Name</h3>
-            <h3>Activity Name</h3>
-            <h3>Activity Name</h3>
-            <h3>Activity Name</h3>
-        </div>
+        <table id="ActivityTable">
+            <tr><td>Saved Activities</td></tr>
+            <tr>
+                
+               <!--/*@thymesVar id="activityDTO" type=""*/-->
+               <td th:text="${activityDTO}"></td>
+
+            </tr>
+        </table>
 
         <!--
         form needs to be saved and displayed on page via mySQL
