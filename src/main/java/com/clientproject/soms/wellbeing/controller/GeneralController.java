@@ -21,4 +21,10 @@ public class GeneralController {
         return "ActivityDataCapture";
     }
 
+    @RequestMapping("/CustomizableDataCapture")
+    public String customizableDataCapture(){
+        return "CustomizableDataCapture";
+    }
+
+
 }
