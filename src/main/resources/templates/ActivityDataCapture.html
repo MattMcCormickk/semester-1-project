@@ -13,37 +13,37 @@
 </head>
 <body>
 <header th:replace="fragments/header :: header"></header>
-<div class="flexContainer">
-    <h1>Activity Data Capture</h1>
-    <form action="http://localhost:8080/myAction" method="get" id="myform">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="activityName" placeholder="Activity Name">
-            <label for="activityName">Activity Name</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="activityDate" placeholder="dd/mm/yyyy">
-            <label for="activityDate">Activity Date</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="noOfVolunteers" placeholder="No. of Volunteers">
-            <label for="noOfVolunteers">No. of Volunteers</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="noOfHours" placeholder="No. of Hours">
-            <label for="noOfHours">No. of Hours</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
-            <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="location" placeholder="Location">
-            <label for="location">Location</label>
-        </div>
-        <br>
-        <button type="submit" name="submit" class="submitButton" id="submitButton">Submit</button>
-    </form>
-</div>
+    <div class="flexContainer">
+        <h1>Activity Data Capture</h1>
+        <form action="http://localhost:8080/myAction" method="get" id="myform">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="activityName" placeholder="Activity Name">
+                <label for="activityName">Activity Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="activityDate" placeholder="dd/mm/yyyy">
+                <label for="activityDate">Activity Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="noOfVolunteers" placeholder="No. of Volunteers">
+                <label for="noOfVolunteers">No. of Volunteers</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="noOfHours" placeholder="No. of Hours">
+                <label for="noOfHours">No. of Hours</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
+                <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="location" placeholder="Location">
+                <label for="location">Location</label>
+            </div>
+            <br>
+            <button type="submit" name="submit" class="submitButton" id="submitButton">Submit</button>
+        </form>
+    </div>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
