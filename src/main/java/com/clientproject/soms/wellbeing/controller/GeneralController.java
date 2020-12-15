@@ -26,5 +26,9 @@ public class GeneralController {
         return "CustomizableDataCapture";
     }
 
+    @RequestMapping("/Dashboard")
+    public String dashboard(){
+        return "Dashboard";
+    }
 
 }
