@@ -41,4 +41,9 @@ public class GeneralController {
         return "ServiceProviderRegistration";
     }
 
+    @RequestMapping("/UserDataCapture")
+    public String UserDataCapture(){
+        return "UserDataCapture";
+    }
+
 }
