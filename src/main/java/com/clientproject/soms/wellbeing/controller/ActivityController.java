@@ -21,18 +21,8 @@ public class ActivityController {
         activityRepo = pRepo;
     }
 
-    /*
-    @RequestMapping(path="/Student", method = RequestMethod.GET)
-    public ModelAndView search(@RequestParam(value="surname", defaultValue="null") String surnameString) {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject(studentRepo.findStudentBySurname(surnameString));
-        mav.setViewName("StudentDetails");
-        return mav;
-    }
 
-     */
-
-    @RequestMapping(path="/Activity", method = RequestMethod.POST)
+    @RequestMapping(path="/fragments/SavedActivities", method = RequestMethod.POST)
     public ModelAndView addActivity(CreateActivity createActivity, BindingResult br) {
         ModelAndView mav = new ModelAndView();
         if (br.hasErrors()) {
