@@ -90,3 +90,5 @@ INSERT INTO USER (FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, EMAIL, TELEPHONE, ADDRES
 INSERT INTO USER (FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, EMAIL, TELEPHONE, ADDRESS, POST_CODE) VALUES ('Cassian', 'Wallis', '1995-12-16', 'cassian.wallis@user.com', '08888444411', 'North Street Chelmsford', 'CM62 0KD');
 
 INSERT INTO ACTIVITY (ACTIVITY_NAME, SERV_PROV_ID, ACTIVITY_DATE, DESCRIPTION, LOCATION, KEYWORDS) VALUES ('Rubbish Cleaning', 1, '2020-08-10', 'Cleaning Rubbish around the River Taff', 'Cardiff', '');
+INSERT INTO `soms_wellbeing`.`activity` (`ACTIVITY_NAME`, `SERV_PROV_ID`, `ACTIVITY_DATE`, `DESCRIPTION`, `LOCATION`) VALUES ('Rubbish Cleaning', '2', '2020-10-01', 'Cleaning Rubbish around the street ', 'Cardiff');
+INSERT INTO `soms_wellbeing`.`activity` (`ACTIVITY_NAME`, `SERV_PROV_ID`, `ACTIVITY_DATE`, `DESCRIPTION`, `LOCATION`) VALUES ('Rubbish Cleanning', '3', '2020-10-02', 'Cleaning rubbish on the street', 'Newcastle');
