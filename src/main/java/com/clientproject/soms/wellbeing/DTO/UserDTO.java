@@ -1,52 +1,59 @@
 package com.clientproject.soms.wellbeing.DTO;
 
+import java.util.Date;
+
 public class UserDTO {
-    private String userID;
-    private String firstname;
-    private String surname;
-    private String dateOfBirth;
+
+    private int userId;
+    private String firstName;
+    private String lastName;
+    private Date dateOfBirth;
     private String email;
     private String telephone;
     private String address;
     private String postcode;
-    private ActivityDTO[] activityDTO;
 
-    public UserDTO(String userID, String firstname, String surname, String dateOfBirth, String email,
-                       String telephone, String address, String postcode, ActivityDTO[] activityDTO){
-        this.userID = userID;
-        this.firstname = firstname;
-        this.surname = surname;
+    public UserDTO(int userId, String firstName, String lastName, Date dateOfBirth, String email,
+                   String telephone, String address, String postcode){
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.telephone = telephone;
         this.address = address;
         this.postcode = postcode;
-        this.activityDTO = activityDTO;
     }
 
-    public String getUserID() {
-        return userID;
+    public int getUserId() {
+        return userId;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public String getEmail() {return email;}
+    public String getEmail() {
+        return email;
+    }
 
-    public String getTelephone(){ return telephone;}
+    public String getTelephone() {
+        return telephone;
+    }
 
-    public String getAddress() {return address;}
+    public String getAddress() {
+        return address;
+    }
 
-    public String getPostcode() {return postcode;}
-
-    public ActivityDTO[] getActivityDTO() {return activityDTO;}
+    public String getPostcode() {
+        return postcode;
+    }
 }
