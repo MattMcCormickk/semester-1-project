@@ -16,24 +16,24 @@ body h1{
 .navbar{
     display: flex;
     float: left;
-    background-color: #4d004d;
+    /*background-color: #062F4F;*/
+    background-color: #0B3C5D;
     color: white;
     width: 100%;
     margin-bottom: 20px;
 }
 .container-fluid{
-    background-color: #4d004d;
+    background-color: #660066;
 }
 
 .soms-footer{
     display: flex;
     float: left;
-    background-color: #a6a6a6;
+    background-color: #CDA34F;
     color: black;
     width: 100%;
     padding-left: 20px;
     font-size: 0.8rem;
-    margin-top: 50px;
 }
 .footer-content{
     padding-left: 20px;
@@ -44,9 +44,23 @@ body h1{
     padding-left: 20px;
 }
 
+.allUsersContainer{
+    flex: 5;
+    width: 90%;
+    margin-left: 100px;
+    background-color: #553D67;
+}
+
+.allUsersContainer table{
+    color: white;
+}
+.tableTitle{
+    margin-left: 100px;
+}
+
 .dropbtn {
-    background-color: #d0d0d0;
-    color: black;
+    background-color: #B82601;
+    color: white;
     /*color: white;*/
     /*padding-right: 10px;*/
     /* margin-left: 10px; */
@@ -55,7 +69,7 @@ body h1{
     height: 40px;
     width: 150px;
     border-radius: 5px;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .dropbtn a{
@@ -83,9 +97,10 @@ body h1{
 }
 
 .nav-item a:hover{
-    background-color: #0099cc;
-    color: black;
-    border: solid 2px white;
+    /*background-color: #0099cc;*/
+    background-color: #B82601;
+    /*color: black;*/
+    /*border: solid 2px white;*/
     /*font-weight: bold;*/
     font-size: 1.2rem;
 }
@@ -99,8 +114,8 @@ body h1{
     display: none;
     position: absolute;
     /* background-color: black; */
-    background-color: #d0d0d0;
-    color: black;
+    background-color: #CDA34F;
+    color: white;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -112,14 +127,14 @@ body h1{
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
-.dropdown-content a:hover {background-color: #0099cc; color: black;}
+.dropdown-content a:hover {background-color: #B82601; color: white;}
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: #0099cc; border: solid 2px white;}
+/*.dropdown:hover .dropbtn {background-color: #0099cc; border: solid 2px white;}*/
 
 .logo{
     /* display: flex; */
