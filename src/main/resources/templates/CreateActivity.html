@@ -16,7 +16,7 @@
 
     <main>
 
-      <form class="text-center" method = "post" action="#">
+      <form class="text-center" method = "post" action="/Activity/">
           <div class="form-group">
               <label>Activity Name</label>
               <input type="text" class="form-control"  placeholder="ActivityName">
@@ -51,10 +51,11 @@
 
         <table id="ActivityTable">
             <tr><td>Saved Activities</td></tr>
-            <tr>
+            <tr th:each="activity: ${activity}">
                 
-               <!--/*@thymesVar id="activityDTO" type=""*/-->
-               <td th:text="${activityDTO}"></td>
+               <!--/*@thymesVar id="activity" type=""*/-->
+               <!--/*@thymesVar id="activityName" type="activityName"*/-->
+               <td th:text="${activity.activityName}"></td>
 
             </tr>
         </table>
