@@ -2,25 +2,25 @@ package com.clientproject.soms.wellbeing.DTO;
 
 public class ActivityDTO {
     private String activityName;
-    private String activityID;
+    private int activityID;
     private String Description;
     private String Location;
-    private String Keywords;
+    private String date;
 
 
-    public ActivityDTO(String activityName, String activityID, String Description, String Location, String Keywords){
+    public ActivityDTO(String activityName, int activityID, String Description, String Location, String date){
         this.activityName = activityName;
         this.activityID = activityID;
         this.Description = Description;
         this.Location = Location;
-        this.Keywords = Keywords;
+        this.date = date;
     }
 
     public String getActivityName() {
         return activityName;
     }
 
-    public String getActivityID() {
+    public int getActivityID() {
         return activityID;
     }
 
@@ -33,7 +33,7 @@ public class ActivityDTO {
     }
 
     public String getKeywords() {
-        return Keywords;
+        return date;
     }
 
 }

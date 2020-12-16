@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ActivityRepository {
     public Object findActivityByActivityName(String activityName);
-    public Object findActivityByActivityID(String activityID);
+    public Object findActivityByActivityID(int activityID);
     boolean addActivity(CreateActivity createActivity);
 
     List<ActivityDTO> findAllActivities();

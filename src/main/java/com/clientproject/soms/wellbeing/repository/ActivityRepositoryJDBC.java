@@ -44,7 +44,7 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
     }
 
     @Override
-    public ActivityDTO findActivityByActivityID(String activityID) {
+    public ActivityDTO findActivityByActivityID(int activityID) {
         ActivityDTO activityDTO = (ActivityDTO) jdbcTemplate.queryForObject(
                 "select activityName, activityID,description, location, keywords",
                 new Object[]{activityID}, new ActivityMapper());
