@@ -17,7 +17,7 @@ public class ActivityMapper implements RowMapper {
                 rs.getInt("ACTIVITY_ID"),
                 rs.getString("DESCRIPTION"),
                 rs.getString("LOCATION"),
-                rs.getString("ACTIV ITY_DATE")
+                rs.getDate("ACTIVITY_DATE")
                 );
     }
 }

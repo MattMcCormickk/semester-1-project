@@ -1,14 +1,16 @@
 package com.clientproject.soms.wellbeing.DTO;
 
+import java.util.Date;
+
 public class ActivityDTO {
     private String activityName;
     private int activityID;
     private String description;
     private String location;
-    private String date;
+    private Date date;
 
 
-    public ActivityDTO(String activityName, int activityID, String description, String location, String date) {
+    public ActivityDTO(String activityName, int activityID, String description, String location,Date date) {
         this.activityName = activityName;
         this.activityID = activityID;
         this.description = description;
@@ -32,7 +34,7 @@ public class ActivityDTO {
         return location;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 }
