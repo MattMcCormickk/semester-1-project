@@ -13,12 +13,11 @@ public class ActivityMapper implements RowMapper {
 
     @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new ActivityDTO(rs.getInt("ACTIVITY_ID"),
-                rs.getString("ACTIVITY_NAME"),
-                rs.getInt("SERV_PROV_ID"),
-                rs.getDate("ACTIVITY_DATE"),
+        return new ActivityDTO(rs.getString("ACTIVITY_NAME"),
+                rs.getInt("ACTIVITY_ID"),
                 rs.getString("DESCRIPTION"),
                 rs.getString("LOCATION"),
-                "******");
+                rs.getString("ACTIV ITY_DATE")
+                );
     }
 }

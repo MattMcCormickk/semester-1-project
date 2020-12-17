@@ -27,22 +27,18 @@
             <tr>
                 <th>Activity ID</th>
                 <th>Activity Name</th>
-                <th>Service provider ID</th>
                 <th>Date</th>
                 <th>Description</th>
                 <th>Location</th>
-                <th>Keywords</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="activities: ${allActivities}">
                 <td th:text="${activities.getActivityID}"></td>
                 <td th:text="${activities.activityName}"></td>
-                <td th:text="${activities.serviceProviderID}"></td>
                 <td th:text="${activities.date}"></td>
                 <td th:text="${activities.description}"></td>
                 <td th:text="${activities.location}"></td>
-                <td th:text="${activities.keywords}"></td>
             </tr>
             </tbody>
         </table>
