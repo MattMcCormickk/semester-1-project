@@ -27,11 +27,6 @@ public class GeneralController {
         return "ActivityDataCapture";
     }
 
-    @RequestMapping("/ActivityDataCaptureList")
-    public String activityDataCaptureList(){
-        return "ActivityDataCaptureList";
-    }
-
     @RequestMapping("/CustomizableDataCapture")
     public String customizableDataCapture(){
         return "CustomizableDataCapture";

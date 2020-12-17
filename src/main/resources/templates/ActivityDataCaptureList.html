@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.Thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -33,12 +33,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="activities: ${allActivities}">
-                <td th:text="${activities.getActivityID}"></td>
-                <td th:text="${activities.activityName}"></td>
-                <td th:text="${activities.date}"></td>
-                <td th:text="${activities.description}"></td>
-                <td th:text="${activities.location}"></td>
+            <tr th:each="activity: ${allActivity}">
+                <td th:text="${activity.activityID}"></td>
+                <td th:text="${activity.activityName}"></td>
+                <td th:text="${activity.date}"></td>
+                <td th:text="${activity.description}"></td>
+                <td th:text="${activity.location}"></td>
             </tr>
             </tbody>
         </table>

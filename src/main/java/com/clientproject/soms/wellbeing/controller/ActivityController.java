@@ -18,7 +18,6 @@ public class ActivityController {
 
     @GetMapping("ActivityDataCaptureList")
     public ModelAndView queryAllActivity(){
-
         ModelAndView mav = new ModelAndView();
         mav.addObject("allActivity",activityRepository.findAllActivity());
         mav.setViewName("ActivityDataCaptureList");
