@@ -54,8 +54,11 @@ body h1{
 .allUsersContainer table{
     color: white;
 }
+.allUsersContainer table tr:hover{
+    color: white;
+}
 .tableTitle{
-    margin-left: 100px;
+    text-align: center;
 }
 
 .dropbtn {
