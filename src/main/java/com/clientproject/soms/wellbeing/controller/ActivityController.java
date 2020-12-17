@@ -1,9 +1,13 @@
 package com.clientproject.soms.wellbeing.controller;
 
+import com.clientproject.soms.wellbeing.form.CreateActivity;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +33,23 @@ public class ActivityController {
         ModelAndView mav = new ModelAndView();
         mav.addObject(activityRepository.findActivityByActivityName(activityName));
         mav.setViewName("Dashboard");
+        return mav;
+    }
+
+    @RequestMapping(path="/Student", method = RequestMethod.POST)
+    public ModelAndView addActivity(CreateActivity createActivity, BindingResult br) {
+        ModelAndView mav = new ModelAndView();
+        if (br.hasErrors()) {
+            mav.setViewName("Home");
+        } else {
+            if (activityRepository.addActivity(createActivity)) {
+                System.out.println("added student");
+                mav.addObject("students", activityRepository.findAllActivity());
+                mav.setViewName("CreateActivity");
+            }else{
+                mav.setViewName("Home");
+            }
+        }
         return mav;
     }
 }
