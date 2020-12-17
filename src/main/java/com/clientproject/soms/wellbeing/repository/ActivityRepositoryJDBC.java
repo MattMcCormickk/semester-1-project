@@ -19,8 +19,10 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
     }
 
     @Override
-    public Object findActivityByActivityName(String activityName) {
-        return null;
+    public ActivityDTO findActivityByActivityName(String activityName) {
+        ActivityDTO activityDTO=(ActivityDTO) template.queryForObject("ACTIVITY_NAME,ACTIVITY_ID,DESCRIPTION,LOCATION,ACTIVITY_DATE from soms_wellbeing.activity where ACTIVITY_NAME = ?",
+              new Object[]{activityName},new ActivityMapper());
+        return activityDTO;
     }
 
     @Override
@@ -33,6 +35,7 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
         return false;
     }
 
+    //query all activity
     @Override
     public List<ActivityDTO> findAllActivity() {
         return template.query(
@@ -41,6 +44,5 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
         );
     }
 
-    //query activity data by activity name
 
 }
