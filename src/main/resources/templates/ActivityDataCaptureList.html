@@ -21,16 +21,7 @@
 <body>
 <header th:replace="fragments/header :: header"></header>
 <div class="flexDashboard">
-    <form class="form-inline">
-        <div class="form-group">
-            <label >Activity Id</label>
-            <input type="text" class="form-control" placeholder="Activity ID">
-        </div>
-        <div class="form-group">
-            <label >User Id</label>
-            <input type="text" class="form-control" placeholder="User Id">
-        </div>
-        <button type="submit" class="btn btn-info">search</button>
+    <main>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -44,36 +35,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-            </tr>
-            <tr>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-            </tr>
-            <tr>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
-                <td>xxx</td>
+            <tr th:each="activities: ${allActivities}">
+                <td th:text="${activities.getActivityID}"></td>
+                <td th:text="${activities.activityName}"></td>
+                <td th:text="${activities.serviceProviderID}"></td>
+                <td th:text="${activities.date}"></td>
+                <td th:text="${activities.description}"></td>
+                <td th:text="${activities.location}"></td>
+                <td th:text="${activities.keywords}"></td>
             </tr>
             </tbody>
         </table>
-    </form>
+    </main>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <footer th:replace="fragments/footer :: footer"></footer>

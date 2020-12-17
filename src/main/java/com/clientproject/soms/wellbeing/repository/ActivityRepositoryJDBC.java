@@ -1,53 +1,16 @@
 package com.clientproject.soms.wellbeing.repository;
 
-import com.clientproject.soms.wellbeing.DTO.ActivityDTO;
-import com.clientproject.soms.wellbeing.form.CreateActivity;
-import com.clientproject.soms.wellbeing.model.ActivityMapper;
-import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.List;
-
-@Repository
-public class ActivityRepositoryJDBC implements ActivityRepository{
-
-    private JdbcTemplate jdbcTemplate;
+public class ActivityRepositoryJDBC {
+    JdbcTemplate template;
 
     @Autowired
-    public ActivityRepositoryJDBC(JdbcTemplate aTemplate) {
-        jdbcTemplate = aTemplate;
+    public ActivityRepositoryJDBC(JdbcTemplate template) {
+        this.template = template;
     }
 
-    @Override
-    public List<ActivityDTO> findAllActivities() {
-        return jdbcTemplate.query(
-                "select activityName, activityID,description, location, keywords",
-                new ActivityMapper());
-    }
+    //query activity data by activity name
 
-    @Override
-    public boolean addActivity(CreateActivity createActivity){
-        int rows = jdbcTemplate.update(
-                "insert into Activity (activityName, activityID, description, location, keywords) values(?,?,?,?,?)" ,
-                new Object[]{createActivity.getActivityName(), createActivity.getActivityID(), createActivity.getDescription(),
-                createActivity.getLocation(), createActivity.getKeywords() });
-        return rows>0;
-    }
-
-    @Override
-    public ActivityDTO findActivityByActivityName(String activityName){
-        ActivityDTO activityDTO = (ActivityDTO) jdbcTemplate.queryForObject(
-                "select activityName, activityID,description, location, keywords",
-                new Object[]{activityName}, new ActivityMapper());
-        return activityDTO;
-    }
-
-    @Override
-    public ActivityDTO findActivityByActivityID(int activityID) {
-        ActivityDTO activityDTO = (ActivityDTO) jdbcTemplate.queryForObject(
-                "select activityName, activityID,description, location, keywords",
-                new Object[]{activityID}, new ActivityMapper());
-        return activityDTO;
-    }
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -22,55 +22,37 @@
 <header th:replace="fragments/header :: header"></header>
 <div class="flexDashboard">
   <form class="form-inline">
-      <div class="form-group">
+      <!--<div class="form-group">
           <label >Activity Id</label>
           <input type="text" class="form-control" placeholder="Activity ID">
-      </div>
+      </div>-->
       <div class="form-group">
           <label >User Id</label>
-          <input type="text" class="form-control" placeholder="User Id">
+          <input type="text" name="activityName" class="form-control" placeholder="User Id">
       </div>
-      <button type="submit" class="btn btn-info">search</button>
+      <a type="submit" class="btn btn-info" th:href="@{/FindActivity}">search</a>
       <table class="table table-striped">
           <thead>
           <tr>
+              <th>Activity ID</th>
               <th>Activity Name</th>
-              <th>User Name</th>
-              <th>Date of Activity</th>
-              <th>No. of hours</th>
-              <th>No. of Volunteers</th>
+              <th>Service provider ID</th>
+              <th>Date</th>
+              <th>Description</th>
               <th>Location</th>
-              <th>Outputs</th>
+              <th>Keywords</th>
           </tr>
           </thead>
           <tbody>
           <tr>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-          </tr>
-          <tr>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-          </tr>
-          <tr>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-              <td>xxx</td>
-          </tr>
+              <td th:text="${findActivity.getActivityID()}"></td>
+              <td th:text="${findActivity.getActivityName()}"></td>
+              <td th:text="${findActivity.getServiceProviderID()}"></td>
+              <td th:text="${findActivity.getDate()}"></td>
+              <td th:text="${findActivity.getDescription()}"></td>
+              <td th:text="${findActivity.getLocation()}"></td>
+              <td th:text="${findActivity.getKeywords()}"></td>
+          </tr>findActivity
           </tbody>
       </table>
   </form>
