@@ -3,6 +3,7 @@ package com.clientproject.soms.wellbeing.controller;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -15,6 +16,7 @@ public class ActivityController {
         this.activityRepository = aRepo;
     }
 
+    @GetMapping("ActivityDataCaptureList")
     public ModelAndView queryAllActivity(){
 
         ModelAndView mav = new ModelAndView();
