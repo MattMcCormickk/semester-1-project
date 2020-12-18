@@ -45,7 +45,7 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
     @Override
     public List<ActivityDTO> findAllActivity() {
         return template.query(
-                "select ACTIVITY_NAME,ACTIVITY_ID,DESCRIPTION,LOCATION,ACTIVITY_DATE from soms_wellbeing.activity",
+                "select ACTIVITY_NAME,ACTIVITY_ID,SERV_PROV_ID,DESCRIPTION,LOCATION,ACTIVITY_DATE,KEYWORDS from soms_wellbeing.activity",
                 new ActivityMapper()
         );
     }

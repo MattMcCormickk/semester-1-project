@@ -15,9 +15,11 @@ public class ActivityMapper implements RowMapper {
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new ActivityDTO(rs.getString("ACTIVITY_NAME"),
                 rs.getInt("ACTIVITY_ID"),
+                rs.getInt("SERV_PROV_ID"),
                 rs.getString("DESCRIPTION"),
                 rs.getString("LOCATION"),
-                rs.getDate("ACTIVITY_DATE")
+                rs.getDate("ACTIVITY_DATE"),
+                rs.getString("KEYWORDS")
                 );
     }
 }

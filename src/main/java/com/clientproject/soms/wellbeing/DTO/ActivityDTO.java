@@ -5,17 +5,21 @@ import java.util.Date;
 public class ActivityDTO {
     private String activityName;
     private int activityID;
+    private int serProID;
     private String description;
     private String location;
     private Date date;
+    private String keyWords;
 
 
-    public ActivityDTO(String activityName, int activityID, String description, String location,Date date) {
+    public ActivityDTO(String activityName, int activityID, int serProID, String description, String location, Date date, String keyWords) {
         this.activityName = activityName;
         this.activityID = activityID;
+        this.serProID = serProID;
         this.description = description;
         this.location = location;
         this.date = date;
+        this.keyWords = keyWords;
     }
 
     public String getActivityName() {
@@ -24,6 +28,10 @@ public class ActivityDTO {
 
     public int getActivityID() {
         return activityID;
+    }
+
+    public int getSerProID() {
+        return serProID;
     }
 
     public String getDescription() {
@@ -36,5 +44,9 @@ public class ActivityDTO {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getKeyWords() {
+        return keyWords;
     }
 }

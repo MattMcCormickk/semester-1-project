@@ -27,18 +27,22 @@
             <tr>
                 <th>Activity ID</th>
                 <th>Activity Name</th>
+                <th>Service Provider ID</th>
                 <th>Date</th>
                 <th>Description</th>
                 <th>Location</th>
+                <th>Keywords</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="activity: ${allActivity}">
                 <td th:text="${activity.activityID}"></td>
                 <td th:text="${activity.activityName}"></td>
+                <td th:text="${activity.serProID}"></td>
                 <td th:text="${activity.date}"></td>
                 <td th:text="${activity.description}"></td>
                 <td th:text="${activity.location}"></td>
+                <td th:text="${activity.keyWords}"></td>
                 <td><a href="#link" class="btn btn-success" role="button">Capture Activity</a></td>
             </tr>
             </tbody>
