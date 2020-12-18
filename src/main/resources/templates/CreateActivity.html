@@ -22,8 +22,12 @@
               <input type="text" class="form-control"  placeholder="ActivityName">
           </div>
           <div class="form-group">
-              <label>Activity ID</label>
-              <input type="text" class="form-control"  placeholder="ActivityID">
+              <label>Your ID</label>
+              <input type="text" class="form-control"  placeholder="ServiceProviderID">
+          </div>
+          <div class="form-group">
+              <label>Activity Date</label>
+              <input type="date" class="form-control"  placeholder="ActivityDate">
           </div>
           <div class="form-group">
             <label for="Description">Description</label><br>
@@ -49,18 +53,23 @@
           <button type="save" class="btn btn-primary">Save</button>
       </form>
 
-        <table id="ActivityTable">
+        <table class="table table-hover">
             <tr><td>Saved Activities</td></tr>
-            <tr th:each="activity: ${activity}">
-                
-               <!--/*@thymesVar id="activity" type=""*/-->
-               <!--/*@thymesVar id="activityName" type="activityName"*/-->
-               <td th:text="${activity}"></td>
+            <tr>
+                <th scope="col">Activity Name</th>
+                <th scope="col">Activity Date</th>
+                <th scope="col">Activity Location</th>
+            </tr>
 
+            <tr th:each="activity: ${all_activity}">
+                <td th:text="${activity.activityName}"></td>
+                <td th:text="${activity.date}"></td>
+                <td th:text="${activity.location}"></td>
+                <td><a href="#link" class="btn btn-success" role="button">Submit</a></td>
             </tr>
         </table>
 
-        <!--
+               <!--
         form needs to be saved and displayed on page via mySQL
         next move for SP is to send form answers to BEE the difference which displays answers and includes form label USER id and metrics
         -->

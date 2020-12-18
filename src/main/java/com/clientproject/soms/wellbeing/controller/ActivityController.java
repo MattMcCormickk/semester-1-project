@@ -36,7 +36,8 @@ public class ActivityController {
         return mav;
     }
 
-    @RequestMapping(path="/Student", method = RequestMethod.POST)
+    /*
+    @RequestMapping(path="/Activity", method = RequestMethod.POST)
     public ModelAndView addActivity(CreateActivity createActivity, BindingResult br) {
         ModelAndView mav = new ModelAndView();
         if (br.hasErrors()) {
@@ -52,4 +53,15 @@ public class ActivityController {
         }
         return mav;
     }
+
+     */
+
+    @RequestMapping(path = "/CreateActivity", method = RequestMethod.GET)
+    public ModelAndView search(){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("all_activity", activityRepository.findAllActivity());
+        mav.setViewName("CreateActivity");
+        return mav;
+    }
+
 }
