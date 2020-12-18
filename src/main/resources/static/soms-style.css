@@ -48,15 +48,15 @@ body h1{
     flex: 5;
     width: 90%;
     margin-left: 100px;
-    background-color: #553D67;
+    /*background-color: #BC4639;*/
 }
 
 .allUsersContainer table{
-    color: white;
+    /*color: white;*/
 }
 
 .allUsersContainer table tr:hover{
-    color: white;
+    /*color: white;*/
 }
 .tableTitle{
     text-align: left;
