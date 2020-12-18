@@ -1,19 +1,25 @@
 package com.clientproject.soms.wellbeing.DTO;
 
+import java.util.Date;
+
 public class ActivityDTO {
     private String activityName;
     private int activityID;
+    private int serProID;
     private String description;
     private String location;
-    private String date;
+    private Date date;
+    private String keyWords;
 
 
-    public ActivityDTO(String activityName, int activityID, String description, String location, String date) {
+    public ActivityDTO(String activityName, int activityID, int serProID, String description, String location, Date date, String keyWords) {
         this.activityName = activityName;
         this.activityID = activityID;
+        this.serProID = serProID;
         this.description = description;
         this.location = location;
         this.date = date;
+        this.keyWords = keyWords;
     }
 
     public String getActivityName() {
@@ -24,6 +30,10 @@ public class ActivityDTO {
         return activityID;
     }
 
+    public int getSerProID() {
+        return serProID;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -32,7 +42,11 @@ public class ActivityDTO {
         return location;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
+    }
+
+    public String getKeyWords() {
+        return keyWords;
     }
 }
