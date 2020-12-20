@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
@@ -13,15 +14,24 @@
 <body>
 <div class="saved" th:fragment="savedActivity">
 
-<table id="ActivityTable">
-    <tr><td>Saved Activities</td></tr>
+    <table class="table table-hover">
+        <tr><td>Saved Activities</td></tr>
+        <tr>
+            <th scope="col">Activity Name</th>
+            <th scope="col">Activity Date</th>
+            <th scope="col">Activity Location</th>
+        </tr>
 
-
-
-    </tr>
-</table>
+        <tr th:each="activity: ${all_activity}">
+            <td th:text="${activity.activityName}"></td>
+            <td th:text="${activity.date}"></td>
+            <td th:text="${activity.location}"></td>
+            <td><a href="#link" class="btn btn-success" role="button">Submit</a></td>
+        </tr>
+    </table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>
+-->

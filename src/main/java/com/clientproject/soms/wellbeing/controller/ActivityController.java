@@ -36,16 +36,16 @@ public class ActivityController {
         return mav;
     }
 
-    /*
-    @RequestMapping(path="/Activity", method = RequestMethod.POST)
+
+    @RequestMapping(path="/CreateActivity/", method = RequestMethod.POST)
     public ModelAndView addActivity(CreateActivity createActivity, BindingResult br) {
         ModelAndView mav = new ModelAndView();
         if (br.hasErrors()) {
             mav.setViewName("Home");
         } else {
             if (activityRepository.addActivity(createActivity)) {
-                System.out.println("added student");
-                mav.addObject("students", activityRepository.findAllActivity());
+                System.out.println("added activity");
+                mav.addObject("all_activity", activityRepository.findAllActivity());
                 mav.setViewName("CreateActivity");
             }else{
                 mav.setViewName("Home");
@@ -54,7 +54,6 @@ public class ActivityController {
         return mav;
     }
 
-     */
 
     @RequestMapping(path = "/CreateActivity", method = RequestMethod.GET)
     public ModelAndView search(){
@@ -63,5 +62,7 @@ public class ActivityController {
         mav.setViewName("CreateActivity");
         return mav;
     }
+
+
 
 }
