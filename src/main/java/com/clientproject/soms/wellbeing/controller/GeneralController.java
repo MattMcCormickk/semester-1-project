@@ -48,4 +48,10 @@ public class GeneralController {
         return "UserDataCapture";
     }
 
+    @RequestMapping(path="/CreateActivity", method = RequestMethod.GET)
+    public ModelAndView activityCreation(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("CreateActivity");
+        return mav;
+    }
 }

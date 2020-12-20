@@ -37,7 +37,7 @@ public class ActivityController {
     }
 
 
-    @RequestMapping(path="/CreateActivity/", method = RequestMethod.POST)
+    @RequestMapping(path="/CustomizableDataCapture/", method = RequestMethod.POST)
     public ModelAndView addActivity(CreateActivity createActivity, BindingResult br) {
         ModelAndView mav = new ModelAndView();
         if (br.hasErrors()) {
@@ -46,7 +46,7 @@ public class ActivityController {
             if (activityRepository.addActivity(createActivity)) {
                 System.out.println("added activity");
                 mav.addObject("all_activity", activityRepository.findAllActivity());
-                mav.setViewName("CreateActivity");
+                mav.setViewName("CustomizableDataCapture");
             }else{
                 mav.setViewName("Home");
             }
@@ -55,13 +55,14 @@ public class ActivityController {
     }
 
 
-    @RequestMapping(path = "/CreateActivity", method = RequestMethod.GET)
+    @RequestMapping(path = "/Activities", method = RequestMethod.GET)
     public ModelAndView search(){
         ModelAndView mav = new ModelAndView();
         mav.addObject("all_activity", activityRepository.findAllActivity());
-        mav.setViewName("CreateActivity");
+        mav.setViewName("SavedActivities");
         return mav;
     }
+
 
 
 
