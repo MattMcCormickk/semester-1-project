@@ -54,6 +54,8 @@ public class ActivityController {
     }
 
  */
+
+
     @RequestMapping(path="/CustomizeForm", method = RequestMethod.POST)
     public ModelAndView addActivity(CreateActivity createActivity) {
         ModelAndView mav = new ModelAndView();
@@ -68,6 +70,7 @@ public class ActivityController {
 
         return mav;
     }
+
 
 
     @RequestMapping(path = "/Activities", method = RequestMethod.GET)

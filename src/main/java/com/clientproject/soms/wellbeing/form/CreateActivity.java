@@ -13,11 +13,11 @@ public class CreateActivity {
 
         public CreateActivity(String activityName, int serviceProviderID, Date date, String description, String Location, String Keywords) {
             this.activityName = activityName;
+            this.serviceProviderID = serviceProviderID;
+            this.date = date;
             this.Description = description;
             this.Location = Location;
             this.Keywords = Keywords;
-            this.serviceProviderID = serviceProviderID;
-            this.date = date;
         }
 
         public String getActivityName() {
@@ -36,7 +36,10 @@ public class CreateActivity {
             return Keywords;
         }
 
-        public int getServiceProviderID(){return serviceProviderID;}
+        public int getServiceProviderID(){
+            return serviceProviderID;
+
+        }
 
         public Date getActivityDate(){return date;}
     }
