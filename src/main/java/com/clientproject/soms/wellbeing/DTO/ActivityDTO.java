@@ -1,10 +1,11 @@
 package com.clientproject.soms.wellbeing.DTO;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ActivityDTO {
     private String activityName;
     private int activityID;
+    private int serProID;
     private String description;
     private String location;
     private Date date;
@@ -16,6 +17,7 @@ public class ActivityDTO {
     public ActivityDTO(int activityID, String activityName, int serviceProviderID, Date date, String description, String location, String keywords) {
         this.activityName = activityName;
         this.activityID = activityID;
+        this.serProID = serProID;
         this.description = description;
         this.location = location;
         this.date = date;
@@ -29,6 +31,10 @@ public class ActivityDTO {
 
     public int getActivityID() {
         return activityID;
+    }
+
+    public int getSerProID() {
+        return serProID;
     }
 
     public String getDescription() {

@@ -21,7 +21,7 @@ body h1{
     background-color: #0B3C5D;
     color: white;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .container-fluid{
     background-color: #660066;
@@ -49,17 +49,19 @@ body h1{
     flex: 5;
     width: 90%;
     margin-left: 100px;
-    background-color: #553D67;
+    /*background-color: #BC4639;*/
 }
 
 .allUsersContainer table{
-    color: white;
+    /*color: white;*/
 }
+
 .allUsersContainer table tr:hover{
-    color: white;
+    /*color: white;*/
 }
 .tableTitle{
-    text-align: center;
+    text-align: left;
+    font-size: 1.5rem;
 }
 
 .dropbtn {
@@ -201,9 +203,21 @@ body h1{
     height: 50%;
     margin-left: 200px;
 }
-
-#all_activity_button{
-    margin: 1em;
-    justify-content: center;
+.search-text{
+    /*margin-left: 400px;*/
+    width: 80%;
+    margin-bottom: 5px;
+}
+.search-text .form-control {
+    padding-left: 2.5rem;
+}
+.search-text .search-icon {
+    position: absolute;
+    display: block;
+    width: 2.75rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
     text-align: center;
+    pointer-events: none;
+    color: black;
 }
