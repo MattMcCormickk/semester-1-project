@@ -1,3 +1,5 @@
+<!--PAGE DISPLAYS ALL ACTIVITIES
+ACTIVITIES CAN BE SELECTED AND RE-USED-->
 
 <!DOCTYPE html>
 <html lang="en"
@@ -27,15 +29,16 @@
             <th scope="col">Use Activity</th>
         </tr>
 
-        <tr th:each="activity: ${all_activity}">
+        <!--/*@thymesVar id="activity" type=""*/-->
+        <tr th:each="activity: ${activity}">
             <td th:text="${activity.activityName}"></td>
-            <td th:text="${activity.activityID}"></td>
+            <td th:text="${activity.serviceProviderID}"></td>
             <td th:text="${activity.description}"></td>
             <td th:text="${activity.location}"></td>
             <td th:text="${activity.date}"></td>
             <td><form action="/CustomizableDataCapture" id="customize_activity_button" method = "post">
                 <input action="/Activities" type="submit">
-            </form>
+            </form> <!--SUBMIT ENTIRE ROW AS FORM WITH SAME PARAMS AS CreateActivity -->
             </td>
         </tr>
     </table>

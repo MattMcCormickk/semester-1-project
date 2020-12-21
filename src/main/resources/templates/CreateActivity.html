@@ -1,3 +1,4 @@
+<!--PAGE FOR ACTIVITY FORM CREATION-->
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -17,14 +18,14 @@
     <main>
         <h1>Create Activity</h1>
 
-      <form class="text-center" method = "post"  th:action="CustomizableDataCapture">
+      <form class="text-center" th:method = "post"  th:action="${'/CustomizeForm/'}">
           <div class="form-group">
               <label>Activity Name</label>
               <input type="text" class="form-control"  placeholder="ActivityName">
           </div>
           <div class="form-group">
               <label>Your ID</label>
-              <input type="text" class="form-control"  placeholder="ServiceProviderID">
+              <input type="number" class="form-control"  placeholder="ServiceProviderID">
           </div>
           <div class="form-group">
               <label>Activity Date</label>
@@ -59,30 +60,7 @@
             Alternatively, click here to submit an Activity you've used previously
             <br><input action="/Activities" type="submit" name="action">
         </form>
-<!--
-        <div id="activityTable">
-        <table class="table table-hover">
-            <tr><td>Saved Activities</td></tr>
-            <tr>
-                <th scope="col">Activity Name</th>
-                <th scope="col">Activity Date</th>
-                <th scope="col">Activity Location</th>
-            </tr>
 
-            <tr th:each="activity: ${all_activity}">
-                <td th:text="${activity.activityName}"></td>
-                <td th:text="${activity.date}"></td>
-                <td th:text="${activity.location}"></td>
-                <td><a href="#link" class="btn btn-success" role="button">Submit</a></td>
-            </tr>
-        </table>
-        </div>
-        -->
-
-               <!--
-        form needs to be saved and displayed on page via mySQL
-        next move for SP is to send form answers to BEE the difference which displays answers and includes form label USER id and metrics
-        -->
 
     </main>
     <footer th:replace="fragments/footer :: footer"></footer>
