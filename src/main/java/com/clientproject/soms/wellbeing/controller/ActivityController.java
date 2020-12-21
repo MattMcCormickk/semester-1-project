@@ -17,8 +17,7 @@ public class ActivityController {
     private ActivityRepository activityRepository;
 
     @Autowired
-    public ActivityController(ActivityRepository aRepo) {
-        this.activityRepository = aRepo;
+    public ActivityController(ActivityRepository aRepo) {activityRepository = aRepo;
     }
 
     @GetMapping("ActivityDataCaptureList")
@@ -36,20 +35,53 @@ public class ActivityController {
         return mav;
     }
 
-    @RequestMapping(path="/Student", method = RequestMethod.POST)
+/*
+    @RequestMapping(path="/CustomizeForm", method = RequestMethod.POST)
     public ModelAndView addActivity(CreateActivity createActivity, BindingResult br) {
         ModelAndView mav = new ModelAndView();
         if (br.hasErrors()) {
             mav.setViewName("Home");
         } else {
             if (activityRepository.addActivity(createActivity)) {
-                System.out.println("added student");
-                mav.addObject("students", activityRepository.findAllActivity());
-                mav.setViewName("CreateActivity");
+                System.out.println("added activity");
+                //mav.addObject("activities", activityRepository.findAllActivity());
+                mav.setViewName("CustomizableDataCapture");
             }else{
                 mav.setViewName("Home");
             }
         }
         return mav;
     }
+
+ */
+
+
+    @RequestMapping(path="/CustomizeForm", method = RequestMethod.POST)
+    public ModelAndView addActivity(CreateActivity createActivity) {
+        ModelAndView mav = new ModelAndView();
+
+            if (activityRepository.addActivity(createActivity)) {
+                System.out.println("added activity");
+                //mav.addObject("activities", activityRepository.findAllActivity());
+                mav.setViewName("CustomizableDataCapture");
+            }else{
+                mav.setViewName("Home");
+            }
+
+        return mav;
+    }
+
+
+
+    @RequestMapping(path = "/Activities", method = RequestMethod.GET)
+    public ModelAndView search(){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("activity", activityRepository.findAllActivity());
+        mav.setViewName("SavedActivities");
+        return mav;
+    }
+
+
+
+
 }

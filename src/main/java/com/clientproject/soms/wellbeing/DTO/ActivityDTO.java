@@ -9,17 +9,20 @@ public class ActivityDTO {
     private String description;
     private String location;
     private Date date;
-    private String keyWords;
+    private String keywords;
+    private int serviceProviderID;
 
 
-    public ActivityDTO(String activityName, int activityID, int serProID, String description, String location, Date date, String keyWords) {
+
+    public ActivityDTO(int activityID, String activityName, int serviceProviderID, Date date, String description, String location, String keywords) {
         this.activityName = activityName;
         this.activityID = activityID;
         this.serProID = serProID;
         this.description = description;
         this.location = location;
         this.date = date;
-        this.keyWords = keyWords;
+        this.serviceProviderID = serviceProviderID;
+        this.keywords = keywords;
     }
 
     public String getActivityName() {
@@ -46,7 +49,6 @@ public class ActivityDTO {
         return date;
     }
 
-    public String getKeyWords() {
-        return keyWords;
-    }
+    public int getServiceProviderID(){return serviceProviderID;}
+
 }
