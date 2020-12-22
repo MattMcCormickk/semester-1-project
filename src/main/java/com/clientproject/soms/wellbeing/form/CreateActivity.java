@@ -1,16 +1,18 @@
 package com.clientproject.soms.wellbeing.form;
 
+import java.util.Date;
+
 public class CreateActivity {
 
         private String activityName;
-        private String activityID;
+        private Date activityDate;
         private String Description;
         private String Location;
         private String Keywords;
 
-        public CreateActivity(String activityName, String activityID, String Description, String Location, String Keywords) {
+        public CreateActivity(String activityName, Date activityDate, String Description, String Location, String Keywords) {
             this.activityName = activityName;
-            this.activityID = activityID;
+            this.activityDate = activityDate;
             this.Description = Description;
             this.Location = Location;
             this.Keywords = Keywords;
@@ -20,8 +22,8 @@ public class CreateActivity {
             return activityName;
         }
 
-        public String getActivityID() {
-            return activityID;
+        public Date getActivityDate() {
+            return activityDate;
         }
 
         public String getDescription() {

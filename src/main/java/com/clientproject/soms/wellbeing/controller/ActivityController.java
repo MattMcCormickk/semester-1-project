@@ -21,7 +21,7 @@ public class ActivityController {
         this.activityRepository = aRepo;
     }
 
-    @RequestMapping(value = "ActivityDataCaptureList", method = RequestMethod.GET)
+    @RequestMapping(value = "ActivityDataCaptureList2", method = RequestMethod.GET)
     public ModelAndView queryAllActivity(){
         ModelAndView mav = new ModelAndView();
         mav.addObject("allActivity",activityRepository.findAllActivity());
@@ -36,7 +36,7 @@ public class ActivityController {
         return mav;
     }
 
-    @RequestMapping(path="/ActivityDataCaptureList", method = RequestMethod.POST)
+    @RequestMapping(path="/AddActivity", method = RequestMethod.POST)
     public ModelAndView addActivity(CreateActivity createActivity) {
         ModelAndView mav = new ModelAndView();
 
