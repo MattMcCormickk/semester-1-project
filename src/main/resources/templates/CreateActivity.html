@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.Thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,52 +8,47 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="soms-style.css">
-    <title>Create Activity</title>
+    <link rel="stylesheet" href="../soms-style.css">
+    <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Register Activity</title>
 </head>
 <body>
     <header th:replace="fragments/header :: header"></header>
 
     <main>
-
-      <form class="text-center" method = "post" action='/AddActivity/'>
-          <div class="form-group">
-              <label>Activity Name</label>
-              <input type="text" class="form-control"  placeholder="ActivityName">
-          </div>
-          <div class="form-group">
-              <label>Activity Date</label>
-              <input type="date" class="form-control"  placeholder="ActivityDate">
-          </div>
-          <div class="form-group">
-            <label for="Description">Description</label><br>
-                <textarea id="Description" name="Description"
-                  rows="5" cols="50">
-                    Enter Description here...
-                </textarea>
-          </div>
-          <div class="form-group">
-            <label for="Location">Location</label><br>
-                <textarea id="Location" name="Location"
-                  rows="5" cols="50">
-                    Enter Location here...
-                </textarea>
-          </div>
-          <div class="form-group">
-            <label for="Keywords">Keywords</label><br>
-                <textarea id="Keywords" name="Keywords"
-                  rows="5" cols="50">
-                    Enter Keywords here...
-                </textarea>
-          </div>
-          <button type="save" class="btn btn-primary">Submit</button>
-      </form>
-
-        <form action="/ActivityData" id="all_activity_button" method = "get">
-            Alternatively, click here to submit an Activity you've used previously
-            <br><input action="/ActivityDataCaptureList" type="submit" name="action">
+      <div class="registerActivityContainer">
+        <h1>Register New Activity</h1>
+        <form action="/AddActivity/" method="get" id="myform">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="activityName" placeholder="Activity Name" name="activityName">
+                <label for="activityName">Activity Name</label>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="activityDate" placeholder="dd/mm/yyyy" name="activityDate">
+                    <label for="activityDate">Activity Date</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="location" placeholder="Location" name="location">
+                    <label for="location">Location</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <textarea name="description" id="description" class="form-control" placeholder="Activity Description" style="height: 100px"></textarea>
+              <label for="description">Description</label>
+            </div>
+            <div class="form-floating mb-3">
+              <textarea name="keywords" id="keywords" class="form-control" placeholder="Keywords" style="height: 100px"></textarea>
+              <label for="keywords">Keywords</label>
+            </div>
+            <button type="submit" class="btn btn-success" id="registerActivityButton">Register Activity</button>
         </form>
-
+      </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 

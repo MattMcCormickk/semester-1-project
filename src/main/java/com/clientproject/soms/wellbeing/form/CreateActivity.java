@@ -6,37 +6,37 @@ public class CreateActivity {
 
 
         private String activityName;
-        private Date activityDate;
-        private String Description;
-        private String Location;
-        private String Keywords;
+        private String activityDate;
+        private String description;
+        private String location;
+        private String keywords;
 
-        public CreateActivity(String activityName, Date activityDate, String Description, String Location, String Keywords) {
+        public CreateActivity(String activityName, String activityDate, String description, String location, String keywords) {
             this.activityName = activityName;
             this.activityDate = activityDate;
-            this.Description = Description;
-            this.Location = Location;
-            this.Keywords = Keywords;
+            this.description = description;
+            this.location = location;
+            this.keywords = keywords;
         }
 
         public String getActivityName() {
             return this.activityName;
         }
 
-        public Date getActivityDate() {
+        public String getActivityDate() {
             return activityDate;
         }
 
         public String getDescription() {
-            return Description;
+            return description;
         }
 
         public String getLocation() {
-            return Location;
+            return location;
         }
 
         public String getKeywords() {
-            return Keywords;
+            return keywords;
         }
     }
 

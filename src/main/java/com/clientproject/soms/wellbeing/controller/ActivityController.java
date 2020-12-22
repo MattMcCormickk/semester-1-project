@@ -9,6 +9,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
+
 @Controller
 public class ActivityController {
 
@@ -34,8 +36,8 @@ public class ActivityController {
         return mav;
     }
 
-    @RequestMapping(value="AddActivity", method = RequestMethod.POST)
-    public ModelAndView addActivity(@Validated CreateActivity createActivity, BindingResult br) {
+    @RequestMapping(value="/AddActivity", method = RequestMethod.GET)
+    public ModelAndView addActivity(@Validated CreateActivity createActivity, BindingResult br) throws ParseException {
         ModelAndView mav = new ModelAndView();
         if (br.hasErrors()) {
             mav.setViewName("Home");
