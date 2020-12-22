@@ -49,22 +49,6 @@
           <button type="save" class="btn btn-primary">Save</button>
       </form>
 
-        <table id="ActivityTable">
-            <tr><td>Saved Activities</td></tr>
-            <tr th:each="activity: ${activity}">
-                
-               <!--/*@thymesVar id="activity" type=""*/-->
-               <!--/*@thymesVar id="activityName" type="activityName"*/-->
-               <td th:text="${activity}"></td>
-
-            </tr>
-        </table>
-
-        <!--
-        form needs to be saved and displayed on page via mySQL
-        next move for SP is to send form answers to BEE the difference which displays answers and includes form label USER id and metrics
-        -->
-
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 

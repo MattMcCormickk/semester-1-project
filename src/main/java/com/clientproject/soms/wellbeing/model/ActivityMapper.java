@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 public class ActivityMapper implements RowMapper {
 
-    //`ACTIVITY_ID`, `ACTIVITY_NAME`, `SERV_PROV_ID`, `ACTIVITY_DATE`, `DESCRIPTION`, `LOCATION`
 
     @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {

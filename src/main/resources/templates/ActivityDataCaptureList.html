@@ -27,7 +27,6 @@
             <tr>
                 <th>Activity ID</th>
                 <th>Activity Name</th>
-                <th>Service Provider ID</th>
                 <th>Date</th>
                 <th>Description</th>
                 <th>Location</th>
@@ -38,7 +37,6 @@
             <tr th:each="activity: ${allActivity}">
                 <td th:text="${activity.activityID}"></td>
                 <td th:text="${activity.activityName}"></td>
-                <td th:text="${activity.serProID}"></td>
                 <td th:text="${activity.date}"></td>
                 <td th:text="${activity.description}"></td>
                 <td th:text="${activity.location}"></td>
