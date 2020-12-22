@@ -33,11 +33,10 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
     @Override
     public boolean addActivity(CreateActivity createActivity) {
         int rows = template.update(
-         "insert into ACTIVITY (ACTIVITY_ID, ACTIVITY_NAME,SERV_PROV_ID, ACTIVITY_DATE, DESCRIPTION,LOCATION,KEYWORDS) values(?,?,?,?,?)" ,
-         new Object[]{createActivity.getActivityName(), 1, createActivity.getActivityDate(),
-                 createActivity.getDescription(),createActivity.getLocation(),
-                 createActivity.getKeywords()}
-        );
+         "insert into ACTIVITY (ACTIVITY_NAME,SERV_PROV_ID, ACTIVITY_DATE, DESCRIPTION,LOCATION,KEYWORDS) values(?,?,?,?,?, ?)" ,
+                createActivity.getActivityName(), 1, createActivity.getActivityDate(),
+                createActivity.getDescription(),createActivity.getLocation(),
+                createActivity.getKeywords());
         return rows>0;
     }
 

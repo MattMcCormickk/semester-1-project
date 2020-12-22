@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CreateActivity {
 
+
         private String activityName;
         private Date activityDate;
         private String Description;
@@ -19,7 +20,7 @@ public class CreateActivity {
         }
 
         public String getActivityName() {
-            return activityName;
+            return this.activityName;
         }
 
         public Date getActivityDate() {

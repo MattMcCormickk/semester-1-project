@@ -5,10 +5,8 @@ import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -21,7 +19,7 @@ public class ActivityController {
         this.activityRepository = aRepo;
     }
 
-    @RequestMapping(value = "ActivityDataCaptureList2", method = RequestMethod.GET)
+    @RequestMapping(value = "ActivityData", method = RequestMethod.GET)
     public ModelAndView queryAllActivity(){
         ModelAndView mav = new ModelAndView();
         mav.addObject("allActivity",activityRepository.findAllActivity());
@@ -36,17 +34,20 @@ public class ActivityController {
         return mav;
     }
 
-    @RequestMapping(path="/AddActivity", method = RequestMethod.POST)
-    public ModelAndView addActivity(CreateActivity createActivity) {
+    @RequestMapping(value="AddActivity", method = RequestMethod.POST)
+    public ModelAndView addActivity(@Validated CreateActivity createActivity, BindingResult br) {
         ModelAndView mav = new ModelAndView();
-
+        if (br.hasErrors()) {
+            mav.setViewName("Home");
+        }else {
             if (activityRepository.addActivity(createActivity)) {
                 System.out.println("added activity");
                 mav.addObject("allActivity", activityRepository.findAllActivity());
                 mav.setViewName("ActivityDataCaptureList");
-            }else{
+            } else {
                 mav.setViewName("Home");
             }
+        }
         return mav;
     }
 
