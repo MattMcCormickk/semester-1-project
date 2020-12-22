@@ -1,27 +1,27 @@
 package com.clientproject.soms.wellbeing.form;
 
-import java.util.Date;
-
 public class CreateActivity {
 
         private String activityName;
+        private String activityID;
         private String Description;
         private String Location;
         private String Keywords;
-        private int serviceProviderID;
-        private Date date;
 
-        public CreateActivity(String activityName, int serviceProviderID, Date date, String description, String Location, String Keywords) {
+        public CreateActivity(String activityName, String activityID, String Description, String Location, String Keywords) {
             this.activityName = activityName;
-            this.serviceProviderID = serviceProviderID;
-            this.date = date;
-            this.Description = description;
+            this.activityID = activityID;
+            this.Description = Description;
             this.Location = Location;
             this.Keywords = Keywords;
         }
 
         public String getActivityName() {
             return activityName;
+        }
+
+        public String getActivityID() {
+            return activityID;
         }
 
         public String getDescription() {
@@ -35,12 +35,5 @@ public class CreateActivity {
         public String getKeywords() {
             return Keywords;
         }
-
-        public int getServiceProviderID(){
-            return serviceProviderID;
-
-        }
-
-        public Date getActivityDate(){return date;}
     }
 
