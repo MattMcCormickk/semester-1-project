@@ -21,7 +21,7 @@ public class ActivityController {
         this.activityRepository = aRepo;
     }
 
-    @GetMapping("ActivityDataCaptureList")
+    @RequestMapping(value = "ActivityDataCaptureList", method = RequestMethod.GET)
     public ModelAndView queryAllActivity(){
         ModelAndView mav = new ModelAndView();
         mav.addObject("allActivity",activityRepository.findAllActivity());
@@ -36,20 +36,18 @@ public class ActivityController {
         return mav;
     }
 
-    @RequestMapping(path="/Student", method = RequestMethod.POST)
-    public ModelAndView addActivity(CreateActivity createActivity, BindingResult br) {
+    @RequestMapping(path="/ActivityDataCaptureList", method = RequestMethod.POST)
+    public ModelAndView addActivity(CreateActivity createActivity) {
         ModelAndView mav = new ModelAndView();
-        if (br.hasErrors()) {
-            mav.setViewName("Home");
-        } else {
+
             if (activityRepository.addActivity(createActivity)) {
-                System.out.println("added student");
-                mav.addObject("students", activityRepository.findAllActivity());
-                mav.setViewName("CreateActivity");
+                System.out.println("added activity");
+                mav.addObject("allActivity", activityRepository.findAllActivity());
+                mav.setViewName("ActivityDataCaptureList");
             }else{
                 mav.setViewName("Home");
             }
-        }
         return mav;
     }
+
 }

@@ -16,7 +16,7 @@
 
     <main>
 
-      <form class="text-center" method = "post" action="/fragments/SavedActivities">
+      <form class="text-center" method = "post" action="/ActivityDataCaptureList">
           <div class="form-group">
               <label>Activity Name</label>
               <input type="text" class="form-control"  placeholder="ActivityName">
@@ -46,12 +46,12 @@
                     Enter Keywords here...
                 </textarea>
           </div>
-          <button type="save" class="btn btn-primary">Save</button>
+          <button type="save" class="btn btn-primary">Submit</button>
       </form>
 
-        <form action="/Activities" id="all_activity_button" method = "get">
+        <form action="/ActivityDataCaptureList" id="all_activity_button" method = "get">
             Alternatively, click here to submit an Activity you've used previously
-            <br><input action="/Activities" type="submit" name="action">
+            <br><input action="/ActivityDataCaptureList" type="submit" name="action">
         </form>
 
     </main>

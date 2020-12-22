@@ -220,3 +220,8 @@ body h1{
     pointer-events: none;
     color: black;
 }
+
+#all_activity_button{
+    text-align: center;
+    padding: 2em;
+}
