@@ -33,8 +33,8 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
     @Override
     public boolean addActivity(CreateActivity createActivity) {
         int rows = template.update(
-         "insert into ACTIVITY (ACTIVITY_NAME, SERV_PROV_ID, ACTIVITY_DATE, DESCRIPTION,LOCATION,KEYWORDS) values(?,?,?,?,?,?)" ,
-         new Object[]{ createActivity.getActivityName(), createActivity.getServiceProviderID(), createActivity.getActivityDate(),
+         "insert into ACTIVITY (ACTIVITY_NAME,ACTIVITY_ID,DESCRIPTION,LOCATION,KEYWORDS) values(?,?,?,?,?)" ,
+         new Object[]{createActivity.getActivityName(), createActivity.getActivityID(),
                  createActivity.getDescription(),createActivity.getLocation(),
                  createActivity.getKeywords()}
         );
@@ -45,9 +45,10 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
     @Override
     public List<ActivityDTO> findAllActivity() {
         return template.query(
-                "select ACTIVITY_ID,ACTIVITY_NAME,SERV_PROV_ID,ACTIVITY_DATE,DESCRIPTION,LOCATION,KEYWORDS from ACTIVITY",
+                "select ACTIVITY_NAME,ACTIVITY_ID,SERV_PROV_ID,DESCRIPTION,LOCATION,ACTIVITY_DATE,KEYWORDS from soms_wellbeing.activity",
                 new ActivityMapper()
         );
     }
+
 
 }

@@ -32,12 +32,17 @@ public class GeneralController {
         return "CustomizableDataCapture";
     }
 
-
     @RequestMapping("/Dashboard")
     public String dashboard(){
         return "Dashboard";
     }
 
+    @RequestMapping(path="/CreateActivity", method = RequestMethod.GET)
+    public ModelAndView createActivity(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("CreateActivity");
+        return mav;
+    }
 
     @RequestMapping("/ServiceProviderRegistration")
     public String serviceProviderRegistration(){
@@ -49,10 +54,4 @@ public class GeneralController {
         return "UserDataCapture";
     }
 
-    @RequestMapping(path="/CreateActivity", method = RequestMethod.GET)
-    public ModelAndView activityCreation(){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("CreateActivity");
-        return mav;
-    }
 }
