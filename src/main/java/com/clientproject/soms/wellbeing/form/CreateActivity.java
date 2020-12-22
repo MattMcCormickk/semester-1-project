@@ -1,39 +1,42 @@
 package com.clientproject.soms.wellbeing.form;
 
+import java.util.Date;
+
 public class CreateActivity {
 
-        private String activityName;
-        private String activityID;
-        private String Description;
-        private String Location;
-        private String Keywords;
 
-        public CreateActivity(String activityName, String activityID, String Description, String Location, String Keywords) {
+        private String activityName;
+        private String activityDate;
+        private String description;
+        private String location;
+        private String keywords;
+
+        public CreateActivity(String activityName, String activityDate, String description, String location, String keywords) {
             this.activityName = activityName;
-            this.activityID = activityID;
-            this.Description = Description;
-            this.Location = Location;
-            this.Keywords = Keywords;
+            this.activityDate = activityDate;
+            this.description = description;
+            this.location = location;
+            this.keywords = keywords;
         }
 
         public String getActivityName() {
-            return activityName;
+            return this.activityName;
         }
 
-        public String getActivityID() {
-            return activityID;
+        public String getActivityDate() {
+            return activityDate;
         }
 
         public String getDescription() {
-            return Description;
+            return description;
         }
 
         public String getLocation() {
-            return Location;
+            return location;
         }
 
         public String getKeywords() {
-            return Keywords;
+            return keywords;
         }
     }
 

@@ -12,7 +12,7 @@ public class ActivityDTO {
     private String keyWords;
 
 
-    public ActivityDTO(String activityName, int activityID, int serProID, String description, String location, Date date, String keyWords) {
+    public ActivityDTO(int activityID, String activityName,  int serProID, String description, String location, Date date, String keyWords) {
         this.activityName = activityName;
         this.activityID = activityID;
         this.serProID = serProID;

@@ -45,9 +45,9 @@ body h1{
 }
 
 .allUsersContainer{
-    flex: 5;
-    width: 90%;
-    margin-left: 100px;
+    flex: 4;
+    /* width: 90%; */
+    margin-left: 50px;
     /*background-color: #BC4639;*/
 }
 
@@ -61,6 +61,7 @@ body h1{
 .tableTitle{
     text-align: left;
     font-size: 1.5rem;
+    width: 50%;
 }
 
 .dropbtn {
@@ -157,9 +158,9 @@ body h1{
     visibility: hidden;
 }
 .flexContainer{
-    flex: 3;
-    padding-left: 400px;
-    width: 50%;
+    flex: 5;
+    padding-left: 100px;
+    width: 90%;
 }
 
 .flexContainerCustomize {
@@ -204,7 +205,7 @@ body h1{
 }
 .search-text{
     /*margin-left: 400px;*/
-    width: 80%;
+    width: 300px;
     margin-bottom: 5px;
 }
 .search-text .form-control {
@@ -219,4 +220,69 @@ body h1{
     text-align: center;
     pointer-events: none;
     color: black;
+}
+table tr:hover{
+    background-color: #B82601;
+    color: white;
+}
+
+.tablesAndCards {
+  display: inline-flex;
+  /* float: left; */
+}
+.cardsContainer {
+  margin-left: 20px;
+  margin-right: 20px;
+  /* display: flex; */
+  flex: 2;
+  height: 25%;
+  /* width: 600px; */
+  /* float: left; */
+}
+#userCard {
+  /* width: 800px; */
+  /* margin-right: 10px; */
+}
+
+#activityCard {
+  /* width: 300px; */
+}
+
+.titleAndSearch {
+  display: inline-flex;
+  /* float: left; */
+}
+
+#captureButton {
+  background-Color:#B82601;
+  color: white;
+  width: 200px;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+#captureButton:hover {
+  background-color: green;
+}
+
+.allActivitiesContainer {
+    flex: 5;
+    margin-left: 50px;
+}
+
+#all_activity_button{
+    text-align: center;
+    padding: 2em;
+}
+
+.registerActivityContainer {
+  width: 60%;
+  margin-left: 300px;
+  margin-bottom: 50px;
+}
+.registerActivityContainer h1{
+  text-align: center;
+}
+.registerActivityContainer button{
+  background-color: #660066;
 }
