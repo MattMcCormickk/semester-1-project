@@ -18,6 +18,8 @@ public class UserActivityController {
         this.activityRepository = activityRepository;
     }
 
+    /*  Added a new route to navigate to activity selection page after selecting a user
+        The user details are passed as parameters in the GET request from the previous page. */
     @RequestMapping(path = "/CaptureActivityForUser", method = RequestMethod.GET)
     public ModelAndView captureActivityForUser(
             @RequestParam(value="userId") String userId,
