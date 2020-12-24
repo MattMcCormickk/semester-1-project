@@ -27,22 +27,25 @@
             <tr>
                 <th>Activity ID</th>
                 <th>Activity Name</th>
-                <th>Date</th>
+                <th>Hours</th>
+                <th>User ID</th>
+                <th>Activity Date</th>
+                <th>Number of Rubbish bags</th>
+                <th>Number of Volunteer</th>
                 <th>Description</th>
-                <th>Location</th>
-                <th>Keywords</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="activity: ${allActivity}">
-                <td th:text="${activity.activityID}"></td>
-                <td th:text="${activity.activityName}"></td>
-                <td th:text="${activity.date}"></td>
-                <td th:text="${activity.description}"></td>
-                <td th:text="${activity.location}"></td>
-                <td th:text="${activity.keyWords}"></td>
-                <td><a th:href="@{/qActByID/{id}(id=${activity.activityID})}" class="btn btn-success" role="button" >Display Activity Data</a></td>
-            </tr>tr
+                <tr th:each="activityData:${activityData}">
+                    <td th:text="${activityData.activityID}"></td>
+                    <td th:text="${activityData.activityName}"></td>
+                    <td th:text="${activityData.hours}"></td>
+                    <td th:text="${activityData.userID}"></td>
+                    <td th:text="${activityData.activityDate}"></td>
+                    <td th:text="${activityData.noBagsRubbish}"></td>
+                    <td th:text="${activityData.noVolunteer}"></td>
+                    <td th:text="${activityData.description}"></td>
+                </tr>
             </tbody>
         </table>
     </main>

@@ -14,7 +14,10 @@ public class ActivityDataMapper implements RowMapper {
                 rs.getFloat("NO_OF_HOURS"),
                 rs.getString("ACTIVITY_NAME"),
                 rs.getString("DESCRIPTION"),
-                rs.getInt("NO_BAGS_RUBBISH"));
+                rs.getInt("NO_BAGS_RUBBISH"),
+                rs.getInt("NO_OF_VOLUNTEERS"),
+                rs.getInt("USER_ID"),
+                rs.getDate("ACTIVITY_DATE"));
 
     }
 }

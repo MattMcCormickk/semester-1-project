@@ -24,7 +24,7 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
 
     @Override
     public ActivityDTO findActivityByActivityName(String activityName) {
-        ActivityDTO activityDTO=(ActivityDTO) template.queryForObject("ACTIVITY_NAME,ACTIVITY_ID,DESCRIPTION,LOCATION,ACTIVITY_DATE from soms_wellbeing.activity where ACTIVITY_NAME = ?",
+        ActivityDTO activityDTO=(ActivityDTO) template.queryForObject("Select ACTIVITY_NAME,ACTIVITY_ID,DESCRIPTION,LOCATION,ACTIVITY_DATE from soms_wellbeing.activity where ACTIVITY_NAME = ?",
               new Object[]{activityName},new ActivityMapper());
         return activityDTO;
     }
