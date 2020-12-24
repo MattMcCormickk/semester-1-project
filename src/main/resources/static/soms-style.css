@@ -221,49 +221,6 @@ body h1{
     pointer-events: none;
     color: black;
 }
-table tr:hover{
-    background-color: #B82601;
-    color: white;
-}
-
-.tablesAndCards {
-  display: inline-flex;
-  /* float: left; */
-}
-.cardsContainer {
-  margin-left: 20px;
-  margin-right: 20px;
-  /* display: flex; */
-  flex: 2;
-  height: 25%;
-  /* width: 600px; */
-  /* float: left; */
-}
-#userCard {
-  /* width: 800px; */
-  /* margin-right: 10px; */
-}
-
-#activityCard {
-  /* width: 300px; */
-}
-
-.titleAndSearch {
-  display: inline-flex;
-  /* float: left; */
-}
-
-#captureButton {
-  background-Color:#B82601;
-  color: white;
-  width: 200px;
-  margin-top: 10px;
-  margin-left: 5px;
-}
-
-#captureButton:hover {
-  background-color: green;
-}
 
 .allActivitiesContainer {
     flex: 5;
@@ -285,4 +242,54 @@ table tr:hover{
 }
 .registerActivityContainer button{
   background-color: #660066;
+}
+
+table tr:hover {
+    background-color: #B82601;
+    color: white;
+}
+
+table tr th td:active {
+    background-color: #B82601;
+    color: white;
+}
+
+.titleAndSearch {
+    display: flex;
+    float: left;
+    width: 50%;
+}
+
+.tablesAndCards {
+    display: inline-flex;
+    float: left;
+}
+
+.cardsContainer {
+    flex: 2;
+    margin-left: 20px;
+    margin-right: 50px;
+    margin-top: 100px;
+}
+
+#userCard {
+    width: 500px;
+    background-color: #660066;
+    color: white;
+}
+
+#captureButton {
+    background-color: #FFB900;
+    width: 50%;
+    margin-left: 100px;
+}
+
+#captureButton:hover{
+    background-color: green;
+    color: white;
+}
+/* Override the bootstrap provided default table row hover background colour */
+.table-hover tr:hover td, .table-hover tr:hover th {
+    background: #B82601;
+    color: white;
 }
