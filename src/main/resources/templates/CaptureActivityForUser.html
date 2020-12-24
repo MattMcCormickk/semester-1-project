@@ -87,16 +87,20 @@
                                 <input type="text" class="form-control" id="description" name="description" readonly>
                             </div>
                         </div>
-                        <div class="row" style="max-width:90%; margin-left:5px">
-                            <label for="noOfHours">No. of Hours</label>
-                            <input type="text" class="form-control" id="noOfHours" name="noOfHours" placeholder="No. of Hours">
-                        </div>
-                        <div class="row" style="max-width:90%; margin-left:5px">
-                            <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
-                            <input type="text" class="form-control" id="bagsOfRubbish" name="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
+                        <div class="row">
+                          <div class="form-floating mb-3" style="color:black; margin-top: 10px">
+                              <input type="text" class="form-control" id="noOfHours" placeholder="No. of Hours">
+                              <label for="noOfHours">No. of Hours</label>
+                          </div>
                         </div>
                         <div class="row">
-                            <button type="submit" class="btn" id="submitActivityButton">Submit Activity</button>
+                          <div class="form-floating mb-3" style="color:black">
+                              <input type="text" class="form-control" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
+                              <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn" id="submitButton">Submit Activity</button>
                             <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
                         </div>
                     </form>
@@ -104,44 +108,8 @@
             </form>
         </div>
     </div>
+</div>
 
-</div>
-<!-- <div class="form-floating mb-3">
-    <input type="text" class="form-control" id="noOfHours" placeholder="No. of Hours">
-    <label for="noOfHours">No. of Hours</label>
-</div>
-<div class="form-floating mb-3">
-    <input type="text" class="form-control" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
-    <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
-</div> -->
-<!-- <form action="http://localhost:8080/myAction" method="get" id="myform">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="activityName" placeholder="Activity Name">
-        <label for="activityName">Activity Name</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="activityDate" placeholder="dd/mm/yyyy">
-        <label for="activityDate">Activity Date</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="noOfVolunteers" placeholder="No. of Volunteers">
-        <label for="noOfVolunteers">No. of Volunteers</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="noOfHours" placeholder="No. of Hours">
-        <label for="noOfHours">No. of Hours</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
-        <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="location" placeholder="Location">
-        <label for="location">Location</label>
-    </div>
-    <br>
-    <button type="submit" name="submit" class="submitButton" id="submitButton">Submit</button>
-</form> -->
 <script type="text/javascript">
 
     // Function invoked on page load to set the selected user details from the previous page.
@@ -177,9 +145,9 @@
             }
         }
     }
+
     /* Function to select a user from the table, display the selected user details on the card shown on the right and highlight the selected row.
     When another user is selected, un-highlight the previously selected row. */
-
     function selectActivity(){
         var table = document.getElementById("allActivitiesTable"), rIndex;
         for (var i = 0; i < table.rows.length; i++) {
@@ -205,14 +173,11 @@
                 /* Select the radio button when any cell in the row is clicked.
                 This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
                 It is important to note that the radio button is at position 'rIndex - 1'.*/
-
                 var radioButton = document.getElementsByClassName("form-check-input");
                 radioButton[rIndex - 1].checked = true;
-
             }
         }
     }
-
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

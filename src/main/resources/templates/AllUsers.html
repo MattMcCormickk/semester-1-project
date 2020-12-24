@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" class="btn" id="selectUserButton">Select User</button>
+                            <button type="submit" class="btn" id="submitButton">Select User</button>
                             <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
                         </div>
                     </form>
@@ -101,6 +101,7 @@
             }
         }
     }
+
     /* Function to select a user from the table, display the selected user details on the card shown on the right and highlight the selected row.
     When another user is selected, un-highlight the previously selected row. */
     function selectUser(){
@@ -128,7 +129,6 @@
                 /* Select the radio button when any cell in the row is clicked.
                 This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
                 It is important to note that the radio button is at position 'rIndex - 1'.*/
-
                 var radioButton = document.getElementsByClassName("form-check-input");
                 radioButton[rIndex - 1].checked = true;
             }

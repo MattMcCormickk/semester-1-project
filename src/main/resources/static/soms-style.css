@@ -289,20 +289,13 @@ table tr th td:active {
     margin-right: 50px;
 }
 
-#selectUserButton {
+#submitButton {
     background-color: #FFB900;
     width: 50%;
-    margin-left: 100px;
+    margin-left: 125px;
 }
 
-#submitActivityButton {
-    background-color: #FFB900;
-    width: 50%;
-    margin-left: 100px;
-    margin-top: 20px;
-}
-
-#selectUserButton:hover, #submitActivityButton:hover{
+#submitButton:hover{
     background-color: green;
     color: white;
 }
