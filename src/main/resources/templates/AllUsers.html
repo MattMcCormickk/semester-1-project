@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" class="btn" id="captureButton">Capture Activity</button>
+                            <button type="submit" class="btn" id="submitButton">Select User</button>
                             <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
                         </div>
                     </form>
@@ -101,15 +101,15 @@
             }
         }
     }
+
     /* Function to select a user from the table, display the selected user details on the card shown on the right and highlight the selected row.
     When another user is selected, un-highlight the previously selected row. */
     function selectUser(){
         var table = document.getElementById("allUsersTable"), rIndex;
-        console.log("Inside function")
         for (var i = 0; i < table.rows.length; i++) {
             table.rows[i].onclick = function() {
                 rIndex = this.rowIndex;
-                console.log(rIndex);
+                // console.log(rIndex);
                 var userId = this.cells[1].innerHTML;
                 var userName = this.cells[2].innerHTML;
                 var userEmail = this.cells[3].innerHTML;
@@ -117,7 +117,7 @@
                 document.getElementById("userId").value = userId;
                 document.getElementById("userName").value = userName;
                 document.getElementById("userEmail").value = userEmail;
-                console.log("Selected user is " + userId + " " + userName + " " + userEmail);
+                // console.log("Selected user is " + userId + " " + userName + " " + userEmail);
                 for (var i = 0; i < table.rows.length; i++) {
                     table.rows[i].style.backgroundColor = "white";
                     table.rows[i].style.color = "black";
@@ -129,7 +129,6 @@
                 /* Select the radio button when any cell in the row is clicked.
                 This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
                 It is important to note that the radio button is at position 'rIndex - 1'.*/
-
                 var radioButton = document.getElementsByClassName("form-check-input");
                 radioButton[rIndex - 1].checked = true;
             }
