@@ -23,6 +23,7 @@ public class UserRepositoryJDBC implements UserRepository {
         jdbcTemplate = template;
     }
 
+    // Method to query all the users from the database
     @Override
     public List<UserDTO> findAllUsers() {
         return jdbcTemplate.query(
