@@ -24,25 +24,9 @@
     <main>
         <table class="table table-striped">
             <thead>
-            <tr>
-                <th>Activity ID</th>
-                <th>Activity Name</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Location</th>
-                <th>Keywords</th>
-            </tr>
             </thead>
             <tbody>
-            <tr th:each="activity: ${allActivity}">
-                <td th:text="${activity.activityID}"></td>
-                <td th:text="${activity.activityName}"></td>
-                <td th:text="${activity.date}"></td>
-                <td th:text="${activity.description}"></td>
-                <td th:text="${activity.location}"></td>
-                <td th:text="${activity.keyWords}"></td>
-                <td><a th:href="@{/qActByID/{id}(id=${activity.activityID})}" class="btn btn-success" role="button" >Display Activity Data</a></td>
-            </tr>
+                <p class="text-warning">There is no activity data recorded</p>
             </tbody>
         </table>
     </main>
