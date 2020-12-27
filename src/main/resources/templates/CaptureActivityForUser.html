@@ -47,12 +47,12 @@
         <div class="card w-60" id="activityCard">
     <!-- Upon submitting the below form, saveUserActivity() is being invoked which makes an AJAX request to save the information in the database. -->
             <form class="" action="/SaveActivity" method="get" id="saveActivityForm" onsubmit="return saveUserActivity()">
-                <div class="card-header">Selected Activity</div>
+                <div class="card-header">Selected User & Activity</div>
                 <div class="card-body">
                     <!-- <h5 class="card-title"></h5> -->
                       <div class="row">
-                          <div class="col" style="max-width:15%">
-                              <label for="userId">#</label>
+                          <div class="col" style="max-width:16%">
+                              <label for="userId">User Id</label>
                               <input type="text" class="form-control" id="userIdText" name="userId" readonly>
                               <div id="userId" name="userId" th:text="${userId}" style="display: NONE"></div>
                           </div>
@@ -68,8 +68,8 @@
                           </div>
                       </div>
                       <div class="row">
-                          <div class="col" style="max-width:15%">
-                              <label for="activityID">#</label>
+                          <div class="col" style="max-width:16%">
+                              <label for="activityID">Activity Id</label>
                               <input type="text" class="form-control" id="activityID" name="activityID" readonly>
                           </div>
                           <div class="col">
