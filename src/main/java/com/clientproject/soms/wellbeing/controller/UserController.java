@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 
+// Important - added RestController so that SaveUserActivity method is working!!
 @RestController
 @Controller
 public class UserController {

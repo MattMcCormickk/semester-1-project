@@ -113,6 +113,24 @@
     </div>
 </div>
 
+<!-- Modal to display the confirmation popup message to the user. This modal is displayed after saving the information in the database.  -->
+<div class="modal fade" id="savedMessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Saved User Activity!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Successfully logged the user's activity information! Thanks!!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
 
     // Function invoked on page load to set the selected user details from the previous page.
@@ -193,13 +211,19 @@
       var params = 'userId=' + userId + '&activityId=' + activityId + '&activityDate=' + activityDate + '&noOfHours=' + noOfHours + '&bagsOfRubbish=' + bagsOfRubbish;
       // console.log(params);
       var xhttp = new XMLHttpRequest();
-      xhttp.open("POST", 'http://localhost:8080/SaveUserActivityData', true); // true is asynchronous
+      //
+      xhttp.open("POST", '/SaveUserActivityData', true); // true is asynchronous
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.onreadystatechange = function() {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
           console.log(xhttp.responseText);
           // alert("Successfully saved the user activity data! Thanks!!");
-          document.getElementById("response").innerHTML = xhttp.responseText;
+          // Initialize the modal to display the confirmation message.
+          var myModal = new bootstrap.Modal(document.getElementById("savedMessage"), {
+            keyboard: false
+          })
+          myModal.show();   // Display the modal when the AJAX call is successful.
+          // document.getElementById("response").innerHTML = xhttp.responseText;
         } else {
           console.error(xhttp.statusText);
         }
