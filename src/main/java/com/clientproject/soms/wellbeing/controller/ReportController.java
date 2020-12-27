@@ -1,5 +1,6 @@
 package com.clientproject.soms.wellbeing.controller;
 
+import com.clientproject.soms.wellbeing.DTO.ActivityDataDTO;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import com.clientproject.soms.wellbeing.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class ReportController {
@@ -32,10 +35,15 @@ public class ReportController {
 
     @RequestMapping(value = "qActByID/{id}", method = RequestMethod.GET)
     public ModelAndView queryActivityDataById(@PathVariable("id") int id){
-        System.out.println(id);
         ModelAndView mav = new ModelAndView();
-        mav.addObject("activityData",reportRepository.queryActivityByID(id));
-        mav.setViewName("ActivityDetailList");
+        List activityDataList = (List) reportRepository.queryActivityByID(id);
+        System.out.println(activityDataList.isEmpty());
+        if(activityDataList.isEmpty()){
+            mav.setViewName("NullActivityDetail");
+        }else {
+            mav.addObject("activityData",activityDataList);
+            mav.setViewName("ActivityDetailList");
+        }
         return mav;
     }
 

@@ -32,13 +32,5 @@ public class ReportRepositoryJDBC implements ReportRepository{
                new Object[]{aID},new ActivityDataMapper());
     }
 
-    @Override
-    public Object queryActivityByName(String aName) {
-        return null;
-    }
 
-    @Override
-    public Object queryActivityByID(int aID) {
-        return null;
-    }
 }
