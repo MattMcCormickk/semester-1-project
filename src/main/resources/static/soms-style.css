@@ -304,3 +304,12 @@ table tr th td:active {
     background: #B82601;
     color: white;
 }
+
+/* Styling for the 'Close' button in the modal */
+.modal-footer a {
+  background-color: #660066;
+  color: white;
+}
+.modal-footer a:hover {
+  background-color: green;
+}

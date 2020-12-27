@@ -103,10 +103,10 @@
                           <button type="submit" class="btn" id="submitButton">Submit Activity</button>
                           <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
                       </div>
-                      <div class="row">
+                      <!-- <div class="row"> -->
                         <!-- Displays the message to the user that the data has been saved. -->
-                        <p id="response"></p>
-                      </div>
+                        <!-- <p id="response"></p>
+                      </div> -->
                 </div>
             </form>
         </div>
@@ -119,13 +119,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Saved User Activity!</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body">
         Successfully logged the user's activity information! Thanks!!
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <!-- Added a custom button to close the modal. The page will redirect to '/AllUsers when the user clicks on 'Close'.  -->
+        <a href="/AllUsers" class="btn btn-secondary" role="button">Close</a>
       </div>
     </div>
   </div>
@@ -219,8 +222,9 @@
           console.log(xhttp.responseText);
           // alert("Successfully saved the user activity data! Thanks!!");
           // Initialize the modal to display the confirmation message.
+          // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
           var myModal = new bootstrap.Modal(document.getElementById("savedMessage"), {
-            keyboard: false
+            backdrop: 'static', keyboard: false
           })
           myModal.show();   // Display the modal when the AJAX call is successful.
           // document.getElementById("response").innerHTML = xhttp.responseText;
