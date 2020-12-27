@@ -19,6 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/bootstrap/*").permitAll()
                 .and()
                 .formLogin();
+        httpSecurity.csrf().disable();
     }
 
     @Autowired
