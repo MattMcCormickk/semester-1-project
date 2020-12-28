@@ -45,69 +45,93 @@
     </div>
     <div class="cardsContainer" id="cards">
         <div class="card w-60" id="activityCard">
-            <form class="" action="/SaveUserActivityData/" method="get">
-                <div class="card-header">Selected Activity</div>
+    <!-- Upon submitting the below form, saveUserActivity() is being invoked which makes an AJAX request to save the information in the database. -->
+            <form class="" action="/SaveActivity" method="get" id="saveActivityForm" onsubmit="return saveUserActivity()">
+                <div class="card-header">Selected User & Activity</div>
                 <div class="card-body">
                     <!-- <h5 class="card-title"></h5> -->
-                    <form action="/CaptureActivityForUser/" method="GET" id="myform">
-                        <div class="row">
-                            <div class="col" style="max-width:15%">
-                                <label for="userId">#</label>
-                                <input type="text" class="form-control" id="userIdText" name="userId" readonly>
-                                <div id="userId" name="userId" th:text="${userId}" style="display: NONE"></div>
-                            </div>
-                            <div class="col">
-                                <label for="userName">User Name</label>
-                                <input type="text" class="form-control" id="userNameText" name="userName" readonly>
-                                <div id="userName" name="userName" th:text="${userName}" style="display: NONE"></div>
-                            </div>
-                            <div class="col">
-                                <label for="userEmail">User Email</label>
-                                <input type="text" class="form-control" id="userEmailText" name="userEmail" readonly>
-                                <div id="userEmail" name="userEmail" th:text="${userEmail}" style="display: NONE"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="max-width:15%">
-                                <label for="activityID">#</label>
-                                <input type="text" class="form-control" id="activityID" name="activityID" readonly>
-                            </div>
-                            <div class="col">
-                                <label for="activityName">Activity Name</label>
-                                <input type="text" class="form-control" id="activityName" name="activityName" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="max-width:25%">
-                                <label for="activityDate">Activity Date</label>
-                                <input type="text" class="form-control" id="activityDate" name="activityDate" readonly>
-                            </div>
-                            <div class="col">
-                                <label for="description">Description</label>
-                                <input type="text" class="form-control" id="description" name="description" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-floating mb-3" style="color:black; margin-top: 10px">
-                              <input type="text" class="form-control" name="noOfHours" id="noOfHours" placeholder="No. of Hours">
-                              <label for="noOfHours">No. of Hours</label>
+                      <div class="row">
+                          <div class="col" style="max-width:16%">
+                              <label for="userId">User Id</label>
+                              <input type="text" class="form-control" id="userIdText" name="userId" readonly>
+                              <div id="userId" name="userId" th:text="${userId}" style="display: NONE"></div>
                           </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-floating mb-3" style="color:black">
-                              <input type="text" class="form-control" name="bagsOfRubbish" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
-                              <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
+                          <div class="col">
+                              <label for="userName">User Name</label>
+                              <input type="text" class="form-control" id="userNameText" name="userName" readonly>
+                              <div id="userName" name="userName" th:text="${userName}" style="display: NONE"></div>
                           </div>
+                          <div class="col">
+                              <label for="userEmail">User Email</label>
+                              <input type="text" class="form-control" id="userEmailText" name="userEmail" readonly>
+                              <div id="userEmail" name="userEmail" th:text="${userEmail}" style="display: NONE"></div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col" style="max-width:16%">
+                              <label for="activityID">Activity Id</label>
+                              <input type="text" class="form-control" id="activityID" name="activityID" readonly>
+                          </div>
+                          <div class="col">
+                              <label for="activityName">Activity Name</label>
+                              <input type="text" class="form-control" id="activityName" name="activityName" readonly>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col" style="max-width:25%">
+                              <label for="activityDate">Activity Date</label>
+                              <input type="text" class="form-control" id="activityDate" name="activityDate" readonly>
+                          </div>
+                          <div class="col">
+                              <label for="description">Description</label>
+                              <input type="text" class="form-control" id="description" name="description" readonly>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-floating mb-3" style="color:black; margin-top: 10px">
+                            <input type="text" class="form-control" name="noOfHours" id="noOfHours" placeholder="No. of Hours">
+                            <label for="noOfHours">No. of Hours</label>
                         </div>
-                        <div class="row">
-                            <button type="submit" class="btn" id="submitButton">Submit Activity</button>
-                            <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
+                      </div>
+                      <div class="row">
+                        <div class="form-floating mb-3" style="color:black">
+                            <input type="text" class="form-control" name="bagsOfRubbish" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
+                            <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
                         </div>
-                    </form>
+                      </div>
+                      <div class="row">
+                          <button type="submit" class="btn" id="submitButton">Submit Activity</button>
+                          <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
+                      </div>
+                      <!-- <div class="row"> -->
+                        <!-- Displays the message to the user that the data has been saved. -->
+                        <!-- <p id="response"></p>
+                      </div> -->
                 </div>
             </form>
         </div>
     </div>
+</div>
+
+<!-- Modal to display the confirmation popup message to the user. This modal is displayed after saving the information in the database.  -->
+<div class="modal fade" id="savedMessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Saved User Activity!</h5>
+        <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        Successfully logged the user's activity information! Thanks!!
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <!-- Added a custom button to close the modal. The page will redirect to '/AllUsers when the user clicks on 'Close'.  -->
+        <a href="/AllUsers" class="btn btn-secondary" role="button">Close</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -177,6 +201,39 @@
                 radioButton[rIndex - 1].checked = true;
             }
         }
+    }
+
+/*  This is the AJAX function invoked when user clicks on 'Submit Activity'
+    This function makes a POST request call to the route /SaveUserActivityData to save the submitted information in the database. */
+    function saveUserActivity() {
+      var userId = document.getElementById("userIdText").value;
+      var activityId = document.getElementById("activityID").value;
+      var activityDate = document.getElementById("activityDate").value;
+      var noOfHours = document.getElementById("noOfHours").value;
+      var bagsOfRubbish = document.getElementById("bagsOfRubbish").value;
+      var params = 'userId=' + userId + '&activityId=' + activityId + '&activityDate=' + activityDate + '&noOfHours=' + noOfHours + '&bagsOfRubbish=' + bagsOfRubbish;
+      // console.log(params);
+      var xhttp = new XMLHttpRequest();
+      //
+      xhttp.open("POST", '/SaveUserActivityData', true); // true is asynchronous
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+          console.log(xhttp.responseText);
+          // alert("Successfully saved the user activity data! Thanks!!");
+          // Initialize the modal to display the confirmation message.
+          // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
+          var myModal = new bootstrap.Modal(document.getElementById("savedMessage"), {
+            backdrop: 'static', keyboard: false
+          })
+          myModal.show();   // Display the modal when the AJAX call is successful.
+          // document.getElementById("response").innerHTML = xhttp.responseText;
+        } else {
+          console.error(xhttp.statusText);
+        }
+      };
+      xhttp.send(params);
+      return false;
     }
 </script>
 

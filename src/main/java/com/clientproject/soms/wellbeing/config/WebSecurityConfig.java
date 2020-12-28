@@ -19,6 +19,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/bootstrap/*").permitAll()
                 .and()
                 .formLogin();
+    /*  Very important - Need to disable csrf to allow POST requests.
+        Getting HTTP 403 Forbidden error if this is not disabled!! */
+        httpSecurity.csrf().disable();
     }
 
     @Autowired
