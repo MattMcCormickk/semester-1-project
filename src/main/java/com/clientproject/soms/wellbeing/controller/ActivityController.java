@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 
+@RestController
 @Controller
 public class ActivityController {
 
@@ -36,21 +37,24 @@ public class ActivityController {
         return mav;
     }
 
-    @RequestMapping(value="/AddActivity", method = RequestMethod.GET)
-    public ModelAndView addActivity(@Validated CreateActivity createActivity, BindingResult br) throws ParseException {
-        ModelAndView mav = new ModelAndView();
-        if (br.hasErrors()) {
-            mav.setViewName("Home");
-        }else {
-            if (activityRepository.addActivity(createActivity)) {
-                System.out.println("added activity");
-                mav.addObject("allActivity", activityRepository.findAllActivity());
-                mav.setViewName("ActivityDataCaptureList");
-            } else {
-                mav.setViewName("Home");
-            }
-        }
-        return mav;
-    }
+    /*  The below route is invoked upon clicking 'Register Activity'.
+        This method registers the new activity in the database.
+        Converted the below method to POST request instead of GET request.
+        The browser makes an AJAX request to this method to register the new activity in the database. */
 
+    @RequestMapping(value="/AddActivity", method = RequestMethod.POST)
+    public String addActivity(@RequestParam(value = "activityName") String activityName,
+                              @RequestParam(value = "activityDate") String activityDate,
+                              @RequestParam(value = "location") String location,
+                              @RequestParam(value = "description") String description,
+                              @RequestParam(value = "keywords") String keywords) throws ParseException {
+
+        CreateActivity createActivity = new CreateActivity(activityName, activityDate, location, description, keywords);
+        String response = "";
+        if (activityRepository.addActivity(createActivity)) {
+            System.out.println("added activity");
+            response = "Successfully registered the new activity!!";
+        }
+        return response;
+    }
 }
