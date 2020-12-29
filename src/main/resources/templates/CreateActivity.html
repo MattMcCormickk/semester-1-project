@@ -19,7 +19,8 @@
     <main>
       <div class="registerActivityContainer">
         <h1>Register New Activity</h1>
-        <form action="/AddActivity/" method="get" id="myform">
+<!-- Upon submitting the below form, registerActivity() is being invoked which makes an AJAX request to register the activity in the database. -->
+        <form action="/AddNewActivity/" method="get" id="myform" onsubmit="return registerActivity()">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="activityName" placeholder="Activity Name" name="activityName">
                 <label for="activityName">Activity Name</label>
@@ -50,6 +51,61 @@
         </form>
       </div>
     </main>
+
+    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after registering the activity in the database.  -->
+    <div class="modal fade" id="savedMessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Registered New Activity!</h5>
+            <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+          </div>
+          <div class="modal-body">
+            Successfully registered the new Activity! Thanks!!
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            <!-- Added a custom button to close the modal. -->
+            <a href="" class="btn btn-secondary" role="button">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+
+    /*  This is the AJAX function invoked when user clicks on 'Register Activity'
+        This function makes a POST request call to the route /AddActivity to register the activity in the database. */
+        function registerActivity() {
+          var activityName = document.getElementById("activityName").value;
+          var activityDate = document.getElementById("activityDate").value;
+          var location = document.getElementById("location").value;
+          var description = document.getElementById("description").value;
+          var keywords = document.getElementById("keywords").value;
+          var params = 'activityName=' + activityName + '&activityDate=' + activityDate + '&location=' + location + '&description=' + description + '&keywords=' + keywords;
+          // console.log(params);
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("POST", '/AddActivity', true); // true is asynchronous
+          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhttp.onreadystatechange = function() {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+              console.log(xhttp.responseText);
+              // Initialize the modal to display the confirmation message.
+              // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
+              var myModal = new bootstrap.Modal(document.getElementById("savedMessage"), {
+                backdrop: 'static', keyboard: false
+              })
+              myModal.show();   // Display the modal when the AJAX call is successful.
+            } else {
+              console.error(xhttp.statusText);
+            }
+          };
+          xhttp.send(params);
+          return false;
+        }
+
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <footer th:replace="fragments/footer :: footer"></footer>

@@ -39,7 +39,7 @@ public class UserController {
         The browser makes an AJAX request to this method to save the user activity information in the database. */
 
     @RequestMapping(path="/SaveUserActivityData", method = RequestMethod.POST)
-    public String saveUserActivity(@RequestParam(value="userId") String userId,
+    public String saveUserActivity(@RequestParam(value = "userId") String userId,
                                    @RequestParam(value = "activityId") String activityId,
                                    @RequestParam(value = "activityDate") String activityDate,
                                    @RequestParam(value = "noOfHours") String noOfHours,
