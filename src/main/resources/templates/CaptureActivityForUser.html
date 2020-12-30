@@ -14,125 +14,132 @@
     <title>Capture Activity For User</title>
 </head>
 <body onload="setUserDetails()">
-<header th:replace="fragments/header :: header"></header>
-<div class="tablesAndCards">
-    <div class="allActivitiesContainer" style="width: 800px">
-        <div class="titleAndSearch">
-            <div class="search-text">
-                <span class="fa fa-search search-icon"></span>
-                <input type="text" id="searchActivity" onkeyup="searchActivity()" class="form-control" placeholder="Search for activity..">
-            </div>
-            <h1>All Activities</h1>
-        </div>
-        <table class="table table-hover" id="allActivitiesTable" onclick="selectActivity()">
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">#</th>
-                <th scope="col">Activity Name</th>
-                <th scope="col">Activity Date</th>
-                <th scope="col">Description</th>
-                <th scope="col">Location</th>
-            </tr>
-            <tr th:each="activity: ${allActivities}">
-                <td><input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="" onclick="selectActivity()"></td>
-                <th scope="row" th:text="${activity.activityID}"></th>
-                <td th:text="${activity.activityName}"></td>
-                <td th:text="${activity.date}"></td>
-                <td th:text="${activity.description}"></td>
-                <td th:text="${activity.location}"></td>
-            </tr>
-        </table>
-    </div>
-    <div class="cardsContainer" id="cards">
-        <div class="card w-60" id="activityCard">
-    <!-- Upon submitting the below form, saveUserActivity() is being invoked which makes an AJAX request to save the information in the database. -->
-            <form class="" action="/SaveActivity" method="get" id="saveActivityForm" onsubmit="return saveUserActivity()">
-                <div class="card-header">Selected User & Activity</div>
-                <div class="card-body">
-                    <!-- <h5 class="card-title"></h5> -->
-                      <div class="row">
-                          <div class="col" style="max-width:16%">
-                              <label for="userId">User Id</label>
-                              <input type="text" class="form-control" id="userIdText" name="userId" readonly>
-                              <div id="userId" name="userId" th:text="${userId}" style="display: NONE"></div>
-                          </div>
-                          <div class="col">
-                              <label for="userName">User Name</label>
-                              <input type="text" class="form-control" id="userNameText" name="userName" readonly>
-                              <div id="userName" name="userName" th:text="${userName}" style="display: NONE"></div>
-                          </div>
-                          <div class="col">
-                              <label for="userEmail">User Email</label>
-                              <input type="text" class="form-control" id="userEmailText" name="userEmail" readonly>
-                              <div id="userEmail" name="userEmail" th:text="${userEmail}" style="display: NONE"></div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col" style="max-width:16%">
-                              <label for="activityID">Activity Id</label>
-                              <input type="text" class="form-control" id="activityID" name="activityID" readonly>
-                          </div>
-                          <div class="col">
-                              <label for="activityName">Activity Name</label>
-                              <input type="text" class="form-control" id="activityName" name="activityName" readonly>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col" style="max-width:25%">
-                              <label for="activityDate">Activity Date</label>
-                              <input type="text" class="form-control" id="activityDate" name="activityDate" readonly>
-                          </div>
-                          <div class="col">
-                              <label for="description">Description</label>
-                              <input type="text" class="form-control" id="description" name="description" readonly>
-                          </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-floating mb-3" style="color:black; margin-top: 10px">
-                            <input type="text" class="form-control" name="noOfHours" id="noOfHours" placeholder="No. of Hours">
-                            <label for="noOfHours">No. of Hours</label>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-floating mb-3" style="color:black">
-                            <input type="text" class="form-control" name="bagsOfRubbish" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
-                            <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
-                        </div>
-                      </div>
-                      <div class="row">
-                          <button type="submit" class="btn" id="submitButton">Submit Activity</button>
-                          <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
-                      </div>
-                      <!-- <div class="row"> -->
-                        <!-- Displays the message to the user that the data has been saved. -->
-                        <!-- <p id="response"></p>
-                      </div> -->
+  <header th:replace="fragments/header :: header"></header>
+    <div class="tablesAndCards">
+        <div class="allActivitiesContainer" style="width: 800px">
+            <div class="titleAndSearch">
+                <div class="search-text">
+                    <span class="fa fa-search search-icon"></span>
+                    <input type="text" id="searchActivity" onkeyup="searchActivity()" class="form-control" placeholder="Search for activity..">
                 </div>
-            </form>
+                <h1>All Activities</h1>
+            </div>
+          <table class="table table-hover" id="allActivitiesTable" onclick="selectActivity()">
+            <!-- Added column width percentages -->
+                <col style="width:5%">
+                <col style="width:5%">
+                <col style="width:25%">
+                <col style="width:15%">
+                <col style="width:40%">
+                <col style="width:10%">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Activity Name</th>
+                    <th scope="col">Activity Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Location</th>
+                </tr>
+                <tr th:each="activity: ${allActivities}">
+                    <td><input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="" onclick="selectActivity()"></td>
+                    <th scope="row" th:text="${activity.activityID}"></th>
+                    <td th:text="${activity.activityName}"></td>
+                    <td th:text="${activity.date}"></td>
+                    <td th:text="${activity.description}"></td>
+                    <td th:text="${activity.location}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="cardsContainer" id="cards">
+            <div class="card w-60" id="activityCard">
+        <!-- Upon submitting the below form, saveUserActivity() is being invoked which makes an AJAX request to save the information in the database. -->
+                <form class="" action="/SaveActivity" method="get" id="saveActivityForm" onsubmit="return saveUserActivity()">
+                    <div class="card-header">Selected User & Activity</div>
+                    <div class="card-body">
+                        <!-- <h5 class="card-title"></h5> -->
+                          <div class="row">
+                              <div class="col" style="max-width:16%">
+                                  <label for="userId">User Id</label>
+                                  <input type="text" class="form-control" id="userIdText" name="userId" readonly>
+                                  <div id="userId" name="userId" th:text="${userId}" style="display: NONE"></div>
+                              </div>
+                              <div class="col">
+                                  <label for="userName">User Name</label>
+                                  <input type="text" class="form-control" id="userNameText" name="userName" readonly>
+                                  <div id="userName" name="userName" th:text="${userName}" style="display: NONE"></div>
+                              </div>
+                              <div class="col">
+                                  <label for="userEmail">User Email</label>
+                                  <input type="text" class="form-control" id="userEmailText" name="userEmail" readonly>
+                                  <div id="userEmail" name="userEmail" th:text="${userEmail}" style="display: NONE"></div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col" style="max-width:16%">
+                                  <label for="activityID">Activity Id</label>
+                                  <input type="text" class="form-control" id="activityID" name="activityID" readonly>
+                              </div>
+                              <div class="col">
+                                  <label for="activityName">Activity Name</label>
+                                  <input type="text" class="form-control" id="activityName" name="activityName" readonly>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col" style="max-width:25%">
+                                  <label for="activityDate">Activity Date</label>
+                                  <input type="text" class="form-control" id="activityDate" name="activityDate" readonly>
+                              </div>
+                              <div class="col">
+                                  <label for="description">Description</label>
+                                  <input type="text" class="form-control" id="description" name="description" readonly>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-floating mb-3" style="color:black; margin-top: 10px">
+                                <input type="text" class="form-control" name="noOfHours" id="noOfHours" placeholder="No. of Hours">
+                                <label for="noOfHours">No. of Hours</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-floating mb-3" style="color:black">
+                                <input type="text" class="form-control" name="bagsOfRubbish" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
+                                <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <button type="submit" class="btn" id="submitButton">Submit Activity</button>
+                              <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
+                          </div>
+                          <!-- <div class="row"> -->
+                            <!-- Displays the message to the user that the data has been saved. -->
+                            <!-- <p id="response"></p>
+                          </div> -->
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Modal to display the confirmation popup message to the user. This modal is displayed after saving the information in the database.  -->
-<div class="modal fade" id="savedMessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Saved User Activity!</h5>
-        <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-      </div>
-      <div class="modal-body">
-        Successfully logged the user's activity information! Thanks!!
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-        <!-- Added a custom button to close the modal. The page will redirect to '/AllUsers when the user clicks on 'Close'.  -->
-        <a href="/AllUsers" class="btn btn-secondary" role="button">Close</a>
+    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after saving the information in the database.  -->
+    <div class="modal fade" id="savedMessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Saved User Activity!</h5>
+            <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+          </div>
+          <div class="modal-body">
+            Successfully logged the user's activity information! Thanks!!
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            <!-- Added a custom button to close the modal. The page will redirect to '/AllUsers when the user clicks on 'Close'.  -->
+            <a href="/AllUsers" class="btn btn-secondary" role="button">Close</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 <script type="text/javascript">
 
@@ -146,7 +153,7 @@
         document.getElementById("userEmailText").value = email;
     }
 
-    // Function to search based on activity name/description and filter the results in the table
+    // Function to search based on activity name, description, location and filter the results in the table
     function searchActivity() {
         var searchInp, searchFilter, activitiesTable, row, data, i, textVal;
         searchInp = document.getElementById("searchActivity");
@@ -156,12 +163,15 @@
 
         //Loop through the table rows and hide those who don't match the search filter
         for (var i = 0; i < row.length; i++) {
-            activityName = row[i].getElementsByTagName("td")[1]; // Search based on activity name
-            activityDesc = row[i].getElementsByTagName("td")[3]; // Search based on activity description
+            var activityName = row[i].getElementsByTagName("td")[1]; // Search based on activity name
+            var activityDesc = row[i].getElementsByTagName("td")[3]; // Search based on activity description
+            var location = row[i].getElementsByTagName("td")[4]; // Search based on location
             if (activityName && activityDesc) {
                 textVal1 = activityName.textContent || activityName.innerText;
                 textVal2 = activityDesc.textContent || activityDesc.innerText;
-                if (textVal1.toUpperCase().indexOf(searchFilter) > -1 || textVal2.toUpperCase().indexOf(searchFilter) > -1) {
+                textVal3 = location.textContent || location.innerText;
+                if (textVal1.toUpperCase().indexOf(searchFilter) > -1 || textVal2.toUpperCase().indexOf(searchFilter) > -1
+                    || textVal3.toUpperCase().indexOf(searchFilter) > -1) {
                     row[i].style.display = "";
                 } else {
                     row[i].style.display = "none";

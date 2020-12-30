@@ -49,7 +49,7 @@ public class ActivityController {
                               @RequestParam(value = "description") String description,
                               @RequestParam(value = "keywords") String keywords) throws ParseException {
 
-        CreateActivity createActivity = new CreateActivity(activityName, activityDate, location, description, keywords);
+        CreateActivity createActivity = new CreateActivity(activityName, activityDate, description, location, keywords);
         String response = "";
         if (activityRepository.addActivity(createActivity)) {
             System.out.println("added activity");

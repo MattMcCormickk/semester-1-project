@@ -209,9 +209,9 @@ body h1{
 }
 
 .carouselContainer {
-    width: 70%;
-    height: 50%;
-    margin-left: 200px;
+    width: 60%;
+    height: 40%;
+    margin-left: 300px;
 }
 .search-text{
     /*margin-left: 400px;*/
@@ -243,8 +243,10 @@ body h1{
 }
 
 .registerActivityContainer {
-  width: 60%;
-  margin-left: 300px;
+  display: flex;
+  float: left;
+  /* width: 60%; */
+  margin-left: 50px;
   margin-bottom: 50px;
 }
 .registerActivityContainer h1{
@@ -327,4 +329,31 @@ table tr th td:active {
     background-color: maroon;
     color: white;
     background-image: linear-gradient(black, teal);
+}
+
+.activitiesContainer {
+  flex: 1.5;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.registerActivityForm {
+  flex: 1;
+}
+
+#registerActivityButton {
+  background-image: linear-gradient(teal, black);
+  color: white;
+  margin-left: 200px;
+}
+#registerActivityButton:hover {
+  background-image: linear-gradient(black, teal);
+}
+
+#customizeButton {
+  background-color: maroon;
+  color: white;
+}
+#customizeButton:hover {
+  background-color: green;
 }
