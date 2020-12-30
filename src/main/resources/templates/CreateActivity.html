@@ -18,37 +18,73 @@
 
     <main>
       <div class="registerActivityContainer">
-        <h1>Register New Activity</h1>
-<!-- Upon submitting the below form, registerActivity() is being invoked which makes an AJAX request to register the activity in the database. -->
-        <form action="/AddNewActivity/" method="get" id="myform" onsubmit="return registerActivity()">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="activityName" placeholder="Activity Name" name="activityName">
-                <label for="activityName">Activity Name</label>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="activityDate" placeholder="dd/mm/yyyy" name="activityDate">
-                    <label for="activityDate">Activity Date</label>
+        <div class="registerActivityForm">
+          <h1>Register New Activity</h1>
+  <!-- Upon submitting the below form, registerActivity() is being invoked which makes an AJAX request to register the activity in the database. -->
+          <form action="/AddNewActivity/" method="get" id="myform" onsubmit="return registerActivity()">
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="activityName" placeholder="Activity Name" name="activityName" required>
+                  <label for="activityName">Activity Name</label>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-floating mb-3">
+                      <input type="date" class="form-control" id="activityDate" placeholder="dd/mm/yyyy" name="activityDate" required>
+                      <label for="activityDate">Activity Date</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="location" placeholder="Location" name="location" required>
+                      <label for="location">Location</label>
+                  </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="location" placeholder="Location" name="location">
-                    <label for="location">Location</label>
-                </div>
+              <div class="form-floating mb-3">
+                <textarea name="description" id="description" class="form-control" placeholder="Activity Description" style="height: 100px" required></textarea>
+                <label for="description">Description</label>
               </div>
-            </div>
-            <div class="form-floating mb-3">
-              <textarea name="description" id="description" class="form-control" placeholder="Activity Description" style="height: 100px"></textarea>
-              <label for="description">Description</label>
-            </div>
-            <div class="form-floating mb-3">
-              <textarea name="keywords" id="keywords" class="form-control" placeholder="Keywords" style="height: 100px"></textarea>
-              <label for="keywords">Keywords</label>
-            </div>
-            <button type="submit" class="btn btn-success" id="registerActivityButton">Register Activity</button>
-        </form>
+              <div class="form-floating mb-3">
+                <textarea name="keywords" id="keywords" class="form-control" placeholder="Keywords" style="height: 100px"></textarea>
+                <label for="keywords">Keywords</label>
+              </div>
+              <button type="submit" class="btn btn-success" id="registerActivityButton">Register Activity</button>
+          </form>
+        </div>
+          <div class="activitiesContainer">
+              <div class="titleAndSearch">
+                  <div class="search-text">
+                      <span class="fa fa-search search-icon"></span>
+                      <input type="text" id="searchActivity" onkeyup="searchActivity()" class="form-control" placeholder="Search for activity..">
+                  </div>
+                  <h1>All Activities</h1>
+              </div>
+            <table class="table table-hover" id="activitiesTable" onclick="selectActivity()">
+                  <col style="width:5%">
+                  <col style="width:20%">
+                  <col style="width:15%">
+                  <col style="width:45%">
+                  <col style="width:10%">
+                  <col style="width:5%">
+                  <tr>
+                      <!-- <th scope="col"></th> -->
+                      <th scope="col">#</th>
+                      <th scope="col">Activity Name</th>
+                      <th scope="col">Activity Date</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Location</th>
+                  </tr>
+                  <tr th:each="activity: ${allActivities}">
+                      <!-- <td><input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="" onclick="selectActivity()"></td> -->
+                      <th scope="row" th:text="${activity.activityID}"></th>
+                      <td th:text="${activity.activityName}"></td>
+                      <td th:text="${activity.date}"></td>
+                      <td th:text="${activity.description}"></td>
+                      <td th:text="${activity.location}"></td>
+                      <td><a href="" class="btn" role="button" id="customizeButton">Customize</a></td>
+                  </tr>
+              </table>
+          </div>
       </div>
     </main>
 
@@ -103,6 +139,33 @@
           };
           xhttp.send(params);
           return false;
+        }
+
+        // Function to search based on activity name, description, location and filter the results in the table
+        function searchActivity() {
+            var searchInp, searchFilter, activitiesTable, row, data, i, textVal;
+            searchInp = document.getElementById("searchActivity");
+            searchFilter = searchInp.value.toUpperCase();
+            activitiesTable = document.getElementById("activitiesTable");
+            row = activitiesTable.getElementsByTagName("tr");
+
+            //Loop through the table rows and hide those who don't match the search filter
+            for (var i = 0; i < row.length; i++) {
+                var activityName = row[i].getElementsByTagName("td")[0]; // Search based on activity name
+                var activityDesc = row[i].getElementsByTagName("td")[2]; // Search based on activity description
+                var location = row[i].getElementsByTagName("td")[3]; // Search based on location
+                if (activityName && activityDesc) {
+                    textVal1 = activityName.textContent || activityName.innerText;
+                    textVal2 = activityDesc.textContent || activityDesc.innerText;
+                    textVal3 = location.textContent || location.innerText;
+                    if (textVal1.toUpperCase().indexOf(searchFilter) > -1 || textVal2.toUpperCase().indexOf(searchFilter) > -1
+                        || textVal3.toUpperCase().indexOf(searchFilter) > -1) {
+                        row[i].style.display = "";
+                    } else {
+                        row[i].style.display = "none";
+                    }
+                }
+            }
         }
 
     </script>

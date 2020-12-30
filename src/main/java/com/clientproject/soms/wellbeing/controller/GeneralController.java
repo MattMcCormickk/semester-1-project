@@ -40,6 +40,7 @@ public class GeneralController {
     @RequestMapping(path="/CreateActivity", method = RequestMethod.GET)
     public ModelAndView createActivity(){
         ModelAndView mav = new ModelAndView();
+        mav.addObject("allActivities", activityRepository.findAllActivity());
         mav.setViewName("CreateActivity");
         return mav;
     }
