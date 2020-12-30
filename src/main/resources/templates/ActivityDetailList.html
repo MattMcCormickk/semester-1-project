@@ -22,32 +22,45 @@
 <header th:replace="fragments/header :: header"></header>
 <div class="flexDashboard">
     <main>
+        <div class="input-group mb-3 col-sm-5">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-outline-primary" type="button" id="button-addon2">Button</button>
+        </div>
+        <div class="row g-3">
+            <label for="activityID">Activity ID:</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="activityID" type="text" th:value="${activityID}" readonly>
+            </div>
+            <label for="activityName">Activity Name:</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="activityName" type="text" th:value="${activityName}" readonly>
+            </div>
+            <label for="activityDescription">Activity Description:</label>
+            <div class="col-sm-6">
+                <input class="form-control" id="activityDescription" type="text" th:value="${activityDescription}" readonly>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Activity ID</th>
-                <th>Activity Name</th>
-                <th>Hours</th>
                 <th>User ID</th>
                 <th>Activity Date</th>
+                <th>Hours</th>
                 <th>Number of Rubbish bags</th>
                 <th>Number of Volunteer</th>
-                <th>Description</th>
             </tr>
             </thead>
             <tbody>
                 <tr th:each="activityData:${activityData}">
-                    <td th:text="${activityData.activityID}"></td>
-                    <td th:text="${activityData.activityName}"></td>
-                    <td th:text="${activityData.hours}"></td>
                     <td th:text="${activityData.userID}"></td>
                     <td th:text="${activityData.activityDate}"></td>
+                    <td th:text="${activityData.hours}"></td>
                     <td th:text="${activityData.noBagsRubbish}"></td>
                     <td th:text="${activityData.noVolunteer}"></td>
-                    <td th:text="${activityData.description}"></td>
                 </tr>
             </tbody>
         </table>
+        <a th:href="@{/allActivities}" class="btn btn-success" role="button" >Back</a>
     </main>
 
 </div>
