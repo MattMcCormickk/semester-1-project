@@ -25,11 +25,16 @@ public class ReportRepositoryJDBC implements ReportRepository{
 
     @Override
     public List<ActivityDataDTO> queryActivityByID(int aID) {
+
+        int type[] = new int[]{
+                Types.INTEGER
+        };
+
        return jdbcTemplate.query("SELECT T3.ACTIVITY_ID,T1.NO_OF_HOURS,T3.ACTIVITY_NAME,T3.DESCRIPTION,T2.NO_BAGS_RUBBISH," +
                "T1.NO_OF_VOLUNTEERS,T1.USER_ID,T3.ACTIVITY_DATE " +
                "FROM soms_wellbeing.activity_data T1,soms_wellbeing.activity_outputs T2, soms_wellbeing.ACTIVITY T3 " +
                "WHERE T1.ACTIVITY_ID = T2.ACTIVITY_ID = T3.ACTIVITY_ID = ?",
-               new Object[]{aID},new ActivityDataMapper());
+               new Object[]{aID},type,new ActivityDataMapper());
     }
 
 
