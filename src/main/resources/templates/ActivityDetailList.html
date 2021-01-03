@@ -22,11 +22,11 @@
 <header th:replace="fragments/header :: header"></header>
 <div class="flexDashboard">
     <main>
-        <div class="input-group mb-3 col-sm-5">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-primary" type="button" id="button-addon2">Button</button>
-        </div>
         <div class="row g-3">
+            <div class="search-text">
+                <span class="fa fa-search search-icon"></span>
+                <input type="text" id="searchUserID" class="form-control" placeholder="Search for ID" onkeyup="searchUser()">
+            </div>
             <label for="activityID">Activity ID:</label>
             <div class="col-sm-3">
                 <input class="form-control" id="activityID" type="text" th:value="${activityID}" readonly>
@@ -40,14 +40,14 @@
                 <input class="form-control" id="activityDescription" type="text" th:value="${activityDescription}" readonly>
             </div>
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped" id="allActivityDataTable">
             <thead>
             <tr>
-                <th>User ID</th>
-                <th>Activity Date</th>
-                <th>Hours</th>
-                <th>Number of Rubbish bags</th>
-                <th>Number of Volunteer</th>
+                <th scope="col">User ID</th>
+                <th scope="col">Activity Date</th>
+                <th scope="col">Hours</th>
+                <th scope="col">Number of Rubbish bags</th>
+                <th scope="col">Number of Volunteer</th>
             </tr>
             </thead>
             <tbody>
@@ -64,6 +64,64 @@
     </main>
 
 </div>
+
+<script type="text/javascript">
+
+    // Function to search based on user name and filter the results in the table
+    function searchUser() {
+        var searchInp, searchFilter, usersTable, row, data, i, textVal;
+        searchInp = document.getElementById("searchUserID");
+        searchFilter = searchInp.value.toUpperCase();
+        usersTable = document.getElementById("allActivityDataTable");
+        row = usersTable.getElementsByTagName("tr");
+
+        //Loop through the table rows and hide those who don't match the search filter
+        for (var i = 0; i < row.length; i++) {
+            data = row[i].getElementsByTagName("td")[1];
+            if (data) {
+                textVal = data.textContent || data.innerText;
+                if (textVal.toUpperCase().indexOf(searchFilter) > -1) {
+                    row[i].style.display = "";
+                } else {
+                    row[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    /* Function to select a user from the table, display the selected user details on the card shown on the right and highlight the selected row.
+    When another user is selected, un-highlight the previously selected row. */
+    function selectUser(){
+        var table = document.getElementById("allUsersTable"), rIndex;
+        for (var i = 0; i < table.rows.length; i++) {
+            table.rows[i].onclick = function() {
+                rIndex = this.rowIndex;
+                // console.log(rIndex);
+                var userId = this.cells[1].innerHTML;
+                var userName = this.cells[2].innerHTML;
+                var userEmail = this.cells[3].innerHTML;
+                // document.getElementById("userId").innerHTML = userId;
+                document.getElementById("userId").value = userId;
+                document.getElementById("userName").value = userName;
+                document.getElementById("userEmail").value = userEmail;
+                // console.log("Selected user is " + userId + " " + userName + " " + userEmail);
+                for (var i = 0; i < table.rows.length; i++) {
+                    table.rows[i].style.backgroundColor = "white";
+                    table.rows[i].style.color = "black";
+                }
+                var selectedRow = table.getElementsByTagName('tr')[rIndex];
+                selectedRow.style.backgroundColor = "#B82601";
+                selectedRow.style.color = "white";
+
+                /* Select the radio button when any cell in the row is clicked.
+                This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
+                It is important to note that the radio button is at position 'rIndex - 1'.*/
+                var radioButton = document.getElementsByClassName("form-check-input");
+                radioButton[rIndex - 1].checked = true;
+            }
+        }
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <footer th:replace="fragments/footer :: footer"></footer>
 
