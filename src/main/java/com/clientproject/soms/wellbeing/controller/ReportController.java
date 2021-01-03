@@ -41,6 +41,10 @@ public class ReportController {
         if(activityDataList.isEmpty()){
             mav.setViewName("NullActivityDetail");
         }else {
+            ActivityDataDTO activityDataDTO = (ActivityDataDTO) activityDataList.get(1);
+            mav.addObject("activityID",activityDataDTO.getActivityID());
+            mav.addObject("activityName",activityDataDTO.getActivityName());
+            mav.addObject("activityDescription",activityDataDTO.getDescription());
             mav.addObject("activityData",activityDataList);
             mav.setViewName("ActivityDetailList");
         }
