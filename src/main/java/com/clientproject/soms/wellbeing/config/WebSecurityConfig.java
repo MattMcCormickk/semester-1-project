@@ -18,7 +18,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/Home").permitAll()
                 .mvcMatchers("/bootstrap/*").permitAll()
                 .mvcMatchers("/CreateActivity/*").authenticated()
+                .mvcMatchers("/ActivityData/*").authenticated()
+                .mvcMatchers("/AllUsers/*").authenticated()
+                .mvcMatchers("/allActivities/*").authenticated()
                 .mvcMatchers("/CreateActivity").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/ActivityData").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/AllUsers").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/allActivities").hasRole("SERVICE_PROVIDER")
                 .and()
                 .formLogin()
                     .loginPage("/login");
@@ -36,5 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("bmw").password("{noop}password").roles("SERVICE_PROVIDER");
+        auth
+                .inMemoryAuthentication()
+                .withUser("audi").password("{noop}password").roles("SERVICE_PROVIDER");
+        auth
+                .inMemoryAuthentication()
+                .withUser("Skoda").password("{noop}password").roles("SERVICE_PROVIDER");
     }
 }
