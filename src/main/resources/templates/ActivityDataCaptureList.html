@@ -16,15 +16,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
             crossorigin="anonymous"></script>
-    <title>Dashboard</title>
+    <title>Submit Activity Data</title>
 </head>
 <body>
 <header th:replace="fragments/header :: header"></header>
 <div class="flexDashboard">
     <main>
-        <table class="table table-striped">
+
+        <div class="titleAndSearch">
+            <div class="search-text">
+                <span class="fa fa-search search-icon"></span>
+                <input type="text" id="searchActivity" onkeyup="searchActivity()" class="form-control" placeholder="Search for activities..">
+            </div>
+            <h1>All Events</h1>
+        </div>
+        <table class="table table-striped" id="allActivityTable" onclick=selectActivity()>
             <thead>
             <tr>
+                <th></th>
                 <th>Activity ID</th>
                 <th>Activity Name</th>
                 <th>Date</th>
@@ -35,6 +44,7 @@
             </thead>
             <tbody>
             <tr th:each="activity: ${allActivity}">
+                <td><input class="form-check-input" type="radio" name="exampleRadios" id="selectRadio" value="" onclick="selectActivity()"></td>
                 <td th:text="${activity.activityID}"></td>
                 <td th:text="${activity.activityName}"></td>
                 <td th:text="${activity.date}"></td>
@@ -45,11 +55,171 @@
             </tr>
             </tbody>
         </table>
+
+        <div class="cardsContainer" id="cards">
+            <div class="card w-60" id="userCard">
+                <div class="card-header">Selected Activity</div>
+                <div class="card-body">
+                    <!-- <h5 class="card-title"></h5> -->
+                    <form action="/NewActivityData/" method="get" id="myform" onsubmit="return activityDataCapture()">
+                        <div class="row">
+                            <div class="col" style="max-width:20%">
+                                <label for="activityID">Activity Id</label>
+                                <input type="text" class="form-control" id="activityID" name="activityID" readonly>
+                            </div>
+                            <div class="col">
+                                <label for="activityName">Activity Name</label>
+                                <input type="text" class="form-control" id="activityName" name="activityName" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="activityDate">Activity Date</label>
+                                <input type="text" class="form-control" id="activityDate" name="activityDate" readonly><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-floating mb-3" style="color:black; margin-top: 10px">
+                                <input type="number" class="form-control" name="noOfVolunteers" id="noOfVolunteers" placeholder="Number of Volunteers">
+                                <label for="noOfVolunteers">Number of Volunteers</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-floating mb-3" style="color:black">
+                                <input type="number" class="form-control" name="duration" id="duration" placeholder="Duration (hrs)">
+                                <label for="duration">Duration (hrs)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-floating mb-3" style="color:black">
+
+                                <input type="number" class="form-control" name="rubbishCollected" id="rubbishCollected" placeholder="Rubbish Collected">
+                                <label for="rubbishCollected">Rubbish Collected</label>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn" id="submitButton">Submit Activity Data</button>
+                            <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal to display the confirmation popup message to the user. This modal is displayed after registering the activity in the database.  -->
+        <div class="modal fade" id="submitMessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Activity Data Submitted!</h5>
+                        <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                    </div>
+                    <div class="modal-body">
+                        Successfully submitted activity data!
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                        <!-- Added a custom button to close the modal. -->
+                        <a href="" class="btn btn-secondary" role="button">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
 </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <footer th:replace="fragments/footer :: footer"></footer>
+<script>
+    // Function to search based on user name and filter the results in the table
+    function searchActivity() {
+        var searchInp, searchFilter, allActivityTable, row, data, i, textVal;
+        searchInp = document.getElementById("searchActivity");
+        searchFilter = searchInp.value.toUpperCase();
+        activityTable = document.getElementById("allActivityTable");
+        row = activityTable.getElementsByTagName("tr");
 
+        //Loop through the table rows and hide those who don't match the search filter
+        for (var i = 0; i < row.length; i++) {
+            data = row[i].getElementsByTagName("td")[2];
+            if (data) {
+                textVal = data.textContent || data.innerText;
+                if (textVal.toUpperCase().indexOf(searchFilter) > -1) {
+                    row[i].style.display = "";
+                } else {
+                    row[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    /* Function to select a user from the table, display the selected user details on the card shown on the right and highlight the selected row.
+    When another user is selected, un-highlight the previously selected row. */
+    function selectActivity(){
+        var table = document.getElementById("allActivityTable"), rIndex;
+        for (var i = 0; i < table.rows.length; i++) {
+            table.rows[i].onclick = function() {
+                rIndex = this.rowIndex;
+                console.log(rIndex);
+                var activityID = this.cells[1].innerHTML;
+                var activityName = this.cells[2].innerHTML;
+                var activityDate = this.cells[3].innerHTML;
+                // document.getElementById("activityID").innerHTML = activityID;
+                document.getElementById("activityID").value = activityID;
+                document.getElementById("activityName").value = activityName;
+                document.getElementById("activityDate").value = activityDate;
+                // console.log("Selected activity is " + activityId + " " + activityName + " " + activityEmail);
+                for (var i = 0; i < table.rows.length; i++) {
+                    table.rows[i].style.backgroundColor = "white";
+                    table.rows[i].style.color = "black";
+                }
+                var selectedRow = table.getElementsByTagName('tr')[rIndex];
+                selectedRow.style.backgroundColor = "#b82601";
+                selectedRow.style.color = "white";
+
+                /* Select the radio button when any cell in the row is clicked.
+                This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
+                It is important to note that the radio button is at position 'rIndex - 1'.*/
+                var radioButton = document.getElementsByClassName("form-check-input");
+                radioButton[rIndex - 1].checked = true;
+            }
+        }
+    }
+
+    function activityDataCapture() {
+        var activityID = document.getElementById("activityID").value;
+        var activityDate = document.getElementById("activityDate").value;
+        var activityName = document.getElementById("activityName").value;
+        var noOfVolunteers = document.getElementById('noOfVolunteers').value;
+        var duration = document.getElementById("duration").value;
+        var rubbishCollected = document.getElementById("rubbishCollected").value;
+        var params = 'activityID=' + activityID + '&activityName=' + activityName + '&activityDate=' + activityDate +
+            '&noOfVolunteers=' + noOfVolunteers + '&rubbishCollected=' + rubbishCollected + '&duration=' + duration;
+        console.log(params);
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", '/SubmitActivityData', true); // true is asynchronous
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+                console.log(xhttp.responseText);
+                // Initialize the modal to display the confirmation message.
+                // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
+                var myModal = new bootstrap.Modal(document.getElementById("submitMessage"), {
+                    backdrop: 'static', keyboard: false
+                })
+                myModal.show();   // Display the modal when the AJAX call is successful.
+            } else {
+                console.error(xhttp.statusText);
+            }
+        };
+        xhttp.send(params);
+        return false;
+    }
+</script>
 </body>
 </html>
