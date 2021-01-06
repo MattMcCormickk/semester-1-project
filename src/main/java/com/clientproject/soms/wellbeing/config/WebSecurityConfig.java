@@ -14,11 +14,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.authorizeRequests()
-                .mvcMatchers("/*").permitAll()
                 .mvcMatchers("/").permitAll()
+                .mvcMatchers("/Home").permitAll()
                 .mvcMatchers("/bootstrap/*").permitAll()
+                .mvcMatchers("/CreateActivity/*").authenticated()
+                .mvcMatchers("/CreateActivity").hasRole("SERVICE_PROVIDER")
                 .and()
-                .formLogin();
+                .formLogin()
+                    .loginPage("/login");
     /*  Very important - Need to disable csrf to allow POST requests.
         Getting HTTP 403 Forbidden error if this is not disabled!! */
         httpSecurity.csrf().disable();
@@ -29,5 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("user").password("{noop}password").roles("USER");
+
+        auth
+                .inMemoryAuthentication()
+                .withUser("bmw").password("{noop}password").roles("SERVICE_PROVIDER");
     }
 }
