@@ -13,29 +13,73 @@
 <body>
 <header th:fragment="header">
     <div class="navbar">
-        <h1>Sustainability Outcome Measurement Software (SOMS)</h1>
-        <div class="nav-item">
-            <a class="btn" href="/Home">HOME</a>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">REGISTER <i class="fa fa-caret-down"></i></button>
-            <div class="dropdown-content">
-                <a href="/ServiceProviderRegistration">New Service Provider</a>
-                <a href="/CreateActivity">New Activity</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">LOG ACTIVITY <i class="fa fa-caret-down"></i></button>
-            <div class="dropdown-content">
-                <a href="/ActivityData">For Each Event</a>
-                <a href="/AllUsers">For Each User</a>
-            </div>
-        </div>
-        <div class="nav-item">
-            <a class="btn" href="/allActivities">REPORTS</a>
-        </div>
         <img src="../images/pendragon_logo.png" alt="" class="logo">
+        <h1>Sustainability Outcome Measurement Software (SOMS)</h1>
+        <div class="navContainer">
+          <div class="nav-item">
+              <a class="btn" href="/Home"><i class="fa fa-home"></i> HOME</a>
+          </div>
+          <div class="nav-item">
+              <a class="btn" href="/CreateActivity">REGISTER ACTIVITY</a>
+          </div>
+          <!-- <div class="dropdown">
+              <button class="dropbtn">REGISTER <i class="fa fa-caret-down"></i></button>
+              <div class="dropdown-content">
+                  <a href="/ServiceProviderRegistration">New Service Provider</a>
+                  <a href="/CreateActivity">New Activity</a>
+              </div>
+          </div> -->
+          <div class="nav-item">
+              <a class="btn">LOG ACTIVITY <i class="fa fa-caret-down"></i></a>
+              <!-- <button class="dropbtn">LOG ACTIVITY <i class="fa fa-caret-down"></i></button> -->
+              <div class="dropdown-content">
+                  <a href="/ActivityData">For An Event</a>
+                  <a href="/AllUsers">For A User</a>
+              </div>
+          </div>
+          <div class="nav-item">
+              <a class="btn" href="/allActivities">REPORTS</a>
+          </div>
+          <!-- <div class="loginButton" id="loginIcon"> -->
+              <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#loginSignUpModal"><i class="fa fa-user"></i> LOGIN / SIGN UP</button> -->
+              <!-- <a class="btn" href="/login">LOGIN / SIGN UP <i class="fa fa-user"></i></a>
+          </div> -->
+          <div class="nav-item" id="logoutIcon">
+              <a class="btn" id="loggedUser"><i class="fa fa-user"></i> Logged in: <span sec:authentication="name"></span> <i class="fa fa-caret-down"></i></a>
+              <!-- <p id="loggedUser"> Logged in user: <span sec:authentication="name"></span></p> -->
+              <!-- <button class="dropbtn">LOG ACTIVITY <i class="fa fa-caret-down"></i></button> -->
+              <div class="dropdown-content">
+                  <!-- <a href="" id="loggedUser"></a> -->
+                  <a href="">Update Profile</a>
+                  <a href="" class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal" > LOGOUT</a>
+                  <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal"> LOGOUT</button> -->
+              </div>
+          </div>
+        </div>
     </div>
+
+      <!-- Modal -->
+  <div class="modal fade" id="logOutModal" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form class="" th:action="@{/logout}" method="post">
+            <div class="modal-header" id="common-modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">LogOut Confirmation</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Please confirm that you want to logout!
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" id="logOutButton">Confirm</button>
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+              <a href="" class="btn btn-secondary" role="button">Close</a>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </header>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

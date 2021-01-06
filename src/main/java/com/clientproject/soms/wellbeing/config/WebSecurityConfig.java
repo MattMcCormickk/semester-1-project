@@ -14,11 +14,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.authorizeRequests()
-                .mvcMatchers("/*").permitAll()
                 .mvcMatchers("/").permitAll()
+                .mvcMatchers("/Home").permitAll()
                 .mvcMatchers("/bootstrap/*").permitAll()
+                .mvcMatchers("/CreateActivity/*").authenticated()
+                .mvcMatchers("/ActivityData/*").authenticated()
+                .mvcMatchers("/AllUsers/*").authenticated()
+                .mvcMatchers("/allActivities/*").authenticated()
+                .mvcMatchers("/CreateActivity").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/ActivityData").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/AllUsers").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/allActivities").hasRole("SERVICE_PROVIDER")
                 .and()
-                .formLogin();
+                .formLogin()
+                    .loginPage("/login");
     /*  Very important - Need to disable csrf to allow POST requests.
         Getting HTTP 403 Forbidden error if this is not disabled!! */
         httpSecurity.csrf().disable();
@@ -29,5 +38,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("user").password("{noop}password").roles("USER");
+
+        auth
+                .inMemoryAuthentication()
+                .withUser("bmw").password("{noop}password").roles("SERVICE_PROVIDER");
+        auth
+                .inMemoryAuthentication()
+                .withUser("audi").password("{noop}password").roles("SERVICE_PROVIDER");
+        auth
+                .inMemoryAuthentication()
+                .withUser("Skoda").password("{noop}password").roles("SERVICE_PROVIDER");
     }
 }

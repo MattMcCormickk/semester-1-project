@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 
+@RestController
 @Controller
 public class ServiceProviderController {
 
@@ -41,25 +39,16 @@ public class ServiceProviderController {
         return response;
     }
 
-
-
-//    @RequestMapping(path="/ServiceProvider", method = RequestMethod.GET)
-//    public ModelAndView addServiceProvider(@Validated ServiceProviderDTO serviceProviderDTO, BindingResult br) {
-//        ModelAndView mav = new ModelAndView();
-//        if (br.hasErrors()) {
-//            System.out.println(1);
-//            mav.setViewName("Home");
-//        } else {
-//            System.out.println(2);
-//            if (serviceProviderRepository.addServiceProvider(serviceProviderDTO)) {
-//                System.out.println(3);
-//                mav.setViewName("Home");
-//            }else{
-//                System.out.println(4);
-//                mav.setViewName("Home");
-//            }
-//        }
-//        return mav;
-//    }
-
+    @RequestMapping(path = "/checkIfServiceProviderExists", method = RequestMethod.POST)
+    public String checkIfServiceProviderExists(@RequestParam(value="name") String name) {
+        String response = "";
+        if(serviceProviderRepository.checkIfServiceProviderExists(name).get(0).getCount() > 0) {
+            System.out.println(serviceProviderRepository.checkIfServiceProviderExists(name).get(0).getCount());
+            response = "Login is successful";
+        } else {
+            response = "Login failed";
+        }
+        System.out.println(response);
+        return response;
+    }
 }
