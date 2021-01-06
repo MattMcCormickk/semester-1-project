@@ -1,11 +1,15 @@
 package com.clientproject.soms.wellbeing.repository;
 
+import com.clientproject.soms.wellbeing.DTO.ServiceProviderCountDTO;
 import com.clientproject.soms.wellbeing.DTO.ServiceProviderDTO;
+import com.clientproject.soms.wellbeing.model.ServiceProviderCountMapper;
+import com.clientproject.soms.wellbeing.model.ServiceProviderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Types;
+import java.util.List;
 
 @Repository
 public class ServiceProviderRepositoryJDBC implements ServiceProviderRepository {
@@ -34,30 +38,12 @@ public class ServiceProviderRepositoryJDBC implements ServiceProviderRepository 
         ) ;
         return rows>0;
     }
-/*
-    public boolean addActivity(CreateActivity createActivity) throws ParseException {
-        int types[] = new int[] {
-                Types.VARCHAR,
-                Types.INTEGER,
-                Types.DATE,
-                Types.VARCHAR,
-                Types.VARCHAR,
-                Types.VARCHAR
-        };
 
-    *//*  Added to convert String to Date format.
-        This is needed because the activity date is being read as String from the input HTML form. *//*
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date activityDt = format.parse(createActivity.getActivityDate());
-
-        int rows = template.update(
-                "insert into ACTIVITY (ACTIVITY_NAME,SERV_PROV_ID, ACTIVITY_DATE, DESCRIPTION,LOCATION,KEYWORDS) values(?,?,?,?,?,?)",
-                new Object[]{createActivity.getActivityName(), 1, activityDt,
-                        createActivity.getDescription(),createActivity.getLocation(),
-                        createActivity.getKeywords()}, types);
-        return rows>0;
-    }*/
-
+    @Override
+    public List<ServiceProviderCountDTO> checkIfServiceProviderExists(String name) {
+        return template.query(
+                "SELECT COUNT(*) FROM SERVICE_PROVIDER WHERE NAME = ?" ,
+                new Object[]{name}, new ServiceProviderCountMapper());
+    }
 
 }

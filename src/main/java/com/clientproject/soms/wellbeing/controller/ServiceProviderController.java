@@ -39,25 +39,16 @@ public class ServiceProviderController {
         return response;
     }
 
-
-
-//    @RequestMapping(path="/ServiceProvider", method = RequestMethod.GET)
-//    public ModelAndView addServiceProvider(@Validated ServiceProviderDTO serviceProviderDTO, BindingResult br) {
-//        ModelAndView mav = new ModelAndView();
-//        if (br.hasErrors()) {
-//            System.out.println(1);
-//            mav.setViewName("Home");
-//        } else {
-//            System.out.println(2);
-//            if (serviceProviderRepository.addServiceProvider(serviceProviderDTO)) {
-//                System.out.println(3);
-//                mav.setViewName("Home");
-//            }else{
-//                System.out.println(4);
-//                mav.setViewName("Home");
-//            }
-//        }
-//        return mav;
-//    }
-
+    @RequestMapping(path = "/checkIfServiceProviderExists", method = RequestMethod.POST)
+    public String checkIfServiceProviderExists(@RequestParam(value="name") String name) {
+        String response = "";
+        if(serviceProviderRepository.checkIfServiceProviderExists(name).get(0).getCount() > 0) {
+            System.out.println(serviceProviderRepository.checkIfServiceProviderExists(name).get(0).getCount());
+            response = "Login is successful";
+        } else {
+            response = "Login failed";
+        }
+        System.out.println(response);
+        return response;
+    }
 }

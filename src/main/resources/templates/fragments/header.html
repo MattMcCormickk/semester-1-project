@@ -40,146 +40,46 @@
           <div class="nav-item">
               <a class="btn" href="/allActivities">REPORTS</a>
           </div>
-          <div class="loginButton">
-              <button class="btn" data-bs-toggle="modal" data-bs-target="#loginSignUpModal"><i class="fa fa-user"></i> LOGIN / SIGN UP</button>
-              <!-- <a class="btn">LOGIN / SIGN UP <i class="fa fa-user"></i></a> -->
+          <!-- <div class="loginButton" id="loginIcon"> -->
+              <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#loginSignUpModal"><i class="fa fa-user"></i> LOGIN / SIGN UP</button> -->
+              <!-- <a class="btn" href="/login">LOGIN / SIGN UP <i class="fa fa-user"></i></a>
+          </div> -->
+          <div class="nav-item" id="logoutIcon">
+              <a class="btn" id="loggedUser"><i class="fa fa-user"></i> Logged in: <span sec:authentication="name"></span> <i class="fa fa-caret-down"></i></a>
+              <!-- <p id="loggedUser"> Logged in user: <span sec:authentication="name"></span></p> -->
+              <!-- <button class="dropbtn">LOG ACTIVITY <i class="fa fa-caret-down"></i></button> -->
+              <div class="dropdown-content">
+                  <!-- <a href="" id="loggedUser"></a> -->
+                  <a href="">Update Profile</a>
+                  <a href="" class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal" > LOGOUT</a>
+                  <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal"> LOGOUT</button> -->
+              </div>
           </div>
         </div>
     </div>
 
-    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after saving the information in the database.  -->
-
-    <div class="modal fade" id="loginSignUpModal" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content animate">
-          <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-            <li class="tab-item active">
-              <a class="nav-link active" id="signUp-tab" data-bs-toggle="tab" href="#signUp" role="tab" aria-controls="signUp" aria-selected="true">Sign Up</a>
-            </li>
-            <li class="tab-item active">
-              <a class="nav-link" id="login-tab" data-bs-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="false">Login</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="signUp" role="tabpanel" aria-labelledby="signUp-tab">
-              <form action="" method="" onsubmit="return registerServiceProv()">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="signUpModalTitle">Sign Up - Register Service Provider</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                    <div class="modal-body">
-                      <div class="row">
-                        <div class="col">
-                          <div class="form-floating mb-3">
-                              <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
-                              <label for="name"><i class="fa fa-user icon"></i> Name</label>
-                          </div>
-                        </div>
-                        <div class="col">
-                          <div class="form-floating mb-3">
-                              <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
-                              <label for="email"><i class="fa fa-envelope icon"></i> Email</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-8">
-                          <div class="form-floating mb-3">
-                            <textarea name="text" id="address" class="form-control" placeholder="Address" style="height: 100px" required></textarea>
-                            <label for="address"><i class="fa fa-map-marker icon"></i> Address</label>
-                          </div>
-                        </div>
-                        <div class="col-4">
-                          <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="postcode" placeholder="Post Code" name="postcode" required>
-                            <label for="postcode"><i class="fa fa-map-marker icon"></i> Post Code</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col">
-                          <div class="form-floating mb-3">
-                              <input type="text" class="form-control" id="telephone" placeholder="Telephone" name="telephone" required>
-                              <label for="telephone"><i class="fa fa-phone icon"></i> Telephone</label>
-                          </div>
-                        </div>
-                        <div class="col">
-                          <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="companiesHouseId" placeholder="Companies House Id" name="companiesHouseId" required>
-                            <label for="companiesHouseId"><i class="fa fa-building icon"></i> Companies House Id</label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                    <!-- Added a custom button to close the modal. -->
-                    <button type="submit" class="btn btn-primary" id="registerButton">Register Service Provider</button>
-                    <a href="" class="btn btn-secondary" role="button">Close</a>
-                  </div>
-                </form>
-              </div>
-              <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="login-tab" style="max-width:500px; margin-left:150px;">
-                <form action="/login/" method="get" id="loginForm" onsubmit="return login()">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="staticBackdropLabel">Login</h5>
-                      <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
-                      <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                    </div>
-                    <div class="modal-body">
-                          <div class="form-floating mb-3">
-                              <input type="text" class="form-control" id="user" placeholder="Activity Name" name="user" required>
-                              <label for="user">User Name</label>
-                          </div>
-                          <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
-                            <label for="password">Password</label>
-                          </div>
-                    </div>
-                    <div class="modal-footer">
-                      <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                      <!-- Added a custom button to close the modal. -->
-                      <button type="submit" class="btn btn-success" id="loginButton">Login</button>
-                      <a href="" class="btn btn-secondary" role="button">Close</a>
-                    </div>
-                </form>
-              </div>
+      <!-- Modal -->
+  <div class="modal fade" id="logOutModal" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form class="" th:action="@{/logout}" method="post">
+            <div class="modal-header" id="common-modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">LogOut Confirmation</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </div>
-        </div>
+            <div class="modal-body">
+              Please confirm that you want to logout!
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" id="logOutButton">Confirm</button>
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+              <a href="" class="btn btn-secondary" role="button">Close</a>
+            </div>
+        </form>
       </div>
+    </div>
+  </div>
 
-      <script type="text/javascript">
-            /*  This is the AJAX function invoked when user clicks on 'Register Service Provider'
-                This function makes a POST request call to the route /addServiceProvider to register the service provider in the database. */
-            function registerServiceProv() {
-                console.log(`Hello`);
-                var name = document.getElementById("name").value;
-                var email = document.getElementById("email").value;
-                var telephone = document.getElementById("telephone").value;
-                var address = document.getElementById("address").value;
-                var postcode = document.getElementById("postcode").value;
-                var companiesHouseId = document.getElementById("companiesHouseId").value;
-                var params = 'name=' + name + '&email=' + email + '&telephone=' + telephone + '&address=' + address + '&postcode=' + postcode + '&companiesHouseId=' + companiesHouseId;
-                // console.log(params);
-                var xhttp = new XMLHttpRequest();
-                xhttp.open("POST", '/ServiceProvider', true); // true is asynchronous
-                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.onreadystatechange = function() {
-                    if (xhttp.readyState === 4 && xhttp.status === 200) {
-                        console.log(xhttp.responseText);
-                        var modalTitle = document.getElementById("signUpModalTitle");
-                        modalTitle.innerHTML = "Successfully registered your account! Thanks!! Please login to our website now!";
-                        modalTitle.style.color = "white";
-                        modalTitle.style.backgroundColor = "maroon";
-                    } else {
-                        console.error(xhttp.statusText);
-                    }
-                };
-                xhttp.send(params);
-                return false;
-            }
-      </script>
 </header>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

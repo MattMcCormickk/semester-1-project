@@ -385,13 +385,21 @@ table tr th td:active {
 #registerButton {
   background-image: linear-gradient(teal, black);
   color: white;
+  width: 300px;
+  margin-left: 225px;
 }
 #loginButton {
+  width: 300px;
+  margin-left: 100px;
+  background-image: linear-gradient(teal, black);
+  color: white;
+}
+#logOutButton {
   width: 300px;
   background-image: linear-gradient(teal, black);
   color: white;
 }
-#registerButton:hover, #loginButton:hover {
+#registerButton:hover, #loginButton:hover, #logOutButton:hover {
   background-image: linear-gradient(maroon, #B82601);
 }
 
@@ -435,4 +443,32 @@ table tr th td:active {
 .nav-tabs > li > a.active {
     background-image: linear-gradient(maroon, #B82601);
     color: white;
+}
+#common-modal-header {
+    background-image: linear-gradient(maroon, #B82601);
+    color: white;
+}
+
+.tabsContainer {
+  width: 800px;
+  height: 40%;
+  margin-left: 350px;
+  margin-top: 50px;
+  background-image: linear-gradient(teal, black);
+  padding-bottom: 10px;
+}
+.tab-content {
+  margin-left: 10px;
+  width: 780px;
+}
+.tab-content h5 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: white;
+}
+#myTab {
+  margin-left: 2px;
+}
+#welcomeTitle {
+  margin-left: 450px;
 }
