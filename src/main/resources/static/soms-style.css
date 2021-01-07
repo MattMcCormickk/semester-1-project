@@ -112,7 +112,7 @@ body h1{
 }
 .nav-item{
     margin-left: 10px;
-    margin-right: 25px;
+    margin-right: 20px;
     /* color: black; */
     /* color: black; */
     /* background-color: #d0d0d0; */
@@ -471,4 +471,7 @@ table tr th td:active {
 }
 #welcomeTitle {
   margin-left: 450px;
+}
+.btn {
+  background-color: maroon;
 }

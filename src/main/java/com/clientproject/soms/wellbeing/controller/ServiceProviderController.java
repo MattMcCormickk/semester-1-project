@@ -39,11 +39,13 @@ public class ServiceProviderController {
         return response;
     }
 
+    // check if the service provider exists in the database using email id instead of name
     @RequestMapping(path = "/checkIfServiceProviderExists", method = RequestMethod.POST)
-    public String checkIfServiceProviderExists(@RequestParam(value="name") String name) {
+//    public String checkIfServiceProviderExists(@RequestParam(value="name") String name) {
+    public String checkIfServiceProviderExists(@RequestParam(value="email") String email) {
         String response = "";
-        if(serviceProviderRepository.checkIfServiceProviderExists(name).get(0).getCount() > 0) {
-            System.out.println(serviceProviderRepository.checkIfServiceProviderExists(name).get(0).getCount());
+        if(serviceProviderRepository.checkIfServiceProviderExists(email).get(0).getCount() > 0) {
+            System.out.println(serviceProviderRepository.checkIfServiceProviderExists(email).get(0).getCount());
             response = "Login is successful";
         } else {
             response = "Login failed";
