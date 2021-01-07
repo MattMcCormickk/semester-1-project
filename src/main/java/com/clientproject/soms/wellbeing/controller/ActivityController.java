@@ -1,5 +1,6 @@
 package com.clientproject.soms.wellbeing.controller;
 
+import com.clientproject.soms.wellbeing.form.ActivityData;
 import com.clientproject.soms.wellbeing.form.CreateActivity;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,22 @@ public class ActivityController {
         if (activityRepository.addActivity(createActivity)) {
             System.out.println("added activity");
             response = "Successfully registered the new activity!!";
+        }
+        return response;
+    }
+
+    @RequestMapping(value="/SubmitActivityData", method = RequestMethod.POST)
+    public String addActivity(@RequestParam(value = "activityID") String activityID,
+                              @RequestParam(value = "activityDate") String activityDate,
+                              @RequestParam(value = "duration") int noOfHours,
+                              @RequestParam(value = "noOfVolunteers") int noOfVolunteers,
+                              @RequestParam(value = "rubbishCollected") int bagsOfRubbish) throws ParseException {
+
+        ActivityData activityData = new ActivityData(activityID, "1", activityDate, noOfHours,  noOfVolunteers, bagsOfRubbish);
+        String response = "";
+        if (activityRepository.addActivityData(activityData)) {
+            System.out.println("added activity data");
+            response = "Successfully submitted activity data!";
         }
         return response;
     }

@@ -1,6 +1,7 @@
 package com.clientproject.soms.wellbeing.repository;
 
 import com.clientproject.soms.wellbeing.DTO.ActivityDTO;
+import com.clientproject.soms.wellbeing.form.ActivityData;
 import com.clientproject.soms.wellbeing.form.CreateActivity;
 import com.clientproject.soms.wellbeing.model.ActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,43 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
                 createActivity.getDescription(),createActivity.getLocation(),
                 createActivity.getKeywords()}, types);
         return rows>0;
+    }
+
+    public boolean addActivityData(ActivityData activityData) throws ParseException {
+        int[] types1 = new int[] {
+                Types.INTEGER,
+                Types.INTEGER,
+                Types.DATE,
+                Types.INTEGER,
+                Types.FLOAT,
+        };
+        int[] types2 = new int[] {
+                Types.INTEGER,
+                Types.INTEGER,
+                Types.DATE,
+                Types.INTEGER,
+        };
+
+    /*  Added to convert String to Date format.
+        This is needed because the activity date is being read as String from the input HTML form. */
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date activityDt = format.parse(activityData.getActivityDate());
+
+        int rowsActData = template.update(
+                "INSERT INTO ACTIVITY_DATA (ACTIVITY_ID, SERV_PROV_ID, ACTIVITY_DATE, NO_OF_VOLUNTEERS, NO_OF_HOURS) VALUES (?,?,?,?,?)",
+                new Object[]{activityData.getActivityID(),
+                        1,
+                        activityDt,
+                        activityData.getNoOfVolunteers(),
+                        activityData.getNoOfHours()}, types1);
+
+        int rowsActOut = template.update(
+                "INSERT INTO ACTIVITY_OUTPUTS (ACTIVITY_ID, SERV_PROV_ID, ACTIVITY_DATE, NO_BAGS_RUBBISH) VALUES (?,?,?,?)",
+                new Object[]{activityData.getActivityID(),
+                        1,
+                        activityDt,
+                        activityData.getBagsOfRubbish()}, types2);
+        return rowsActData > 0 && rowsActOut > 0;
     }
 
     //query all activity
