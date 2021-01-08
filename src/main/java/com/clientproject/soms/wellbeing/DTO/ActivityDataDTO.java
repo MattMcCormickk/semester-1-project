@@ -11,8 +11,10 @@ public class ActivityDataDTO {
     private int noVolunteer;
     private int userID;
     private Date activityDate;
+    private String userFirstName;
+    private String userLastName;
 
-    public ActivityDataDTO(int activityID, float hours, String activityName, String description, int noBagsRubbish, int noVolunteer, int userID, Date activityDate) {
+    public ActivityDataDTO(int activityID, float hours, String activityName, String description, int noBagsRubbish, int noVolunteer, int userID, Date activityDate, String userFirstName, String userLastName) {
         this.activityID = activityID;
         this.hours = hours;
         this.activityName = activityName;
@@ -21,6 +23,8 @@ public class ActivityDataDTO {
         this.noVolunteer = noVolunteer;
         this.userID = userID;
         this.activityDate = activityDate;
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
     }
 
     public int getActivityID() {
@@ -53,5 +57,13 @@ public class ActivityDataDTO {
 
     public Date getActivityDate() {
         return activityDate;
+    }
+
+    public String getUserFirstName() {
+        return userFirstName;
+    }
+
+    public String getUserLastName() {
+        return userLastName;
     }
 }

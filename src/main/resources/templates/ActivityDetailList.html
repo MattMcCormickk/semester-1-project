@@ -25,7 +25,7 @@
         <div class="row g-3">
             <div class="search-text">
                 <span class="fa fa-search search-icon"></span>
-                <input type="text" id="searchUserID" class="form-control" placeholder="Search for ID" onkeyup="searchUser()">
+                <input type="text" id="searchUserName" class="form-control" placeholder="Search for Name" onkeyup="searchUser()">
             </div>
             <label for="activityID">Activity ID:</label>
             <div class="col-sm-3">
@@ -44,6 +44,7 @@
             <thead>
             <tr>
                 <th scope="col">User ID</th>
+                <th scope="col">User Name</th>
                 <th scope="col">Activity Date</th>
                 <th scope="col">Hours</th>
                 <th scope="col">Number of Rubbish bags</th>
@@ -53,6 +54,7 @@
             <tbody>
                 <tr th:each="activityData:${activityData}">
                     <td th:text="${activityData.userID}"></td>
+                    <td th:text="${activityData.userFirstName} + ' ' + ${activityData.userLastName}"></td>
                     <td th:text="${activityData.activityDate}"></td>
                     <td th:text="${activityData.hours}"></td>
                     <td th:text="${activityData.noBagsRubbish}"></td>
@@ -70,14 +72,14 @@
     // Function to search based on user name and filter the results in the table
     function searchUser() {
         var searchInp, searchFilter, usersTable, row, data, i, textVal;
-        searchInp = document.getElementById("searchUserID");
+        searchInp = document.getElementById("searchUserName");
         searchFilter = searchInp.value.toUpperCase();
         usersTable = document.getElementById("allActivityDataTable");
         row = usersTable.getElementsByTagName("tr");
 
         //Loop through the table rows and hide those who don't match the search filter
         for (var i = 0; i < row.length; i++) {
-            data = row[i].getElementsByTagName("td")[1];
+            data = row[i].getElementsByTagName("td")[2];
             if (data) {
                 textVal = data.textContent || data.innerText;
                 if (textVal.toUpperCase().indexOf(searchFilter) > -1) {
@@ -85,39 +87,6 @@
                 } else {
                     row[i].style.display = "none";
                 }
-            }
-        }
-    }
-
-    /* Function to select a user from the table, display the selected user details on the card shown on the right and highlight the selected row.
-    When another user is selected, un-highlight the previously selected row. */
-    function selectUser(){
-        var table = document.getElementById("allUsersTable"), rIndex;
-        for (var i = 0; i < table.rows.length; i++) {
-            table.rows[i].onclick = function() {
-                rIndex = this.rowIndex;
-                // console.log(rIndex);
-                var userId = this.cells[1].innerHTML;
-                var userName = this.cells[2].innerHTML;
-                var userEmail = this.cells[3].innerHTML;
-                // document.getElementById("userId").innerHTML = userId;
-                document.getElementById("userId").value = userId;
-                document.getElementById("userName").value = userName;
-                document.getElementById("userEmail").value = userEmail;
-                // console.log("Selected user is " + userId + " " + userName + " " + userEmail);
-                for (var i = 0; i < table.rows.length; i++) {
-                    table.rows[i].style.backgroundColor = "white";
-                    table.rows[i].style.color = "black";
-                }
-                var selectedRow = table.getElementsByTagName('tr')[rIndex];
-                selectedRow.style.backgroundColor = "#B82601";
-                selectedRow.style.color = "white";
-
-                /* Select the radio button when any cell in the row is clicked.
-                This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
-                It is important to note that the radio button is at position 'rIndex - 1'.*/
-                var radioButton = document.getElementsByClassName("form-check-input");
-                radioButton[rIndex - 1].checked = true;
             }
         }
     }
