@@ -39,11 +39,13 @@ public class ServiceProviderRepositoryJDBC implements ServiceProviderRepository 
         return rows>0;
     }
 
+    //  check if the service provider exists in the database using email id instead of name
     @Override
-    public List<ServiceProviderCountDTO> checkIfServiceProviderExists(String name) {
+    public List<ServiceProviderCountDTO> checkIfServiceProviderExists(String email) {
         return template.query(
-                "SELECT COUNT(*) FROM SERVICE_PROVIDER WHERE NAME = ?" ,
-                new Object[]{name}, new ServiceProviderCountMapper());
+//                "SELECT COUNT(*) FROM SERVICE_PROVIDER WHERE NAME = ?",
+                "SELECT COUNT(*) FROM SERVICE_PROVIDER WHERE EMAIL = ?",
+                new Object[]{email}, new ServiceProviderCountMapper());
     }
 
 }

@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/allActivities").hasRole("SERVICE_PROVIDER")
                 .and()
                 .formLogin()
+                    .usernameParameter("email")     // change authentication to email id
                     .loginPage("/login");
     /*  Very important - Need to disable csrf to allow POST requests.
         Getting HTTP 403 Forbidden error if this is not disabled!! */
@@ -41,12 +42,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth
                 .inMemoryAuthentication()
-                .withUser("bmw").password("{noop}password").roles("SERVICE_PROVIDER");
+                .withUser("bmw@company.com").password("{noop}password").roles("SERVICE_PROVIDER");
         auth
                 .inMemoryAuthentication()
-                .withUser("audi").password("{noop}password").roles("SERVICE_PROVIDER");
+                .withUser("audi@company.com").password("{noop}password").roles("SERVICE_PROVIDER");
         auth
                 .inMemoryAuthentication()
-                .withUser("Skoda").password("{noop}password").roles("SERVICE_PROVIDER");
+                .withUser("Skoda@company.com").password("{noop}password").roles("SERVICE_PROVIDER");
+        auth
+                .inMemoryAuthentication()
+                .withUser("toyota@company.com").password("{noop}password").roles("SERVICE_PROVIDER");
     }
 }

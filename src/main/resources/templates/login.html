@@ -37,8 +37,10 @@
                   <h5 style="color:orange">Sorry, invalid username or password</h5>
               </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="username" placeholder="User Name" name="username" required>
-                    <label for="username">User Name</label>
+                    <!-- change to email id instead of name for authentication -->
+                    <!-- <input type="text" class="form-control" id="username" placeholder="User Name" name="username" required> -->
+                    <input type="email" class="form-control" id="email" placeholder="Email Id" name="email" required>
+                    <label for="email">Email Id</label>
                 </div>
                 <div class="form-floating mb-3">
                   <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
@@ -172,9 +174,14 @@
      This function is invoked before the Spring security login - once the below check is passed,
      the page submits the credentials for Spring security authentication. */
         function checkUserLogin() {
-          var name = document.getElementById("username").value;
-          console.log(name);
-          var params = 'name=' + name;
+    //  check if the service provider exists in the database using email id instead of name
+          // var name = document.getElementById("username").value;
+          // console.log(name);
+          // var params = 'name=' + name;
+          // console.log(params);
+          var email = document.getElementById("email").value;
+          console.log(email);
+          var params = 'email=' + email;
           console.log(params);
           var xhttp = new XMLHttpRequest();
           xhttp.open("POST", '/checkIfServiceProviderExists', false); // true is asynchronous
