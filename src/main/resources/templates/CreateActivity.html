@@ -60,12 +60,12 @@
                   <h1>All Activities</h1>
               </div>
             <table class="table table-hover" id="activitiesTable" onclick="selectActivity()">
-                  <col style="width:5%">
-                  <col style="width:20%">
-                  <col style="width:15%">
-                  <col style="width:45%">
+                  <col style="width:3%">
+                  <col style="width:18%">
+                  <col style="width:14%">
+                  <col style="width:40%">
                   <col style="width:10%">
-                  <col style="width:5%">
+                  <col style="width:15%">
                   <tr>
                       <!-- <th scope="col"></th> -->
                       <th scope="col">#</th>
@@ -81,7 +81,7 @@
                       <td th:text="${activity.date}"></td>
                       <td th:text="${activity.description}"></td>
                       <td th:text="${activity.location}"></td>
-                      <td><a href="" class="btn" role="button" id="customizeButton" data-bs-toggle="modal" data-bs-target="#customizeActivity" onclick="selectActivity()">Customize</a></td>
+                      <td><a href="" class="btn" role="button" id="customizeButton" data-bs-toggle="modal" data-bs-target="#customizeActivity" onclick="selectActivity()"><i class="fa fa-edit"></i> Customize</a></td>
                   </tr>
               </table>
           </div>
@@ -158,7 +158,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Activity Metrics/Inputs
+                    Customize Activity Metrics/Inputs
                   </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
@@ -168,32 +168,23 @@
                         <table class="table" id="activityInpTable">
                           <col style="width:10%">
                           <col style="width:90%">
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Metric/Input Name</th>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td>
-                            <td>Number of Volunteers</td>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td>
-                            <td>Number of Hours</td>
-                          </tr>
+                          <thead>
+                            <tr>
+                              <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllInp" id="selectAllInp"></th>
+                              <th scope="col">Selected Metrics/Inputs</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td>
+                              <td>Number of Volunteers</td>
+                            </tr>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td>
+                              <td>Number of Hours</td>
+                            </tr>
+                          </tbody>
                         </table>
-                        <div class="row">
-                          <div class="col-8">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="customInp" placeholder="Custom Input" name="customInp" required>
-                                <label for="customInp">Custom Input</label>
-                            </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="form-floating mb-3">
-                              <button class="btn btn-success" type="button" id="addCustInpButton"><i class="fa fa-plus"></i> Add Custom</button>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                       <div class="col-2">
                         <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
@@ -207,27 +198,46 @@
                         <table class="table" id="tempInpTable">
                           <col style="width:10%">
                           <col style="width:90%">
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Pre-defined template inputs</th>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
-                            <td>Land area cleaned (in square feet)</td>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
-                            <td>Distance covered/cleaned (in miles)</td>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
-                            <td>Average no. of steps taken per volunteer</td>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
-                            <td>No. of days spent on the activity</td>
-                          </tr>
+                          <thead>
+                            <tr>
+                              <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllTempInp" id="selectAllTempInp"></th>
+                              <th scope="col">Pre-defined template inputs</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
+                              <td>Land area cleaned (in square feet)</td>
+                            </tr>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
+                              <td>Distance covered/cleaned (in miles)</td>
+                            </tr>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
+                              <td>Average no. of steps taken per volunteer</td>
+                            </tr>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
+                              <td>No. of days spent on the activity</td>
+                            </tr>
+                          </tbody>
                         </table>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="customInp" placeholder="Custom Input" name="customInp" required>
+                            <label for="customInp">Custom Input</label>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-floating mb-3">
+                          <div class="d-grid gap-2 col-10 mx-auto">
+                            <button class="btn btn-success" type="button" id="addCustInpButton"><i class="fa fa-plus"></i> Add Custom</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -236,7 +246,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingThree">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Activity Outputs
+                    Customize Activity Outputs
                   </button>
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
@@ -246,28 +256,19 @@
                         <table class="table" id="activityOutTable">
                           <col style="width:10%">
                           <col style="width:90%">
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Output Name</th>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selectOutCheck" id="selectOutCheck" value="" onclick="selectOutput()"></td>
-                            <td>Number of bags of rubbish collected</td>
-                          </tr>
+                          <thead>
+                            <tr>
+                              <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllOut" id="selectAllOut"></th>
+                              <th scope="col">Selected Outputs</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selectOutCheck" id="selectOutCheck" value="" onclick="selectOutput()"></td>
+                              <td>Number of bags of rubbish collected</td>
+                            </tr>
+                          </tbody>
                         </table>
-                        <div class="row">
-                          <div class="col-8">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="customOut" placeholder="Custom Input" name="customInp" required>
-                                <label for="customInp">Custom Input</label>
-                            </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="form-floating mb-3">
-                              <button class="btn btn-success" type="button" id="addCustOutButton"><i class="fa fa-plus"></i> Add Custom</button>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                       <div class="col-2">
                         <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
@@ -281,27 +282,46 @@
                         <table class="table" id="tempOutTable">
                           <col style="width:10%">
                           <col style="width:90%">
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Pre-defined template outputs</th>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck" value="" onclick="selectTempOut()"></td>
-                            <td>No. of bags of recyclable material collected (tins, cans, bottles etc.)</td>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck" value="" onclick="selectTempOut()"></td>
-                            <td>No. of bags of hazardous items collected (broken glass, sharp items etc.)</td>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck" value="" onclick="selectTempOut()"></td>
-                            <td>Weight of plastic waste or non-degradable items collected (in kilograms)</td>
-                          </tr>
-                          <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck" value="" onclick="selectTempOut()"></td>
-                            <td>Improved river water quality (concentration of pollutants - milligrams per liter (mg/l) or micrograms per liter (µg/l))</td>
-                          </tr>
+                          <thead>
+                            <tr>
+                              <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllTempOut" id="selectAllTempOut"></th>
+                              <th scope="col">Pre-defined template outputs</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
+                              <td>No. of bags of recyclable material collected (tins, cans, bottles etc.)</td>
+                            </tr>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
+                              <td>No. of bags of hazardous items collected (broken glass, sharp items etc.)</td>
+                            </tr>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
+                              <td>Weight of plastic waste or non-degradable items collected (in kilograms)</td>
+                            </tr>
+                            <tr>
+                              <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
+                              <td>Improved river water quality (concentration of pollutants - micrograms per liter (µg/l))</td>
+                            </tr>
+                          </tbody>
                         </table>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="customOut" placeholder="Custom Input" name="customInp" required>
+                            <label for="customInp">Custom Input</label>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-floating mb-3">
+                          <div class="d-grid gap-2 col-10 mx-auto">
+                            <button class="btn btn-success" type="button" id="addCustOutButton"><i class="fa fa-plus"></i> Add Custom</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -418,25 +438,73 @@
 
         $(document).ready(function() {
             $("#addInpButton").on("click", function() {
-                var selectedRows = $("#tempInpTable input:checked").parents("tr").remove().clone().appendTo($("#activityInpTable tbody").add(selectedRows));
+              var selectedRows = $("#tempInpTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#activityInpTable tbody").add(selectedRows));
+              $(".form-check-input").prop("checked", false);
             });
         });
         $(document).ready(function() {
             $("#remInpButton").on("click", function() {
-                var selectedRows = $("#activityInpTable input:checked").parents("tr").remove().clone().appendTo($("#tempInpTable tbody").add(selectedRows));
+                var selectedRows = $("#activityInpTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#tempInpTable tbody").add(selectedRows));
+                $(".form-check-input").prop("checked", false);
             });
         });
         $(document).ready(function() {
             $("#addOutButton").on("click", function() {
-                var selectedRows = $("#tempOutTable input:checked").parents("tr").remove().clone().appendTo($("#activityOutTable tbody").add(selectedRows));
+                var selectedRows = $("#tempOutTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#activityOutTable tbody").add(selectedRows));
+                $(".form-check-input").prop("checked", false);
             });
         });
         $(document).ready(function() {
             $("#remOutButton").on("click", function() {
-                var selectedRows = $("#activityOutTable input:checked").parents("tr").remove().clone().appendTo($("#tempOutTable tbody").add(selectedRows));
+                var selectedRows = $("#activityOutTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#tempOutTable tbody").add(selectedRows));
+                $(".form-check-input").prop("checked", false);
             });
         });
 
+        $(document).ready(function() {
+            $("#addCustInpButton").on("click", function() {
+                var custInput = $("#customInp").val();
+                $("#activityInpTable").append('<tr><td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td><td>' + custInput + '</td></tr>');
+            });
+        });
+
+        $(document).ready(function() {
+            $("#addCustOutButton").on("click", function() {
+                var custOutput = $("#customOut").val();
+                $("#activityOutTable").append('<tr><td><input class="form-check-input" type="checkbox" name="selectOutCheck" id="selectOutCheck"></td><td>' + custOutput + '</td></tr>');
+            });
+        });
+
+        $(function() {
+            $("#activityInpTable #selectAllInp").click(function() {
+                if(this.checked) {
+                    $("#activityInpTable .form-check-input").prop("checked", true);
+                } else {
+                    $("#activityInpTable .form-check-input").prop("checked", false);
+                }
+            });
+            $("#tempInpTable #selectAllTempInp").click(function() {
+                if(this.checked) {
+                    $("#tempInpTable .form-check-input").prop("checked", true);
+                } else {
+                    $("#tempInpTable .form-check-input").prop("checked", false);
+                }
+            });
+            $("#activityOutTable #selectAllOut").click(function() {
+                if(this.checked) {
+                    $("#activityOutTable .form-check-input").prop("checked", true);
+                } else {
+                    $("#activityOutTable .form-check-input").prop("checked", false);
+                }
+            });
+            $("#tempOutTable #selectAllTempOut").click(function() {
+                if(this.checked) {
+                    $("#tempOutTable .form-check-input").prop("checked", true);
+                } else {
+                    $("#tempOutTable .form-check-input").prop("checked", false);
+                }
+            });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 

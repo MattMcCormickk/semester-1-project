@@ -356,7 +356,7 @@ table tr th td:active {
 }
 
 .activitiesContainer {
-  flex: 1.5;
+  flex: 1.75;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -501,10 +501,11 @@ table tr th td:active {
   /* background-image: linear-gradient(#4B4848, grey); */
   background-color: #4B4848;
   color: white;
-  transition: background-color 1s ease;
-  transition: color 1s ease;
+  /* transition: background-color 1s ease; */
+  /* transition: color 1s ease; */
 }
 #activityInpTable tr, #activityOutTable tr, #tempInpTable tr, #tempOutTable tr {
+  background-color: #4B4848;
   color: white;
 }
 #activityInpTable tr:hover, #activityOutTable tr:hover, #tempInpTable tr:hover, #tempOutTable tr:hover {
@@ -514,11 +515,24 @@ table tr th td:active {
 .form-floating.mb-3 {
   color: black;
 }
-#addInpButton, #remInpButton, #addCustInpButton {
+
+.accordion-body button {
+  background-color: darkorange;
+  color: black;
+}
+.accordion-body button:hover {
+  background-color: green;
+  color: white;
+}
+.accordion-body button:focus {
+  background-color: darkorange;
+  color: black;
+}
+/* #addInpButton, #remInpButton, #addCustInpButton {
   background-color: darkorange;
   color: black;
 }
 #addInpButton:hover, #remInpButton:hover, #addCustInpButton:hover {
   background-color: green;
   color: white;
-}
+} */
