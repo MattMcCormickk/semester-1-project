@@ -81,7 +81,7 @@
                       <td th:text="${activity.date}"></td>
                       <td th:text="${activity.description}"></td>
                       <td th:text="${activity.location}"></td>
-                      <td><a href="" class="btn" role="button" id="customizeButton">Customize</a></td>
+                      <td><a href="" class="btn" role="button" id="customizeButton" data-bs-toggle="modal" data-bs-target="#customizeActivity" onclick="selectActivity()">Customize</a></td>
                   </tr>
               </table>
           </div>
@@ -108,6 +108,216 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after registering the activity in the database.  -->
+    <div class="modal fade" id="customizeActivity" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content animate">
+          <div class="modal-header" id="common-modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Customize Activity Metrics/Outputs</h5>
+
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Selected Activity
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                  <div class="accordion-body">
+                    <!-- <strong>This is the first item's accordion body.</strong> -->
+                    <div class="row">
+                        <div class="col" style="max-width:7%">
+                            <label for="activityId">#</label>
+                            <input type="text" class="form-control" id="custActivityId" name="activityId" readonly>
+                        </div>
+                        <div class="col" style="max-width:23%">
+                            <label for="activityName">Activity Name</label>
+                            <input type="text" class="form-control" id="custActivityName" name="activityName" readonly>
+                        </div>
+                        <div class="col" style="max-width:15%">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="custLocation" name="location" readonly>
+                        </div>
+                        <div class="col" style="max-width:15%">
+                            <label for="activityDate">Activity Date</label>
+                            <input type="text" class="form-control" id="custActivityDate" name="activityDate" readonly>
+                        </div>
+                        <div class="col" style="max-width:40%">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="custDescription" name="description" readonly>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Activity Metrics/Inputs
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <table class="table" id="activityInpTable">
+                          <col style="width:10%">
+                          <col style="width:90%">
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Metric/Input Name</th>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck" value="" onclick="selectInput()"></td>
+                            <td>Number of Volunteers</td>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck" value="" onclick="selectInput()"></td>
+                            <td>Number of Hours</td>
+                          </tr>
+                        </table>
+                        <div class="row">
+                          <div class="col-8">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="customInp" placeholder="Custom Input" name="customInp" required>
+                                <label for="customInp">Custom Input</label>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="form-floating mb-3">
+                              <button class="btn btn-success" type="button" id="addCustInpButton"><i class="fa fa-plus"></i> Add Custom</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
+                          <button class="btn btn-success" type="button" id="addInpButton" onclick="addInput()"><i class="fa fa-angle-double-left"></i> Add</button>
+                        </div>
+                        <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:5px">
+                          <button class="btn btn-success" type="button" id="remInpButton"><i class="fa fa-angle-double-right"></i> Remove</button>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <table class="table" id="tempInpTable">
+                          <col style="width:10%">
+                          <col style="width:90%">
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Pre-defined template inputs</th>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck" value="" onclick="selectTempInp()"></td>
+                            <td>Land area cleaned (in square feet)</td>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck" value="" onclick="selectTempInp()"></td>
+                            <td>Distance covered/cleaned (in miles)</td>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck" value="" onclick="selectTempInp()"></td>
+                            <td>Average no. of steps taken per volunteer</td>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck" value="" onclick="selectTempInp()"></td>
+                            <td>No. of days spent on the activity</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Activity Outputs
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <table class="table" id="activityOutTable">
+                          <col style="width:10%">
+                          <col style="width:90%">
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Output Name</th>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selectOutCheck" id="selectOutCheck" value="" onclick="selectOutput()"></td>
+                            <td>Number of bags of rubbish collected</td>
+                          </tr>
+                        </table>
+                        <div class="row">
+                          <div class="col-8">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="customOut" placeholder="Custom Input" name="customInp" required>
+                                <label for="customInp">Custom Input</label>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="form-floating mb-3">
+                              <button class="btn btn-success" type="button" id="addCustOutButton"><i class="fa fa-plus"></i> Add Custom</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
+                          <button class="btn btn-success" type="button"><i class="fa fa-angle-double-left"></i> Add</button>
+                        </div>
+                        <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:5px">
+                          <button class="btn btn-success" type="button"><i class="fa fa-angle-double-right"></i> Remove</button>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <table class="table" id="tempOutTable">
+                          <col style="width:10%">
+                          <col style="width:90%">
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Pre-defined template outputs</th>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck" value="" onclick="selectTempOut()"></td>
+                            <td>No. of bags of recyclable material collected (tins, cans, bottles etc.)</td>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck" value="" onclick="selectTempOut()"></td>
+                            <td>No. of bags of hazardous items collected (broken glass, sharp items etc.)</td>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck" value="" onclick="selectTempOut()"></td>
+                            <td>Weight of plastic waste or non-degradable items collected (in kilograms)</td>
+                          </tr>
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck" value="" onclick="selectTempOut()"></td>
+                            <td>Improved river water quality (concentration of pollutants - milligrams per liter (mg/l) or micrograms per liter (µg/l))</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            <!-- Added a custom button to close the modal. -->
+            <a href="" class="btn btn-secondary" role="button">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <script type="text/javascript">
 
@@ -164,6 +374,41 @@
                     } else {
                         row[i].style.display = "none";
                     }
+                }
+            }
+        }
+
+        /* Function to select an activity from the table, display the selected activity details on the customization modal popup.
+        When another activity is selected, un-highlight the previously selected row. */
+        function selectActivity(){
+            var table = document.getElementById("activitiesTable"), rIndex;
+            for (var i = 0; i < table.rows.length; i++) {
+                table.rows[i].onclick = function() {
+                    rIndex = this.rowIndex;
+                    var activityId = this.cells[0].innerHTML;
+                    var activityName = this.cells[1].innerHTML;
+                    var activityDate = this.cells[2].innerHTML;
+                    var description = this.cells[3].innerHTML;
+                    var location = this.cells[4].innerHTML;
+
+                    document.getElementById("custActivityId").value = activityId;
+                    document.getElementById("custActivityName").value = activityName;
+                    document.getElementById("custActivityDate").value = activityDate;
+                    document.getElementById("custDescription").value = description;
+                    document.getElementById("custLocation").value = location;
+                    for (var i = 0; i < table.rows.length; i++) {
+                        table.rows[i].style.backgroundColor = "white";
+                        table.rows[i].style.color = "black";
+                    }
+                    var selectedRow = table.getElementsByTagName('tr')[rIndex];
+                    selectedRow.style.backgroundColor = "#B82601";
+                    selectedRow.style.color = "white";
+
+                    /* Select the radio button when any cell in the row is clicked.
+                    This allows the user to select an activity by clicking anywhere in the row and not necessarily on the radio button.
+                    It is important to note that the radio button is at position 'rIndex - 1'.*/
+                    // var radioButton = document.getElementsByClassName("form-check-input");
+                    // radioButton[rIndex - 1].checked = true;
                 }
             }
         }
