@@ -509,7 +509,7 @@ table tr th td:active {
 }
 #activityInpTable tr:hover, #activityOutTable tr:hover, #tempInpTable tr:hover, #tempOutTable tr:hover {
   background-color: darkorange;
-  color: white;
+  color: black;
 }
 .form-floating.mb-3 {
   color: black;

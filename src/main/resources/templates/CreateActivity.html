@@ -173,11 +173,11 @@
                             <th scope="col">Metric/Input Name</th>
                           </tr>
                           <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck" value="" onclick="selectInput()"></td>
+                            <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td>
                             <td>Number of Volunteers</td>
                           </tr>
                           <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck" value="" onclick="selectInput()"></td>
+                            <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td>
                             <td>Number of Hours</td>
                           </tr>
                         </table>
@@ -197,7 +197,7 @@
                       </div>
                       <div class="col-2">
                         <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
-                          <button class="btn btn-success" type="button" id="addInpButton" onclick="addInput()"><i class="fa fa-angle-double-left"></i> Add</button>
+                          <button class="btn btn-success" type="button" id="addInpButton"><i class="fa fa-angle-double-left"></i> Add</button>
                         </div>
                         <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:5px">
                           <button class="btn btn-success" type="button" id="remInpButton"><i class="fa fa-angle-double-right"></i> Remove</button>
@@ -212,19 +212,19 @@
                             <th scope="col">Pre-defined template inputs</th>
                           </tr>
                           <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck" value="" onclick="selectTempInp()"></td>
+                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
                             <td>Land area cleaned (in square feet)</td>
                           </tr>
                           <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck" value="" onclick="selectTempInp()"></td>
+                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
                             <td>Distance covered/cleaned (in miles)</td>
                           </tr>
                           <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck" value="" onclick="selectTempInp()"></td>
+                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
                             <td>Average no. of steps taken per volunteer</td>
                           </tr>
                           <tr>
-                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck" value="" onclick="selectTempInp()"></td>
+                            <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
                             <td>No. of days spent on the activity</td>
                           </tr>
                         </table>
@@ -271,10 +271,10 @@
                       </div>
                       <div class="col-2">
                         <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
-                          <button class="btn btn-success" type="button"><i class="fa fa-angle-double-left"></i> Add</button>
+                          <button class="btn btn-success" type="button" id="addOutButton"><i class="fa fa-angle-double-left"></i> Add</button>
                         </div>
                         <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:5px">
-                          <button class="btn btn-success" type="button"><i class="fa fa-angle-double-right"></i> Remove</button>
+                          <button class="btn btn-success" type="button" id="remOutButton"><i class="fa fa-angle-double-right"></i> Remove</button>
                         </div>
                       </div>
                       <div class="col-5">
@@ -412,6 +412,30 @@
                 }
             }
         }
+
+        /*  jQuery functions to move the records from one table to another.
+            These functions are invoked when user clicks the 'Add' and 'Remove' buttons to move the data between tables. */
+
+        $(document).ready(function() {
+            $("#addInpButton").on("click", function() {
+                var selectedRows = $("#tempInpTable input:checked").parents("tr").remove().clone().appendTo($("#activityInpTable tbody").add(selectedRows));
+            });
+        });
+        $(document).ready(function() {
+            $("#remInpButton").on("click", function() {
+                var selectedRows = $("#activityInpTable input:checked").parents("tr").remove().clone().appendTo($("#tempInpTable tbody").add(selectedRows));
+            });
+        });
+        $(document).ready(function() {
+            $("#addOutButton").on("click", function() {
+                var selectedRows = $("#tempOutTable input:checked").parents("tr").remove().clone().appendTo($("#activityOutTable tbody").add(selectedRows));
+            });
+        });
+        $(document).ready(function() {
+            $("#remOutButton").on("click", function() {
+                var selectedRows = $("#activityOutTable input:checked").parents("tr").remove().clone().appendTo($("#tempOutTable tbody").add(selectedRows));
+            });
+        });
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
