@@ -1,8 +1,10 @@
 package com.clientproject.soms.wellbeing.controller;
 
 import com.clientproject.soms.wellbeing.DTO.ActivityDataDTO;
+import com.clientproject.soms.wellbeing.DTO.UserDTO;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import com.clientproject.soms.wellbeing.repository.ReportRepository;
+import com.clientproject.soms.wellbeing.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,11 +20,13 @@ public class ReportController {
 
     private ActivityRepository activityRepository;
     private ReportRepository reportRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public ReportController(ActivityRepository aRepo, ReportRepository rRepo) {
+    public ReportController(ActivityRepository aRepo, ReportRepository rRepo,UserRepository userRepository) {
         this.activityRepository = aRepo;
         this.reportRepository = rRepo;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping(value = "allActivities", method = RequestMethod.GET)
@@ -50,5 +54,18 @@ public class ReportController {
         }
         return mav;
     }
-
+    @RequestMapping(value = "/selectByUser",method = RequestMethod.GET)
+    public ModelAndView queryAllUser(){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("showAllUsers",userRepository.findAllUsers());
+        mav.setViewName("SelectByUser");
+        return mav;
+    }
+    @RequestMapping(value = "qActByUserID/{id}",method = RequestMethod.GET)
+    public ModelAndView queryActivityDataByUserID(@PathVariable("id")int id){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("queryByID",reportRepository.queryActivityByUserID(id));
+        mav.setViewName("ActivityData");
+        return mav;
+    }
 }
