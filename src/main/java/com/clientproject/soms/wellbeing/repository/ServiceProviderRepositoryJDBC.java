@@ -1,7 +1,9 @@
 package com.clientproject.soms.wellbeing.repository;
 
+import com.clientproject.soms.wellbeing.DTO.ActivityDTO;
 import com.clientproject.soms.wellbeing.DTO.ServiceProviderCountDTO;
 import com.clientproject.soms.wellbeing.DTO.ServiceProviderDTO;
+import com.clientproject.soms.wellbeing.model.ActivityMapper;
 import com.clientproject.soms.wellbeing.model.ServiceProviderCountMapper;
 import com.clientproject.soms.wellbeing.model.ServiceProviderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,13 @@ public class ServiceProviderRepositoryJDBC implements ServiceProviderRepository 
 
     @Autowired
     public ServiceProviderRepositoryJDBC(JdbcTemplate template) { this.template = template; }
+
+    @Override
+    public ServiceProviderDTO findServiceProviderByEmail(String email) {
+        ServiceProviderDTO serviceProviderDTO=(ServiceProviderDTO) template.queryForObject("Select NAME, EMAIL,TELEPHONE,ADDRESS,POST_CODE,COMP_HSE_ID from soms_wellbeing.SERVICE_PROVIDER where EMAIL = ?",
+                new Object[]{email},new ServiceProviderMapper());
+        return serviceProviderDTO;
+    }
 
     @Override
     public boolean addServiceProvider(ServiceProviderDTO serviceProviderDTO) {
