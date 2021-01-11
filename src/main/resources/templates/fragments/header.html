@@ -44,14 +44,13 @@
               <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#loginSignUpModal"><i class="fa fa-user"></i> LOGIN / SIGN UP</button> -->
               <!-- <a class="btn" href="/login">LOGIN / SIGN UP <i class="fa fa-user"></i></a>
           </div> -->
-            <div class="nav-item">
+            <!-- <div class="nav-item">
                 <a class="btn"><i class="fa fa-user-tie"></i>ADMIN <i class="fa fa-caret-down"></i></a>
-                <!-- <button class="dropbtn">LOG ACTIVITY <i class="fa fa-caret-down"></i></button> -->
                 <div class="dropdown-content">
                     <a href="/ContactAdmin">Contact Admin</a>
                     <a href="/AdminHome">Admin Login</a>
                 </div>
-            </div>
+            </div> -->
 
           <div class="nav-item" id="logoutIcon">
               <a class="btn" id="loggedUser"><i class="fa fa-user"></i> <span sec:authentication="name"></span> <i class="fa fa-caret-down"></i></a>
@@ -60,6 +59,7 @@
               <div class="dropdown-content">
                   <!-- <a href="" id="loggedUser"></a> -->
                   <a href="">Update Profile</a>
+                  <a href="/ContactAdmin">Contact Admin</a>
                   <a href="" class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal" > LOGOUT</a>
                   <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal"> LOGOUT</button> -->
               </div>
