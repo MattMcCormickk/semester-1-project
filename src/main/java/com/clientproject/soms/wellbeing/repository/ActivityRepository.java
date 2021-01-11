@@ -2,6 +2,7 @@ package com.clientproject.soms.wellbeing.repository;
 
 import com.clientproject.soms.wellbeing.form.ActivityData;
 import com.clientproject.soms.wellbeing.form.CreateActivity;
+import com.clientproject.soms.wellbeing.form.CustomizeActivity;
 
 import java.text.ParseException;
 
@@ -11,5 +12,5 @@ public interface ActivityRepository {
     boolean addActivity(CreateActivity createActivity) throws ParseException;
     boolean addActivityData(ActivityData activityData) throws ParseException;
     public Object findAllActivity();
-    public Object findAllActivityBySerPro(int serProID);
+    boolean saveCustomizedActivity(CustomizeActivity customizeActivity);
 }

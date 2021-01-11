@@ -3,6 +3,7 @@ package com.clientproject.soms.wellbeing.repository;
 import com.clientproject.soms.wellbeing.DTO.ActivityDTO;
 import com.clientproject.soms.wellbeing.form.ActivityData;
 import com.clientproject.soms.wellbeing.form.CreateActivity;
+import com.clientproject.soms.wellbeing.form.CustomizeActivity;
 import com.clientproject.soms.wellbeing.model.ActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -106,6 +107,45 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
         );
     }
 
+    public boolean saveCustomizedActivity(CustomizeActivity customizeActivity) {
+        int[] types = new int[] {
+                Types.INTEGER,
+                Types.INTEGER,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR
+        };
+
+        int rows = template.update(
+                "INSERT INTO ACTIVITY_CUSTOM (ACTIVITY_ID, SERV_PROV_ID, CUST_METRIC_1, CUST_METRIC_2, CUST_METRIC_3, CUST_METRIC_4, CUST_METRIC_5, CUST_METRIC_6, " +
+                        "CUST_OUTPUT_1, CUST_OUTPUT_2, CUST_OUTPUT_3, CUST_OUTPUT_4, CUST_OUTPUT_5, CUST_OUTPUT_6) " +
+                        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                new Object[]{customizeActivity.getActivityId(),
+                        1,
+                        customizeActivity.getCustMetric1(),
+                        customizeActivity.getCustMetric2(),
+                        customizeActivity.getCustMetric3(),
+                        customizeActivity.getCustMetric4(),
+                        customizeActivity.getCustMetric5(),
+                        customizeActivity.getCustMetric6(),
+                        customizeActivity.getCustOutput1(),
+                        customizeActivity.getCustOutput2(),
+                        customizeActivity.getCustOutput3(),
+                        customizeActivity.getCustOutput4(),
+                        customizeActivity.getCustOutput5(),
+                        customizeActivity.getCustOutput6()}, types);
+
+        return rows > 0;
+    }
 
     @Override
     public List<ActivityDTO> findAllActivityBySerPro(int serProID){
