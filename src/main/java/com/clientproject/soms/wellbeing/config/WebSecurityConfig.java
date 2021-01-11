@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/AllUsers").hasRole("SERVICE_PROVIDER")
                 .mvcMatchers("/allActivities").hasRole("SERVICE_PROVIDER")
                 .mvcMatchers("/CustomizeActivity").hasRole("SERVICE_PROVIDER")
+		.mvcMatchers("/AdminHome").hasRole("ADMIN")
                 .and()
                 .formLogin()
                     .usernameParameter("email")     // change authentication to email id
@@ -54,5 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("toyota@company.com").password("{noop}password").roles("SERVICE_PROVIDER");
+        auth
+                .inMemoryAuthentication()
+                .withUser("admin").password("{noop}password").roles("ADMIN");                
     }
 }

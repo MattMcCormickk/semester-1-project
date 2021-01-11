@@ -76,4 +76,9 @@ public class GeneralController {
         }
         return "redirect:/";
     }
+    @RequestMapping("/SelectedPage")
+    public String selectPage(){
+        return "SelectedPage";
+    }
+
 }
