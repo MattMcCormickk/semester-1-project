@@ -375,11 +375,12 @@ table tr th td:active {
 }
 
 #customizeButton {
-  background-color: maroon;
-  color: white;
+  background-color: darkorange;
+  color: black;
 }
 #customizeButton:hover {
   background-color: green;
+  color: white;
 }
 
 #registerButton {
@@ -536,3 +537,22 @@ table tr th td:active {
   background-color: green;
   color: white;
 } */
+#customizeTitle {
+  text-align: center;
+}
+.accordionsContainer {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+#submitCustomize {
+  background-color: darkorange;
+  color: black;
+  margin-left: 550px;
+  margin-right: 500px;
+  margin-top: 10px;
+  width: 300px;
+}
+#submitCustomize:hover {
+  background-color: green;
+  color: white;
+}
