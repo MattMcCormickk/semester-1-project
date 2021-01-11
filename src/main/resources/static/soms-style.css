@@ -539,6 +539,11 @@ table tr th td:active {
 } */
 #customizeTitle {
   text-align: center;
+  background-color: darkorange;
+  color: black;
+  margin-left: 375px;
+  width: 400px;
+  font-size: 1rem;  
 }
 .accordionsContainer {
   margin-left: 50px;
