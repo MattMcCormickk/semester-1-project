@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../soms-style.css">
+    <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Contact Admin</title>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<main>
+    <div class="contactAdminContainer">
+        <div class="contactAdminForm">
+            <h1>Contact Admin</h1>
+            <!-- Upon submitting the below form, registerActivity() is being invoked which makes an AJAX request to register the activity in the database. -->
+            <form action="/AdminContacted/" method="get" id="contact_admin_form" onsubmit="return contactAdmin()">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="name" name="name" required>
+                    <label for="name">Your Name</label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="date" placeholder="dd/mm/yyyy" name="date" required>
+                            <label for="date"> Date</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="email" name="email" required>
+                            <label for="email"><i class="fa fa-envelope icon"></i> Email</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea type="text" name="description" id="description" class="form-control" placeholder="Issue Description" style="height: 100px" required></textarea>
+                    <label for="description">How can we help?</label>
+                </div>
+                <button type="submit" class="btn btn-success" id="contactAdminButton">Contact Admin</button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after registering the activity in the database.  -->
+    <div class="modal fade" id="contactMessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Contacted Admin!</h5>
+                    <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    Successfully contacted admin!
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <!-- Added a custom button to close the modal. -->
+                    <a href="" class="btn btn-secondary" role="button">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+
+
+<script>
+
+     function contactAdmin() {
+        var name = document.getElementById("name").value;
+        var date = document.getElementById("date").value;
+        var email = document.getElementById("email").value;
+        var description = document.getElementById("description").value;
+        var params = 'name=' + name + '&date=' + date + '&email=' + email + '&description=' + description;
+        console.log(params);
+
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", '/AdminContact', true); // true is asynchronous
+
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+                console.log(xhttp.responseText);
+                // Initialize the modal to display the confirmation message.
+                // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
+                var myModal = new bootstrap.Modal(document.getElementById("contactMessage"), {
+                    backdrop: 'static', keyboard: false
+                })
+                myModal.show();   // Display the modal when the AJAX call is successful.
+            } else {
+                console.error(xhttp.statusText);
+            }
+        };
+        xhttp.send(params);
+        return false;
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

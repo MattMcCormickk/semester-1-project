@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../soms-style.css">
+    <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Admin Home</title>
+</head>
+<body>
+
+<main>
+    <div class="adminHomeContainer">
+        <!--<div th:if="$(not #lists.isEmpty(allMessages)">-->
+        <h1>Admin</h1>
+        <div class="contactTable">
+                <h3 id="table_title">Serivce Provider Messages</h3>
+            <table class="table table-hover" id="allMessagesTable">
+                <col style="width:5%">
+                <col style="width:20%">
+                <col style="width:15%">
+                <col style="width:20%">
+                <col style="width:20%">
+                <col style="width:5%">
+                <col style="width:5%">
+                <thead>
+                <tr>
+                    <!-- <th scope="col"></th> -->
+                    <th scope="col">#</th>
+                    <th scope="col">Date Recieved</th>
+                    <th scope="col">Service Provider Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Description</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="message: ${allMessages}">
+                    <td><input class="form-check-input" type="radio" name="exampleRadios"  value=""></td>
+                    <td th:text="${message.date}"></td>
+                    <td th:text="${message.name}"></td>
+                    <td th:text="${message.email}"></td>
+                    <td th:text="${message.description}"></td>
+                    <td><a href="" class="btn btn-success" role="button" onclick="deleteMessage()">Delete</a></td>
+                    <td><a href="" class="btn btn-success" role="button" onclick="replyToMessage()">Reply</a></td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="selectSPwrapper">
+            <h3>Select Service Provider</h3>
+            <h4>Enter Service Provider Name</h4><br>
+
+                    <div class="search-text">
+                        <span class="fa fa-search search-icon"></span>
+                        <input type="text" id="findSerPro" onkeyup="findSerPro()" class="form-control" placeholder="Service Provider Name...">
+                    </div>
+
+            <h4>Or Select From The List</h4>
+                <table class="table table-striped" id="allSerProTable" onclick=selectSerPro()>
+                    <thead>
+                    <col style="width:33%">
+                    <col style="width:33%">
+                    <col style="width:33%">
+
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>email</th>
+                        <th>tel.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="serPro: ${allSerPro}">
+                        <td><input class="form-check-input" type="radio" name="exampleRadios" id="selectRadio2" value="" onclick="selectSerPro()"></td>
+                        <td th:text="${serPro.serviceProviderName}"></td>
+                        <td th:text="${serPro.serviceProviderEmail}"></td>
+                        <td th:text="${serPro.telephone}"></td>
+                        <td><a href="#userCard" class="btn btn-success" role="button">Select</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+
+    </div>
+
+    <div class="ammendDataWrapper">
+        <h3>Ammend Data</h3>
+            <!--SEARCH FOR DATA, FILTER BY SELECTED SERVICE PROVIDER ID -->
+    </div>
+
+    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after registering the activity in the database.  -->
+    <div class="modal fade" id="MessageDelted" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content animate">
+                <div class="modal-header" id="common-modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Message Deleted!</h5>
+                    <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    Deleted Message
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <!-- Added a custom button to close the modal. -->
+                    <a href="" class="btn btn-secondary" role="button">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<script type="text/javascript">
+    function deleteMessage() { <!--DELETE MESSAGE -->
+        var table = document.getElementById("allMessagesTable"), rIndex;
+        for (var i = 0; i < table.rows.length; i++) {
+            table.rows[i].onclick = function () {
+                rIndex = this.rowIndex;
+                console.log(rIndex);
+
+                var name = rIndex[2];
+                var date = rIndex[1];
+                var email = rIndex[3];
+                var description = rIndex[4];
+                var params = 'name=' + name + '&date=' + date + '&email' + email + '&description' + description;
+                rIndex.remove()
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("DELETE", '/DeleteMessage', true); // true is asynchronous
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        console.log(xhttp.responseText);
+                        // Initialize the modal to display the confirmation message.
+                        // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
+                        var myModal = new bootstrap.Modal(document.getElementById("MessageDeleted"), {
+                            backdrop: 'static', keyboard: false
+                        })
+                        myModal.show();   // Display the modal when the AJAX call is successful.
+                    } else {
+                        console.error(xhttp.statusText);
+                    }
+                };
+                xhttp.send(params);
+                return false;
+            }
+
+            }
+    }
+
+    function replyToMessage(){} <!--REPLY TO MESSAGE -->
+
+    function findSerPro() { <!--FILTER TABLE BY NAME LIKE ON OTHER PAGES -->
+
+        var searchInp, searchFilter, allActivityTable, row, data, i, textVal;
+        searchInp = document.getElementById("findSerPro");
+        searchFilter = searchInp.value.toUpperCase();
+        activityTable = document.getElementById("allSerProTable");
+        row = activityTable.getElementsByTagName("tr");
+
+        //Loop through the table rows and hide those who don't match the search filter
+        for (var i = 0; i < row.length; i++) {
+            data = row[i].getElementsByTagName("td")[2];
+            if (data) {
+                textVal = data.textContent || data.innerText;
+                if (textVal.toUpperCase().indexOf(searchFilter) > -1) {
+                    row[i].style.display = "";
+                } else {
+                    row[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    /* MOVES RELEVANT INFO TO AMMEND DATA SECTION */
+    function selectSerPro(){
+        var table = document.getElementById("allSerProTable"), rIndex;
+        for (var i = 0; i < table.rows.length; i++) {
+            table.rows[i].onclick = function() {
+                rIndex = this.rowIndex;
+                console.log(rIndex);
+                var ID = this.cells[1].innerHTML;
+
+                document.getElementById("serProName").value = ID;
+
+                for (var i = 0; i < table.rows.length; i++) {
+                    table.rows[i].style.backgroundColor = "white";
+                    table.rows[i].style.color = "black";
+                }
+
+                var selectedRow = table.getElementsByTagName('tr')[rIndex];
+                selectedRow.style.backgroundColor = "#b82601";
+                selectedRow.style.color = "white";
+
+                /* Select the radio button when any cell in the row is clicked.
+                This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
+                It is important to note that the radio button is at position 'rIndex - 1'.*/
+                var radioButton = document.getElementsByClassName("form-check-input");
+                radioButton[rIndex - 1].checked = true;
+            }
+        }
+    }
+    </script>
+</body>
+</html>
