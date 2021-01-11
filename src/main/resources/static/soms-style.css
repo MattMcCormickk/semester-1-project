@@ -10,6 +10,21 @@ body h1{
     padding-left: 10px;
     /* padding-right: 20px; */
 }
+
+body h3{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  font-size: 1rem;
+  padding-bottom: 1em;
+}
+
+body h4{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-size: 0.85rem;
+    padding-bottom: 1em;
+}
+
 .navbar h1{
     font-size: 1.2rem;
     flex: 4;
@@ -472,6 +487,49 @@ table tr th td:active {
 #welcomeTitle {
   margin-left: 450px;
 }
-.btn {
-  background-color: maroon;
+
+.social_media_icons a{
+    padding: 0.5em;
+    position: relative;
+    display: inline-flex;
+    font-size: 150%
+}
+
+.contactAdminForm {
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+#contactAdminButton{
+    text-align: center;
+    float: right;
+    height: 75px;
+    width: 200px;
+}
+
+.contactTable{
+    width: 45%;
+    float: left;
+    position: relative;
+
+}
+
+.selectSPwrapper{
+    width: 45%;
+    float:right;
+    position: relative;
+}
+
+.ammendDataWrapper{
+    width: 90%;
+    padding: 2em;
+    float: bottom;
+    clear: both;
+    text-align: center;
+}
+
+.adminHomeContainer{
+    padding-right: 2em;
+    padding-left: 2em;
+
 }
