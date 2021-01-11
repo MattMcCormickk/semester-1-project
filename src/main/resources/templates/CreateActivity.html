@@ -9,7 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../soms-style.css">
-    <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Register Activity</title>
 </head>
@@ -60,12 +59,12 @@
                   <h1>All Activities</h1>
               </div>
             <table class="table table-hover" id="activitiesTable" onclick="selectActivity()">
-                  <col style="width:5%">
-                  <col style="width:20%">
-                  <col style="width:15%">
-                  <col style="width:45%">
+                  <col style="width:3%">
+                  <col style="width:18%">
+                  <col style="width:14%">
+                  <col style="width:40%">
                   <col style="width:10%">
-                  <col style="width:5%">
+                  <col style="width:15%">
                   <tr>
                       <!-- <th scope="col"></th> -->
                       <th scope="col">#</th>
@@ -81,7 +80,16 @@
                       <td th:text="${activity.date}"></td>
                       <td th:text="${activity.description}"></td>
                       <td th:text="${activity.location}"></td>
-                      <td><a href="" class="btn" role="button" id="customizeButton">Customize</a></td>
+                      <!-- <td><a href="" class="btn" role="button" id="customizeButton" data-bs-toggle="modal" data-bs-target="#customizeActivity" onclick="selectActivity()"><i class="fa fa-edit"></i> Customize</a></td> -->
+                      <td><a th:href="@{/CustomizeActivity
+                                            (activityId=${activity.activityID},
+                                            activityName=${activity.activityName},
+                                            activityDate=${activity.date},
+                                            location=${activity.location},
+                                            description=${activity.description})}"
+                                     class="btn" role="button" id="customizeButton"><i class="fa fa-edit"></i> Customize
+                          </a>
+                      </td>
                   </tr>
               </table>
           </div>
@@ -164,6 +172,41 @@
                     } else {
                         row[i].style.display = "none";
                     }
+                }
+            }
+        }
+
+        /* Function to select an activity from the table, display the selected activity details on the customization modal popup.
+        When another activity is selected, un-highlight the previously selected row. */
+        function selectActivity(){
+            var table = document.getElementById("activitiesTable"), rIndex;
+            for (var i = 0; i < table.rows.length; i++) {
+                table.rows[i].onclick = function() {
+                    rIndex = this.rowIndex;
+                    var activityId = this.cells[0].innerHTML;
+                    var activityName = this.cells[1].innerHTML;
+                    var activityDate = this.cells[2].innerHTML;
+                    var description = this.cells[3].innerHTML;
+                    var location = this.cells[4].innerHTML;
+
+                    document.getElementById("custActivityId").value = activityId;
+                    document.getElementById("custActivityName").value = activityName;
+                    document.getElementById("custActivityDate").value = activityDate;
+                    document.getElementById("custDescription").value = description;
+                    document.getElementById("custLocation").value = location;
+                    for (var i = 0; i < table.rows.length; i++) {
+                        table.rows[i].style.backgroundColor = "white";
+                        table.rows[i].style.color = "black";
+                    }
+                    var selectedRow = table.getElementsByTagName('tr')[rIndex];
+                    selectedRow.style.backgroundColor = "#B82601";
+                    selectedRow.style.color = "white";
+
+                    /* Select the radio button when any cell in the row is clicked.
+                    This allows the user to select an activity by clicking anywhere in the row and not necessarily on the radio button.
+                    It is important to note that the radio button is at position 'rIndex - 1'.*/
+                    // var radioButton = document.getElementsByClassName("form-check-input");
+                    // radioButton[rIndex - 1].checked = true;
                 }
             }
         }
