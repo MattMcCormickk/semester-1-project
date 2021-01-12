@@ -58,7 +58,8 @@
               <!-- <button class="dropbtn">LOG ACTIVITY <i class="fa fa-caret-down"></i></button> -->
               <div class="dropdown-content">
                   <!-- <a href="" id="loggedUser"></a> -->
-                  <a th:href="@{/UpdateProfile/{emailId}(emailId=${#authentication.name})}">Update Profile</a>
+                  <!-- <a th:href="@{/UpdateProfile/{emailId}(emailId=${#authentication.name})}">Update Profile</a> -->
+                  <a th:href="@{/UpdateProfile/(${#authentication.name})}">Update Profile</a>
                   <a href="/ContactAdmin">Contact Admin</a>
                   <a href="" class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal" > LOGOUT</a>
                   <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal"> LOGOUT</button> -->
