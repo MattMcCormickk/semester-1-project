@@ -334,9 +334,33 @@
         $(function() {
             $("#submitCustomize").click(function() {
                 let activityId = $("#activityId").val();  // Get the activity id
+
+            /* ALlowing customizations from the third row (excluding header) onwards in the inputs table.
+              The first two are default metrics/inputs for all activities.
+              Below are the jQuery functions to select the specific cell values from the table. */
+                var custMetric1 = $("#activityInpTable tr:eq(3) td:eq(1)").text();  // Get the value from 4th row and 2nd column in the table
+                var custMetric2 = $("#activityInpTable tr:eq(4) td:eq(1)").text();
+                var custMetric3 = $("#activityInpTable tr:eq(5) td:eq(1)").text();
+                var custMetric4 = $("#activityInpTable tr:eq(6) td:eq(1)").text();
+                var custMetric5 = $("#activityInpTable tr:eq(7) td:eq(1)").text();
+                var custMetric6 = $("#activityInpTable tr:eq(8) td:eq(1)").text();
+
+            /* ALlowing customizations from the second row (excluding header) onwards in the outputs table.
+              The first one is a default output for all activities.
+              Below are the jQuery functions to select the specific cell values from the table. */
+                var custOutput1 = $("#activityOutTable tr:eq(2) td:eq(1)").text();  // Get the value from 3rd row and 2nd column in the table
+                var custOutput2 = $("#activityOutTable tr:eq(3) td:eq(1)").text();
+                var custOutput3 = $("#activityOutTable tr:eq(4) td:eq(1)").text();
+                var custOutput4 = $("#activityOutTable tr:eq(5) td:eq(1)").text();
+                var custOutput5 = $("#activityOutTable tr:eq(6) td:eq(1)").text();
+                var custOutput6 = $("#activityOutTable tr:eq(7) td:eq(1)").text();
+
                 // Construct the key-value pairs for the request parameters
-                var params = {'activityId' : activityId, 'serviceProvId' : 1, 'custMetric1' : '1', 'custMetric2' : '2', 'custMetric3' : '3', 'custMetric4' : '4', 'custMetric5' : '5', 'custMetric6' : '6',
-                              'custOutput1' : '1', 'custOutput2' : '2', 'custOutput3' : '3', 'custOutput4' : '4', 'custOutput5' : '5', 'custOutput6' : '6'};
+                var params = {'activityId' : activityId, 'serviceProvId' : 1,
+                              'custMetric1' : custMetric1, 'custMetric2' : custMetric2, 'custMetric3' : custMetric3,
+                              'custMetric4' : custMetric4, 'custMetric5' : custMetric5, 'custMetric6' : custMetric6,
+                              'custOutput1' : custOutput1, 'custOutput2' : custOutput2, 'custOutput3' : custOutput3,
+                              'custOutput4' : custOutput4, 'custOutput5' : custOutput5, 'custOutput6' : custOutput6};
 
                 $.ajax({
                     type: 'POST',

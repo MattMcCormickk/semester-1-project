@@ -183,6 +183,7 @@ body h4{
     color: black;
     background-image: linear-gradient(white, teal);
     min-width: 160px;
+    z-index: 2;
     /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
     /* margin-left: 20px; */
 }
@@ -607,7 +608,7 @@ table tr th td:active {
   color: black;
   margin-left: 375px;
   width: 400px;
-  font-size: 1rem;  
+  font-size: 1rem;
 }
 .accordionsContainer {
   margin-left: 50px;
