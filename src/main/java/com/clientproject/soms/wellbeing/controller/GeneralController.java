@@ -76,6 +76,11 @@ public class GeneralController {
         }
         return "redirect:/";
     }
+
+    @RequestMapping("/UpdateProfile")
+    public String UpdateProfile(){
+        return "UpdateProfile";
+
     @RequestMapping("/SelectedPage")
     public String selectPage(){
         return "SelectedPage";

@@ -19,6 +19,14 @@ public class ServiceProviderDTO {
         this.serProID = serProID;
     }
 
+    public ServiceProviderDTO(String name, String telephone, String address, String postcode, String companiesHouseId) {
+        this.name = name;
+        this.telephone = telephone;
+        this.address = address;
+        this.postcode = postcode;
+        this.companiesHouseId = companiesHouseId;
+    }
+
     public String getName() { return name; }
 
     public String getEmail() { return email; }
@@ -32,4 +40,5 @@ public class ServiceProviderDTO {
     public  String getCompaniesHouseId() { return  companiesHouseId; }
 
     public int getSerProID() {return serProID;}
+
 }
