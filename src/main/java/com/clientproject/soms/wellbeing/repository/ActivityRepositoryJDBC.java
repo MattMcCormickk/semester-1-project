@@ -1,10 +1,12 @@
 package com.clientproject.soms.wellbeing.repository;
 
 import com.clientproject.soms.wellbeing.DTO.ActivityDTO;
+import com.clientproject.soms.wellbeing.DTO.CustomActivityDTO;
 import com.clientproject.soms.wellbeing.form.ActivityData;
 import com.clientproject.soms.wellbeing.form.CreateActivity;
 import com.clientproject.soms.wellbeing.form.CustomizeActivity;
 import com.clientproject.soms.wellbeing.model.ActivityMapper;
+import com.clientproject.soms.wellbeing.model.CustomizeActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -61,6 +63,7 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
         return rows>0;
     }
 
+    @Override
     public boolean addActivityData(ActivityData activityData) throws ParseException {
         int[] types1 = new int[] {
                 Types.INTEGER,
@@ -107,6 +110,7 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
         );
     }
 
+    @Override
     public boolean saveCustomizedActivity(CustomizeActivity customizeActivity) {
         int[] types = new int[] {
                 Types.INTEGER,
@@ -148,11 +152,13 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
     }
 
     @Override
-    public List<ActivityDTO> findAllActivityBySerPro(int serProID){
-        ActivityDTO activityDTO=(ActivityDTO) template.queryForObject("Select ACTIVITY_NAME,ACTIVITY_ID,DESCRIPTION,LOCATION,ACTIVITY_DATE from soms_wellbeing.activity where ACTIVITY_NAME = ?",
-                new Object[]{serProID},new ActivityMapper());
-        return (List<ActivityDTO>) activityDTO;
-    }
+    public CustomActivityDTO getCustomMetrics(String activityId) {
+        CustomActivityDTO customActivityDTO = (CustomActivityDTO) template.queryForObject(
+                "SELECT CUST_METRIC_1, CUST_METRIC_2, CUST_METRIC_3, CUST_METRIC_4, CUST_METRIC_5, CUST_METRIC_6, " +
+                        "CUST_OUTPUT_1, CUST_OUTPUT_2, CUST_OUTPUT_3, CUST_OUTPUT_4, CUST_OUTPUT_5, CUST_OUTPUT_6 FROM ACTIVITY_CUSTOM WHERE ACTIVITY_ID= ?",
+                    new Object[]{activityId}, new CustomizeActivityMapper());
 
+        return customActivityDTO;
+    }
 
 }

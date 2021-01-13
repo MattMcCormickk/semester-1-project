@@ -1,5 +1,6 @@
 package com.clientproject.soms.wellbeing.controller;
 
+import com.clientproject.soms.wellbeing.DTO.CustomActivityDTO;
 import com.clientproject.soms.wellbeing.form.ActivityData;
 import com.clientproject.soms.wellbeing.form.CreateActivity;
 import com.clientproject.soms.wellbeing.form.CustomizeActivity;
@@ -114,6 +115,20 @@ public class ActivityController {
             response = "Successfully customized the activity!";
         }
         return response;
+    }
+
+    @RequestMapping(path = "/getCustomizedActivity", method = RequestMethod.GET)
+    public String getCustomizedActivity(@RequestParam(value = "activityId") String activityId) {
+        CustomActivityDTO customActivityDTO = activityRepository.getCustomMetrics(activityId);
+//        System.out.println(customActivityDTO.getCustMetric1());
+        String allMetrics = customActivityDTO.getCustMetric1() + "|" + customActivityDTO.getCustMetric2() + "|" +
+                            customActivityDTO.getCustMetric3() + "|" + customActivityDTO.getCustMetric4() + "|" +
+                            customActivityDTO.getCustMetric5() + "|" + customActivityDTO.getCustMetric6() + "|" +
+                            customActivityDTO.getCustOutput1() + "|" + customActivityDTO.getCustOutput2() + "|" +
+                            customActivityDTO.getCustOutput3() + "|" + customActivityDTO.getCustOutput4() + "|" +
+                            customActivityDTO.getCustOutput5() + "|" + customActivityDTO.getCustOutput6();
+
+        return allMetrics;
     }
 
 }

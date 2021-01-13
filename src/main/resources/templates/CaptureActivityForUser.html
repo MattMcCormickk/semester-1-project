@@ -16,7 +16,7 @@
 <body onload="setUserDetails()">
   <header th:replace="fragments/header :: header"></header>
     <div class="tablesAndCards">
-        <div class="allActivitiesContainer" style="width: 800px">
+        <div class="allActivitiesContainer" id="allActivitiesContainer" style="width: 750px">
             <div class="titleAndSearch">
                 <div class="search-text">
                     <span class="fa fa-search search-icon"></span>
@@ -28,9 +28,9 @@
             <!-- Added column width percentages -->
                 <col style="width:5%">
                 <col style="width:5%">
-                <col style="width:25%">
+                <col style="width:20%">
                 <col style="width:15%">
-                <col style="width:40%">
+                <col style="width:45%">
                 <col style="width:10%">
                 <tr>
                     <th scope="col"></th>
@@ -94,7 +94,7 @@
                                   <input type="text" class="form-control" id="description" name="description" readonly>
                               </div>
                           </div>
-                          <div class="row">
+                          <!-- <div class="row">
                             <div class="form-floating mb-3" style="color:black; margin-top: 10px">
                                 <input type="text" class="form-control" name="noOfHours" id="noOfHours" placeholder="No. of Hours">
                                 <label for="noOfHours">No. of Hours</label>
@@ -104,6 +104,46 @@
                             <div class="form-floating mb-3" style="color:black">
                                 <input type="text" class="form-control" name="bagsOfRubbish" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
                                 <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
+                            </div>
+                          </div> -->
+                          <div class="row">
+                            <div class="col">
+                              <table class="table" id="actInpTable">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Activity Metrics/Inputs</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="noOfHours" id="noOfHours" placeholder="No. of Hours">
+                                          <label for="noOfHours">No. of Hours</label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="col">
+                              <table class="table" id="actOutTable">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Activity Outputs</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="bagsOfRubbish" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
+                                          <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
                             </div>
                           </div>
                           <div class="row">
@@ -211,6 +251,21 @@
                 radioButton[rIndex - 1].checked = true;
             }
         }
+        // jQuery function to make an Ajax HTTP GET request to get the customized activity metrics.
+                $(function() {
+                        var allMetrics;
+                        let activityId = $("#activityID").val();  // Get the activity id
+                        $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:8080/getCustomizedActivity/?activityId=' + activityId,
+                            dataType: "text",
+                            success: function(response) {
+                              allMetrics = response;
+                            },
+                            async: false
+                        });
+                        console.log(allMetrics);
+                });
     }
 
 /*  This is the AJAX function invoked when user clicks on 'Submit Activity'
@@ -244,6 +299,7 @@
       xhttp.send(params);
       return false;
     }
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
