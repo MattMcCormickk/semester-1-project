@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../soms-style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Customize Activity</title>
+</head>
+<body>
+  <header th:replace="fragments/header :: header"></header>
+    <main>
+      <!-- Below are the accordions displayed in the 'Customize Activity' page -->
+      <div class="accordionsContainer">
+        <div class="accordion accordion-flush" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Selected Activity
+                <h5 id="customizeTitle">Customize Inputs & Outputs</h5>
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+              <div class="accordion-body">
+                <div class="row">
+                    <div class="col" style="max-width:7%">
+                        <label for="activityId">#</label>
+                        <input type="text" class="form-control" id="activityId" name="activityId" th:value="${activityId}" readonly>
+                    </div>
+                    <div class="col" style="max-width:23%">
+                        <label for="activityName">Activity Name</label>
+                        <input type="text" class="form-control" id="activityName" name="activityName" th:value="${activityName}" readonly>
+                    </div>
+                    <div class="col" style="max-width:15%">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" th:value="${location}" readonly>
+                    </div>
+                    <div class="col" style="max-width:15%">
+                        <label for="activityDate">Activity Date</label>
+                        <input type="text" class="form-control" id="activityDate" name="activityDate" th:value="${activityDate}" readonly>
+                    </div>
+                    <div class="col" style="max-width:40%">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" name="description" th:value="${description}" readonly>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Customize Activity Metrics/Inputs
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-5">
+                    <table class="table" id="activityInpTable">
+                      <col style="width:10%">
+                      <col style="width:90%">
+                      <thead>
+                        <tr>
+                          <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllInp" id="selectAllInp"></th>
+                          <th scope="col">Selected Metrics/Inputs</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td>
+                          <td>Number of Volunteers</td>
+                        </tr>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td>
+                          <td>Number of Hours</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-2">
+                    <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
+                      <button class="btn btn-success" type="button" id="addInpButton"><i class="fa fa-angle-double-left"></i> Add</button>
+                    </div>
+                    <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:5px">
+                      <button class="btn btn-success" type="button" id="remInpButton"><i class="fa fa-angle-double-right"></i> Remove</button>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <table class="table" id="tempInpTable">
+                      <col style="width:10%">
+                      <col style="width:90%">
+                      <thead>
+                        <tr>
+                          <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllTempInp" id="selectAllTempInp"></th>
+                          <th scope="col">Pre-defined template inputs</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
+                          <td>Land area cleaned (in square feet)</td>
+                        </tr>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
+                          <td>Distance covered/cleaned (in miles)</td>
+                        </tr>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
+                          <td>Average no. of steps taken per volunteer</td>
+                        </tr>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selecTempInpCheck" id="selecTempInpCheck"></td>
+                          <td>No. of days spent on the activity</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-5">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="customInp" placeholder="Custom Input" name="customInp" required>
+                        <label for="customInp">Custom Input</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-floating mb-3">
+                      <div class="d-grid gap-2 col-10 mx-auto">
+                        <button class="btn btn-success" type="button" id="addCustInpButton"><i class="fa fa-plus"></i> Add Custom</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Customize Activity Outputs
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-5">
+                    <table class="table" id="activityOutTable">
+                      <col style="width:10%">
+                      <col style="width:90%">
+                      <thead>
+                        <tr>
+                          <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllOut" id="selectAllOut"></th>
+                          <th scope="col">Selected Outputs</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selectOutCheck" id="selectOutCheck" value="" onclick="selectOutput()"></td>
+                          <td>Number of bags of rubbish collected</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-2">
+                    <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
+                      <button class="btn btn-success" type="button" id="addOutButton"><i class="fa fa-angle-double-left"></i> Add</button>
+                    </div>
+                    <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:5px">
+                      <button class="btn btn-success" type="button" id="remOutButton"><i class="fa fa-angle-double-right"></i> Remove</button>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <table class="table" id="tempOutTable">
+                      <col style="width:10%">
+                      <col style="width:90%">
+                      <thead>
+                        <tr>
+                          <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllTempOut" id="selectAllTempOut"></th>
+                          <th scope="col">Pre-defined template outputs</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
+                          <td>No. of bags of recyclable material collected (tins, cans, bottles etc.)</td>
+                        </tr>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
+                          <td>No. of bags of hazardous items collected (broken glass, sharp items etc.)</td>
+                        </tr>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
+                          <td>Weight of plastic waste or non-degradable items collected (in kilograms)</td>
+                        </tr>
+                        <tr>
+                          <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
+                          <td>Improved river water quality (concentration of pollutants - micrograms per liter (µg/l))</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-5">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="customOut" placeholder="Custom Input" name="customInp" required>
+                        <label for="customInp">Custom Input</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-floating mb-3">
+                      <div class="d-grid gap-2 col-10 mx-auto">
+                        <button class="btn btn-success" type="button" id="addCustOutButton"><i class="fa fa-plus"></i> Add Custom</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success" id="submitCustomize">Submit Customization</button>
+      </div>
+    </main>
+
+    <script type="text/javascript">
+
+        /*  jQuery functions to move the records from one table to another.
+            These functions are invoked when user clicks the 'Add' and 'Remove' buttons to move the data between tables. */
+
+        $(document).ready(function() {
+            $("#addInpButton").on("click", function() {
+              var selectedRows = $("#tempInpTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#activityInpTable tbody").add(selectedRows));
+              $(".form-check-input").prop("checked", false);
+            });
+        });
+        $(document).ready(function() {
+            $("#remInpButton").on("click", function() {
+                var selectedRows = $("#activityInpTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#tempInpTable tbody").add(selectedRows));
+                $(".form-check-input").prop("checked", false);
+            });
+        });
+        $(document).ready(function() {
+            $("#addOutButton").on("click", function() {
+                var selectedRows = $("#tempOutTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#activityOutTable tbody").add(selectedRows));
+                $(".form-check-input").prop("checked", false);
+            });
+        });
+        $(document).ready(function() {
+            $("#remOutButton").on("click", function() {
+                var selectedRows = $("#activityOutTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#tempOutTable tbody").add(selectedRows));
+                $(".form-check-input").prop("checked", false);
+            });
+        });
+
+        // jQuery function to add custom inputs/outputs to the table
+        $(document).ready(function() {
+            $("#addCustInpButton").on("click", function() {
+                var custInput = $("#customInp").val();
+                $("#activityInpTable").append('<tr><td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td><td>' + custInput + '</td></tr>');
+            });
+        });
+
+        $(document).ready(function() {
+            $("#addCustOutButton").on("click", function() {
+                var custOutput = $("#customOut").val();
+                $("#activityOutTable").append('<tr><td><input class="form-check-input" type="checkbox" name="selectOutCheck" id="selectOutCheck"></td><td>' + custOutput + '</td></tr>');
+            });
+        });
+
+        // jQuery function to select/de-select all the records in a table
+        $(function() {
+            $("#activityInpTable #selectAllInp").click(function() {
+                if(this.checked) {
+                    $("#activityInpTable .form-check-input").prop("checked", true);
+                } else {
+                    $("#activityInpTable .form-check-input").prop("checked", false);
+                }
+            });
+            $("#tempInpTable #selectAllTempInp").click(function() {
+                if(this.checked) {
+                    $("#tempInpTable .form-check-input").prop("checked", true);
+                } else {
+                    $("#tempInpTable .form-check-input").prop("checked", false);
+                }
+            });
+            $("#activityOutTable #selectAllOut").click(function() {
+                if(this.checked) {
+                    $("#activityOutTable .form-check-input").prop("checked", true);
+                } else {
+                    $("#activityOutTable .form-check-input").prop("checked", false);
+                }
+            });
+            $("#tempOutTable #selectAllTempOut").click(function() {
+                if(this.checked) {
+                    $("#tempOutTable .form-check-input").prop("checked", true);
+                } else {
+                    $("#tempOutTable .form-check-input").prop("checked", false);
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

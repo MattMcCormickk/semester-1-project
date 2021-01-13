@@ -88,7 +88,7 @@
 
         //Loop through the table rows and hide those who don't match the search filter
         for (var i = 0; i < row.length; i++) {
-            data = row[i].getElementsByTagName("td")[2];
+            data = row[i].getElementsByTagName("td")[1];
             if (data) {
                 textVal = data.textContent || data.innerText;
                 if (textVal.toUpperCase().indexOf(searchFilter) > -1) {

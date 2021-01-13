@@ -68,11 +68,6 @@ public class GeneralController {
         return "UserDataCapture";
     }
 
-    @RequestMapping("/UpdateProfile")
-    public String UpdateProfile(){
-        return "UpdateProfile";
-    }
-
     @GetMapping("/login")
     public String displayLogin() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -81,4 +76,9 @@ public class GeneralController {
         }
         return "redirect:/";
     }
+    @RequestMapping("/SelectedPage")
+    public String selectPage(){
+        return "SelectedPage";
+    }
+
 }

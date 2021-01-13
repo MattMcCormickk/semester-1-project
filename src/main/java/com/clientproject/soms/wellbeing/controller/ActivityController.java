@@ -24,14 +24,14 @@ public class ActivityController {
     }
 
     @RequestMapping(value = "ActivityData", method = RequestMethod.GET)
-    public ModelAndView queryAllActivity(){
+    public ModelAndView queryAllActivity() {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("allActivity",activityRepository.findAllActivity());
+        mav.addObject("allActivity", activityRepository.findAllActivity());
         mav.setViewName("ActivityDataCaptureList");
         return mav;
     }
 
-    public ModelAndView queryActivityByName(@RequestParam(value = "activityName", defaultValue = "null") String activityName){
+    public ModelAndView queryActivityByName(@RequestParam(value = "activityName", defaultValue = "null") String activityName) {
         ModelAndView mav = new ModelAndView();
         mav.addObject(activityRepository.findActivityByActivityName(activityName));
         mav.setViewName("Dashboard");
@@ -43,7 +43,7 @@ public class ActivityController {
         Converted the below method to POST request instead of GET request.
         The browser makes an AJAX request to this method to register the new activity in the database. */
 
-    @RequestMapping(value="/AddActivity", method = RequestMethod.POST)
+    @RequestMapping(value = "/AddActivity", method = RequestMethod.POST)
     public String addActivity(@RequestParam(value = "activityName") String activityName,
                               @RequestParam(value = "activityDate") String activityDate,
                               @RequestParam(value = "location") String location,
@@ -59,14 +59,14 @@ public class ActivityController {
         return response;
     }
 
-    @RequestMapping(value="/SubmitActivityData", method = RequestMethod.POST)
+    @RequestMapping(value = "/SubmitActivityData", method = RequestMethod.POST)
     public String addActivity(@RequestParam(value = "activityID") String activityID,
                               @RequestParam(value = "activityDate") String activityDate,
                               @RequestParam(value = "duration") int noOfHours,
                               @RequestParam(value = "noOfVolunteers") int noOfVolunteers,
                               @RequestParam(value = "rubbishCollected") int bagsOfRubbish) throws ParseException {
 
-        ActivityData activityData = new ActivityData(activityID, "1", activityDate, noOfHours,  noOfVolunteers, bagsOfRubbish);
+        ActivityData activityData = new ActivityData(activityID, "1", activityDate, noOfHours, noOfVolunteers, bagsOfRubbish);
         String response = "";
         if (activityRepository.addActivityData(activityData)) {
             System.out.println("added activity data");
@@ -74,4 +74,21 @@ public class ActivityController {
         }
         return response;
     }
+
+    @RequestMapping(path = "/CustomizeActivity", method = RequestMethod.GET)
+    public ModelAndView customizeActivity(@RequestParam(value = "activityId") String activityId,
+                                          @RequestParam(value = "activityName") String activityName,
+                                          @RequestParam(value = "activityDate") String activityDate,
+                                          @RequestParam(value = "location") String location,
+                                          @RequestParam(value = "description") String description) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("activityId", activityId);
+        mav.addObject("activityName", activityName);
+        mav.addObject("activityDate", activityDate);
+        mav.addObject("location", location);
+        mav.addObject("description", description);
+        mav.setViewName("CustomizeActivity");
+        return mav;
+    }
+
 }

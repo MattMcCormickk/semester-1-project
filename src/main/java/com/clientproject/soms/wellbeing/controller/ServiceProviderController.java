@@ -39,16 +39,6 @@ public class ServiceProviderController {
         return response;
     }
 
-
-    public ModelAndView queryServiceProviderByEmail(@RequestParam(value = "email", defaultValue = "null") String email){
-        ModelAndView mav = new ModelAndView();
-        mav.addObject(serviceProviderRepository.findServiceProviderByEmail(email));
-        mav.setViewName("UpdateProfile");
-        return mav;
-    }
-
-
-
     // check if the service provider exists in the database using email id instead of name
     @RequestMapping(path = "/checkIfServiceProviderExists", method = RequestMethod.POST)
 //    public String checkIfServiceProviderExists(@RequestParam(value="name") String name) {
