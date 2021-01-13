@@ -56,5 +56,41 @@ public class ServiceProviderRepositoryJDBC implements ServiceProviderRepository 
         );
     }
 
+    @Override
+    public ServiceProviderDTO findServiceProviderByEmail(String email) {
+        ServiceProviderDTO serviceProviderDTO = (ServiceProviderDTO) template.queryForObject("Select NAME, EMAIL,TELEPHONE,ADDRESS,POST_CODE,COMP_HSE_ID from soms_wellbeing.SERVICE_PROVIDER where EMAIL = ?",
+                new Object[]{email},new ServiceProviderMapper());
+        return serviceProviderDTO;
+    }
+
+//    @Override
+//    public ServiceProviderDTO updateServiceProviderByEmail(String email) {
+//        ServiceProviderDTO serviceProviderDTO = (ServiceProviderDTO) template.queryForObject("UPDATE NAME, EMAIL,TELEPHONE,ADDRESS,POST_CODE,COMP_HSE_ID from soms_wellbeing.SERVICE_PROVIDER where EMAIL = ?",
+//                new Object[]{email},new ServiceProviderMapper());
+//        return serviceProviderDTO;
+//    }
+
+    @Override
+    public boolean updateServiceProviderByEmail(ServiceProviderDTO serviceProviderDTO) {
+
+        int types[] = new int[] {
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR
+        };
+
+        int rows = template.update(
+                "UPDATE soms_wellbeing.SERVICE_PROVIDER SET NAME = ?, TELEPHONE = ?, ADDRESS= ?, POST_CODE= ?, COMP_HSE_ID= ? where EMAIL = ?",
+                new Object[]{serviceProviderDTO.getName(),
+                        serviceProviderDTO.getTelephone(), serviceProviderDTO.getAddress(),
+                        serviceProviderDTO.getPostcode(), serviceProviderDTO.getCompaniesHouseId(),serviceProviderDTO.getEmail()},types
+        ) ;
+        return rows>0;
+    }
+
+
 }
 

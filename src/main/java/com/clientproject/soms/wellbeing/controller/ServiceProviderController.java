@@ -49,4 +49,32 @@ public class ServiceProviderController {
         System.out.println(response);
         return response;
     }
+
+
+    @RequestMapping(path = "/UpdateProfile/{emailId}", method = RequestMethod.GET)
+    public ModelAndView queryServiceProviderByEmail(@PathVariable("emailId") String email){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("ServiceProvider",serviceProviderRepository.findServiceProviderByEmail(email));
+        mav.setViewName("UpdateProfile");
+        return mav;
+    }
+
+    @RequestMapping(value="/UpdateInformation", method = RequestMethod.POST)
+    public String updateInformation(@RequestParam(value = "name") String name,
+                                    @RequestParam(value = "email") String email,
+                                     @RequestParam(value = "telephone") String telephone,
+                                     @RequestParam(value = "address") String address,
+                                     @RequestParam(value = "postcode") String postcode,
+                                     @RequestParam(value = "companiesHouseId") String companiesHouseId) throws ParseException {
+
+        ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO(name, email, telephone, address, postcode, companiesHouseId);
+        String response = "";
+        if (serviceProviderRepository.updateServiceProviderByEmail(serviceProviderDTO)) {
+            System.out.println("update service provider");
+            response = "Successfully update the new service provider!!";
+        }
+        return response;
+    }
+
+
 }
