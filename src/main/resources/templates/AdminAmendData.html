@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../soms-style.css">
+    <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Amend Data</title>
+</head>
+<body>
+
+<div class="amendDataWrapper">
+    <h3>Amend Data</h3>
+    <label for="serProName">Service Provider Name</label>
+    <input type="text" class="form-control" id="serProName" name="serProName" th:value="${serProName}" readonly>
+    <label for="serProID">Service Provider ID</label>
+    <input type="text" class="form-control" id="serProID" name="serProID" th:value="${serProID}" readonly>
+
+    <!-- bring up activities table based on filtering data by selected service provider's id -->
+
+        <table class="table table-striped" id="SP-activity-table">
+            <thead>
+            <tr>
+                <th>Activity ID</th>
+                <th>Activity Name</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Keywords</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+        <tr th:each="activity: ${allActivity}" th:if="${activity.serProID} == ${serProID}">
+            <td th:text="${activity.activityID}"></td>
+            <td th:text="${activity.activityName}"></td>
+            <td th:text="${activity.date}"></td>
+            <td th:text="${activity.description}"></td>
+            <td th:text="${activity.location}"></td>
+            <td th:text="${activity.keyWords}"></td>
+            <td><a th:href="@{/qActByID/{id}(id=${activity.activityID})}" class="btn btn-success" role="button" >Amend Activity Data</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+</div>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

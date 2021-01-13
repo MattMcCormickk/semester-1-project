@@ -491,51 +491,53 @@ table tr th td:active {
   margin-left: 450px;
 }
 
-.social_media_icons a{
+.social_media_icons a{​​
     padding: 0.5em;
     position: relative;
     display: inline-flex;
-    font-size: 150%
-}
+    font-size: 150%;
+    text-decoration:none;
+    color: inherit;
+}​​
 
-.contactAdminForm {
-    padding-left: 3em;
-    padding-right: 3em;
-}
-
-#contactAdminButton{
+#contactAdminButton{​​
     text-align: center;
     float: right;
     height: 75px;
     width: 200px;
-}
+}​​
 
-.contactTable{
+.contactTable{​​
     width: 45%;
     float: left;
     position: relative;
+    background-color: #eeeeee;
 
-}
+}​​
 
-.selectSPwrapper{
+.selectSPwrapper{​​
     width: 45%;
     float:right;
     position: relative;
-}
+}​​
 
-.ammendDataWrapper{
-    width: 90%;
+.amendDataWrapper{​​
+    width: 100%;
     padding: 2em;
     float: bottom;
     clear: both;
     text-align: center;
-}
+}​​
 
-.adminHomeContainer{
-    padding-right: 2em;
-    padding-left: 2em;
+.adminHomeContainer{​​
+    padding-right: 1em;
+    padding-left: 1em;
+}​​
 
-}
+input #idSerPro-selected{​​
+    text-align: center;
+}​​
+
 .btn-close:hover {
   background-color: white;
 }

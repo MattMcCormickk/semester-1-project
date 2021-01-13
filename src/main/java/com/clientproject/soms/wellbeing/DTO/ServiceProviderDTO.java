@@ -7,14 +7,16 @@ public class ServiceProviderDTO {
     private String address;
     private String postcode;
     private String companiesHouseId;
+    private int serProID;
 
-    public ServiceProviderDTO( String name, String email, String telephone, String address, String postcode, String companiesHouseId){
+    public ServiceProviderDTO(int serProID, String name, String email, String telephone, String address, String postcode, String companiesHouseId){
         this.name = name;
         this.email = email;
         this.telephone = telephone;
         this.address = address;
         this.postcode = postcode;
         this.companiesHouseId = companiesHouseId;
+        this.serProID = serProID;
     }
 
     public String getName() { return name; }
@@ -28,4 +30,6 @@ public class ServiceProviderDTO {
     public  String getPostcode() { return  postcode; }
 
     public  String getCompaniesHouseId() { return  companiesHouseId; }
+
+    public int getSerProID() {return serProID;}
 }

@@ -57,6 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("toyota@company.com").password("{noop}password").roles("SERVICE_PROVIDER");
         auth
                 .inMemoryAuthentication()
+                .withUser("benz@company.com").password("{noop}password").roles("SERVICE_PROVIDER");
+        auth
+                .inMemoryAuthentication()
                 .withUser("admin").password("{noop}password").roles("ADMIN");                
     }
 }

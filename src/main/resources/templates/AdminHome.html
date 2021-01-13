@@ -21,8 +21,9 @@
         <!--<div th:if="$(not #lists.isEmpty(allMessages)">-->
         <h1>Admin</h1>
         <div class="contactTable">
-                <h3 id="table_title">Serivce Provider Messages</h3>
-            <table class="table table-hover" id="allMessagesTable">
+            <h3 id="table_title">Serivce Provider Messages</h3>
+            <table class="table table-hover table-sm" id="allMessagesTable">
+                <col style="width:5%">
                 <col style="width:5%">
                 <col style="width:20%">
                 <col style="width:15%">
@@ -33,23 +34,26 @@
                 <thead>
                 <tr>
                     <!-- <th scope="col"></th> -->
-                    <th scope="col">#</th>
+                    <th scope="col">Replied</th>
                     <th scope="col">Date Recieved</th>
-                    <th scope="col">Service Provider Name</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Service</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Message</th>
 
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="message: ${allMessages}">
-                    <td><input class="form-check-input" type="radio" name="exampleRadios"  value=""></td>
-                    <td th:text="${message.date}"></td>
-                    <td th:text="${message.name}"></td>
-                    <td th:text="${message.email}"></td>
-                    <td th:text="${message.description}"></td>
-                    <td><a href="" class="btn btn-success" role="button" onclick="deleteMessage()">Delete</a></td>
-                    <td><a href="" class="btn btn-success" role="button" onclick="replyToMessage()">Reply</a></td>
+                   <td><input class="form-check-input" type="checkbox" value=""></td>
+                    <td th:text="${message.recievedDate}"></td>
+                    <td th:text="${message.priority}"></td>
+                    <td th:text="${message.SerProName}"></td>
+                    <td th:text="${message.serProEmail}"></td>
+                    <td th:text="${message.message}"></td>
+                    <td><a th:href="@{/message/delete/{id}(id=${message.messageID})}"  class="btn btn-danger" role="button" onclick="deleteMessage()">Delete</a></td>
+                    <td><a th:href="@{/message/reply/{id}(id=${message.messageID})}"  class="btn btn-primary" role="button" onclick="replyToMessage()">Reply</a></td>
+
                 </tr>
                 </tbody>
 
@@ -60,46 +64,48 @@
             <h3>Select Service Provider</h3>
             <h4>Enter Service Provider Name</h4><br>
 
-                    <div class="search-text">
-                        <span class="fa fa-search search-icon"></span>
-                        <input type="text" id="findSerPro" onkeyup="findSerPro()" class="form-control" placeholder="Service Provider Name...">
-                    </div>
+            <div class="search-text">
+                <span class="fa fa-search search-icon"></span>
+                <input type="text" id="findSerPro" onkeyup="findSerPro()" class="form-control" placeholder="Service Provider Name...">
+            </div>
 
             <h4>Or Select From The List</h4>
-                <table class="table table-striped" id="allSerProTable" onclick=selectSerPro()>
-                    <thead>
-                    <col style="width:33%">
-                    <col style="width:33%">
-                    <col style="width:33%">
+            <table class="table table-hover table-sm " id="allSerProTable" onclick=selectSerPro()>
+                <thead>
+                <col style="width:33%">
+                <col style="width:33%">
+                <col style="width:33%">
 
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>email</th>
-                        <th>tel.</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="serPro: ${allSerPro}">
-                        <td><input class="form-check-input" type="radio" name="exampleRadios" id="selectRadio2" value="" onclick="selectSerPro()"></td>
-                        <td th:text="${serPro.serviceProviderName}"></td>
-                        <td th:text="${serPro.serviceProviderEmail}"></td>
-                        <td th:text="${serPro.telephone}"></td>
-                        <td><a href="#userCard" class="btn btn-success" role="button">Select</a></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>email</th>
+                    <th>tel.</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="serPro: ${allSerPro}">
+                   <!-- <td><input class="form-check-input"  name="exampleRadios" onclick="selectSerPro()" value=""></td>-->
+                    <td th:text="${serPro.serProID}"></td>
+                    <td th:text="${serPro.name}"></td>
+                    <td th:text="${serPro.email}"></td>
+                    <td th:text="${serPro.telephone}"></td>
+                    <td><a class="btn btn-primary"
+                           role="button" th:href="@{/AdminAmendData(
+            serProID=${serPro.serProID},
+            serProName=${serPro.name},
+        )}">Select</a></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
     </div>
 
-    <div class="ammendDataWrapper">
-        <h3>Ammend Data</h3>
-            <!--SEARCH FOR DATA, FILTER BY SELECTED SERVICE PROVIDER ID -->
-    </div>
+
 
     <!-- Modal to display the confirmation popup message to the user. This modal is displayed after registering the activity in the database.  -->
-    <div class="modal fade" id="MessageDelted" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="MessageDeleted" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content animate">
                 <div class="modal-header" id="common-modal-header">
@@ -124,6 +130,8 @@
 <footer th:replace="fragments/footer :: footer"></footer>
 
 <script type="text/javascript">
+
+    /*
     function deleteMessage() { <!--DELETE MESSAGE -->
         var table = document.getElementById("allMessagesTable"), rIndex;
         for (var i = 0; i < table.rows.length; i++) {
@@ -139,7 +147,7 @@
                 rIndex.remove()
 
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("DELETE", '/DeleteMessage', true); // true is asynchronous
+                xhttp.open("POST", '/DeleteMessage', true); // true is asynchronous
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.onreadystatechange = function() {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
@@ -158,8 +166,12 @@
                 return false;
             }
 
-            }
+        }
     }
+
+     */
+
+
 
     function replyToMessage(){} <!--REPLY TO MESSAGE -->
 
@@ -168,8 +180,8 @@
         var searchInp, searchFilter, allActivityTable, row, data, i, textVal;
         searchInp = document.getElementById("findSerPro");
         searchFilter = searchInp.value.toUpperCase();
-        activityTable = document.getElementById("allSerProTable");
-        row = activityTable.getElementsByTagName("tr");
+        table = document.getElementById("allSerProTable");
+        row = table.getElementsByTagName("tr");
 
         //Loop through the table rows and hide those who don't match the search filter
         for (var i = 0; i < row.length; i++) {
@@ -185,34 +197,35 @@
         }
     }
 
-    /* MOVES RELEVANT INFO TO AMMEND DATA SECTION */
-    function selectSerPro(){
+    function selectSerPro() {}
+
         var table = document.getElementById("allSerProTable"), rIndex;
         for (var i = 0; i < table.rows.length; i++) {
-            table.rows[i].onclick = function() {
+            table.rows[i].onclick = function () {
                 rIndex = this.rowIndex;
                 console.log(rIndex);
-                var ID = this.cells[1].innerHTML;
 
-                document.getElementById("serProName").value = ID;
+                var name = this.cells[1].innerHTML;
+                var id = this.cells[0].innerHTML;
 
+                console.log("Selected sp is " + name);
+
+                document.getElementById("serPro-id").value = id;
+                document.getElementById("serPro-name").value = name;
+                console.log(id);
+                console.log(name);
+            }
                 for (var i = 0; i < table.rows.length; i++) {
                     table.rows[i].style.backgroundColor = "white";
                     table.rows[i].style.color = "black";
                 }
 
-                var selectedRow = table.getElementsByTagName('tr')[rIndex];
-                selectedRow.style.backgroundColor = "#b82601";
-                selectedRow.style.color = "white";
-
-                /* Select the radio button when any cell in the row is clicked.
-                This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
-                It is important to note that the radio button is at position 'rIndex - 1'.*/
-                var radioButton = document.getElementsByClassName("form-check-input");
-                radioButton[rIndex - 1].checked = true;
-            }
-        }
     }
-    </script>
+
+
+
+
+
+</script>
 </body>
 </html>

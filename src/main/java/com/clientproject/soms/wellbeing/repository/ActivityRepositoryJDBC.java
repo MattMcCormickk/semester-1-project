@@ -107,4 +107,12 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
     }
 
 
+    @Override
+    public List<ActivityDTO> findAllActivityBySerPro(int serProID){
+        ActivityDTO activityDTO=(ActivityDTO) template.queryForObject("Select ACTIVITY_NAME,ACTIVITY_ID,DESCRIPTION,LOCATION,ACTIVITY_DATE from soms_wellbeing.activity where ACTIVITY_NAME = ?",
+                new Object[]{serProID},new ActivityMapper());
+        return (List<ActivityDTO>) activityDTO;
+    }
+
+
 }

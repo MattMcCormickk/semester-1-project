@@ -11,4 +11,5 @@ public interface ActivityRepository {
     boolean addActivity(CreateActivity createActivity) throws ParseException;
     boolean addActivityData(ActivityData activityData) throws ParseException;
     public Object findAllActivity();
+    public Object findAllActivityBySerPro(int serProID);
 }

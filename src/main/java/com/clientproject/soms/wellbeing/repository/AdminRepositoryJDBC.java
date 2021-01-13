@@ -51,7 +51,7 @@ public class AdminRepositoryJDBC implements AdminRepository{
         Date date = format.parse(contactAdmin.getDate());
 
         int rows = template.update(
-                "insert into CONTACT_ADMIN (SERV_PROV_ID, SERV_PROV_NAME, SERV_PROV_EMAIL, MESSAGE_TEXT, RECEIVED_DATE,PRIORITY) values(?,?,?,?,?,?)",
+                "insert into CONTACT_ADMIN (SERV_PROV_ID, SERV_PROV_NAME, SERV_PROV_EMAIL, MESSAGE, RECEIVED_DATE,PRIORITY) values(?,?,?,?,?,?)",
                 new Object[]{1, contactAdmin.getName(),   contactAdmin.getEmail(), contactAdmin.getDescription(), date, "Medium"}, types);
         return rows>0;
     }
@@ -59,12 +59,12 @@ public class AdminRepositoryJDBC implements AdminRepository{
     @Override
     public List<ContactAdminDTO> findAllMessages() {
         return template.query(
-                "select SERV_PROV_ID, SERV_PROV_NAME, MESSAGE_DATE, SERV_PROV_EMAIL, MESSAGE_TEXT) from soms_wellbeing.contact_admin",
+                "select MESSAGE_ID, SERV_PROV_ID, SERV_PROV_NAME, SERV_PROV_EMAIL, MESSAGE, RECEIVED_DATE, PRIORITY, REPLY_MESSAGE, REPLIED_DATE, ADMIN_EMAIL, IS_REPLIED from soms_wellbeing.contact_admin",
                 new ContactAdminMapper()
         );
     }
 
-    /*
+/*
     @Override
     public boolean deleteMessage(ContactAdmin contactAdmin) throws ParseException{
         String sql = "DELETE FROM CONTACT_ADMIN WHERE contactAdmin = ?";
@@ -72,5 +72,32 @@ public class AdminRepositoryJDBC implements AdminRepository{
         return template.update(sql, args) == 1;
     }
 
+    /*
+    @Override
+    public boolean replyToMessage(ContactAdmin contactAdmin) throws ParseException{
+        int types[] = new int[] {
+                Types.VARCHAR,
+                Types.DATE,
+                Types.VARCHAR,
+                Types.BOOLEAN
+        };
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = format.parse(contactAdmin.getDate());
+
+    }
+
      */
+/*
+    @Override
+    public ContactAdminDTO findMessageByID(int messageID) {
+        ContactAdminDTO contactAdminDTO=(ContactAdminDTO) template.queryForObject("Select SERV_PROV_NAME, RECEIVED_DATE," +
+                        "SERV_PROV_EMAIL, MESSAGE, PRIORITY from soms_wellbeing.activity where CONTACT_ADMIN = ?",
+                new Object[]{messageID}, new ContactAdminMapper());
+        return (ContactAdminDTO) contactAdminDTO;
+    }
+
+ */
+
+
 }

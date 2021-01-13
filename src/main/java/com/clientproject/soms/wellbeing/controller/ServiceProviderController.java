@@ -1,14 +1,10 @@
 package com.clientproject.soms.wellbeing.controller;
 
 import com.clientproject.soms.wellbeing.DTO.ServiceProviderDTO;
-import com.clientproject.soms.wellbeing.form.CreateActivity;
 import com.clientproject.soms.wellbeing.repository.ServiceProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 
@@ -30,7 +26,7 @@ public class ServiceProviderController {
                                      @RequestParam(value = "postcode") String postcode,
                                      @RequestParam(value = "companiesHouseId") String companiesHouseId) throws ParseException {
 
-        ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO(name, email, telephone, address, postcode, companiesHouseId);
+        ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO(1, name, email, telephone, address, postcode, companiesHouseId);
         String response = "";
         if (serviceProviderRepository.addServiceProvider(serviceProviderDTO)) {
             System.out.println("added service provider");

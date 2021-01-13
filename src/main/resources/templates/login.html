@@ -62,8 +62,8 @@
                 </div>
                 <div class="col">
                   <div class="form-floating mb-3">
-                      <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
-                      <label for="email"><i class="fa fa-envelope icon"></i> Email</label>
+                      <input type="email" class="form-control" id="signUpEmail" placeholder="Email" name="email" required>
+                      <label for="signUpEmail"><i class="fa fa-envelope icon"></i> Email</label>
                   </div>
                 </div>
               </div>
@@ -140,7 +140,7 @@
       This function makes a POST request call to the route /addServiceProvider to register the service provider in the database. */
         function registerServiceProv() {
             var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
+            var email = document.getElementById("signUpEmail").value;
             var telephone = document.getElementById("telephone").value;
             var address = document.getElementById("address").value;
             var postcode = document.getElementById("postcode").value;
