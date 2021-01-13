@@ -1,5 +1,6 @@
-package com.clientproject.soms.wellbeing.controller;
 
+<<<<<<< src/main/java/com/clientproject/soms/wellbeing/controller/ReportController.java
+=======
 import com.clientproject.soms.wellbeing.DTO.ActivityDataDTO;
 import com.clientproject.soms.wellbeing.DTO.UserDTO;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
@@ -46,6 +47,15 @@ public class ReportController {
             mav.setViewName("NullActivityDetail");
         }else {
             ActivityDataDTO activityDataDTO = (ActivityDataDTO) activityDataList.get(1);
+            int sumOfBag=0;
+            float sumOfHours=0;
+            for(int i=0;i<activityDataList.size();i++){
+                ActivityDataDTO aDataDTO = (ActivityDataDTO) activityDataList.get(i);
+                sumOfBag = sumOfBag + aDataDTO.getNoBagsRubbish();
+                sumOfHours = sumOfHours + aDataDTO.getHours();
+            }
+            mav.addObject("averageBagPerUser",sumOfBag/activityDataList.size());
+            mav.addObject("averageHoursPerUser",sumOfHours/activityDataList.size());
             mav.addObject("activityID",activityDataDTO.getActivityID());
             mav.addObject("activityName",activityDataDTO.getActivityName());
             mav.addObject("activityDescription",activityDataDTO.getDescription());
@@ -54,6 +64,7 @@ public class ReportController {
         }
         return mav;
     }
+
     @RequestMapping(value = "/selectByUser",method = RequestMethod.GET)
     public ModelAndView queryAllUser(){
         ModelAndView mav = new ModelAndView();
@@ -69,3 +80,4 @@ public class ReportController {
         return mav;
     }
 }
+>>>>>>> src/main/java/com/clientproject/soms/wellbeing/controller/ReportController.java
