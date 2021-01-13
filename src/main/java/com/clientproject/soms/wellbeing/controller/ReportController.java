@@ -42,6 +42,15 @@ public class ReportController {
             mav.setViewName("NullActivityDetail");
         }else {
             ActivityDataDTO activityDataDTO = (ActivityDataDTO) activityDataList.get(1);
+            int sumOfBag=0;
+            float sumOfHours=0;
+            for(int i=0;i<activityDataList.size();i++){
+                ActivityDataDTO aDataDTO = (ActivityDataDTO) activityDataList.get(i);
+                sumOfBag = sumOfBag + aDataDTO.getNoBagsRubbish();
+                sumOfHours = sumOfHours + aDataDTO.getHours();
+            }
+            mav.addObject("averageBagPerUser",sumOfBag/activityDataList.size());
+            mav.addObject("averageHoursPerUser",sumOfHours/activityDataList.size());
             mav.addObject("activityID",activityDataDTO.getActivityID());
             mav.addObject("activityName",activityDataDTO.getActivityName());
             mav.addObject("activityDescription",activityDataDTO.getDescription());
