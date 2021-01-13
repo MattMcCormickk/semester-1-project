@@ -1,6 +1,5 @@
+package com.clientproject.soms.wellbeing.controller;
 
-<<<<<<< src/main/java/com/clientproject/soms/wellbeing/controller/ReportController.java
-=======
 import com.clientproject.soms.wellbeing.DTO.ActivityDataDTO;
 import com.clientproject.soms.wellbeing.DTO.UserDTO;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
@@ -80,4 +79,3 @@ public class ReportController {
         return mav;
     }
 }
->>>>>>> src/main/java/com/clientproject/soms/wellbeing/controller/ReportController.java
