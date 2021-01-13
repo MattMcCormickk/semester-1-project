@@ -1,3 +1,4 @@
+package com.clientproject.soms.wellbeing.controller;
 
 import com.clientproject.soms.wellbeing.DTO.ActivityDataDTO;
 import com.clientproject.soms.wellbeing.DTO.UserDTO;
