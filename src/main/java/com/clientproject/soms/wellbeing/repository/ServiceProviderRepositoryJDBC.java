@@ -48,4 +48,13 @@ public class ServiceProviderRepositoryJDBC implements ServiceProviderRepository 
                 new Object[]{email}, new ServiceProviderCountMapper());
     }
 
+    @Override
+    public List<ServiceProviderDTO> findAllSerPro() {
+        return template.query(
+                "select SERV_PROV_ID, NAME, EMAIL,TELEPHONE,ADDRESS,POST_CODE,COMP_HSE_ID from soms_wellbeing.service_provider",
+                new ServiceProviderMapper()
+        );
+    }
+
 }
+

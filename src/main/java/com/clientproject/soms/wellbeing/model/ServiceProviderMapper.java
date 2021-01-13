@@ -11,6 +11,7 @@ public class ServiceProviderMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException{
         return new ServiceProviderDTO(
+                rs.getInt("SERV_PROV_ID"),
                 rs.getString("NAME"),
                 rs.getString("EMAIL"),
                 rs.getString("TELEPHONE"),
