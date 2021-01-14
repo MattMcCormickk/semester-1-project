@@ -29,8 +29,8 @@
                 <col style="width:5%">
                 <col style="width:5%">
                 <col style="width:20%">
-                <col style="width:15%">
-                <col style="width:45%">
+                <col style="width:18%">
+                <col style="width:42%">
                 <col style="width:10%">
                 <tr>
                     <th scope="col"></th>
@@ -51,7 +51,7 @@
             </table>
         </div>
         <div class="cardsContainer" id="cards">
-            <div class="card w-60" id="activityCard">
+            <div class="card w-100" id="activityCard">
         <!-- Upon submitting the below form, saveUserActivity() is being invoked which makes an AJAX request to save the information in the database. -->
                 <form class="" action="/SaveActivity" method="get" id="saveActivityForm" onsubmit="return saveUserActivity()">
                     <div class="card-header">Selected User & Activity</div>
@@ -74,7 +74,7 @@
                                   <div id="userEmail" name="userEmail" th:text="${userEmail}" style="display: NONE"></div>
                               </div>
                           </div>
-                          <div class="row">
+                          <div class="row" style="display:none">
                               <div class="col" style="max-width:16%">
                                   <label for="activityID">Activity Id</label>
                                   <input type="text" class="form-control" id="activityID" name="activityID" readonly>
@@ -84,7 +84,7 @@
                                   <input type="text" class="form-control" id="activityName" name="activityName" readonly>
                               </div>
                           </div>
-                          <div class="row">
+                          <div class="row" style="display:none">
                               <div class="col" style="max-width:25%">
                                   <label for="activityDate">Activity Date</label>
                                   <input type="text" class="form-control" id="activityDate" name="activityDate" readonly>
@@ -108,7 +108,7 @@
                           </div> -->
                           <div class="row">
                             <div class="col">
-                              <table class="table" id="actInpTable">
+                              <table class="table table-borderless" id="actInpTable">
                                 <thead>
                                   <tr>
                                     <th scope="col">Activity Metrics/Inputs</th>
@@ -123,11 +123,59 @@
                                       </div>
                                     </td>
                                   </tr>
+                                  <tr id="custMetricRow1" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custMetric1" id="custMetric1" placeholder="">
+                                          <label for="custMetric1" id="custMetricLabel1"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custMetricRow2" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custMetric2" id="custMetric2" placeholder="">
+                                          <label for="custMetric2" id="custMetricLabel2"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custMetricRow3" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custMetric3" id="custMetric3" placeholder="">
+                                          <label for="custMetric3" id="custMetricLabel3"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custMetricRow4" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custMetric4" id="custMetric4" placeholder="">
+                                          <label for="custMetric4" id="custMetricLabel4"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custMetricRow5" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custMetric5" id="custMetric5" placeholder="">
+                                          <label for="custMetric5" id="custMetricLabel5"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custMetricRow6" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custMetric6" id="custMetric6" placeholder="">
+                                          <label for="custMetric6" id="custMetricLabel6"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
                                 </tbody>
                               </table>
                             </div>
                             <div class="col">
-                              <table class="table" id="actOutTable">
+                              <table class="table table-borderless" id="actOutTable">
                                 <thead>
                                   <tr>
                                     <th scope="col">Activity Outputs</th>
@@ -139,6 +187,54 @@
                                       <div class="form-floating mb-3" style="color:black">
                                           <input type="text" class="form-control" name="bagsOfRubbish" id="bagsOfRubbish" placeholder="No. of bags of rubbish collected">
                                           <label for="bagsOfRubbish">No. of bags of rubbish collected</label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custOutputRow1" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custOutput1" id="custOutput1" placeholder="">
+                                          <label for="custOutput1" id="custOutputLabel1"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custOutputRow2" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custOutput2" id="custOutput2" placeholder="">
+                                          <label for="custOutput2" id="custOutputLabel2"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custOutputRow3" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custOutput3" id="custOutput3" placeholder="">
+                                          <label for="custOutput3" id="custOutputLabel3"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custOutputRow4" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custOutput4" id="custOutput4" placeholder="">
+                                          <label for="custOutput4" id="custOutputLabel4"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custOutputRow5" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custOutput5" id="custOutput5" placeholder="">
+                                          <label for="custOutput5" id="custOutputLabel5"></label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr id="custOutputRow6" style="display:none">
+                                    <td>
+                                      <div class="form-floating mb-3" style="color:black">
+                                          <input type="text" class="form-control" name="custOutput6" id="custOutput6" placeholder="">
+                                          <label for="custOutput6" id="custOutputLabel6"></label>
                                       </div>
                                     </td>
                                   </tr>
@@ -264,7 +360,110 @@
                             },
                             async: false
                         });
-                        console.log(allMetrics);
+                        // console.log(allMetrics);
+        // Split based on the '|' character and get each metric/output
+                        var metric1 = allMetrics.split("|")[0];
+                        var metric2 = allMetrics.split("|")[1];
+                        var metric3 = allMetrics.split("|")[2];
+                        var metric4 = allMetrics.split("|")[3];
+                        var metric5 = allMetrics.split("|")[4];
+                        var metric6 = allMetrics.split("|")[5];
+                        var output1 = allMetrics.split("|")[6];
+                        var output2 = allMetrics.split("|")[7];
+                        var output3 = allMetrics.split("|")[8];
+                        var output4 = allMetrics.split("|")[9];
+                        var output5 = allMetrics.split("|")[10];
+                        var output6 = allMetrics.split("|")[11];
+
+        /* Add the selected custom metrics to the Activity metrics/inputs table rows with fadeIn/fadeOut animation
+          When the selected activity does not have any customized metrics/inputs, the specific rows will automatically hide from the table. */
+                        if(metric1 !== "0" && metric1 !== ""){
+                            $("#custMetricLabel1").text(metric1);
+                            $("#custMetric1").attr("placeholder", metric1);
+                            $("#custMetricRow1").fadeIn(1000);
+                        } else {
+                            $("#custMetricRow1").fadeOut("slow");
+                        }
+                        if(metric2 !== "0" && metric2 !== ""){
+                            $("#custMetricLabel2").text(metric2);
+                            $("#custMetric2").attr("placeholder", metric2);
+                            $("#custMetricRow2").fadeIn(2000);
+                        } else {
+                            $("#custMetricRow2").fadeOut("slow");
+                        }
+                        if(metric3 !== "0" && metric3 !== ""){
+                            $("#custMetricLabel3").text(metric3);
+                            $("#custMetric3").attr("placeholder", metric3);
+                            $("#custMetricRow3").fadeIn(3000);
+                        } else {
+                            $("#custMetricRow3").fadeOut("slow");
+                        }
+                        if(metric4 !== "0" && metric4 !== ""){
+                            $("#custMetricLabel4").text(metric4);
+                            $("#custMetric4").attr("placeholder", metric4);
+                            $("#custMetricRow4").fadeIn(4000);
+                        } else {
+                            $("#custMetricRow4").fadeOut("slow");
+                        }
+                        if(metric5 !== "0" && metric5 !== ""){
+                            $("#custMetricLabel5").text(metric5);
+                            $("#custMetric5").attr("placeholder", metric5);
+                            $("#custMetricRow5").fadeIn(5000);
+                        } else {
+                            $("#custMetricRow5").fadeOut("slow");
+                        }
+                        if(metric6 !== "0" && metric6 !== ""){
+                            $("#custMetricLabel6").text(metric6);
+                            $("#custMetric6").attr("placeholder", metric6);
+                            $("#custMetricRow6").fadeIn(6000);
+                        } else {
+                            $("#custMetricRow6").fadeOut("slow");
+                        }
+        /* Similar to the above, perform the same for the custom activity outputs for the selected activity.
+          Add the selected custom outputs to the Activity outputs table rows with fadeIn/fadeOut animation
+          When the selected activity does not have any customized outputs, the specific rows will automatically hide from the table. */
+                        if(output1 !== "0" && output1 !== ""){
+                            $("#custOutputLabel1").text(output1);
+                            $("#custOutput1").attr("placeholder", output1);
+                            $("#custOutputRow1").fadeIn(1000);
+                        } else {
+                            $("#custOutputRow1").fadeOut("slow");
+                        }
+                        if(output2 !== "0" && output2 !== ""){
+                            $("#custOutputLabel2").text(output2);
+                            $("#custOutput2").attr("placeholder", output2);
+                            $("#custOutputRow2").fadeIn(2000);
+                        } else {
+                            $("#custOutputRow2").fadeOut("slow");
+                        }
+                        if(output3 !== "0" && output3 !== ""){
+                            $("#custOutputLabel3").text(output3);
+                            $("#custOutput3").attr("placeholder", output3);
+                            $("#custOutputRow3").fadeIn(3000);
+                        } else {
+                            $("#custOutputRow3").fadeOut("slow");
+                        }
+                        if(output4 !== "0" && output4 !== ""){
+                            $("#custOutputLabel4").text(output4);
+                            $("#custOutput4").attr("placeholder", output4);
+                            $("#custOutputRow4").fadeIn(4000);
+                        } else {
+                            $("#custOutputRow4").fadeOut("slow");
+                        }
+                        if(output5 !== "0" && output5 !== ""){
+                            $("#custOutputLabel5").text(output5);
+                            $("#custOutput5").attr("placeholder", output5);
+                            $("#custOutputRow5").fadeIn(5000);
+                        } else {
+                            $("#custOutputRow5").fadeOut("slow");
+                        }
+                        if(output6 !== "0" && output6 !== ""){
+                            $("#custOutputLabel6").text(output6);
+                            $("#custOutput6").attr("placeholder", output6);
+                            $("#custOutputRow6").fadeIn(6000);
+                        } else {
+                            $("#custOutputRow6").fadeOut("slow");
+                        }
                 });
     }
 

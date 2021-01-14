@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ServiceProviderRepository {
     boolean addServiceProvider(ServiceProviderDTO serviceProviderDTO);
-    public List<ServiceProviderCountDTO> checkIfServiceProviderExists(String name);
+    public List<ServiceProviderCountDTO> checkIfServiceProviderExists(String email);
 }

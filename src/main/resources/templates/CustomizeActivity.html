@@ -188,19 +188,19 @@
                       <tbody>
                         <tr>
                           <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
-                          <td>No. of bags of recyclable material collected (tins, cans, bottles etc.)</td>
+                          <td>No. of bags of recyclable material collected</td>
                         </tr>
                         <tr>
                           <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
-                          <td>No. of bags of hazardous items collected (broken glass, sharp items etc.)</td>
+                          <td>No. of bags of hazardous items collected</td>
                         </tr>
                         <tr>
                           <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
-                          <td>Weight of plastic waste or non-degradable items collected (in kilograms)</td>
+                          <td>Weight of plastic or non-degradable items (in kg)</td>
                         </tr>
                         <tr>
                           <td><input class="form-check-input" type="checkbox" name="selectTempOutCheck" id="selectTempOutCheck"></td>
-                          <td>Improved river water quality (concentration of pollutants - micrograms per liter (µg/l))</td>
+                          <td>River water (concentration of pollutants - µg/l)</td>
                         </tr>
                       </tbody>
                     </table>
@@ -260,25 +260,49 @@
 
         $(document).ready(function() {
             $("#addInpButton").on("click", function() {
-              var selectedRows = $("#tempInpTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#activityInpTable tbody").add(selectedRows));
-              $(".form-check-input").prop("checked", false);  // de-select checkboxes after moving the rows
+              // var selectedRows = $("#tempInpTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#activityInpTable tbody").add(selectedRows));
+      // Commented above line and added jQuery fadeIn/fadeOut to display animation while adding/deleting rows in the two tables
+                var selectedRows = $("#tempInpTable input:checked").parents("tr").not("thead tr").clone();
+                $("#tempInpTable input:checked").parents("tr").not("thead tr").fadeOut("slow", function() {$(this).remove();});
+                $("#activityInpTable").append(selectedRows);
+                selectedRows.hide();
+                selectedRows.fadeIn("slow");
+                $(".form-check-input").prop("checked", false);  // de-select checkboxes after moving the rows
             });
         });
         $(document).ready(function() {
             $("#remInpButton").on("click", function() {
-                var selectedRows = $("#activityInpTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#tempInpTable tbody").add(selectedRows));
+                // var selectedRows = $("#activityInpTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#tempInpTable tbody").add(selectedRows));
+      // Commented above line and added jQuery fadeIn/fadeOut to display animation while adding/deleting rows in the two tables
+                var selectedRows = $("#activityInpTable input:checked").parents("tr").not("thead tr").clone();
+                $("#activityInpTable input:checked").parents("tr").not("thead tr").fadeOut("slow", function() {$(this).remove();});
+                $("#tempInpTable").append(selectedRows);
+                selectedRows.hide();
+                selectedRows.fadeIn("slow");
                 $(".form-check-input").prop("checked", false);  // de-select checkboxes after moving the rows
             });
         });
         $(document).ready(function() {
             $("#addOutButton").on("click", function() {
-                var selectedRows = $("#tempOutTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#activityOutTable tbody").add(selectedRows));
+                // var selectedRows = $("#tempOutTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#activityOutTable tbody").add(selectedRows));
+      // Commented above line and added jQuery fadeIn/fadeOut to display animation while adding/deleting rows in the two tables
+                var selectedRows = $("#tempOutTable input:checked").parents("tr").not("thead tr").clone();
+                $("#tempOutTable input:checked").parents("tr").not("thead tr").fadeOut("slow", function() {$(this).remove();});
+                $("#activityOutTable").append(selectedRows);
+                selectedRows.hide();
+                selectedRows.fadeIn("slow");
                 $(".form-check-input").prop("checked", false);  // de-select checkboxes after moving the rows
             });
         });
         $(document).ready(function() {
             $("#remOutButton").on("click", function() {
-                var selectedRows = $("#activityOutTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#tempOutTable tbody").add(selectedRows));
+                // var selectedRows = $("#activityOutTable input:checked").parents("tr").not("thead tr").remove().clone().appendTo($("#tempOutTable tbody").add(selectedRows));
+      // Commented above line and added jQuery fadeIn/fadeOut to display animation while adding/deleting rows in the two tables
+                var selectedRows = $("#activityOutTable input:checked").parents("tr").not("thead tr").clone();
+                $("#activityOutTable input:checked").parents("tr").not("thead tr").fadeOut("slow", function() {$(this).remove();});
+                $("#tempOutTable").append(selectedRows);
+                selectedRows.hide();
+                selectedRows.fadeIn("slow");
                 $(".form-check-input").prop("checked", false);  // de-select checkboxes after moving the rows
             });
         });
