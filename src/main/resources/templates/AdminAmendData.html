@@ -17,11 +17,13 @@
 <body>
 
 <div class="amendDataWrapper">
-    <h3>Amend Data</h3>
+    <h3 class="adminTitle">Amend Data</h3>
+    <div class="serProSelected"></div>
     <label for="serProName">Service Provider Name</label>
     <input type="text" class="form-control" id="serProName" name="serProName" th:value="${serProName}" readonly>
     <label for="serProID">Service Provider ID</label>
     <input type="text" class="form-control" id="serProID" name="serProID" th:value="${serProID}" readonly>
+</div>
 
     <!-- bring up activities table based on filtering data by selected service provider's id -->
 

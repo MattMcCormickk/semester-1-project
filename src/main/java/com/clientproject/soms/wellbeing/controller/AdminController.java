@@ -2,6 +2,7 @@ package com.clientproject.soms.wellbeing.controller;
 
 import com.clientproject.soms.wellbeing.DTO.ContactAdminDTO;
 import com.clientproject.soms.wellbeing.form.ContactAdmin;
+import com.clientproject.soms.wellbeing.form.ReplyFromAdmin;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import com.clientproject.soms.wellbeing.repository.AdminRepository;
 import com.clientproject.soms.wellbeing.repository.ServiceProviderRepository;
@@ -75,32 +76,56 @@ public class AdminController {
 
     }
 
-    /*
-    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteTheMessage(@RequestParam(value = "id") int id) throws ParseException {
+    @RequestMapping(value= "/AdminReply", method = RequestMethod.POST)
+    public String messageAdmin(@RequestParam(value = "name") String adminName,
+                               @RequestParam(value = "messageID") int messageID,
+                               @RequestParam(value = "date") String replyDate,
+                               @RequestParam(value = "reply") String replyMessage) throws ParseException {
+
+        ReplyFromAdmin replyFromAdmin = new ReplyFromAdmin(messageID, adminName, replyMessage, replyDate, true);
+        String response = "";
+        if (adminRepo.adminReply(replyFromAdmin)) {
+            System.out.println("admin replied");
+            response = "replied to service provider";
+        }
+        return response;
+
+    }
+
+    @RequestMapping(path = "/message/reply/{id}/", method = RequestMethod.GET)
+    public ModelAndView sendReply(@RequestParam(value = "messageRecipient") String name,
+                                  @RequestParam(value = "messageid") int messageID,
+                                  @RequestParam(value = "message") String description){
         ModelAndView mav = new ModelAndView();
-        ContactAdminDTO contactAdminDTO = (ContactAdminDTO) adminRepo.findMessageByID(int id);
-        adminRepo.deleteMessage(contactAdminDTO);
+        mav.addObject("message", description);
+        mav.addObject("messageRecipient", name);
+        mav.addObject("messageid", messageID);
+        mav.setViewName("AdminReply");
+        return mav;
+    }
+
+    @RequestMapping(value="/message/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteMessage(@RequestParam("messageid") int messageID) {
+        ModelAndView mav = new ModelAndView();
+        ContactAdminDTO contactAdminDTO = adminRepo.findMessageByID(messageID);
+        mav.addObject("deletedMessage", adminRepo.deleteMessage(contactAdminDTO));
         mav.addObject("allMessages", adminRepo.findAllMessages());
+        mav.addObject("allSerPro", SPrepo.findAllSerPro());
         mav.setViewName("AdminHome");
         return mav;
     }
 
-     */
-
-    /*
-    @RequestMapping(value="/reply/{id}", method = RequestMethod.GET)
-    public ModelAndView replyMessage(@RequestParam(value = "id") int id) throws ParseException {
-        ModelAndView mav = new ModelAndView();
-        ContactAdminDTO contactAdminDTO = (ContactAdminDTO) adminRepo.findMessageByID(int id);
-        adminRepo.replyToMessage(contactAdminDTO);
-        mav.addObject("thisMessage", (ContactAdminDTO) adminRepo.findMessageByID(int id));
-        mav.setViewName("ReplyToMessage");
-        return mav;
-
-
-     */
-
+    @RequestMapping(path= "/checkIfAdmin", method= RequestMethod.POST)
+    public String checkIfAdmin(@RequestParam(value="email") String email){
+        String response = "";
+        if(SPrepo.checkIfServiceProviderExists(email).get(0).getCount() == 0) {
+            response = "Login is successful";
+        } else {
+        response = "Login failed";
+    }
+        System.out.println(response);
+        return response;
+    }
 
 
 
