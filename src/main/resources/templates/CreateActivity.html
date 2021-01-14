@@ -23,7 +23,7 @@
           <form action="/AddNewActivity/" method="get" id="myform" onsubmit="return registerActivity()">
               <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="activityName" placeholder="Activity Name" name="activityName" required>
-                  <label for="activityName">Activity Name</label>
+                  <label for="activityName"><i class="fa fa-sticky-note"></i> Activity Name</label>
               </div>
               <div class="row">
                 <div class="col">
@@ -35,17 +35,17 @@
                 <div class="col">
                   <div class="form-floating mb-3">
                       <input type="text" class="form-control" id="location" placeholder="Location" name="location" required>
-                      <label for="location">Location</label>
+                      <label for="location"><i class="fa fa-map-marker icon"></i> Location</label>
                   </div>
                 </div>
               </div>
               <div class="form-floating mb-3">
                 <textarea name="description" id="description" class="form-control" placeholder="Activity Description" style="height: 100px" required></textarea>
-                <label for="description">Description</label>
+                <label for="description"><i class="fa fa-list"></i> Description</label>
               </div>
               <div class="form-floating mb-3">
                 <textarea name="keywords" id="keywords" class="form-control" placeholder="Keywords" style="height: 100px"></textarea>
-                <label for="keywords">Keywords</label>
+                <label for="keywords"><i class="fa fa-sticky-note"></i> Keywords</label>
               </div>
               <button type="submit" class="btn btn-success" id="registerActivityButton">Register Activity</button>
           </form>

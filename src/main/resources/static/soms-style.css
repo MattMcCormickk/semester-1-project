@@ -85,6 +85,8 @@ body h4{
     flex: 4;
     /* width: 90%; */
     margin-left: 50px;
+    background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+    color: white;
     /*background-color: #BC4639;*/
 }
 
@@ -255,7 +257,7 @@ body h4{
 }
 .search-text{
     /*margin-left: 400px;*/
-    width: 300px;
+    width: 200px;
     margin-bottom: 5px;
 }
 .search-text .form-control {
@@ -273,8 +275,10 @@ body h4{
 }
 
 .allActivitiesContainer {
-    flex: 2;
+    flex: 4;
     margin-left: 20px;
+    background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+    color: white;
 }
 
 #all_activity_button{
@@ -286,8 +290,8 @@ body h4{
   display: flex;
   float: left;
   /* width: 60%; */
-  margin-left: 50px;
-  margin-bottom: 50px;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 .registerActivityContainer h1{
   text-align: center;
@@ -321,28 +325,28 @@ table tr th td:active {
 }
 
 .cardsContainer {
-    flex: 6;
+    flex: 5;
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .userCardsContainer {
     flex: 2;
     margin-left: 20px;
-    margin-right: 50px;
+    margin-right: 20px;
     margin-top: 20px;
 }
 
 #userCard{
     width: 500px;
-    background-color: #005f69;
+    background-color: #4B4848;
     color: white;
 }
 
 #activityCard {
     width: 800px;
-    background-color: #005f69;
+    background-color: #4B4848;
     color: white;
     margin-right: 20px;
 }
@@ -363,13 +367,13 @@ table tr th td:active {
 #submitButton:hover, #selectUserButton:hover{
     background-color: green;
     color: white;
-    /* background-image: linear-gradient(black, teal); */
-    background-image: linear-gradient(maroon, #B82601);
 }
 /* Override the bootstrap provided default table row hover background colour */
 .table-hover tr:hover td, .table-hover tr:hover th {
-    background: #B82601;
-    color: white;
+    /* background: #B82601;
+    color: white; */
+    background-color: darkorange;
+    color: black;
 }
 
 /* Styling for the 'Close' button in the modal */
@@ -388,19 +392,29 @@ table tr th td:active {
   flex: 1.75;
   margin-left: 20px;
   margin-right: 20px;
+  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
 }
 
 .registerActivityForm {
   flex: 1;
+  height: 500px;
+  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
 }
 
 #registerActivityButton {
-  background-image: linear-gradient(teal, black);
-  color: white;
+  /* background-image: linear-gradient(teal, black);
+  color: white; */
+  background-color: darkorange;
+  color: black;
   margin-left: 200px;
 }
 #registerActivityButton:hover {
-  background-image: linear-gradient(black, teal);
+  /* background-image: linear-gradient(black, teal); */
+  background-color: green;
+  color: white;
 }
 
 #customizeButton {
@@ -415,6 +429,8 @@ table tr th td:active {
 #registerButton {
   background-image: linear-gradient(teal, black);
   color: white;
+  /* background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+  color: black; */
   width: 300px;
   margin-left: 225px;
 }
@@ -486,7 +502,8 @@ table tr th td:active {
   height: 40%;
   margin-left: 350px;
   margin-top: 50px;
-  background-image: linear-gradient(teal, black);
+  /* background-image: linear-gradient(teal, black); */
+  background: linear-gradient(to bottom right, #006666 0%, #ff9933 100%);
   padding-bottom: 10px;
 }
 .tab-content {
@@ -643,4 +660,7 @@ table tr th td:active {
 #actInpTable tr:hover, #actOutTable tr:hover {
   background-color: darkorange;
   color: black;
+}
+.loginPage {
+  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
 }
