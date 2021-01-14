@@ -6,6 +6,7 @@ import com.clientproject.soms.wellbeing.form.ActivityData;
 import com.clientproject.soms.wellbeing.form.CreateActivity;
 import com.clientproject.soms.wellbeing.form.CustomizeActivity;
 import com.clientproject.soms.wellbeing.model.ActivityMapper;
+import com.clientproject.soms.wellbeing.model.CustomizeActivityCountMapper;
 import com.clientproject.soms.wellbeing.model.CustomizeActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -153,12 +154,25 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
 
     @Override
     public CustomActivityDTO getCustomMetrics(String activityId) {
-        CustomActivityDTO customActivityDTO = (CustomActivityDTO) template.queryForObject(
-                "SELECT CUST_METRIC_1, CUST_METRIC_2, CUST_METRIC_3, CUST_METRIC_4, CUST_METRIC_5, CUST_METRIC_6, " +
-                        "CUST_OUTPUT_1, CUST_OUTPUT_2, CUST_OUTPUT_3, CUST_OUTPUT_4, CUST_OUTPUT_5, CUST_OUTPUT_6 FROM ACTIVITY_CUSTOM WHERE ACTIVITY_ID= ?",
-                    new Object[]{activityId}, new CustomizeActivityMapper());
 
-        return customActivityDTO;
+        Integer num = (Integer) template.queryForObject("SELECT COUNT(*) COUNT FROM ACTIVITY_CUSTOM WHERE ACTIVITY_ID=?",
+                new Object[]{activityId}, new CustomizeActivityCountMapper());
+
+        // Check if records exist in ACTIVITY_CUSTOM table for the activity id
+        if(num > 0) {
+            CustomActivityDTO customActivityDTO = (CustomActivityDTO) template.queryForObject(
+                    "SELECT CUST_METRIC_1, CUST_METRIC_2, CUST_METRIC_3, CUST_METRIC_4, CUST_METRIC_5, CUST_METRIC_6, " +
+                            "CUST_OUTPUT_1, CUST_OUTPUT_2, CUST_OUTPUT_3, CUST_OUTPUT_4, CUST_OUTPUT_5, CUST_OUTPUT_6 FROM ACTIVITY_CUSTOM WHERE ACTIVITY_ID= ?",
+                    new Object[]{activityId}, new CustomizeActivityMapper());
+            return customActivityDTO;
+        } else {
+            /*  Added only because some activities will not have any records in ACTIVITY_CUSTOM
+                So returning an object with '0' number of records */
+            String numRecords = num.toString();
+            CustomActivityDTO customActivityDTO = new CustomActivityDTO(numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords);
+            return customActivityDTO;
+        }
+
     }
 
 }

@@ -273,7 +273,7 @@ body h4{
 }
 
 .allActivitiesContainer {
-    flex: 4;
+    flex: 2;
     margin-left: 20px;
 }
 
@@ -321,6 +321,13 @@ table tr th td:active {
 }
 
 .cardsContainer {
+    flex: 6;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.userCardsContainer {
     flex: 2;
     margin-left: 20px;
     margin-right: 50px;
@@ -329,29 +336,35 @@ table tr th td:active {
 
 #userCard{
     width: 500px;
-    background-color: maroon;
+    background-color: #005f69;
     color: white;
 }
 
 #activityCard {
-    width: 700px;
+    width: 800px;
     background-color: #005f69;
     color: white;
-    margin-right: 50px;
+    margin-right: 20px;
 }
 
 #submitButton {
-    background-color: orange;
+    background-color: darkorange;
+    width: 50%;
+    margin-left: 200px;
+    color: black;
+}
+#selectUserButton {
+    background-color: darkorange;
     width: 50%;
     margin-left: 125px;
-    background-image: linear-gradient(teal, black);
-    color: white;
+    color: black;
 }
 
-#submitButton:hover{
+#submitButton:hover, #selectUserButton:hover{
     background-color: green;
     color: white;
-    background-image: linear-gradient(black, teal);
+    /* background-image: linear-gradient(black, teal); */
+    background-image: linear-gradient(maroon, #B82601);
 }
 /* Override the bootstrap provided default table row hover background colour */
 .table-hover tr:hover td, .table-hover tr:hover th {
@@ -625,4 +638,15 @@ table tr th td:active {
 #submitCustomize:hover {
   background-color: green;
   color: white;
+}
+#customizeModalBody {
+  background-color: #005f69;
+  color: white;
+}
+#actInpTable, #actOutTable {
+  color: white;
+}
+#actInpTable tr:hover, #actOutTable tr:hover {
+  background-color: darkorange;
+  color: black;
 }
