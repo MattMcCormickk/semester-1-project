@@ -4,19 +4,38 @@ import java.sql.Date;
 
 public class ReplyFromAdmin {
     private String replyMessage;
-    private Date replyDate;
-    private String adminEmail;
+    private String replyDate;
     private boolean isReplied;
+    private String adminName;
     private int messageID;
 
-    public ReplyFromAdmin(String replyMessage, Date replyDate, String adminEmail, boolean isReplied, int messageID) {
+    public ReplyFromAdmin(int messageID, String adminName, String replyMessage, String replyDate,  boolean isReplied) {
         this.replyMessage = replyMessage;
         this.replyDate = replyDate;
-        this.adminEmail = adminEmail;
         this.isReplied = isReplied;
-        this.messageID=messageID;
+        this.adminName = adminName;
+        this.messageID = messageID;
     }
 
+    public String getReplyMessage() {
+        return replyMessage;
+    }
+
+    public String getReplyDate() {
+        return replyDate;
+    }
+
+    public boolean isReplied() {
+        return isReplied;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public int getMessageID() {
+        return messageID;
+    }
 }
 
 

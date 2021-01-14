@@ -19,7 +19,7 @@ public class ContactAdminMapper implements RowMapper {
                 rs.getString("PRIORITY"),
                 rs.getString("REPLY_MESSAGE"),
                 rs.getDate("REPLIED_DATE"),
-                rs.getString("ADMIN_EMAIL"),
+                rs.getString("ADMIN_NAME"),
                 rs.getBoolean("IS_REPLIED"));
     }
 }

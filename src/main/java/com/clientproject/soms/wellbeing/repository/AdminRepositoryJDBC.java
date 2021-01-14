@@ -1,8 +1,11 @@
 package com.clientproject.soms.wellbeing.repository;
 
+import com.clientproject.soms.wellbeing.DTO.ActivityDTO;
 import com.clientproject.soms.wellbeing.DTO.ContactAdminDTO;
 import com.clientproject.soms.wellbeing.DTO.ServiceProviderDTO;
 import com.clientproject.soms.wellbeing.form.ContactAdmin;
+import com.clientproject.soms.wellbeing.form.ReplyFromAdmin;
+import com.clientproject.soms.wellbeing.model.ActivityMapper;
 import com.clientproject.soms.wellbeing.model.ContactAdminMapper;
 import com.clientproject.soms.wellbeing.model.ServiceProviderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,45 +62,53 @@ public class AdminRepositoryJDBC implements AdminRepository{
     @Override
     public List<ContactAdminDTO> findAllMessages() {
         return template.query(
-                "select MESSAGE_ID, SERV_PROV_ID, SERV_PROV_NAME, SERV_PROV_EMAIL, MESSAGE, RECEIVED_DATE, PRIORITY, REPLY_MESSAGE, REPLIED_DATE, ADMIN_EMAIL, IS_REPLIED from soms_wellbeing.contact_admin",
+                "select MESSAGE_ID, SERV_PROV_ID, SERV_PROV_NAME, SERV_PROV_EMAIL, MESSAGE, RECEIVED_DATE, PRIORITY, REPLY_MESSAGE, REPLIED_DATE, ADMIN_NAME, IS_REPLIED from soms_wellbeing.contact_admin",
                 new ContactAdminMapper()
         );
     }
 
-/*
+
     @Override
-    public boolean deleteMessage(ContactAdmin contactAdmin) throws ParseException{
-        String sql = "DELETE FROM CONTACT_ADMIN WHERE contactAdmin = ?";
-        Object[] args = new Object[] {contactAdmin};
+    public boolean deleteMessage(ContactAdminDTO contactAdminDTO) {
+        String sql = "DELETE FROM CONTACT_ADMIN WHERE contactAdminDTO = ?";
+        Object[] args = new Object[] {contactAdminDTO};
         return template.update(sql, args) == 1;
     }
 
-    /*
+
     @Override
-    public boolean replyToMessage(ContactAdmin contactAdmin) throws ParseException{
+    public boolean adminReply(ReplyFromAdmin replyFromAdmin) throws ParseException {
         int types[] = new int[] {
                 Types.VARCHAR,
                 Types.DATE,
                 Types.VARCHAR,
-                Types.BOOLEAN
+                Types.BOOLEAN,
+                Types.INTEGER
+
         };
 
+        /*  Added to convert String to Date format.
+            This is needed because the activity date is being read as String from the input HTML form. */
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = format.parse(contactAdmin.getDate());
+        Date date = format.parse(replyFromAdmin.getReplyDate());
+
+        int messageID = replyFromAdmin.getMessageID();
+
+        int rows = template.update(
+                "update soms_wellbeing.CONTACT_ADMIN SET REPLY_MESSAGE = ?, REPLIED_DATE = ?, ADMIN_NAME = ?, IS_REPLIED = ? where MESSAGE_ID = ?",
+
+                new Object[]{replyFromAdmin.getReplyMessage(), date, replyFromAdmin.getAdminName(), true, messageID}, types);
+        return rows > 0;
 
     }
 
-     */
-/*
     @Override
     public ContactAdminDTO findMessageByID(int messageID) {
         ContactAdminDTO contactAdminDTO=(ContactAdminDTO) template.queryForObject("Select SERV_PROV_NAME, RECEIVED_DATE," +
                         "SERV_PROV_EMAIL, MESSAGE, PRIORITY from soms_wellbeing.activity where CONTACT_ADMIN = ?",
                 new Object[]{messageID}, new ContactAdminMapper());
-        return (ContactAdminDTO) contactAdminDTO;
+        return contactAdminDTO;
     }
-
- */
 
 
 }

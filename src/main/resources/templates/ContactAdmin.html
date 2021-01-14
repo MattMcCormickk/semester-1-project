@@ -20,7 +20,7 @@
 <main>
     <div class="contactAdminContainer">
         <div class="contactAdminForm">
-            <h1>Contact Admin</h1>
+            <h1 class="adminTitle">Contact Admin</h1>
             <!-- Upon submitting the below form, registerActivity() is being invoked which makes an AJAX request to register the activity in the database. -->
             <form action="/AdminContacted/" method="get" id="contact_admin_form" onsubmit="return contactAdmin()">
                 <div class="row">
@@ -53,7 +53,6 @@
                 </div>
                 </div>
                 </div>
-
 
                 <div class="form-floating mb-3">
                     <textarea type="text" name="description" id="description" class="form-control" placeholder="Issue Description" style="height: 100px" required></textarea>
@@ -90,6 +89,8 @@
 
 <script>
 
+
+
      function contactAdmin() {
         var name = document.getElementById("name").value;
         var date = document.getElementById("date").value;
@@ -97,36 +98,39 @@
         var description = document.getElementById("description").value;
         var priority = document.getElementById("priority").value;
 
-         // if (priority.toLowerCase() !== ["low", "medium", "high"]){
-         //     alert("prioirty must be low, medium or high!")
-         //     return false;
-         // }
+        var priorityValues = ["low", "medium", "high"]
 
-         // else{
+         if (priorityValues.includes(priority.toLowerCase())){
+
              var priority = priority.toLowerCase()
              var params = 'name=' + name + '&date=' + date + '&email=' + email + '&description=' + description + '&priority=' + priority;
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", '/AdminContact', true); // true is asynchronous
+             var xhttp = new XMLHttpRequest();
+             xhttp.open("POST", '/AdminContact', true); // true is asynchronous
 
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState === 4 && xhttp.status === 200) {
-                console.log(xhttp.responseText);
-                // Initialize the modal to display the confirmation message.
-                // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
-                var myModal = new bootstrap.Modal(document.getElementById("contactMessage"), {
-                    backdrop: 'static', keyboard: false
-                })
-                myModal.show();   // Display the modal when the AJAX call is successful.
-            } else {
-                console.error(xhttp.statusText);
-            }
-        };
-        xhttp.send(params);
-        return false;
-    // }
+             xhttp.onreadystatechange = function() {
+                 if (xhttp.readyState === 4 && xhttp.status === 200) {
+                     console.log(xhttp.responseText);
+                     // Initialize the modal to display the confirmation message.
+                     // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
+                     var myModal = new bootstrap.Modal(document.getElementById("contactMessage"), {
+                         backdrop: 'static', keyboard: false
+                     })
+                     myModal.show();   // Display the modal when the AJAX call is successful.
+                 } else {
+                     console.error(xhttp.statusText);
+                 }
+             };
+             xhttp.send(params);
+             return false;
+         }
+
+         else {
+             alert("prioirty must be low, medium or high!")
+             return false;
+    }
      }
 
 
