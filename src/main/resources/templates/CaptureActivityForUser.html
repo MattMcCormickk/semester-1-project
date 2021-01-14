@@ -333,12 +333,16 @@
                 document.getElementById("activityDate").value = activityDate;
                 document.getElementById("description").value = description;
                 for (var i = 0; i < table.rows.length; i++) {
-                    table.rows[i].style.backgroundColor = "white";
+                    // table.rows[i].style.backgroundColor = "white";
+                    table.rows[i].style.background = "linear-gradient(to top left, #006666 0%, #ff9933 100%)";
                     table.rows[i].style.color = "black";
                 }
                 var selectedRow = table.getElementsByTagName('tr')[rIndex];
-                selectedRow.style.backgroundColor = "#B82601";
-                selectedRow.style.color = "white";
+                // selectedRow.style.backgroundColor = "#B82601";
+                // selectedRow.style.color = "white";
+                selectedRow.style.background = "none";
+                selectedRow.style.backgroundColor = "darkorange";
+                selectedRow.style.color = "black";
 
                 /* Select the radio button when any cell in the row is clicked.
                 This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.

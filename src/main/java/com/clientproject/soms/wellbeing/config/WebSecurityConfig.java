@@ -18,19 +18,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/Home").permitAll()
                 .mvcMatchers("/bootstrap/*").permitAll()
                 .mvcMatchers("/CreateActivity/*").authenticated()
-                .mvcMatchers("/AdminHome/*").authenticated()
                 .mvcMatchers("/ActivityData/*").authenticated()
                 .mvcMatchers("/AllUsers/*").authenticated()
-                .mvcMatchers("/SelectedPage/*").authenticated()
                 .mvcMatchers("/allActivities/*").authenticated()
                 .mvcMatchers("/CustomizeActivity/*").authenticated()
-                .mvcMatchers("/CreateActivity").hasAnyRole("SERVICE_PROVIDER", "ADMIN")
-                .mvcMatchers("/ActivityData").hasAnyRole("SERVICE_PROVIDER", "ADMIN")
-                .mvcMatchers("/AllUsers").hasAnyRole("SERVICE_PROVIDER", "ADMIN")
-                .mvcMatchers("/allActivities").hasAnyRole("SERVICE_PROVIDER", "ADMIN")
-                .mvcMatchers("/CustomizeActivity").hasAnyRole("SERVICE_PROVIDER", "ADMIN")
-                .mvcMatchers("/SelectedPage").hasAnyRole("SERVICE_PROVIDER", "ADMIN")
-		        .mvcMatchers("/AdminHome").hasRole("ADMIN")
+                .mvcMatchers("/CreateActivity").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/ActivityData").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/AllUsers").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/allActivities").hasRole("SERVICE_PROVIDER")
+                .mvcMatchers("/CustomizeActivity").hasRole("SERVICE_PROVIDER")
+		.mvcMatchers("/AdminHome").hasRole("ADMIN")
                 .and()
                 .formLogin()
                     .usernameParameter("email")     // change authentication to email id
@@ -63,6 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("benz@company.com").password("{noop}password").roles("SERVICE_PROVIDER");
         auth
                 .inMemoryAuthentication()
-                .withUser("admin@admin").password("{noop}123").roles("ADMIN");
+                .withUser("admin").password("{noop}password").roles("ADMIN");                
     }
 }
