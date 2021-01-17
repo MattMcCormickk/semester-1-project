@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../soms-style.css">
     <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/f18406a3b8.js" crossorigin="anonymous"></script>
     <title>Contact Admin</title>
 </head>
 <body>
@@ -30,12 +31,17 @@
                     <label for="name">Your Name</label>
                 </div>
                     </div>
+                    <div class="col-sm-3">
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="id" placeholder="id" name="id" required>
+                            <label for="id">Your ID</label>
+                        </div>
+                    </div>
 
-
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="form-floating mb-3">
                             <input type="date" class="form-control" id="date" placeholder="dd/mm/yyyy" name="date" required>
-                            <label for="date"> Date</label>
+                            <label for="date">Date</label>
                         </div>
                     </div>
                 </div>
@@ -49,7 +55,7 @@
                     <div class="col-sm-4">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="priority" placeholder="priority" name="priority" required>
-                    <label for="priority">Priority (low, medium, high)</label>
+                    <label for="priority"><i class="fas fa-exclamation"></i> Priority (low, medium, high)</label>
                 </div>
                 </div>
                 </div>
@@ -95,6 +101,7 @@
         var name = document.getElementById("name").value;
         var date = document.getElementById("date").value;
         var email = document.getElementById("email").value;
+        var id = document.getElementById("id").value;
         var description = document.getElementById("description").value;
         var priority = document.getElementById("priority").value;
 
@@ -103,7 +110,7 @@
          if (priorityValues.includes(priority.toLowerCase())){
 
              var priority = priority.toLowerCase()
-             var params = 'name=' + name + '&date=' + date + '&email=' + email + '&description=' + description + '&priority=' + priority;
+             var params = 'name=' + name + '&date=' + date + '&email=' + email + '&description=' + description + '&priority=' + priority  + '&id=' + id;
 
              var xhttp = new XMLHttpRequest();
              xhttp.open("POST", '/AdminContact', true); // true is asynchronous

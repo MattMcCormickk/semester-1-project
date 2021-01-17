@@ -24,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/SelectedPage/*").authenticated()
                 .mvcMatchers("/allActivities/*").authenticated()
                 .mvcMatchers("/CustomizeActivity/*").authenticated()
+                .mvcMatchers("/ContactAdmin/*").authenticated()
+                .mvcMatchers("/ContactAdmin").hasAnyRole("SERVICE_PROVIDER", "ADMIN")
                 .mvcMatchers("/CreateActivity").hasAnyRole("SERVICE_PROVIDER", "ADMIN")
                 .mvcMatchers("/ActivityData").hasAnyRole("SERVICE_PROVIDER", "ADMIN")
                 .mvcMatchers("/AllUsers").hasAnyRole("SERVICE_PROVIDER", "ADMIN")

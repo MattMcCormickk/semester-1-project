@@ -55,7 +55,7 @@ public class AdminRepositoryJDBC implements AdminRepository{
 
         int rows = template.update(
                 "insert into CONTACT_ADMIN (SERV_PROV_ID, SERV_PROV_NAME, SERV_PROV_EMAIL, MESSAGE, RECEIVED_DATE,PRIORITY) values(?,?,?,?,?,?)",
-                new Object[]{1, contactAdmin.getName(),   contactAdmin.getEmail(), contactAdmin.getDescription(), date, "Medium"}, types);
+                new Object[]{contactAdmin.getSerProID(), contactAdmin.getName(),   contactAdmin.getEmail(), contactAdmin.getDescription(), date, contactAdmin.getPriority()}, types);
         return rows>0;
     }
 
@@ -68,13 +68,14 @@ public class AdminRepositoryJDBC implements AdminRepository{
     }
 
 
-    @Override
+   @Override
     public boolean deleteMessage(ContactAdminDTO contactAdminDTO) {
-        String sql = "DELETE FROM CONTACT_ADMIN WHERE contactAdminDTO = ?";
-        Object[] args = new Object[] {contactAdminDTO};
-        return template.update(sql, args) == 1;
-    }
+       int messageID = contactAdminDTO.getMessageID();
+       String sql = "DELETE FROM soms_wellbeing.CONTACT_ADMIN WHERE MESSAGE_ID = ?";
+       Object[] args = new Object[]{contactAdminDTO};
+       return template.update(sql, args) == 1;
 
+   }
 
     @Override
     public boolean adminReply(ReplyFromAdmin replyFromAdmin) throws ParseException {
@@ -83,6 +84,7 @@ public class AdminRepositoryJDBC implements AdminRepository{
                 Types.DATE,
                 Types.VARCHAR,
                 Types.BOOLEAN,
+                Types.INTEGER,
                 Types.INTEGER
 
         };
@@ -95,9 +97,9 @@ public class AdminRepositoryJDBC implements AdminRepository{
         int messageID = replyFromAdmin.getMessageID();
 
         int rows = template.update(
-                "update soms_wellbeing.CONTACT_ADMIN SET REPLY_MESSAGE = ?, REPLIED_DATE = ?, ADMIN_NAME = ?, IS_REPLIED = ? where MESSAGE_ID = ?",
+                "update soms_wellbeing.CONTACT_ADMIN SET REPLY_MESSAGE = ?, REPLIED_DATE = ?, ADMIN_NAME = ?, IS_REPLIED = ?, SERV_PROV_ID = ? where MESSAGE_ID = ?",
 
-                new Object[]{replyFromAdmin.getReplyMessage(), date, replyFromAdmin.getAdminName(), true, messageID}, types);
+                new Object[]{replyFromAdmin.getReplyMessage(), date, replyFromAdmin.getAdminName(), true, replyFromAdmin.getSerProID(), messageID}, types);
         return rows > 0;
 
     }
