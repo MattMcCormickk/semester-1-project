@@ -86,7 +86,8 @@ body h4{
     /* width: 90%; */
     margin-left: 50px;
     background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-    color: white;
+    color: black;
+    /* color: white; */
     /*background-color: #BC4639;*/
 }
 
@@ -246,8 +247,8 @@ body h4{
 }
 
 #submitButton:hover{
-    background-color: #0099cc;
-    color: black;
+    background-color: green;
+    color: white;
 }
 
 .carouselContainer {
@@ -275,7 +276,7 @@ body h4{
 }
 
 .allActivitiesContainer {
-    flex: 4;
+    flex: 3;
     margin-left: 20px;
     background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
     color: white;
@@ -296,18 +297,15 @@ body h4{
 .registerActivityContainer h1{
   text-align: center;
 }
-.registerActivityContainer button{
-  background-color: #660066;
-}
 
 table tr:hover {
-    background-color: #B82601;
-    color: white;
+  background-color: darkorange;
+  color: black;
 }
 
 table tr th td:active {
-    background-color: #B82601;
-    color: white;
+  background-color: darkorange;
+  color: black;
 }
 
 .titleAndSearch {
@@ -325,9 +323,9 @@ table tr th td:active {
 }
 
 .cardsContainer {
-    flex: 5;
-    margin-left: 20px;
-    margin-right: 20px;
+    flex: 4;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
 }
 
@@ -340,21 +338,26 @@ table tr th td:active {
 
 #userCard{
     width: 500px;
-    background-color: #4B4848;
-    color: white;
+    /* background-color: #4B4848; */
+    /* color: white; */
+    background: linear-gradient(to top right, #006666 0%, #ff9933 100%);
+    color: black;
 }
 
 #activityCard {
     width: 800px;
-    background-color: #4B4848;
-    color: white;
+    /* background-color: #4B4848; */
+    /* color: white; */
+    background: linear-gradient(to top right, #006666 0%, #ff9933 100%);
+    color: black;
     margin-right: 20px;
 }
 
 #submitButton {
     background-color: darkorange;
-    width: 50%;
-    margin-left: 200px;
+    width: 30%;
+    margin-left: 250px;
+    margin-right: 250px;
     color: black;
 }
 #selectUserButton {
@@ -417,11 +420,11 @@ table tr th td:active {
   color: white;
 }
 
-#customizeButton {
+#customizeButton, #captureButton {
   background-color: darkorange;
   color: black;
 }
-#customizeButton:hover {
+#customizeButton:hover, #captureButton:hover {
   background-color: green;
   color: white;
 }
@@ -589,14 +592,18 @@ table tr th td:active {
 .accordion-collapse.collapse.show {
   /* background-image: linear-gradient(grey, #4B4848); */
   /* background-image: linear-gradient(#4B4848, grey); */
-  background-color: #4B4848;
-  color: white;
+  /* background-color: #4B4848;
+  color: white; */
+  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+  color: black;
   /* transition: background-color 1s ease; */
   /* transition: color 1s ease; */
 }
 #activityInpTable tr, #activityOutTable tr, #tempInpTable tr, #tempOutTable tr {
-  background-color: #4B4848;
-  color: white;
+  /* background-color: #4B4848;
+  color: white; */
+  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+  color: black;
 }
 #activityInpTable tr:hover, #activityOutTable tr:hover, #tempInpTable tr:hover, #tempOutTable tr:hover {
   background-color: darkorange;
@@ -663,4 +670,64 @@ table tr th td:active {
 }
 .loginPage {
   background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+}
+.spinners {
+  position: fixed;
+  top: 50%;
+  left: 46%;
+  z-index: 999;
+}
+.overlay {
+    /* background: linear-gradient(to top left, #006666 0%, #ff9933 100%); */
+    background-color: black;
+    display: none;
+    /* position: absolute; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.8;
+    transition: background-color 0.5s;
+}
+.allActivities {
+  width:90%;
+  margin-left: 100px;
+  margin-right: 100px;
+  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+}
+.titleSearch {
+    display: flex;
+    float: left;
+}
+.titleSearch h1 {
+  width: 600px;
+  text-align: center;
+}
+.titleSearch .search-text {
+  width: 50%;
+}
+.modal-body, .modal-footer {
+  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+  color: black;
+}
+#submitActivityButton {
+    background-color: darkorange;
+    width: 30%;
+    margin-left: 400px;
+    margin-right: 400px;
+    color: black;
+}
+#submitActivityButton:hover {
+  background-color: green;
+  color: white;
+}
+#downloadButton {
+  background-color: darkorange;
+  color: black;
+  width: 20%;
+}
+#downloadButton:hover {
+  background-color: green;
+  color: white;
 }

@@ -117,11 +117,27 @@
       </div>
     </div>
 
+    <!-- Display spinners to show that the page is loading. This is to simulate a real world scenario when the Ajax call takes a few seconds! -->
+    <div class="overlay" id="loader">
+      <div class="spinners">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+
     <script type="text/javascript">
 
     /*  This is the AJAX function invoked when user clicks on 'Register Activity'
         This function makes a POST request call to the route /AddActivity to register the activity in the database. */
         function registerActivity() {
+          $("#loader").show();  // Display spinners to simulate a page loading scenario
           var activityName = document.getElementById("activityName").value;
           var activityDate = document.getElementById("activityDate").value;
           var location = document.getElementById("location").value;
@@ -132,9 +148,11 @@
           var xhttp = new XMLHttpRequest();
           xhttp.open("POST", '/AddActivity', true); // true is asynchronous
           xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xhttp.onreadystatechange = function() {
+          xhttp.onreadystatechange = setTimeout(function() { /* This is to simulate a real world scenario when the Ajax call takes a few seconds!
+                    Show the spinners just before the Ajax call. Delay the Ajax call by 3 seconds and then hide the spinners! */
             if (xhttp.readyState === 4 && xhttp.status === 200) {
               console.log(xhttp.responseText);
+              $("#loader").hide();
               // Initialize the modal to display the confirmation message.
               // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
               var myModal = new bootstrap.Modal(document.getElementById("savedMessage"), {
@@ -144,7 +162,7 @@
             } else {
               console.error(xhttp.statusText);
             }
-          };
+          }, 3000);
           xhttp.send(params);
           return false;
         }

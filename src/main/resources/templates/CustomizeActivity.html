@@ -250,7 +250,20 @@
       </div>
     </div>
 
-
+    <!-- Display spinners to show that the page is loading. This is to simulate a real world scenario when the Ajax call takes a few seconds! -->
+    <div class="overlay" id="loader">
+      <div class="spinners">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
 
     <script type="text/javascript">
 
@@ -312,6 +325,7 @@
             $("#addCustInpButton").on("click", function() {
                 var custInput = $("#customInp").val();  // Get the custom input text entered by the user
                 $("#activityInpTable").append('<tr><td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="selectInpCheck"></td><td>' + custInput + '</td></tr>');
+                $("#customInp").val("");
             });
         });
 
@@ -319,6 +333,7 @@
             $("#addCustOutButton").on("click", function() {
                 var custOutput = $("#customOut").val();   // Get the custom output text entered by the user
                 $("#activityOutTable").append('<tr><td><input class="form-check-input" type="checkbox" name="selectOutCheck" id="selectOutCheck"></td><td>' + custOutput + '</td></tr>');
+                $("#customOut").val("");
             });
         });
 
@@ -386,17 +401,23 @@
                               'custOutput1' : custOutput1, 'custOutput2' : custOutput2, 'custOutput3' : custOutput3,
                               'custOutput4' : custOutput4, 'custOutput5' : custOutput5, 'custOutput6' : custOutput6};
 
+                $("#loader").show();  // Display spinners to simulate a page loading scenario
                 $.ajax({
                     type: 'POST',
                     url: 'http://localhost:8080/SubmitCustomizedActivity',
                     data: params,
                     dataType: "text",
                     success: function(response) {
-                      // Display the confirmation modal if the call is successful
-                      var myModal = new bootstrap.Modal(document.getElementById("customizedMessage"), {
-                        backdrop: 'static', keyboard: false
-                      });
-                      myModal.show();
+        /* This is to simulate a real world scenario when the Ajax call takes a few seconds!
+          Show the spinners just before the Ajax call. Delay the Ajax call by 3 seconds and then hide the spinners! */
+                      setTimeout(function() {
+                        $("#loader").hide();
+                        // Display the confirmation modal if the call is successful
+                        var myModal = new bootstrap.Modal(document.getElementById("customizedMessage"), {
+                          backdrop: 'static', keyboard: false
+                        });
+                        myModal.show();
+                      }, 3000);
                     }
                 });
             });
