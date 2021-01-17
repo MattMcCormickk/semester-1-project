@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../soms-style.css">
+    <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Edit Data</title>
+</head>
+<body>
+<header th:replace="fragments/adminHeader :: adminHeader"></header>
+<main>
+    <div class="accordionsContainer">
+        <div class="accordion accordion-flush" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button header-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Selected Activity
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col" style="max-width:7%">
+                                <label id="lblVessel" for="activityId">#</label>
+                                <input type="text" class="form-control" id="activityId" name="activityId" th:value="${activityID}" readonly>
+                            </div>
+                            <div class="col" style="max-width:23%">
+                                <label id="lblVesselName" for="activityName">Activity Name</label>
+                                <input type="text" class="form-control" id="activityName" name="activityName" th:value="${activityName}" readonly>
+                            </div>
+                            <div class="col" style="max-width:15%">
+                                <label id="lblVesselLocation" for="location">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" th:value="${location}" readonly>
+                            </div>
+                            <div class="col" style="max-width:15%">
+                                <label id="lblVesselDate" for="activityDate">Activity Date</label>
+                                <input type="text" class="form-control" id="activityDate" name="activityDate" th:value="${activityDate}" readonly>
+                            </div>
+                            <div class="col" style="max-width:40%">
+                                <label id="lblVesselDescription" for="description">Description</label>
+                                <input type="text" class="form-control" id="description" name="description" th:value="${description}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button header-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Edit
+                    </button>
+                </h2>
+
+                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-5">
+                                <table class="table" id="activityInpTable">
+                                    <col style="width:10%">
+                                    <col style="width:90%">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllInp" id="selectAllInp"></th>
+                                        <th scope="col">Select All Values</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="nameCheck"></td>
+                                        <td>Activity Name<td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="idCheck"></td>
+                                        <td>Location</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="descriptionCheck"></td>
+                                        <td>Description</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="dateCheck"></td>
+                                        <td>Date</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-2">
+                                <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
+                                    <button class="btn btn-success" type="button" id="editDataButton"><i class="fa fa-pencil-square-o"></i> Edit Selected</button>
+                                </div>
+
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div id="submitAdminActivityDataBtn">
+        <button type="submit" class="btn btn-success" id="submitCustomize">Submit</button>
+        </div>
+    </div>
+
+</main>
+<script type="text/javascript">
+$(function() {
+    $("#activityInpTable #selectAllInp").click(function () {
+        if (this.checked) {
+            $("#activityInpTable .form-check-input").prop("checked", true);
+        } else {
+            $("#activityInpTable .form-check-input").prop("checked", false);
+        }
+    });
+});
+
+/*
+//MULTIPLE SELECTED
+$(function() {
+    $("#editDataButton").on("click", function() {
+        var selectedRows = $("#activityInpTable input:checked").parents("tr").not("thead tr").val();
+        if (selectedRows =="exportpack"){
+            $('#<%= lblVessel.ClientID %>').text("NewText")
+        }
+        $(".form-check-input").prop("checked", false);
+    });
+});
+*/
+
+
+//ONE SELECTED
+$(function() {
+    $("#editDataButton").on("click", function() {
+        var selectedRow = $("#activityInpTable input:checked").parents("tr").not("thead tr");
+        console.log(selectedRow.val());
+        if (selectedRow.attr('nameCheck')){
+            $('#activityName').empty()
+            //$('#lblVesselName').val("new value")
+        }
+        $(".form-check-input").prop("checked", false);
+    });
+});
+
+
+
+
+
+</script>
+</body>

@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="../soms-style.css">
-    <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
+    <link rel="stylesheet" th:href="@{soms-style.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Admin Reply</title>
 </head>
 <body>
-
+<header th:replace="fragments/adminHeader :: adminHeader"></header>
 <main>
     <div class="AdminReplyContainer">
 
@@ -24,6 +24,8 @@
             <input type="text" class="form-control" id="messageID" name="messageID" th:value="${messageid}" readonly>
             <label for="recipName">Recipient Name</label>
             <input type="text" class="form-control" id="recipName" name="recipName" th:value="${messageRecipient}" readonly>
+            <label for="serProID">Recipient ID</label>
+            <input type="text" class="form-control" id="serProID" name="serProID" th:value="${messageRecipientID}" readonly>
             <label for="OGmessage">Original Message</label>
             <input type="text" class="form-control" id="OGmessage" name="OGmessage" th:value="${message}" readonly>
 
@@ -92,8 +94,9 @@
         var date = document.getElementById("date").value;
         var reply = document.getElementById("reply").value;
         var messageID = document.getElementById("messageID").value;
+        var serProID = document.getElementById("serProID").value;
 
-        var params = 'messageID=' + messageID + '&name=' + name + '&date=' + date + '&reply=' + reply;
+        var params = 'messageID=' + messageID + '&name=' + name + '&date=' + date + '&reply=' + reply + '&serProID=' + serProID;
         console.log(params)
 
         var xhttp = new XMLHttpRequest();

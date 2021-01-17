@@ -33,7 +33,7 @@ body h4{
     display: flex;
     float: left;
     /*background-color: #0B3C5D;*/
-    background-color: #660066;
+    /*background-color: #660066;*/
     color: white;
     /*color: black;*/
     width: 100%;
@@ -54,10 +54,6 @@ body h4{
   flex: 6;
   float: left;
   display: flex;
-}
-
-.container-fluid{
-    background-color: #660066;
 }
 
 .soms-footer{
@@ -85,9 +81,6 @@ body h4{
     flex: 4;
     /* width: 90%; */
     margin-left: 50px;
-    background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-    color: black;
-    /* color: white; */
     /*background-color: #BC4639;*/
 }
 
@@ -186,7 +179,6 @@ body h4{
     color: black;
     background-image: linear-gradient(white, teal);
     min-width: 160px;
-    z-index: 2;
     /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
     /* margin-left: 20px; */
 }
@@ -247,8 +239,8 @@ body h4{
 }
 
 #submitButton:hover{
-    background-color: green;
-    color: white;
+    background-color: #0099cc;
+    color: black;
 }
 
 .carouselContainer {
@@ -258,7 +250,7 @@ body h4{
 }
 .search-text{
     /*margin-left: 400px;*/
-    width: 200px;
+    width: 300px;
     margin-bottom: 5px;
 }
 .search-text .form-control {
@@ -276,10 +268,8 @@ body h4{
 }
 
 .allActivitiesContainer {
-    flex: 3;
-    margin-left: 20px;
-    background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-    color: white;
+    flex: 4;
+    margin-left: 50px;
 }
 
 #all_activity_button{
@@ -291,21 +281,24 @@ body h4{
   display: flex;
   float: left;
   /* width: 60%; */
-  margin-left: 20px;
-  margin-bottom: 20px;
+  margin-left: 50px;
+  margin-bottom: 50px;
 }
 .registerActivityContainer h1{
   text-align: center;
 }
+.registerActivityContainer button{
+  background-color: #660066;
+}
 
 table tr:hover {
-  background-color: darkorange;
-  color: black;
+    background-color: #B82601;
+    color: white;
 }
 
 table tr th td:active {
-  background-color: darkorange;
-  color: black;
+    background-color: #B82601;
+    color: white;
 }
 
 .titleAndSearch {
@@ -315,71 +308,50 @@ table tr th td:active {
 }
 .titleAndSearch h1 {
   width: 300px;
-  text-align: center;
 }
-.titleAndSearch .search-text {
-  width: 50%;
-}
+
 .tablesAndCards {
     display: inline-flex;
     float: left;
 }
 
 .cardsContainer {
-    flex: 4;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-}
-
-.userCardsContainer {
     flex: 2;
     margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
+    margin-right: 50px;
+    margin-top: 50px;
 }
 
 #userCard{
     width: 500px;
-    /* background-color: #4B4848; */
-    /* color: white; */
-    background: linear-gradient(to top right, #006666 0%, #ff9933 100%);
-    color: black;
+    background-color: maroon;
+    color: white;
 }
 
 #activityCard {
-    width: 800px;
-    /* background-color: #4B4848; */
-    /* color: white; */
-    background: linear-gradient(to top right, #006666 0%, #ff9933 100%);
-    color: black;
-    margin-right: 20px;
+    width: 600px;
+    background-color: maroon;
+    color: white;
+    margin-right: 50px;
 }
 
 #submitButton {
-    background-color: darkorange;
-    width: 30%;
-    margin-left: 250px;
-    margin-right: 250px;
-    color: black;
-}
-#selectUserButton {
-    background-color: darkorange;
+    background-color: orange;
     width: 50%;
     margin-left: 125px;
-    color: black;
+    background-image: linear-gradient(teal, black);
+    color: white;
 }
 
-#submitButton:hover, #selectUserButton:hover{
+#submitButton:hover{
     background-color: green;
     color: white;
+    background-image: linear-gradient(black, teal);
 }
 /* Override the bootstrap provided default table row hover background colour */
 .table-hover tr:hover td, .table-hover tr:hover th {
-    /* background: #B82601;
-    color: white; */
-    background-color: darkorange;
-    color: black;
+    background: #B82601;
+    color: white;
 }
 
 /* Styling for the 'Close' button in the modal */
@@ -398,36 +370,26 @@ table tr th td:active {
   flex: 1.75;
   margin-left: 20px;
   margin-right: 20px;
-  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
 }
 
 .registerActivityForm {
   flex: 1;
-  height: 500px;
-  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 20px;
 }
 
 #registerActivityButton {
-  /* background-image: linear-gradient(teal, black);
-  color: white; */
-  background-color: darkorange;
-  color: black;
+  background-image: linear-gradient(teal, black);
+  color: white;
   margin-left: 200px;
 }
 #registerActivityButton:hover {
-  /* background-image: linear-gradient(black, teal); */
-  background-color: green;
-  color: white;
+  background-image: linear-gradient(black, teal);
 }
 
-#customizeButton, #captureButton {
+#customizeButton {
   background-color: darkorange;
   color: black;
 }
-#customizeButton:hover, #captureButton:hover {
+#customizeButton:hover {
   background-color: green;
   color: white;
 }
@@ -435,8 +397,6 @@ table tr th td:active {
 #registerButton {
   background-image: linear-gradient(teal, black);
   color: white;
-  /* background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-  color: black; */
   width: 300px;
   margin-left: 225px;
 }
@@ -508,8 +468,7 @@ table tr th td:active {
   height: 40%;
   margin-left: 350px;
   margin-top: 50px;
-  /* background-image: linear-gradient(teal, black); */
-  background: linear-gradient(to bottom right, #006666 0%, #ff9933 100%);
+  background-image: linear-gradient(teal, black);
   padding-bottom: 10px;
 }
 .tab-content {
@@ -603,16 +562,12 @@ table tr th td:active {
   /* background-image: linear-gradient(#4B4848, grey); */
   background-color: #4B4848;
   color: white;
-  /* background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-  color: black; */
   /* transition: background-color 1s ease; */
   /* transition: color 1s ease; */
 }
 #activityInpTable tr, #activityOutTable tr, #tempInpTable tr, #tempOutTable tr {
-  /* background-color: #4B4848;
-  color: white; */
-  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-  color: black;
+  background-color: #4B4848;
+  color: white;
 }
 #activityInpTable tr:hover, #activityOutTable tr:hover, #tempInpTable tr:hover, #tempOutTable tr:hover {
   background-color: darkorange;
@@ -648,7 +603,7 @@ table tr th td:active {
   color: black;
   margin-left: 375px;
   width: 400px;
-  font-size: 1rem;
+  font-size: 1rem;  
 }
 .accordionsContainer {
   margin-left: 50px;
@@ -666,81 +621,126 @@ table tr th td:active {
   background-color: green;
   color: white;
 }
-#customizeModalBody {
-  background-color: #005f69;
-  color: white;
+
+/*admin styling*/
+.header-button {
+    color: white;
 }
-#actInpTable, #actOutTable {
-  color: white;
-}
-#actInpTable tr:hover, #actOutTable tr:hover {
-  background-color: darkorange;
-  color: black;
-}
-.loginPage {
-  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-}
-.spinners {
-  position: fixed;
-  top: 50%;
-  left: 46%;
-  z-index: 999;
-}
-.overlay {
-    /* background: linear-gradient(to top left, #006666 0%, #ff9933 100%); */
-    background-color: black;
-    display: none;
-    /* position: absolute; */
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0.8;
-    transition: background-color 0.5s;
-}
-.allActivities {
-  width:90%;
-  margin-left: 100px;
-  margin-right: 100px;
-  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-}
-.titleSearch {
-    display: flex;
-    float: left;
-}
-.titleSearch h1 {
-  width: 600px;
-  text-align: center;
-}
-.titleSearch .search-text {
-  width: 50%;
-}
-.modal-body, .modal-footer {
-  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-  color: black;
-}
-#submitActivityButton {
-    background-color: darkorange;
-    width: 30%;
-    margin-left: 400px;
-    margin-right: 400px;
+.header-button.collapsed{
+    background-color: grey;
     color: black;
 }
-#submitActivityButton:hover {
-  background-color: green;
-  color: white;
+.header-button:not(.collapsed) {
+    background-color: #E2FDFF;
+    color: black;
+    transition: background-color 3s ease;
 }
-#downloadButton {
-  background-color: darkorange;
-  color: black;
-  width: 30%;
+
+#editDataButton{background-color: #FCDC94;}
+#submitCustomize {
+    background-color: #FCDC94;
 }
-#downloadButton:hover {
-  background-color: green;
-  color: white;
+
+/*ADMIN NAVBAR*/
+
+.Nav > *{
+ box-sizing: border-box;
 }
-.homePage {
-  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-  color: black;
+.Nav {
+    height: 100px;
+    width: 100%;
+    background-color: #121212;
+    position: relative;
+    margin-bottom: 1em;
 }
+
+.Nav > .nav-header {
+    display: inline;
+}
+
+.Nav > .nav-header > .nav-title {
+    display: inline-block;
+    font-size: 22px;
+    color: #fff;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+}
+
+.Nav > .nav-btn {
+    display: none;
+}
+
+.Nav > .nav-links {
+    display: inline;
+    float: right;
+    font-size: 18px;
+}
+
+.Nav > .nav-links > a {
+    display: inline-block;
+    padding: 13px 10px 13px 10px;
+    text-decoration: none;
+    color: #efefef;
+}
+
+.Nav > .nav-links > a:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.Nav > #nav-check {
+    display: none;
+}
+
+@media (max-width:600px) {
+    .Nav > .nav-btn {
+        display: inline-block;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+    .Nav > .nav-btn > label {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        padding: 13px;
+    }
+    .Nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    .Nav > .nav-btn > label > span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 2px solid #eee;
+    }
+    .Nav > .nav-links {
+        position: absolute;
+        display: block;
+        width: 100%;
+        background-color: #333;
+        height: 0px;
+        transition: all 0.3s ease-in;
+        overflow-y: hidden;
+        top: 50px;
+        left: 0px;
+    }
+    .Nav > .nav-links > a {
+        display: block;
+        width: 100%;
+    }
+    .Nav > #nav-check:not(:checked) ~ .nav-links {
+        height: 0px;
+    }
+    .Nav > #nav-check:checked ~ .nav-links {
+        height: calc(100vh - 50px);
+        overflow-y: auto;
+    }
+
+    #admin-header-logo{
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+

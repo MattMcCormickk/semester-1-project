@@ -8,13 +8,16 @@ public class ReplyFromAdmin {
     private boolean isReplied;
     private String adminName;
     private int messageID;
+    private int serProID;
 
-    public ReplyFromAdmin(int messageID, String adminName, String replyMessage, String replyDate,  boolean isReplied) {
+
+    public ReplyFromAdmin(int messageID, String adminName, String replyMessage, String replyDate,  boolean isReplied, int serProID) {
         this.replyMessage = replyMessage;
         this.replyDate = replyDate;
         this.isReplied = isReplied;
         this.adminName = adminName;
         this.messageID = messageID;
+        this.serProID = serProID;
     }
 
     public String getReplyMessage() {
@@ -35,6 +38,10 @@ public class ReplyFromAdmin {
 
     public int getMessageID() {
         return messageID;
+    }
+
+    public int getSerProID() {
+        return serProID;
     }
 }
 

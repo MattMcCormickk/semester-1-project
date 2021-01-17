@@ -34,23 +34,24 @@
               <!-- <button class="dropbtn">LOG ACTIVITY <i class="fa fa-caret-down"></i></button> -->
               <div class="dropdown-content">
                   <a href="/ActivityData">For An Event</a>
-                  <a href="/AllUsers"><i class="fa fa-user"></i> For A User</a>
+                  <a href="/AllUsers">For A User</a>
               </div>
           </div>
           <div class="nav-item">
-              <a class="btn" href="/SelectedPage"><i class="fa fa-database"></i> REPORTS</a>
+              <a class="btn" href="/SelectedPage">REPORTS</a>
           </div>
           <!-- <div class="loginButton" id="loginIcon"> -->
               <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#loginSignUpModal"><i class="fa fa-user"></i> LOGIN / SIGN UP</button> -->
               <!-- <a class="btn" href="/login">LOGIN / SIGN UP <i class="fa fa-user"></i></a>
           </div> -->
-            <!-- <div class="nav-item">
+            <div class="nav-item">
                 <a class="btn"><i class="fa fa-user-tie"></i>ADMIN <i class="fa fa-caret-down"></i></a>
+                <!-- <button class="dropbtn">LOG ACTIVITY <i class="fa fa-caret-down"></i></button> -->
                 <div class="dropdown-content">
                     <a href="/ContactAdmin">Contact Admin</a>
                     <a href="/AdminHome">Admin Login</a>
                 </div>
-            </div> -->
+            </div>
 
           <div class="nav-item" id="logoutIcon">
               <a class="btn" id="loggedUser"><i class="fa fa-user"></i> <span sec:authentication="name"></span> <i class="fa fa-caret-down"></i></a>
@@ -58,10 +59,9 @@
               <!-- <button class="dropbtn">LOG ACTIVITY <i class="fa fa-caret-down"></i></button> -->
               <div class="dropdown-content">
                   <!-- <a href="" id="loggedUser"></a> -->
-                  <!-- <a th:href="@{/UpdateProfile/{emailId}(emailId=${#authentication.name})}">Update Profile</a> -->
-                  <a th:href="@{/UpdateProfile/(${#authentication.name})}"><i class="fa fa-user"></i> Update Profile</a>
-                  <a href="/ContactAdmin"><i class="fa fa-envelope icon"></i> Contact Admin</a>
-                  <a href="" class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal"><i class="fa fa-sign-out"></i> LOGOUT</a>
+                   <a th:href="@{/UpdateProfile/{emailId}(emailId=${#authentication.name})}">Update Profile</a>
+                  <a href="" class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal" > LOGOUT</a>
+                  <a href="/ServiceProviderInbox" > Inbox</a>
                   <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#logOutModal"> LOGOUT</button> -->
               </div>
           </div>

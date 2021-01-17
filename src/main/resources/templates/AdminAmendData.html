@@ -15,7 +15,7 @@
     <title>Amend Data</title>
 </head>
 <body>
-
+<header th:replace="fragments/adminHeader :: adminHeader"></header>
 <div class="amendDataWrapper">
     <h3 class="adminTitle">Amend Data</h3>
     <div class="serProSelected"></div>
@@ -48,7 +48,12 @@
             <td th:text="${activity.description}"></td>
             <td th:text="${activity.location}"></td>
             <td th:text="${activity.keyWords}"></td>
-            <td><a th:href="@{/qActByID/{id}(id=${activity.activityID})}" class="btn btn-success" role="button" >Amend Activity Data</a></td>
+            <td><a th:href="@{/ActBySPID
+                    (activityID=${activity.activityID},
+                    activityName=${activity.activityName},
+                    date=${activity.date},
+                    description=${activity.description},
+                    location=${activity.location})}" class="btn btn-success" role="button" >Amend Activity Data</a></td>
         </tr>
         </tbody>
     </table>
