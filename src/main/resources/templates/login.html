@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../soms-style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Login</title>
 </head>
 <body onload="showLoginSignUpModal()">
@@ -125,20 +126,36 @@
       </div>
     </div>
 
+    <!-- Display spinners to show that the page is loading. This is to simulate a real world scenario when the Ajax call takes a few seconds! -->
+    <div class="overlay" id="loader">
+      <div class="spinners">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+
       <script type="text/javascript">
 
   //  This function displays the Login/SignUp modal popup in the custom login page.
         function showLoginSignUpModal() {
           document.getElementById('logoutIcon').style.display = "none";
-          var loginSignUpModal = new bootstrap.Modal(document.getElementById("loginSignUpModal"), {
-            backdrop: 'static', keyboard: false
-          })
-          loginSignUpModal.show();
+          // var loginSignUpModal = new bootstrap.Modal(document.getElementById("loginSignUpModal"), {
+          //   backdrop: 'static', keyboard: false
+          // })
+          // loginSignUpModal.show();
         }
 
   /*  This is the AJAX function invoked when user clicks on 'Register Service Provider'
       This function makes a POST request call to the route /addServiceProvider to register the service provider in the database. */
         function registerServiceProv() {
+            $("#loader").show();  // Display spinners to simulate a page loading scenario
             var name = document.getElementById("name").value;
             var email = document.getElementById("signUpemail").value;
             var telephone = document.getElementById("telephone").value;
@@ -150,7 +167,8 @@
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", '/ServiceProvider', true); // true is asynchronous
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.onreadystatechange = function() {
+            xhttp.onreadystatechange = setTimeout(function() { /* This is to simulate a real world scenario when the Ajax call takes a few seconds!
+                      Show the spinners just before the Ajax call. Delay the Ajax call by 3 seconds and then hide the spinners! */
                 if (xhttp.readyState === 4 && xhttp.status === 200) {
                     console.log(xhttp.responseText);
                     // var modalTitle = document.getElementById("signUpModalTitle");
@@ -158,6 +176,7 @@
                     // modalTitle.style.color = "green";
                     // Initialize the modal to display the confirmation message.
                     // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
+                    $("#loader").hide();  // Hide the spinners
                     var myModal = new bootstrap.Modal(document.getElementById("savedMessage"), {
                       backdrop: 'static', keyboard: false
                     })
@@ -165,7 +184,7 @@
                 } else {
                     console.error(xhttp.statusText);
                 }
-            };
+            }, 3000);
             xhttp.send(params);
             return false;
         }
