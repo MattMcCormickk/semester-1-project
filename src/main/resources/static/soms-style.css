@@ -33,7 +33,7 @@ body h4{
     display: flex;
     float: left;
     /*background-color: #0B3C5D;*/
-    background-color: #660066;
+    /*background-color: #660066;*/
     color: white;
     /*color: black;*/
     width: 100%;
@@ -54,10 +54,6 @@ body h4{
   flex: 6;
   float: left;
   display: flex;
-}
-
-.container-fluid{
-    background-color: #660066;
 }
 
 .soms-footer{
@@ -625,3 +621,126 @@ table tr th td:active {
   background-color: green;
   color: white;
 }
+
+/*admin styling*/
+.header-button {
+    color: white;
+}
+.header-button.collapsed{
+    background-color: grey;
+    color: black;
+}
+.header-button:not(.collapsed) {
+    background-color: #E2FDFF;
+    color: black;
+    transition: background-color 3s ease;
+}
+
+#editDataButton{background-color: #FCDC94;}
+#submitCustomize {
+    background-color: #FCDC94;
+}
+
+/*ADMIN NAVBAR*/
+
+.Nav > *{
+ box-sizing: border-box;
+}
+.Nav {
+    height: 100px;
+    width: 100%;
+    background-color: #121212;
+    position: relative;
+    margin-bottom: 1em;
+}
+
+.Nav > .nav-header {
+    display: inline;
+}
+
+.Nav > .nav-header > .nav-title {
+    display: inline-block;
+    font-size: 22px;
+    color: #fff;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+}
+
+.Nav > .nav-btn {
+    display: none;
+}
+
+.Nav > .nav-links {
+    display: inline;
+    float: right;
+    font-size: 18px;
+}
+
+.Nav > .nav-links > a {
+    display: inline-block;
+    padding: 13px 10px 13px 10px;
+    text-decoration: none;
+    color: #efefef;
+}
+
+.Nav > .nav-links > a:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.Nav > #nav-check {
+    display: none;
+}
+
+@media (max-width:600px) {
+    .Nav > .nav-btn {
+        display: inline-block;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+    .Nav > .nav-btn > label {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        padding: 13px;
+    }
+    .Nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    .Nav > .nav-btn > label > span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 2px solid #eee;
+    }
+    .Nav > .nav-links {
+        position: absolute;
+        display: block;
+        width: 100%;
+        background-color: #333;
+        height: 0px;
+        transition: all 0.3s ease-in;
+        overflow-y: hidden;
+        top: 50px;
+        left: 0px;
+    }
+    .Nav > .nav-links > a {
+        display: block;
+        width: 100%;
+    }
+    .Nav > #nav-check:not(:checked) ~ .nav-links {
+        height: 0px;
+    }
+    .Nav > #nav-check:checked ~ .nav-links {
+        height: calc(100vh - 50px);
+        overflow-y: auto;
+    }
+
+    #admin-header-logo{
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+

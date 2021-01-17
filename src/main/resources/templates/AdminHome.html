@@ -15,7 +15,7 @@
     <title>Admin Home</title>
 </head>
 <body>
-
+<header th:replace="fragments/adminHeader :: adminHeader"></header>
 <main>
     <div class="adminHomeContainer">
         <!--<div th:if="$(not #lists.isEmpty(allMessages)">-->
@@ -41,6 +41,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Message</th>
 
+
                 </tr>
                 </thead>
                 <tbody>
@@ -54,8 +55,9 @@
                     <td><a th:href="@{/message/delete/{id}/(messageid=${message.messageID})}"  class="btn btn-danger" role="button" onclick="deleteMessage()">Delete</a></td>
                     <td><a th:href="@{/message/reply/{id}/(messageid=${message.messageID},
                       messageRecipient=${message.SerProName},
+                      messageRecipientID=${message.SerProID},
                       message=${message.message})}"  class="btn btn-primary" role="button" onclick="sendMessgae()">Reply</a></td>
-                  
+
                 </tr>
                 </tbody>
 
@@ -104,7 +106,7 @@
 
     </div>
 
-    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after registering the activity in the database.  -->
+    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after DELETING A MESSAGE -->
     <div class="modal fade" id="MessageDeleted" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content animate">
@@ -126,107 +128,11 @@
     </div>
 
 
-    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Reply message</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
 
 <script>
-
-$(document).ready(function () {
-
-    $("#replyButton").click(function(){
-         $('#messageModal').modal('show');
-    });
-});
-</script>
-<script>
-
-    // $('#exampleModal').on('show.bs.modal', function (event) {
-    //     var button = $(event.relatedTarget) // Button that triggered the modal
-    //     var recipient = button.data('whatever') // Extract info from data-* attributes
-    //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    //     var modal = $(this)
-    //     modal.find('.modal-title').text('New message to ' + recipient)
-    //     modal.find('.modal-body input').val(recipient)
-    // })
-
-    /*
-    function deleteMessage() { <!--DELETE MESSAGE -->
-        var table = document.getElementById("allMessagesTable"), rIndex;
-        for (var i = 0; i < table.rows.length; i++) {
-            table.rows[i].onclick = function () {
-                rIndex = this.rowIndex;
-                console.log(rIndex);
-
-                var name = rIndex[2];
-                var date = rIndex[1];
-                var email = rIndex[3];
-                var description = rIndex[4];
-                var params = 'name=' + name + '&date=' + date + '&email' + email + '&description' + description;
-                rIndex.remove()
-
-                var xhttp = new XMLHttpRequest();
-                xhttp.open("POST", '/DeleteMessage', true); // true is asynchronous
-                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.onreadystatechange = function() {
-                    if (xhttp.readyState === 4 && xhttp.status === 200) {
-                        console.log(xhttp.responseText);
-                        // Initialize the modal to display the confirmation message.
-                        // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
-                        var myModal = new bootstrap.Modal(document.getElementById("MessageDeleted"), {
-                            backdrop: 'static', keyboard: false
-                        })
-                        myModal.show();   // Display the modal when the AJAX call is successful.
-                    } else {
-                        console.error(xhttp.statusText);
-                    }
-                };
-                xhttp.send(params);
-                return false;
-            }
-
-        }
-    }
-
-     */
-
-
-
-    function replyToMessage(){
-
-    }
+    //function replyToMessage(){}
 
     function findSerPro() { <!--FILTER TABLE BY NAME LIKE ON OTHER PAGES -->
 
