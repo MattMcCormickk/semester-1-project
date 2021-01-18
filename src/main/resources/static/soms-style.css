@@ -315,8 +315,11 @@ table tr th td:active {
 }
 .titleAndSearch h1 {
   width: 300px;
+  text-align: center;
 }
-
+.titleAndSearch .search-text {
+  width: 50%;
+}
 .tablesAndCards {
     display: inline-flex;
     float: left;
@@ -592,10 +595,10 @@ table tr th td:active {
 .accordion-collapse.collapse.show {
   /* background-image: linear-gradient(grey, #4B4848); */
   /* background-image: linear-gradient(#4B4848, grey); */
-  /* background-color: #4B4848;
-  color: white; */
-  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
-  color: black;
+  background-color: #4B4848;
+  color: white;
+  /* background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+  color: black; */
   /* transition: background-color 1s ease; */
   /* transition: color 1s ease; */
 }
@@ -725,9 +728,13 @@ table tr th td:active {
 #downloadButton {
   background-color: darkorange;
   color: black;
-  width: 20%;
+  width: 30%;
 }
 #downloadButton:hover {
   background-color: green;
   color: white;
+}
+.homePage {
+  background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
+  color: black;
 }
