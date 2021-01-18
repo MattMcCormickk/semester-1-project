@@ -6,6 +6,7 @@ import com.clientproject.soms.wellbeing.model.ServiceProviderCountMapper;
 import com.clientproject.soms.wellbeing.model.ServiceProviderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Types;
@@ -48,4 +49,52 @@ public class ServiceProviderRepositoryJDBC implements ServiceProviderRepository 
                 new Object[]{email}, new ServiceProviderCountMapper());
     }
 
+    @Override
+    public List<ServiceProviderDTO> findAllSerPro() {
+        return template.query(
+                "select SERV_PROV_ID, NAME, EMAIL,TELEPHONE,ADDRESS,POST_CODE,COMP_HSE_ID from soms_wellbeing.service_provider",
+                new ServiceProviderMapper()
+        );
+    }
+
+    @Override
+    public ServiceProviderDTO findServiceProviderByEmail(String email) {
+        ServiceProviderDTO serviceProviderDTO = (ServiceProviderDTO) template.queryForObject("Select NAME, EMAIL,TELEPHONE,ADDRESS,POST_CODE,COMP_HSE_ID from soms_wellbeing.SERVICE_PROVIDER where EMAIL = ?",
+                new Object[]{email},new ServiceProviderMapper());
+        return serviceProviderDTO;
+    }
+
+    @Override
+    public int findServiceProviderIDByEmail(String email) {
+        ServiceProviderDTO serviceProviderDTO = (ServiceProviderDTO) template.queryForObject("Select SERV_PROV_ID, NAME, EMAIL,TELEPHONE,ADDRESS,POST_CODE,COMP_HSE_ID from soms_wellbeing.SERVICE_PROVIDER where EMAIL = ?",
+                new Object[]{email},new ServiceProviderMapper());
+        int serProID = serviceProviderDTO.getSerProID();
+        return serProID;
+    }
+
+
+
+    @Override
+    public boolean updateServiceProviderByEmail(ServiceProviderDTO serviceProviderDTO) {
+
+        int types[] = new int[] {
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR
+        };
+
+        int rows = template.update(
+                "UPDATE soms_wellbeing.SERVICE_PROVIDER SET NAME = ?, TELEPHONE = ?, ADDRESS= ?, POST_CODE= ?, COMP_HSE_ID= ? where EMAIL = ?",
+                new Object[]{serviceProviderDTO.getName(),
+                        serviceProviderDTO.getTelephone(), serviceProviderDTO.getAddress(),
+                        serviceProviderDTO.getPostcode(), serviceProviderDTO.getCompaniesHouseId(),serviceProviderDTO.getEmail()},types
+        ) ;
+        return rows>0;
+    }
+
+
 }
+

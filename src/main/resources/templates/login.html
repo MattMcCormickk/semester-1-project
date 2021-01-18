@@ -63,8 +63,8 @@
                   </div>
                   <div class="col">
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="signUpemail" placeholder="Email" name="signUpemail" required>
-                        <label for="signUpemail"><i class="fa fa-envelope icon"></i> Email</label>
+                        <input type="email" class="form-control" id="signUpEmail" placeholder="Email" name="signUpEmail" required>
+                        <label for="signUpEmail"><i class="fa fa-envelope icon"></i> Email</label>
                     </div>
                   </div>
                 </div>
@@ -157,7 +157,7 @@
         function registerServiceProv() {
             $("#loader").show();  // Display spinners to simulate a page loading scenario
             var name = document.getElementById("name").value;
-            var email = document.getElementById("signUpemail").value;
+            var email = document.getElementById("signUpEmail").value;
             var telephone = document.getElementById("telephone").value;
             var address = document.getElementById("address").value;
             var postcode = document.getElementById("postcode").value;
@@ -202,28 +202,50 @@
           console.log(email);
           var params = 'email=' + email;
           console.log(params);
-          var xhttp = new XMLHttpRequest();
-          xhttp.open("POST", '/checkIfServiceProviderExists', false); // true is asynchronous
-          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xhttp.onreadystatechange = function() {
+
+          if(email === "admin@admin") {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", '/checkIfAdmin', false); // true is asynchronous
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.onreadystatechange = function () {
               if (xhttp.readyState === 4 && xhttp.status === 200 && xhttp.responseText === "Login is successful") {
+                console.log(xhttp.responseText);
+                document.getElementById("userExists").innerHTML = xhttp.responseText;
+              }
+              xhttp.send(params);
+              if (document.getElementById("userExists").innerHTML === "Login is successful") {
+                return true;    // if service provider is registered in the database, then proceed to authenticate
+              } else {
+                return false;   // if service provider is not registered in the database, then display error message
+              }
+            }
+          }
+
+          else
+            {
+              var xhttp = new XMLHttpRequest();
+              xhttp.open("POST", '/checkIfServiceProviderExists', false); // true is asynchronous
+              xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              xhttp.onreadystatechange = function () {
+                if (xhttp.readyState === 4 && xhttp.status === 200 && xhttp.responseText === "Login is successful") {
                   console.log(xhttp.responseText);
                   document.getElementById("userExists").innerHTML = xhttp.responseText;
                   // document.getElementById("loginModalTitle").style.color = "white";
-              } else {
+                } else {
                   console.log(xhttp.responseText);
                   console.error(xhttp.statusText);
                   document.getElementById("loginModalTitle").innerHTML = "Sorry, this service provider is not registered!";
                   // document.getElementById("loginModalTitle").innerHTML = xhttp.responseText;
                   document.getElementById("loginModalTitle").style.color = "orange";
+                }
+              };
+              xhttp.send(params);
+              if (document.getElementById("userExists").innerHTML === "Login is successful") {
+                return true;    // if service provider is registered in the database, then proceed to authenticate
+              } else {
+                return false;   // if service provider is not registered in the database, then display error message
               }
-          };
-          xhttp.send(params);
-          if(document.getElementById("userExists").innerHTML === "Login is successful") {
-            return true;    // if service provider is registered in the database, then proceed to authenticate
-          } else {
-            return false;   // if service provider is not registered in the database, then display error message
-          }
+            }
         }
       </script>
 

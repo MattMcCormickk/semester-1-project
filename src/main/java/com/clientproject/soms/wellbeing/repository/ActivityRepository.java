@@ -15,4 +15,5 @@ public interface ActivityRepository {
     public Object findAllActivity();
     boolean saveCustomizedActivity(CustomizeActivity customizeActivity);
     public CustomActivityDTO getCustomMetrics(String activityId);
+    public Object findAllActivityBySerPro(int serProID);
 }
