@@ -12,7 +12,6 @@ public interface ServiceProviderRepository {
     public Object findServiceProviderByEmail(String Email);
     public int findServiceProviderIDByEmail(String Email);
     boolean updateServiceProviderByEmail(ServiceProviderDTO serviceProviderDTO);
-    public List<ServiceProviderCountDTO> checkIfServiceProviderExists(String email);
     public Object findAllSerPro();
 }
 

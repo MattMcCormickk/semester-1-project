@@ -59,7 +59,7 @@ public class ServiceProviderRepositoryJDBC implements ServiceProviderRepository 
 
     @Override
     public ServiceProviderDTO findServiceProviderByEmail(String email) {
-        ServiceProviderDTO serviceProviderDTO = (ServiceProviderDTO) template.queryForObject("Select NAME, EMAIL,TELEPHONE,ADDRESS,POST_CODE,COMP_HSE_ID from soms_wellbeing.SERVICE_PROVIDER where EMAIL = ?",
+        ServiceProviderDTO serviceProviderDTO = (ServiceProviderDTO) template.queryForObject("Select SERV_PROV_ID, NAME, EMAIL,TELEPHONE,ADDRESS,POST_CODE,COMP_HSE_ID from soms_wellbeing.SERVICE_PROVIDER where EMAIL = ?",
                 new Object[]{email},new ServiceProviderMapper());
         return serviceProviderDTO;
     }

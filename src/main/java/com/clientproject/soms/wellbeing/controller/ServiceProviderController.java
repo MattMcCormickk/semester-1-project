@@ -5,6 +5,7 @@ import com.clientproject.soms.wellbeing.repository.ServiceProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 
@@ -51,8 +52,8 @@ public class ServiceProviderController {
     }
 
 
-    @RequestMapping(path = "/UpdateProfile/{emailId}", method = RequestMethod.GET)
-    public ModelAndView queryServiceProviderByEmail(@PathVariable("emailId") String email){
+    @RequestMapping(path = "/UpdateProfile", method = RequestMethod.GET)
+    public ModelAndView queryServiceProviderByEmail(@RequestParam("emailId") String email){
         ModelAndView mav = new ModelAndView();
         mav.addObject("ServiceProvider",serviceProviderRepository.findServiceProviderByEmail(email));
         mav.setViewName("UpdateProfile");
@@ -67,7 +68,7 @@ public class ServiceProviderController {
                                      @RequestParam(value = "postcode") String postcode,
                                      @RequestParam(value = "companiesHouseId") String companiesHouseId) throws ParseException {
 
-        ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO(name, email, telephone, address, postcode, companiesHouseId);
+        ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO(1, name, email, telephone, address, postcode, companiesHouseId);
         String response = "";
         if (serviceProviderRepository.updateServiceProviderByEmail(serviceProviderDTO)) {
             System.out.println("update service provider");
