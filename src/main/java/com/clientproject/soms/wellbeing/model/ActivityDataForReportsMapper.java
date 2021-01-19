@@ -21,6 +21,8 @@ public class ActivityDataForReportsMapper implements RowMapper {
                 rs.getInt("CUST_VALUE_2"),
                 rs.getString("CUST_METRIC_1"),
                 rs.getString("CUST_METRIC_2"),
-                rs.getDate("ACTIVITY_DATE"));
+                rs.getDate("ACTIVITY_DATE"),
+                rs.getString("USER_NAME"));
+
     }
 }

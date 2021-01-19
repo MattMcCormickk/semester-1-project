@@ -17,14 +17,24 @@
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
             crossorigin="anonymous"></script>
     <title>Dashboard</title>
+    <style>
+        .center-block{
+            width: 100%;
+            height: 200px;
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 <header th:replace="fragments/header :: header"></header>
 <div class="flexDashboard">
     <main>
         <form class="center-block">
-            <a type="submit" class="btn btn-primary" href="/allActivities">Display Activity By Event</a>
-            <a type="submit" class="btn btn-primary" href="selectByUser">Display Activity By User</a>
+            <a type="submit" class="btn btn-primary" href="/allActivities" style="margin-right: 10px">Display Activity By Event</a>
+            <a type="submit" class="btn btn-primary" href="/selectByUser">Display Activity By User</a>
         </form>
     </main>
 </div>
