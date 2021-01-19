@@ -42,7 +42,9 @@ public class ReportRepositoryJDBC implements ReportRepository{
                 Types.INTEGER
         };
 
-        return jdbcTemplate.query("select * from soms_wellbeing.activity_data where USER_ID=?",new Object[]{uID},type,
+        return jdbcTemplate.query("select T1.*, CONCAT(T2.FIRST_NAME, ' ', T2.LAST_NAME) AS USER_NAME from soms_wellbeing.activity_data T1, SOMS_WELLBEING.USER T2 \n" +
+                        "where T1.USER_ID= T2.USER_ID\n" +
+                        "AND T1.USER_ID=?",new Object[]{uID},type,
                 new ActivityDataForReportsMapper());
     }
 

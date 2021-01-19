@@ -13,8 +13,9 @@ public class ActivityDataForReportsDTO {
     private String cusMetricOne;
     private String cusMetricTwo;
     private Date date;
+    private String userName;
 
-    public ActivityDataForReportsDTO(int activityID, int servProID, int userID, int numOfVol, int numOfHours, int cusValueOne, int cusValueTwo, String cusMetricOne, String cusMetricTwo, Date date) {
+    public ActivityDataForReportsDTO(int activityID, int servProID, int userID, int numOfVol, int numOfHours, int cusValueOne, int cusValueTwo, String cusMetricOne, String cusMetricTwo, Date date, String userName) {
         this.activityID = activityID;
         this.servProID = servProID;
         this.userID = userID;
@@ -25,6 +26,7 @@ public class ActivityDataForReportsDTO {
         this.cusMetricOne = cusMetricOne;
         this.cusMetricTwo = cusMetricTwo;
         this.date = date;
+        this.userName = userName;
     }
 
     public int getActivityID() {
@@ -65,5 +67,9 @@ public class ActivityDataForReportsDTO {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 }
