@@ -17,15 +17,15 @@
 <body>
 <header th:replace="fragments/adminHeader :: adminHeader"></header>
 <main>
-    <div class="accordionsContainer">
-        <div class="accordion accordion-flush" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button header-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Selected Activity
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+
+    <div class="adminTitleDiv">
+        <h1 class="adminTitle">Selected Activity</h1>
+      </div>
+
+        <div class="accordionsContainer">
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <div id="collapsable1" class="accordion-collapse collapse show" aria-labelledby="headingOne">
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col" style="max-width:7%">
@@ -59,7 +59,7 @@
                     </button>
                 </h2>
 
-                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+                <div id="collapsable2" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-5">
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-2">
                                 <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
-                                    <button onclick="updateActivity()" class="btn btn-success" type="button" id="editDataButton"><i class="fa fa-pencil-square-o"></i> Edit Selected</button>
+                                    <button onclick="updateActivity()" class="btn btn-primary" type="button" id="editDataButton"><i class="fa fa-pencil-square-o"></i> Edit Selected</button>
                                 </div>
 
                             </div>

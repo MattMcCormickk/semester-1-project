@@ -11,13 +11,18 @@
 
     <link rel="stylesheet" href="../soms-style.css">
     <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
     <title>Amend Data</title>
 </head>
 <body>
 <header th:replace="fragments/adminHeader :: adminHeader"></header>
 <div class="amendDataWrapper">
-    <h3 class="adminTitle">Amend Data</h3>
+  <div class="adminTitleDiv">
+    <h1 class="adminTitle">Amend Data</h1>
+  </div>
     <div class="serProSelected"></div>
     <label for="serProName">Service Provider Name</label>
     <input type="text" class="form-control" id="serProName" name="serProName" th:value="${serProName}" readonly>
@@ -26,7 +31,7 @@
 </div>
 
     <!-- bring up activities table based on filtering data by selected service provider's id -->
-
+    <div class="SPActivityTableWrapper">
         <table class="table table-striped" id="SP-activity-table">
             <thead>
             <tr>
@@ -36,6 +41,7 @@
                 <th>Description</th>
                 <th>Location</th>
                 <th>Keywords</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -53,15 +59,18 @@
                     activityName=${activity.activityName},
                     date=${activity.date},
                     description=${activity.description},
-                    location=${activity.location})}" class="btn btn-success" role="button" >Amend Activity Data</a></td>
+                    location=${activity.location})}" class="btn btn-success" id="selectBtn" role="button" >Amend Activity Data</a></td>
         </tr>
         </tbody>
     </table>
-
-
-
-
+    </div>>
 </div>
+
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#SP-activity-table').DataTable();
+    } );
+</script>
 
     <footer th:replace="fragments/footer :: footer"></footer>
 </body>
