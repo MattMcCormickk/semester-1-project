@@ -745,3 +745,19 @@ table tr th td:active {
 #changeActivityTable {
     color: white;
 }
+.updateProfile {
+    background-image: linear-gradient(teal, black);
+    margin-left: 400px;
+    margin-right: 400px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+.updateProfile form {
+    padding-top: 20px;
+}
+.updateProfile h5{
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+}
