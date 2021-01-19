@@ -755,10 +755,10 @@ table tr th td:active {
     transition: background-color 3s ease;
 }
 
-#editDataButton{background-color: #FCDC94;}
-#submitCustomize {
-    background-color: #FCDC94;
+#editDataButton{background-color: #FCDC94;
+  margin-top: 15em;
 }
+
 
 /*ADMIN NAVBAR*/
 
@@ -860,4 +860,7 @@ table tr th td:active {
         width: 100%;
         object-fit: contain;
     }
+}
+#changeActivityTable {
+    color: white;
 }

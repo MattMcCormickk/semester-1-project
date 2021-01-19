@@ -63,31 +63,45 @@
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-5">
-                                <table class="table" id="activityInpTable">
+                                <table class="table" id="changeActivityTable">
                                     <col style="width:10%">
-                                    <col style="width:90%">
+                                    <col style="width:60%">
+                                    <col style="width:30%">
                                     <thead>
                                     <tr>
                                         <th scope="col"><input class="form-check-input" type="checkbox" name="selectAllInp" id="selectAllInp"></th>
                                         <th scope="col">Select All Values</th>
+                                        <th scope="col">Edit Values</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="nameCheck"></td>
-                                        <td>Activity Name<td>
+                                        <td>Activity Name</td>
+                                        <td> <form class="editDataForm"><input th:value="${activityName}" type="text" class="form-control" id="Act-Name" placeholder="Activity name" name="Act-Name">
+                                            <label for="Act-Name"></label>
+                                        </form></td>
                                     </tr>
                                     <tr>
-                                        <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="idCheck"></td>
+                                        <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="locationCheck"></td>
                                         <td>Location</td>
+                                        <td> <form class="editDataForm"><input th:value="${location}" type="text" class="form-control" id="Location" placeholder="Location" name="Location">
+                                              <label for="Location"></label>
+                                            </form></td>
                                     </tr>
-                                                                        <tr>
+                                    <tr>
                                         <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="descriptionCheck"></td>
                                         <td>Description</td>
+                                        <td> <form class="editDataForm"><input th:value="${description}" type="text" class="form-control" id="Description" placeholder="Description" name="Description">
+                                              <label for="Description"></label>
+                                            </form></td>
                                     </tr>
                                                                         <tr>
                                         <td><input class="form-check-input" type="checkbox" name="selectInpCheck" id="dateCheck"></td>
                                         <td>Date</td>
+                                        <td> <form class="editDataForm"><input th:value="${activityDate}" type="date" class="form-control" id="date" placeholder="date" name="date">
+                                              <label for="date"></label>
+                                            </form></td>
                                     </tr>
 
                                     </tbody>
@@ -95,7 +109,7 @@
                             </div>
                             <div class="col-2">
                                 <div class="d-grid gap-2 col-8 mx-auto" style="margin-top:40px">
-                                    <button class="btn btn-success" type="button" id="editDataButton"><i class="fa fa-pencil-square-o"></i> Edit Selected</button>
+                                    <button onclick="updateActivity()" class="btn btn-success" type="button" id="editDataButton"><i class="fa fa-pencil-square-o"></i> Edit Selected</button>
                                 </div>
 
                             </div>
@@ -105,53 +119,83 @@
             </div>
             </div>
         </div>
-        <div id="submitAdminActivityDataBtn">
-        <button type="submit" class="btn btn-success" id="submitCustomize">Submit</button>
+    </div>
+
+    <div class="modal fade" id="Editmessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Updated Activity!</h5>
+                    <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    Successfully Updated Activity!
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <!-- Added a custom button to close the modal. -->
+                    <a href="" class="btn btn-secondary" role="button" id="modalButton">Close</a>
+                </div>
+            </div>
         </div>
     </div>
 
 </main>
 <script type="text/javascript">
+//select all check boxes function
 $(function() {
-    $("#activityInpTable #selectAllInp").click(function () {
+    $("#changeActivityTable #selectAllInp").click(function () {
         if (this.checked) {
-            $("#activityInpTable .form-check-input").prop("checked", true);
+            $("#changeActivityTable .form-check-input").prop("checked", true);
         } else {
-            $("#activityInpTable .form-check-input").prop("checked", false);
+            $("#changeActivityTable .form-check-input").prop("checked", false);
         }
     });
 });
 
-/*
-//MULTIPLE SELECTED
-$(function() {
-    $("#editDataButton").on("click", function() {
-        var selectedRows = $("#activityInpTable input:checked").parents("tr").not("thead tr").val();
-        if (selectedRows =="exportpack"){
-            $('#<%= lblVessel.ClientID %>').text("NewText")
-        }
-        $(".form-check-input").prop("checked", false);
-    });
+
+function updateActivity(){
+
+    var name = document.getElementById("Act-Name").value;
+    var location = document.getElementById("Location").value;
+    var description = document.getElementById("Description").value;
+    var date = document.getElementById("date").value;
+    var activityID = document.getElementById("activityId").value;
+    activityID = activityID.toString();
+
+    var params = 'name=' + name + '&date=' + date + '&location=' + location + '&description=' + description + '&activityID=' + activityID;
+
+    console.log(params);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", '/ChangeValues', true); // true is asynchronous
+
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+                console.log(xhttp.responseText);
+                // Initialize the modal to display the confirmation message.
+                // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
+                var myModal = new bootstrap.Modal(document.getElementById("Editmessage"), {
+                    backdrop: 'static', keyboard: false
+                })
+                myModal.show();   // Display the modal when the AJAX call is successful.
+            } else {
+                console.error(xhttp.statusText);
+            }
+        };
+        xhttp.send(params);
+        return false;
+
+}
+$('#modalButton').click(function() {
+    window.location.href = '/AdminHome';
+    return false;
 });
-*/
-
-
-//ONE SELECTED
-$(function() {
-    $("#editDataButton").on("click", function() {
-        var selectedRow = $("#activityInpTable input:checked").parents("tr").not("thead tr");
-        console.log(selectedRow.val());
-        if (selectedRow.attr('nameCheck')){
-            $('#activityName').empty()
-            //$('#lblVesselName').val("new value")
-        }
-        $(".form-check-input").prop("checked", false);
-    });
-});
-
-
-
-
-
 </script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>

@@ -3,6 +3,7 @@ package com.clientproject.soms.wellbeing.controller;
 import com.clientproject.soms.wellbeing.DTO.ContactAdminDTO;
 import com.clientproject.soms.wellbeing.DTO.ServiceProviderDTO;
 import com.clientproject.soms.wellbeing.form.ContactAdmin;
+import com.clientproject.soms.wellbeing.form.CreateActivity;
 import com.clientproject.soms.wellbeing.form.ReplyFromAdmin;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import com.clientproject.soms.wellbeing.repository.AdminRepository;
@@ -133,6 +134,26 @@ public class AdminController {
         return response;
 
     }
+
+    //updates activity on admin edit data page
+    @RequestMapping(value= "/ChangeValues", method = RequestMethod.POST)
+    public String changeActivityValues(@RequestParam(value = "name") String activityName,
+                                    @RequestParam(value = "date") String activityDate,
+                                    @RequestParam(value = "location") String location,
+                                    @RequestParam(value = "description") String description,
+                                       @RequestParam(value = "activityID") String activityID) throws ParseException {
+
+        CreateActivity createActivity = new CreateActivity(activityName, activityDate, description, location, activityID);
+        String response = "";
+        if (actRepo.updateActivity(createActivity)) {
+            System.out.println("updated activity");
+            response = "Successfully updated the activity!!";
+        }
+        return response;
+    }
+
+
+
     //reply button click on admin home page
     @RequestMapping(path = "/message/reply/{id}/", method = RequestMethod.GET)
     public ModelAndView sendReply(@RequestParam(value = "messageRecipient") String name,
