@@ -544,10 +544,11 @@ table tr th td:active {
     width: 200px;
 }
 .contactTable{
-    width: 45%;
+    width: 53%;
     float: left;
     position: relative;
     background-color: #eeeeee;
+    padding: 1em;
 }
 .selectSPwrapper{
     width: 45%;
@@ -569,19 +570,10 @@ table tr th td:active {
 #serProID{text-align: center;}
 #serProName{text-align: center;}
 
-.adminTitle{
-    text-align: center;
-    padding-top: 1em;
-    padding-bottom: 1em;
-}
-
 .btn-close:hover {
   background-color: white;
 }
-/* .accordion {
-  background-image: linear-gradient(maroon, #B82601);
-  color: white;
-} */
+
 .accordion-button {
   color: white;
 }
@@ -742,9 +734,9 @@ table tr th td:active {
 }
 
 /*admin styling*/
-.header-button {
+/* .header-button {
     color: white;
-}
+} */
 .header-button.collapsed{
     background-color: grey;
     color: black;
@@ -862,7 +854,59 @@ table tr th td:active {
     }
 }
 #changeActivityTable {
-    color: white;
+  color: black;
+  background-color: #eeeeee;
+}
+
+#messageID, #recipName, #OGmessage{text-align: center;}
+
+.AdminReplyContainer{
+  text-align: center;
+  padding: 1em;
+}
+
+.AdminReplyForm{
+  padding-top: 1em;
+}
+
+#SP-activity-table{
+margin-left: 2em;
+width: 96%;}
+
+.adminTitleDiv{
+  width: 100%;
+  height: 6em;
+  background-color: #E2FDFF;
+  margin-bottom: 1em;
+}
+
+.adminTitle{
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-size: 30px;
+}
+
+#replyBtn, #selectBtn, #sendReplyBtn, #editDataButton{
+  color: black;
+  background-color: #E2FDFF;
+}
+
+#deletBtn{
+  color: black;
+  background-color: #FFF2F9;
+
+}
+
+#collapsable1, #collapsable2{
+  color: black;
+  background-color: #eeeeee;
+}
+
+#SPActivityTableWrapper{
+    padding-left: 3em;
+    padding-right: 3em;
+    width: 90%;
 }
 .updateProfile {
     background-image: linear-gradient(teal, black);
