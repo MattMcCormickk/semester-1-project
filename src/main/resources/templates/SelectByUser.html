@@ -44,6 +44,7 @@
                      <td><a th:href="@{/qActByUserID/{id}(id=${user.userId})}" class="btn btn-success" role="button">Display Activity Data</a></td>
                 </tr>
             </table>
+            <a th:href="@{/SelectedPage}" class="btn btn-success" role="button" >Back</a>
         </div>
         </div>
     </div>
@@ -61,7 +62,7 @@
 
         //Loop through the table rows and hide those who don't match the search filter
         for (var i = 0; i < row.length; i++) {
-            data = row[i].getElementsByTagName("td")[2];
+            data = row[i].getElementsByTagName("td")[1];
             if (data) {
                 textVal = data.textContent || data.innerText;
                 if (textVal.toUpperCase().indexOf(searchFilter) > -1) {

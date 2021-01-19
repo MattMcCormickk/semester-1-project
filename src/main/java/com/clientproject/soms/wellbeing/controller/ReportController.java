@@ -1,6 +1,7 @@
 package com.clientproject.soms.wellbeing.controller;
 
 import com.clientproject.soms.wellbeing.DTO.ActivityDataDTO;
+import com.clientproject.soms.wellbeing.DTO.ActivityDataForReportsDTO;
 import com.clientproject.soms.wellbeing.DTO.UserDTO;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import com.clientproject.soms.wellbeing.repository.ReportRepository;
@@ -74,8 +75,16 @@ public class ReportController {
     @RequestMapping(value = "qActByUserID/{id}",method = RequestMethod.GET)
     public ModelAndView queryActivityDataByUserID(@PathVariable("id")int id){
         ModelAndView mav = new ModelAndView();
-        mav.addObject("queryByID",reportRepository.queryActivityByUserID(id));
-        mav.setViewName("ActivityData");
+        List userData = (List) reportRepository.queryActivityByUserID(id);
+        if(userData.isEmpty()){
+            mav.setViewName("NullActivityDetail");
+        }else {
+            ActivityDataForReportsDTO activityDataForReportsDTO = (ActivityDataForReportsDTO)userData.get(1);
+            mav.addObject("userName",activityDataForReportsDTO.getUserName());
+            mav.addObject("user", id);
+            mav.addObject("queryByID",reportRepository.queryActivityByUserID(id));
+            mav.setViewName("ActivityData");
+        }
         return mav;
     }
 }

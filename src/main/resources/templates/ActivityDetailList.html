@@ -23,30 +23,38 @@
 <header th:replace="fragments/header :: header"></header>
 <div class="flexDashboard">
     <main>
-        <div class="row g-3">
-            <div class="search-text">
-                <span class="fa fa-search search-icon"></span>
-                <input type="text" id="searchUserName" class="form-control" placeholder="Search for Name" onkeyup="searchUser()">
-            </div>
-            <label for="activityID">Activity ID:</label>
-            <div class="col-sm-3" >
+        <div class="row">
+            <div class="col" >
+                <label for="activityID">Activity ID:</label>
                 <input class="form-control" id="activityID" type="text" th:value="${activityID}" readonly>
             </div>
-            <label for="activityName">Activity Name:</label>
-            <div class="col-sm-3">
+            <div class="col">
+                <label for="activityName">Activity Name:</label>
                 <input class="form-control" id="activityName" type="text" th:value="${activityName}" readonly>
             </div>
-            <label for="averageBagPerUser">Average bags:</label>
-            <div class="col-sm-3" >
+            <div class="col">
+                <label for="activityDescription">Activity Description:</label>
+                <input class="form-control" id="activityDescription" type="text" th:value="${activityDescription}" readonly>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="averageBagPerUser">Average bags:</label>
                 <input class="form-control" id="averageBagPerUser" type="text" th:value="${averageBagPerUser}" readonly>
             </div>
-            <label for="averageHoursPerUser">Average Hours:</label>
-            <div class="col-sm-3" >
+            <div class="col" >
+                <label for="averageHoursPerUser">Average Hours:</label>
                 <input class="form-control" id="averageHoursPerUser" type="text" th:value="${averageHoursPerUser}" readonly>
             </div>
-            <label for="activityDescription">Activity Description:</label>
-            <div class="col-sm-4">
-                    <input class="form-control" id="activityDescription" type="text" th:value="${activityDescription}" readonly>
+        </div>
+        <div class="search-bar" style="margin-top:10px">
+            <div class="row">
+                <div class="col" >
+                    <div class="search-text">
+                        <span class="fa fa-search search-icon"></span>
+                        <input type="text" id="searchUserName" class="form-control" placeholder="Search for Name" onkeyup="searchUser()">
+                    </div>
+                </div>
             </div>
         </div>
         <table class="table table-striped" id="allActivityDataTable">

@@ -22,6 +22,17 @@
 <header th:replace="fragments/header :: header"></header>
 <div class="flexDashboard">
     <main>
+        <div class ="row">
+            <div class="col">
+                <label for="userId">User ID</label>
+                <input type="text" class="form-control" id="userId" name="userId" th:value="${user}" readonly>
+            </div>
+            <div class="col">
+                <label for="userName">User Name:</label>
+                <input type="text" class="form-control" id="userName" name="userId" th:value="${userName}" readonly>
+            </div>
+        </div>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -52,6 +63,7 @@
             </tr>
             </tbody>
         </table>
+        <a th:href="@{/selectByUser}" class="btn btn-success" role="button" >Back</a>
     </main>
 
 </div>
