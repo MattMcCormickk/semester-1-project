@@ -114,5 +114,26 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
         return (List<ActivityDTO>) activityDTO;
     }
 
+    @Override
+    public boolean updateActivity(CreateActivity createActivity) throws ParseException {
+        int types[] = new int[] {
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.DATE,
+                Types.INTEGER
+        };
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = format.parse(createActivity.getActivityDate());
+
+        int activityID = Integer.parseInt(createActivity.getKeywords());
+
+        int rows = template.update(
+                "update soms_wellbeing.ACTIVITY SET ACTIVITY_NAME = ?, DESCRIPTION = ?, LOCATION = ?, ACTIVITY_DATE = ? where ACTIVITY_ID = ?",
+
+                new Object[]{createActivity.getActivityName(), createActivity.getDescription(), createActivity.getLocation(), date, activityID}, types);
+        return rows > 0;
+    }
 
 }
