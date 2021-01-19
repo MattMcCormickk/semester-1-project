@@ -78,8 +78,9 @@ public class GeneralController {
     }
 
     @RequestMapping("/UpdateProfile")
-    public String UpdateProfile(){
+    public String UpdateProfile() {
         return "UpdateProfile";
+    }
 
     @RequestMapping("/SelectedPage")
     public String selectPage(){

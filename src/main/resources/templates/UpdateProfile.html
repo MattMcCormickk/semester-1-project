@@ -15,56 +15,56 @@
 <header th:replace="fragments/header :: header"></header>
 <main>
 
-
-    <form action="" method="" onsubmit="return updateServiceProv()">
-        <h5 id="signUpModalTitle"></h5>
-        <div class="row">
-            <div class="col">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="name" th:value="${ServiceProvider.name}" name="name" required>
-                    <label for="name"><i class="fa fa-user icon"></i> Name</label>
+    <div class="updateProfile">
+        <h5 id="Title">Update Service Provider</h5>
+        <form action="" method="" onsubmit="return updateServiceProv()">
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" th:value="${ServiceProvider.name}" name="name" required>
+                        <label for="name"><i class="fa fa-user icon"></i> Name</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" th:value="${ServiceProvider.email}" name="email" disabled>
+                        <label for="email"><i class="fa fa-envelope icon"></i> Email</label>
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="email" th:value="${ServiceProvider.email}" name="email" disabled>
-                    <label for="email"><i class="fa fa-envelope icon"></i> Email</label>
+            <div class="row">
+                <div class="col-8">
+                    <div class="form-floating mb-3">
+                        <!--                    <textarea name="address" id="address" class="form-control" th:value="${ServiceProvider.address}" style="height: 100px" required></textarea>-->
+                        <input type="text" class="form-control" id="address" th:value="${ServiceProvider.address}" name="address" required>
+                        <label for="address"><i class="fa fa-map-marker icon"></i> Address</label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="postcode" th:value="${ServiceProvider.postcode}" name="postcode" required>
+                        <label for="postcode"><i class="fa fa-map-marker icon"></i> Post Code</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-8">
-                <div class="form-floating mb-3">
-<!--                    <textarea name="address" id="address" class="form-control" th:value="${ServiceProvider.address}" style="height: 100px" required></textarea>-->
-                    <input type="text" class="form-control" id="address" th:value="${ServiceProvider.address}" name="address" required>
-                    <label for="address"><i class="fa fa-map-marker icon"></i> Address</label>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="telephone" th:value="${ServiceProvider.telephone}" name="telephone" required>
+                        <label for="telephone"><i class="fa fa-phone icon"></i> Telephone</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="companiesHouseId" th:value="${ServiceProvider.companiesHouseId}" name="companiesHouseId" required>
+                        <label for="companiesHouseId"><i class="fa fa-building icon"></i> Companies House Id</label>
+                    </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="postcode" th:value="${ServiceProvider.postcode}" name="postcode" required>
-                    <label for="postcode"><i class="fa fa-map-marker icon"></i> Post Code</label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="telephone" th:value="${ServiceProvider.telephone}" name="telephone" required>
-                    <label for="telephone"><i class="fa fa-phone icon"></i> Telephone</label>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="companiesHouseId" th:value="${ServiceProvider.companiesHouseId}" name="companiesHouseId" required>
-                    <label for="companiesHouseId"><i class="fa fa-building icon"></i> Companies House Id</label>
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary" id="registerButton">Update Service Provider</button>
-    </form>
-
+            <button type="submit" class="btn btn-primary" id="registerButton" style="margin-left:400px">Update Service Provider</button>
+        </form>
     </div>
+    <!-- </div> -->
 
 </main>
 
