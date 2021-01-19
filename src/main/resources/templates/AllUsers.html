@@ -45,7 +45,7 @@
                 </tr>
             </table>
         </div>
-        <div class="cardsContainer" id="cards">
+        <div class="userCardsContainer" id="cards">
             <div class="card w-60" id="userCard">
                 <div class="card-header">Selected User</div>
                 <div class="card-body">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" class="btn" id="submitButton">Select User</button>
+                            <button type="submit" class="btn" id="selectUserButton">Select User</button>
                             <!-- <a href="/CaptureActivityForUser" class="btn btn-warning" role="button" id="captureButton">Capture Activity</a> -->
                         </div>
                     </form>
@@ -119,12 +119,16 @@
                 document.getElementById("userEmail").value = userEmail;
                 // console.log("Selected user is " + userId + " " + userName + " " + userEmail);
                 for (var i = 0; i < table.rows.length; i++) {
-                    table.rows[i].style.backgroundColor = "white";
+                    // table.rows[i].style.backgroundColor = "white";
+                    table.rows[i].style.background = "linear-gradient(to top left, #006666 0%, #ff9933 100%)";
                     table.rows[i].style.color = "black";
                 }
                 var selectedRow = table.getElementsByTagName('tr')[rIndex];
-                selectedRow.style.backgroundColor = "#B82601";
-                selectedRow.style.color = "white";
+                // selectedRow.style.backgroundColor = "#B82601";
+                // selectedRow.style.color = "white";
+                selectedRow.style.background = "none";
+                selectedRow.style.backgroundColor = "darkorange";
+                selectedRow.style.color = "black";
 
                 /* Select the radio button when any cell in the row is clicked.
                 This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.

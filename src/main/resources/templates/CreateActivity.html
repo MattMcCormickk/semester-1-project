@@ -23,7 +23,7 @@
           <form action="/AddNewActivity/" method="get" id="myform" onsubmit="return registerActivity()">
               <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="activityName" placeholder="Activity Name" name="activityName" required>
-                  <label for="activityName">Activity Name</label>
+                  <label for="activityName"><i class="fa fa-sticky-note"></i> Activity Name</label>
               </div>
               <div class="row">
                 <div class="col">
@@ -35,17 +35,17 @@
                 <div class="col">
                   <div class="form-floating mb-3">
                       <input type="text" class="form-control" id="location" placeholder="Location" name="location" required>
-                      <label for="location">Location</label>
+                      <label for="location"><i class="fa fa-map-marker icon"></i> Location</label>
                   </div>
                 </div>
               </div>
               <div class="form-floating mb-3">
                 <textarea name="description" id="description" class="form-control" placeholder="Activity Description" style="height: 100px" required></textarea>
-                <label for="description">Description</label>
+                <label for="description"><i class="fa fa-list"></i> Description</label>
               </div>
               <div class="form-floating mb-3">
                 <textarea name="keywords" id="keywords" class="form-control" placeholder="Keywords" style="height: 100px"></textarea>
-                <label for="keywords">Keywords</label>
+                <label for="keywords"><i class="fa fa-sticky-note"></i> Keywords</label>
               </div>
               <button type="submit" class="btn btn-success" id="registerActivityButton">Register Activity</button>
           </form>
@@ -57,6 +57,7 @@
                       <input type="text" id="searchActivity" onkeyup="searchActivity()" class="form-control" placeholder="Search for activity..">
                   </div>
                   <h1>All Activities</h1>
+                  <button type="button" class="btn btn-success" id="downloadButton" onclick="downloadCSV('Activities.csv')"><i class="fa fa-download"></i> Download CSV</button>
               </div>
             <table class="table table-hover" id="activitiesTable" onclick="selectActivity()">
                   <col style="width:3%">
@@ -117,11 +118,27 @@
       </div>
     </div>
 
+    <!-- Display spinners to show that the page is loading. This is to simulate a real world scenario when the Ajax call takes a few seconds! -->
+    <div class="overlay" id="loader">
+      <div class="spinners">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+
     <script type="text/javascript">
 
     /*  This is the AJAX function invoked when user clicks on 'Register Activity'
         This function makes a POST request call to the route /AddActivity to register the activity in the database. */
         function registerActivity() {
+          $("#loader").show();  // Display spinners to simulate a page loading scenario
           var activityName = document.getElementById("activityName").value;
           var activityDate = document.getElementById("activityDate").value;
           var location = document.getElementById("location").value;
@@ -132,9 +149,11 @@
           var xhttp = new XMLHttpRequest();
           xhttp.open("POST", '/AddActivity', true); // true is asynchronous
           xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xhttp.onreadystatechange = function() {
+          xhttp.onreadystatechange = setTimeout(function() { /* This is to simulate a real world scenario when the Ajax call takes a few seconds!
+                    Show the spinners just before the Ajax call. Delay the Ajax call by 3 seconds and then hide the spinners! */
             if (xhttp.readyState === 4 && xhttp.status === 200) {
               console.log(xhttp.responseText);
+              $("#loader").hide();
               // Initialize the modal to display the confirmation message.
               // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
               var myModal = new bootstrap.Modal(document.getElementById("savedMessage"), {
@@ -144,7 +163,7 @@
             } else {
               console.error(xhttp.statusText);
             }
-          };
+          }, 3000);
           xhttp.send(params);
           return false;
         }
@@ -210,6 +229,27 @@
                 }
             }
         }
+
+        /* Function to export the table data to CSV file
+          Reference: Adapted from https://www.codexworld.com/export-html-table-data-to-csv-using-javascript/ */
+            function downloadCSV(filename) {
+              var csv = [];
+              var rows = document.querySelectorAll("#activitiesTable tr");
+              for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                for (var j = 0; j < cols.length; j++ ){
+                  row.push(cols[j].innerText);
+                }
+                csv.push(row.join(","));
+              }
+              var csvFile = new Blob([csv.join("\n")], {type: "text/csv"});
+              var downloadLink = document.createElement("a");
+              downloadLink.download = filename;
+              downloadLink.href = window.URL.createObjectURL(csvFile);
+              downloadLink.style.display = "none";
+              document.body.appendChild(downloadLink);
+              downloadLink.click();
+            }
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

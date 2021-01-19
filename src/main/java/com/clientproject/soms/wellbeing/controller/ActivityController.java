@@ -1,7 +1,9 @@
 package com.clientproject.soms.wellbeing.controller;
 
+import com.clientproject.soms.wellbeing.DTO.CustomActivityDTO;
 import com.clientproject.soms.wellbeing.form.ActivityData;
 import com.clientproject.soms.wellbeing.form.CreateActivity;
+import com.clientproject.soms.wellbeing.form.CustomizeActivity;
 import com.clientproject.soms.wellbeing.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,6 +91,44 @@ public class ActivityController {
         mav.addObject("description", description);
         mav.setViewName("CustomizeActivity");
         return mav;
+    }
+
+    @RequestMapping(path = "/SubmitCustomizedActivity", method = RequestMethod.POST)
+    public String submitCustomizedActivity(@RequestParam(value = "activityId") String activityId,
+                                    @RequestParam(value = "serviceProvId") String serviceProvId,
+                                    @RequestParam(value = "custMetric1") String custMetric1,
+                                    @RequestParam(value = "custMetric2") String custMetric2,
+                                    @RequestParam(value = "custMetric3") String custMetric3,
+                                    @RequestParam(value = "custMetric4") String custMetric4,
+                                    @RequestParam(value = "custMetric5") String custMetric5,
+                                    @RequestParam(value = "custMetric6") String custMetric6,
+                                    @RequestParam(value = "custOutput1") String custOutput1,
+                                    @RequestParam(value = "custOutput2") String custOutput2,
+                                    @RequestParam(value = "custOutput3") String custOutput3,
+                                    @RequestParam(value = "custOutput4") String custOutput4,
+                                    @RequestParam(value = "custOutput5") String custOutput5,
+                                    @RequestParam(value = "custOutput6") String custOutput6) {
+        CustomizeActivity customizeActivity = new CustomizeActivity(activityId, serviceProvId, custMetric1, custMetric2, custMetric3, custMetric4, custMetric5, custMetric6, custOutput1, custOutput2, custOutput3, custOutput4, custOutput5, custOutput6);
+        String response = "";
+        if (activityRepository.saveCustomizedActivity(customizeActivity)) {
+            System.out.println("added activity data");
+            response = "Successfully customized the activity!";
+        }
+        return response;
+    }
+
+    @RequestMapping(path = "/getCustomizedActivity", method = RequestMethod.GET)
+    public String getCustomizedActivity(@RequestParam(value = "activityId") String activityId) {
+        CustomActivityDTO customActivityDTO = activityRepository.getCustomMetrics(activityId);
+//        System.out.println(customActivityDTO.getCustMetric1());
+        String allMetrics = customActivityDTO.getCustMetric1() + "|" + customActivityDTO.getCustMetric2() + "|" +
+                            customActivityDTO.getCustMetric3() + "|" + customActivityDTO.getCustMetric4() + "|" +
+                            customActivityDTO.getCustMetric5() + "|" + customActivityDTO.getCustMetric6() + "|" +
+                            customActivityDTO.getCustOutput1() + "|" + customActivityDTO.getCustOutput2() + "|" +
+                            customActivityDTO.getCustOutput3() + "|" + customActivityDTO.getCustOutput4() + "|" +
+                            customActivityDTO.getCustOutput5() + "|" + customActivityDTO.getCustOutput6();
+
+        return allMetrics;
     }
 
 }
