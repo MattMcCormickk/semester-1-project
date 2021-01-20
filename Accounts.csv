@@ -1,0 +1,7 @@
+Username,Password,Role
+bmw@company.com,password,SERVICE_PROVIDER
+audi@company.com,password,SERVICE_PROVIDER
+Skoda@company.com,password,SERVICE_PROVIDER
+toyota@company.com,password,SERVICE_PROVIDER
+benz@company.com,password,SERVICE_PROVIDER
+admin@admin,123,ADMIN

@@ -77,5 +77,9 @@ public class ServiceProviderController {
         return response;
     }
 
-
+    @RequestMapping(path="/GetServiceProviderId", method = RequestMethod.GET)
+    public int getServiceProviderId(@RequestParam(value = "email") String email) {
+        int servProvId = serviceProviderRepository.findServiceProviderIDByEmail(email);
+        return servProvId;
+    }
 }

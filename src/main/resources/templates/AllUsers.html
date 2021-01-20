@@ -23,6 +23,9 @@
                     <input type="text" id="searchUser" onkeyup="searchUser()" class="form-control" placeholder="Search for names..">
                 </div>
                 <h1>All Users</h1>
+        <!-- Added 'Download CSV' button - this is a server-side download rather than a client-side download done in CreateActivity.html
+        That is, the CSV file is being written by the server and not in the browser. -->
+                <a href="/export/AllUsers" class="btn btn-success" role="button" id="downloadButton"><i class="fa fa-download"></i> Download CSV</a>
             </div>
             <table class="table table-hover" id="allUsersTable" onclick="selectUser()">
                 <tr>
@@ -138,6 +141,7 @@
             }
         }
     }
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
