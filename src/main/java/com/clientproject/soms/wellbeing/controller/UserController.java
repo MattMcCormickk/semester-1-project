@@ -57,6 +57,7 @@ public class UserController {
         return response;
     }
 
+    // Route to get the user name by passing email id as parameter
     @RequestMapping(path="/GetUserNameByEmail", method = RequestMethod.GET)
     public String getUserNameByEmail(@RequestParam(value = "email") String email) {
         String userName = userRepository.getUserByEmail(email).getFirstName() + " " + userRepository.getUserByEmail(email).getLastName();

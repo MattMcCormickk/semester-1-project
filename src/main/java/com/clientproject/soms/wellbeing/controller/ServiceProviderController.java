@@ -77,6 +77,16 @@ public class ServiceProviderController {
         return response;
     }
 
+    // Route to get the service provider name by passing email id as parameter
+    @RequestMapping(path="/GetServiceProviderName", method = RequestMethod.GET)
+    public String getServiceProviderName(@RequestParam(value = "email") String email) {
+
+        ServiceProviderDTO serviceProviderDTO = (ServiceProviderDTO) serviceProviderRepository.findServiceProviderByEmail(email);
+        String servProvName = serviceProviderDTO.getName();
+        return servProvName;
+
+    }
+
     @RequestMapping(path="/GetServiceProviderId", method = RequestMethod.GET)
     public int getServiceProviderId(@RequestParam(value = "email") String email) {
         int servProvId = serviceProviderRepository.findServiceProviderIDByEmail(email);
