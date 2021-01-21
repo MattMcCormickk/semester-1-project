@@ -126,7 +126,7 @@ body h4{
 }
 .nav-item{
     margin-left: 10px;
-    margin-right: 20px;
+    margin-right: 10px;
     /* color: black; */
     /* color: black; */
     /* background-color: #d0d0d0; */
@@ -148,7 +148,7 @@ body h4{
     /* position: relative;
     display: inline-block; */
     margin-left: 10px;
-    margin-right: 20px;
+    margin-right: 10px;
     background-image: linear-gradient(teal, black);
 }
 
@@ -596,13 +596,13 @@ table tr th td:active {
   /* transition: background-color 1s ease; */
   /* transition: color 1s ease; */
 }
-#activityInpTable tr, #activityOutTable tr, #tempInpTable tr, #tempOutTable tr {
+#activityInpTable tr, #activityOutTable tr, #tempInpTable tr, #tempOutTable tr, #allActivitiesTable tr, #allUsersTable tr {
   /* background-color: #4B4848;
   color: white; */
   background: linear-gradient(to top left, #006666 0%, #ff9933 100%);
   color: black;
 }
-#activityInpTable tr:hover, #activityOutTable tr:hover, #tempInpTable tr:hover, #tempOutTable tr:hover {
+#activityInpTable tr:hover, #activityOutTable tr:hover, #tempInpTable tr:hover, #tempOutTable tr:hover, #allActivitiesTable tr:hover, #allUsersTable tr:hover {
   background-color: darkorange;
   color: black;
 }
@@ -723,6 +723,7 @@ table tr th td:active {
   background-color: darkorange;
   color: black;
   width: 30%;
+  margin-left: 100px;
 }
 #downloadButton:hover {
   background-color: green;
@@ -923,4 +924,8 @@ width: 96%;}
     color: white;
     text-align: center;
     padding-top: 20px;
+}
+#activitiesAndUsers {
+  margin-left: 10px;
+  margin-right: 0px;
 }

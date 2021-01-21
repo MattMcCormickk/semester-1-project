@@ -64,4 +64,11 @@ public class UserRepositoryJDBC implements UserRepository {
                         captureUserActivity.getBagsOfRubbish()}, types);
         return rowsActData > 0 && rowsActOut > 0;
     }
+
+    @Override
+    public UserDTO getUserByEmail(String email) {
+        UserDTO userDTO = (UserDTO) jdbcTemplate.queryForObject("SELECT USER_ID, FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, EMAIL, TELEPHONE, ADDRESS, POST_CODE FROM USER WHERE EMAIL = ?",
+                new Object[]{email}, new UserMapper());
+        return userDTO;
+    }
 }
