@@ -13,43 +13,103 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Capture Activity For User</title>
 </head>
-<body onload="setUserDetails()">
+<body>
   <header th:replace="fragments/header :: header"></header>
     <div class="tablesAndCards">
-        <div class="allActivitiesContainer" id="allActivitiesContainer" style="width: 750px">
-            <div class="titleAndSearch">
-                <div class="search-text">
-                    <span class="fa fa-search search-icon"></span>
-                    <input type="text" id="searchActivity" onkeyup="searchActivity()" class="form-control" placeholder="Search for activity..">
+        <div class="accordionsContainer" id="activitiesAndUsers">
+          <div class="accordion accordion-flush" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  All Activities
+                  <!-- <h5 id="customizeTitle">Customize Inputs & Outputs</h5> -->
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                <div class="accordion-body" style="width: 800px">
+                  <!-- <div class="allActivitiesContainer" id="allActivitiesContainer" style="width: 750px"> -->
+                      <div class="titleAndSearch">
+                          <div class="search-text">
+                              <span class="fa fa-search search-icon"></span>
+                              <input type="text" id="searchActivity" onkeyup="searchActivity()" class="form-control" placeholder="Search for activity..">
+                          </div>
+                          <h1>All Activities</h1>
+                      </div>
+                    <table class="table table-hover" id="allActivitiesTable" onclick="selectActivity()">
+                      <!-- Added column width percentages -->
+                          <col style="width:5%">
+                          <col style="width:5%">
+                          <col style="width:20%">
+                          <col style="width:18%">
+                          <col style="width:42%">
+                          <col style="width:10%">
+                          <tr>
+                              <th scope="col"></th>
+                              <th scope="col">#</th>
+                              <th scope="col">Activity Name</th>
+                              <th scope="col">Activity Date</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">Location</th>
+                          </tr>
+                          <tr th:each="activity: ${allActivities}">
+                              <td><input class="form-check-input" type="radio" name="exampleRadios1" id="exampleRadios1" value="" onclick="selectActivity()"></td>
+                              <th scope="row" th:text="${activity.activityID}"></th>
+                              <td th:text="${activity.activityName}"></td>
+                              <td th:text="${activity.date}"></td>
+                              <td th:text="${activity.description}"></td>
+                              <td th:text="${activity.location}"></td>
+                          </tr>
+                      </table>
+                  <!-- </div> -->
                 </div>
-                <h1>All Activities</h1>
+              </div>
             </div>
-          <table class="table table-hover" id="allActivitiesTable" onclick="selectActivity()">
-            <!-- Added column width percentages -->
-                <col style="width:5%">
-                <col style="width:5%">
-                <col style="width:20%">
-                <col style="width:18%">
-                <col style="width:42%">
-                <col style="width:10%">
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">#</th>
-                    <th scope="col">Activity Name</th>
-                    <th scope="col">Activity Date</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Location</th>
-                </tr>
-                <tr th:each="activity: ${allActivities}">
-                    <td><input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="" onclick="selectActivity()"></td>
-                    <th scope="row" th:text="${activity.activityID}"></th>
-                    <td th:text="${activity.activityName}"></td>
-                    <td th:text="${activity.date}"></td>
-                    <td th:text="${activity.description}"></td>
-                    <td th:text="${activity.location}"></td>
-                </tr>
-            </table>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  All Users
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+                <div class="accordion-body" style="width: 800px">
+                  <!-- <div class="allUsersContainer"> -->
+                      <div class="titleAndSearch">
+                          <div class="search-text">
+                              <span class="fa fa-search search-icon"></span>
+                              <input type="text" id="searchUser" onkeyup="searchUser()" class="form-control" placeholder="Search for names..">
+                          </div>
+                          <h1>All Users</h1>
+                  <!-- Added 'Download CSV' button - this is a server-side download rather than a client-side download done in CreateActivity.html
+                  That is, the CSV file is being written by the server and not in the browser. -->
+                          <!-- <a href="/export/AllUsers" class="btn btn-success" role="button" id="downloadButton"><i class="fa fa-download"></i> Download CSV</a> -->
+                      </div>
+                      <table class="table table-hover" id="allUsersTable" onclick="selectUser()">
+                          <tr>
+                              <th scope="col"></th>
+                              <th scope="col">#</th>
+                              <th scope="col">User Name</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Telephone</th>
+                              <th scope="col">Address</th>
+                              <!-- <th scope="col">Capture</th> -->
+                          </tr>
+                          <tr th:each="user: ${allUsers}">
+                              <td><input class="form-check-input" type="radio" name="exampleRadios2" id="selectRadio" value="" onclick="selectUser()"></td>
+                              <th scope="row" th:text="${user.userId}"></th>
+                              <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+                              <td th:text="${user.email}"></td>
+                              <td th:text="${user.telephone}"></td>
+                              <td th:text="${user.address} + ' ' + ${user.postcode}"></td>
+                              <!-- <td><a href="#" class="btn btn-success" role="button">Select</a></td> -->
+                          </tr>
+                      </table>
+                  <!-- </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="cardsContainer" id="cards">
             <div class="card w-60" id="activityCard">
         <!-- Upon submitting the below form, saveUserActivity() is being invoked which makes an AJAX request to save the information in the database. -->
@@ -60,18 +120,18 @@
                           <div class="row">
                               <div class="col" style="max-width:16%">
                                   <label for="userId">User Id</label>
-                                  <input type="text" class="form-control" id="userIdText" name="userId" readonly>
-                                  <div id="userId" name="userId" th:text="${userId}" style="display: NONE"></div>
+                                  <input type="text" class="form-control" id="userId" name="userId" readonly>
+                                  <!-- <div id="userId" name="userId" th:text="${userId}" style="display: NONE"></div> -->
                               </div>
                               <div class="col">
                                   <label for="userName">User Name</label>
-                                  <input type="text" class="form-control" id="userNameText" name="userName" readonly>
-                                  <div id="userName" name="userName" th:text="${userName}" style="display: NONE"></div>
+                                  <input type="text" class="form-control" id="userName" name="userName" readonly>
+                                  <!-- <div id="userName" name="userName" th:text="${userName}" style="display: NONE"></div> -->
                               </div>
                               <div class="col">
                                   <label for="userEmail">User Email</label>
-                                  <input type="text" class="form-control" id="userEmailText" name="userEmail" readonly>
-                                  <div id="userEmail" name="userEmail" th:text="${userEmail}" style="display: NONE"></div>
+                                  <input type="text" class="form-control" id="userEmail" name="userEmail" readonly>
+                                  <!-- <div id="userEmail" name="userEmail" th:text="${userEmail}" style="display: NONE"></div> -->
                               </div>
                           </div>
                           <div class="row" style="display:none">
@@ -271,8 +331,23 @@
           <div class="modal-footer">
             <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
             <!-- Added a custom button to close the modal. The page will redirect to '/AllUsers when the user clicks on 'Close'.  -->
-            <a href="/AllUsers" class="btn btn-secondary" role="button">Close</a>
+            <a href="/CaptureActivityForUser" class="btn btn-secondary" role="button">Close</a>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Display spinners to show that the page is loading. This is to simulate a real world scenario when the Ajax call takes a few seconds! -->
+    <div class="overlay" id="loader">
+      <div class="spinners">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
       </div>
     </div>
@@ -280,14 +355,14 @@
 <script type="text/javascript">
 
     // Function invoked on page load to set the selected user details from the previous page.
-    function setUserDetails(){
-        var id = document.getElementById("userId").innerHTML;
-        var name = document.getElementById("userName").innerHTML;
-        var email = document.getElementById("userEmail").innerHTML;
-        document.getElementById("userIdText").value = id;
-        document.getElementById("userNameText").value = name;
-        document.getElementById("userEmailText").value = email;
-    }
+    // function setUserDetails(){
+    //     var id = document.getElementById("userId").innerHTML;
+    //     var name = document.getElementById("userName").innerHTML;
+    //     var email = document.getElementById("userEmail").innerHTML;
+    //     document.getElementById("userIdText").value = id;
+    //     document.getElementById("userNameText").value = name;
+    //     document.getElementById("userEmailText").value = email;
+    // }
 
     // Function to search based on activity name, description, location and filter the results in the table
     function searchActivity() {
@@ -347,7 +422,8 @@
                 /* Select the radio button when any cell in the row is clicked.
                 This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
                 It is important to note that the radio button is at position 'rIndex - 1'.*/
-                var radioButton = document.getElementsByClassName("form-check-input");
+                var activitiesTable = document.getElementById("allActivitiesTable");
+                var radioButton = activitiesTable.getElementsByClassName("form-check-input");
                 radioButton[rIndex - 1].checked = true;
             }
         }
@@ -474,7 +550,8 @@
 /*  This is the AJAX function invoked when user clicks on 'Submit Activity'
     This function makes a POST request call to the route /SaveUserActivityData to save the submitted information in the database. */
     function saveUserActivity() {
-      var userId = document.getElementById("userIdText").value;
+      $("#loader").show();  // Display spinners to simulate a page loading scenario
+      var userId = document.getElementById("userId").value;
       var activityId = document.getElementById("activityID").value;
       var activityDate = document.getElementById("activityDate").value;
       var noOfHours = document.getElementById("noOfHours").value;
@@ -484,9 +561,11 @@
       var xhttp = new XMLHttpRequest();
       xhttp.open("POST", '/SaveUserActivityData', true); // true is asynchronous
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.onreadystatechange = function() {
+      xhttp.onreadystatechange = setTimeout(function() {  /* This is to simulate a real world scenario when the Ajax call takes a few seconds!
+                Show the spinners just before the Ajax call. Delay the Ajax call by 3 seconds and then hide the spinners! */
         if (xhttp.readyState === 4 && xhttp.status === 200) {
           console.log(xhttp.responseText);
+          $("#loader").hide();
           // alert("Successfully saved the user activity data! Thanks!!");
           // Initialize the modal to display the confirmation message.
           // Added the 'backdrop' value as 'static' so that the modal will not close when user clicks outside the modal.
@@ -498,11 +577,70 @@
         } else {
           console.error(xhttp.statusText);
         }
-      };
+      }, 3000);
       xhttp.send(params);
       return false;
     }
 
+    /* Function to select a user from the table, display the selected user details on the card shown on the right and highlight the selected row.
+    When another user is selected, un-highlight the previously selected row. */
+    function selectUser(){
+        var table = document.getElementById("allUsersTable"), rIndex;
+        for (var i = 0; i < table.rows.length; i++) {
+            table.rows[i].onclick = function() {
+                rIndex = this.rowIndex;
+                // console.log(rIndex);
+                var userId = this.cells[1].innerHTML;
+                var userName = this.cells[2].innerHTML;
+                var userEmail = this.cells[3].innerHTML;
+                // document.getElementById("userId").innerHTML = userId;
+                document.getElementById("userId").value = userId;
+                document.getElementById("userName").value = userName;
+                document.getElementById("userEmail").value = userEmail;
+                // console.log("Selected user is " + userId + " " + userName + " " + userEmail);
+                for (var i = 0; i < table.rows.length; i++) {
+                    // table.rows[i].style.backgroundColor = "white";
+                    table.rows[i].style.background = "linear-gradient(to top left, #006666 0%, #ff9933 100%)";
+                    table.rows[i].style.color = "black";
+                }
+                var selectedRow = table.getElementsByTagName('tr')[rIndex];
+                // selectedRow.style.backgroundColor = "#B82601";
+                // selectedRow.style.color = "white";
+                selectedRow.style.background = "none";
+                selectedRow.style.backgroundColor = "darkorange";
+                selectedRow.style.color = "black";
+
+                /* Select the radio button when any cell in the row is clicked.
+                This allows the user to select a user by clicking anywhere in the row and not necessarily on the radio button.
+                It is important to note that the radio button is at position 'rIndex - 1'.*/
+                var usersTable = document.getElementById("allUsersTable");
+                var radioButton = usersTable.getElementsByClassName("form-check-input");
+                radioButton[rIndex - 1].checked = true;
+            }
+        }
+    }
+
+    // Function to search based on user name and filter the results in the table
+    function searchUser() {
+        var searchInp, searchFilter, usersTable, row, data, i, textVal;
+        searchInp = document.getElementById("searchUser");
+        searchFilter = searchInp.value.toUpperCase();
+        usersTable = document.getElementById("allUsersTable");
+        row = usersTable.getElementsByTagName("tr");
+
+        //Loop through the table rows and hide those who don't match the search filter
+        for (var i = 0; i < row.length; i++) {
+            data = row[i].getElementsByTagName("td")[2];
+            if (data) {
+                textVal = data.textContent || data.innerText;
+                if (textVal.toUpperCase().indexOf(searchFilter) > -1) {
+                    row[i].style.display = "";
+                } else {
+                    row[i].style.display = "none";
+                }
+            }
+        }
+    }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
