@@ -8,12 +8,13 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="../soms-style.css">
-    <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<!-- the plug-in responsible for table sorting, searching and pagination -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
     <title>Admin Home</title>
 </head>
@@ -22,8 +23,10 @@
 <main>
     <div class="adminHomeContainer">
         <div class="adminTitleDiv">
-        <h1 class="adminTitle">Admin</h1>
-      </div>
+            <h1 class="adminTitle">Admin</h1>
+        </div>
+
+        <!-- table displays all messages sent from all service providers to admin -->
         <div class="contactTable">
             <h3 id="table_title">Serivce Provider Messages</h3>
             <table class="table table-striped table-hover table-sm" id="allMessagesTable">
@@ -57,12 +60,18 @@
                     <td th:text="${message.SerProName}"></td>
                     <td th:text="${message.serProEmail}"></td>
                     <td th:text="${message.message}"></td>
-                    <td><a th:href="@{/message/delete/{id}/(messageid=${message.messageID})}"  id="deletBtn" class="btn btn-danger" role="button" onclick="deleteMessage()">Delete</a></td>
+                    <td>
+                      <!-- button deletes message from CONTACT_ADMIN table -->
+                        <form action="#" th:action="@{'/Admindelete/{id}'(id=${message.messageID})}" th:method="delete">
+                            <input type="hidden" name="_method" value="delete" />
+                            <button href='' class="btn btn-danger" id="deleteMsgBtn2" type="submit"> Delete</button>
+                        </form>
+                    </td>
+                    <!-- button redirects to AdminReply.html so Admin can reply to particular message -->
                     <td><a th:href="@{/message/reply/{id}/(messageid=${message.messageID},
                       messageRecipient=${message.SerProName},
                       messageRecipientID=${message.SerProID},
                       message=${message.message})}"  class="btn btn-primary" id="replyBtn" role="button" onclick="sendMessgae()">Reply</a></td>
-
                 </tr>
                 </tbody>
 
@@ -75,7 +84,7 @@
                 <span class="fa fa-search search-icon"></span>
                 <input style="width:125%" type="text" id="findSerPro" onkeyup="findSerPro()" class="form-control" placeholder="Service Provider Name...">
             </div>
-
+<!-- table lists all service providers in SERVICE_PROVIDER table -->
             <table class="table table-hover table-sm " id="allSerProTable" onclick=selectSerPro()>
                 <thead>
                 <col style="width:33%">
@@ -91,11 +100,12 @@
                 </thead>
                 <tbody>
                 <tr th:each="serPro: ${allSerPro}">
-                    <!-- <td><input class="form-check-input"  name="exampleRadios" onclick="selectSerPro()" value=""></td>-->
+
                     <td th:text="${serPro.serProID}"></td>
                     <td th:text="${serPro.name}"></td>
                     <td th:text="${serPro.email}"></td>
                     <td th:text="${serPro.telephone}"></td>
+                    <!-- button carries ser pro data across to AdminAmendData page -->
                     <td><a class="btn btn-primary" id="selectBtn"
                            role="button" th:href="@{/AdminAmendData(
             serProID=${serPro.serProID},
@@ -108,36 +118,13 @@
 
     </div>
 
-    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after DELETING A MESSAGE -->
-    <div class="modal fade" id="MessageDeleted" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content animate">
-                <div class="modal-header" id="common-modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Message Deleted!</h5>
-                    <!-- Removed the default modal close icon so that the user must click on the 'Close' button. -->
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                </div>
-                <div class="modal-body">
-                    Deleted Message
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                    <!-- Added a custom button to close the modal. -->
-                    <a href="" class="btn btn-secondary" role="button">Close</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
 
 <script>
-    //function replyToMessage(){}
 
-    function findSerPro() { <!--FILTER TABLE BY NAME LIKE ON OTHER PAGES -->
-
+    function findSerPro() {
+//search and filter ser pro's by name
         var searchInp, searchFilter, allActivityTable, row, data, i, textVal;
         searchInp = document.getElementById("findSerPro");
         searchFilter = searchInp.value.toUpperCase();
@@ -158,37 +145,37 @@
         }
     }
 
-    function selectSerPro() {}
+//allows for a particular service provider to be selected
+    function selectSerPro() {
 
-    var table = document.getElementById("allSerProTable"), rIndex;
-    for (var i = 0; i < table.rows.length; i++) {
-        table.rows[i].onclick = function () {
-            rIndex = this.rowIndex;
-            console.log(rIndex);
-
-            var name = this.cells[1].innerHTML;
-            var id = this.cells[0].innerHTML;
-
-            console.log("Selected sp is " + name);
-
-            document.getElementById("serPro-id").value = id;
-            document.getElementById("serPro-name").value = name;
-            console.log(id);
-            console.log(name);
-        }
+        var table = document.getElementById("allSerProTable"), rIndex;
         for (var i = 0; i < table.rows.length; i++) {
-            table.rows[i].style.backgroundColor = "white";
-            table.rows[i].style.color = "black";
-        }
+            table.rows[i].onclick = function () {
+                rIndex = this.rowIndex;
+                console.log(rIndex);
 
+                var name = this.cells[1].innerHTML;
+                var id = this.cells[0].innerHTML;
+
+                console.log("Selected sp is " + name);
+
+                document.getElementById("serPro-id").value = id;
+                document.getElementById("serPro-name").value = name;
+                console.log(id);
+                console.log(name);
+            }
+            for (var i = 0; i < table.rows.length; i++) {
+                table.rows[i].style.backgroundColor = "white";
+                table.rows[i].style.color = "black";
+            }
+
+        }
     }
 
-
+    //adds sorting, searching an dpagination features to table
     $(document).ready( function () {
         $('#allMessagesTable').DataTable();
     } );
-
-
 
 
 </script>

@@ -25,6 +25,7 @@
         <div class="accordionsContainer">
             <div class="accordion accordion-flush" id="accordionExample">
               <div class="accordion-item">
+                <!-- displays activity data carried across from AdminAmendData.html -->
                 <div id="collapsable1" class="accordion-collapse collapse show" aria-labelledby="headingOne">
                     <div class="accordion-body">
                         <div class="row">
@@ -58,7 +59,7 @@
                         Edit
                     </button>
                 </h2>
-
+<!-- form where a single or multiple values of the loaded activity can be changed -->
                 <div id="collapsable2" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
                     <div class="accordion-body">
                         <div class="row">
@@ -120,7 +121,7 @@
             </div>
         </div>
     </div>
-
+<!-- modal displays upon form submition to show the data has been edited -->
     <div class="modal fade" id="Editmessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -154,7 +155,7 @@ $(function() {
     });
 });
 
-
+//post function that also loads modal
 function updateActivity(){
 
     var name = document.getElementById("Act-Name").value;
@@ -165,8 +166,7 @@ function updateActivity(){
     activityID = activityID.toString();
 
     var params = 'name=' + name + '&date=' + date + '&location=' + location + '&description=' + description + '&activityID=' + activityID;
-
-    console.log(params);
+    //console.log(params);
 
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", '/ChangeValues', true); // true is asynchronous
@@ -190,6 +190,7 @@ function updateActivity(){
         return false;
 
 }
+//closing modal redirects back to home page
 $('#modalButton').click(function() {
     window.location.href = '/AdminHome';
     return false;

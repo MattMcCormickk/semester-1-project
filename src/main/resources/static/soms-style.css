@@ -544,20 +544,20 @@ table tr th td:active {
     width: 200px;
 }
 .contactTable{
-    width: 53%;
+    width: 60%;
     float: left;
     position: relative;
     background-color: #eeeeee;
     padding: 1em;
 }
 .selectSPwrapper{
-    width: 45%;
+    width: 35%;
     float:right;
     position: relative;
 }
 .amendDataWrapper{
     width: 100%;
-    padding: 2em;
+    padding: 1em;
     float: bottom;
     clear: both;
     text-align: center;
@@ -874,11 +874,22 @@ table tr th td:active {
 margin-left: 2em;
 width: 96%;}
 
+/*header for admin pages including svg*/
 .adminTitleDiv{
   width: 100%;
   height: 6em;
-  background-color: #E2FDFF;
   margin-bottom: 1em;
+    background-color: #E2FDFF;
+    position: relative;
+    overflow: hidden;
+    background-image: url("data:image/svg+xml,%3Csvg width='717' height='238' xmlns='http://www.w3.org/2000/svg'%3E%3C!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ --%3E%3Cg style=''%3E%3Ctitle%3Ebackground%3C/title%3E%3Crect /%3E%3Cg display='none' overflow='visible' y='0' x='0' height='100%25' width='100%25' id='canvasGrid'%3E%3Crect fill='url(%23gridpattern)' stroke-width='0' y='0' x='0' height='100%25' width='100%25' id='svg_16'/%3E%3C/g%3E%3C/g%3E%3Cg style='' class='currentLayer'%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg id='svg_15' class='selected' fill='%231aebeb' fill-opacity='1' stroke='%233cfcc2' stroke-opacity='1'%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_1' y2='22' x2='388' y1='184' x1='58' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_2' y2='219' x2='487' y1='38' x1='143' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_3' y2='92' x2='526' y1='197' x1='286' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_4' y2='238' x2='468' y1='57' x1='407' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_5' y2='0' x2='179' y1='192' x1='205' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_6' y2='133' x2='633' y1='62' x1='258' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_7' y2='93' x2='717' y1='178' x1='510' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_8' y2='129' x2='0' y1='207' x1='347' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_9' y2='27' x2='29' y1='187' x1='108' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_10' y2='23' x2='216' y1='89' x1='5' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_11' y2='63' x2='574' y1='213' x1='576' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_12' y2='36' x2='478' y1='120' x1='710' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_13' y2='203' x2='637' y1='151' x1='512' stroke-width='1.5' stroke='%233cfcc2' fill='none'/%3E%3Cline stroke='%233cfcc2' stroke-linecap='undefined' stroke-linejoin='undefined' id='svg_14' y2='187' x2='491' y1='35' x1='524' stroke-width='1.5' fill='none'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-position: -40% 8%;
+    background-repeat: repeat;
+    background-size: 50% 30%;
+    content: '';
+    display: block;
+
 }
 
 .adminTitle{
@@ -893,7 +904,7 @@ width: 96%;}
   background-color: #E2FDFF;
 }
 
-#deletBtn{
+#deleteMsgBtn, #deleteMsgBtn2{
   color: black;
   background-color: #FFF2F9;
 
@@ -924,6 +935,10 @@ width: 96%;}
     color: white;
     text-align: center;
     padding-top: 20px;
+}
+.spInboxWrapper{
+    margin-left: 2em;
+    margin-right: 2em;
 }
 #activitiesAndUsers {
   margin-left: 10px;

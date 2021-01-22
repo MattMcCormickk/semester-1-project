@@ -1,3 +1,5 @@
+Sp inbox
+
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -9,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../soms-style.css">
+    <!-- the plug-in responsible for table sorting, searching and pagination -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
@@ -19,41 +22,48 @@
 <header th:replace="fragments/header :: header"></header>
 
 <main>
-    <h3 class="adminTitle">Inbox</h3>
-    <!--  <label for="serProID">Service Provider ID</label>-->
-    <!--  <input type="text" class="form-control" id="serProID" name="serProID" th:value="${serProID}" readonly>-->
-    <table class="sortable table table-striped" id="SP-inbox-table">
-        <thead>
-        <tr>
-            <th>Original Message</th>
-            <th>Date</th>
-            <th>Admin Name</th>
-            <th>Reply</th>
-            <th>Reply Date</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="spInboxWrapper">
+        <h3 class="adminTitle">Inbox</h3>
+        <!-- table displays all the messages that specific ser pro has sent and all their admin replies -->
+        <table class="sortable table table-striped" id="SP-inbox-table">
+            <thead>
+            <tr>
+                <th>Original Message</th>
+                <th>Date</th>
+                <th>Admin Name</th>
+                <th>Reply</th>
+                <th>Reply Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <tr style="color:black" th:each="message: ${allMessages}" th:if="${message.serProID} == ${thisSerPro}">
-            <!-- "${message.isReplied} == true"> -->
-            <td th:text="${message.message}"></td>
-            <td th:text="${message.recievedDate}"></td>
-            <td th:text="${message.adminName}"></td>
-            <td th:text="${message.replyMessage}"></td>
-            <td th:text="${message.replyDate}"></td>
-            <td><a th:href="@{/inbox/delete/{id}/(messageid=${message.messageID})}"  class="btn btn-danger" role="button">Delete</a></td>
-        </tr>
+            <tr style="color:black" th:each="message: ${allMessages}" th:if="${message.serProID} == ${thisSerPro}">
+                <td th:text="${message.message}"></td>
+                <td th:text="${message.recievedDate}"></td>
+                <td th:text="${message.adminName}"></td>
+                <td th:text="${message.replyMessage}"></td>
+                <td th:text="${message.replyDate}"></td>
+                <td>
+<!-- button deletes data  -->
+                    <form action="#" th:action="@{'/SPdelete/{id}'(id=${message.messageID})}" th:method="delete" onsubmit="return deletemsg()">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button href='' class="btn btn-danger" id="deleteMsgBtn" type="submit" data-toggle="modal" data-target="#DeleteMessage"> Delete</button>
+                    </form>
+                </td>
+            </tr>
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+
 </main>
 
-
+<!-- function responsible for pagination and sorting table  -->
 <script type="text/javascript">
     $(document).ready( function () {
         $('#SP-inbox-table').DataTable();
-    } );
+    });
 </script>
 
 
@@ -70,4 +80,3 @@
 <footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
-
