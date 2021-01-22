@@ -22,7 +22,7 @@
     <div class="contactAdminContainer">
         <div class="contactAdminForm">
             <h1 class="adminTitle">Contact Admin</h1>
-            <!-- Upon submitting the below form, registerActivity() is being invoked which makes an AJAX request to register the activity in the database. -->
+            <!-- form posts messgae and data is saved in CONTACT_ADMIN table -->
             <form action="/AdminContacted/" method="get" id="contact_admin_form" onsubmit="return contactAdmin()">
                 <div class="row">
                     <div class="col">
@@ -64,13 +64,14 @@
                     <textarea type="text" name="description" id="description" class="form-control" placeholder="Issue Description" style="height: 100px" required></textarea>
                     <label for="description">How can we help?</label>
                 </div>
+                <!-- modal appears on submit -->
                 <button type="submit" class="btn btn-success" id="contactAdminButton">Contact Admin</button>
             </form>
 
         </div>
     </div>
 
-    <!-- Modal to display the confirmation popup message to the user. This modal is displayed after registering the activity in the database.  -->
+    <!-- Modal to display the confirmation popup message to the user. -->
     <div class="modal fade" id="contactMessage" visibility="hidden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -95,8 +96,7 @@
 
 <script>
 
-
-
+// function posts data and will appear in ServiceProviderInbox.html and AdminHome.html pages
      function contactAdmin() {
         var name = document.getElementById("name").value;
         var date = document.getElementById("date").value;
@@ -105,10 +105,9 @@
         var description = document.getElementById("description").value;
         var priority = document.getElementById("priority").value;
 
+// if priority not typed as one of the values below an alert will appear and form won't submit
         var priorityValues = ["low", "medium", "high"]
-
          if (priorityValues.includes(priority.toLowerCase())){
-
              var priority = priority.toLowerCase()
              var params = 'name=' + name + '&date=' + date + '&email=' + email + '&description=' + description + '&priority=' + priority  + '&id=' + id;
 

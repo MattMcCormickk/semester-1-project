@@ -1,29 +1,22 @@
 package com.clientproject.soms.wellbeing;
+
+import com.clientproject.soms.wellbeing.DTO.ServiceProviderDTO;
 import com.clientproject.soms.wellbeing.controller.ServiceProviderController;
 import com.clientproject.soms.wellbeing.repository.ServiceProviderRepository;
 import org.junit.jupiter.api.Test;
-
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ServiceProviderController.class)
-public class WellbeingApplicationTests {
-
-//    @Test
-//    void contextLoads() {
-//    }
+public class ServiceProviderControllerTests {
 
     @Autowired
     private ServiceProviderController serviceProviderController;
@@ -35,16 +28,19 @@ public class WellbeingApplicationTests {
     private ServiceProviderRepository serviceProviderRepository;
 
     @Test
-    public void getServiceProviderId() throws Exception {
+    public void getServiceProviderName() throws Exception {
 
-        Mockito.when(serviceProviderRepository.findServiceProviderIDByEmail("benz@company.com")).thenReturn(42);
+        String servProvName = "Mercedes Benz";
+        String email = "benz@company.com";
 
-        String url = "/GetServiceProviderId";
+        ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO(servProvName, "01111333355", "Park Lane, London", "W1A 5PQ", "20");
+
+        Mockito.when(serviceProviderRepository.findServiceProviderByEmail("benz@company.com")).thenReturn(serviceProviderDTO);
+        String url = "/GetServiceProviderName";
         mockMvc.perform(get(url)
                 .param("email", "benz@company.com"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("42"));
+        .andExpect(content().string("Mercedes Benz"));
 
     }
-
 }

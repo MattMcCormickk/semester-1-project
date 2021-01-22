@@ -1,9 +1,13 @@
 package com.clientproject.soms.wellbeing.repository;
 
 import com.clientproject.soms.wellbeing.DTO.ActivityDTO;
+import com.clientproject.soms.wellbeing.DTO.CustomActivityDTO;
 import com.clientproject.soms.wellbeing.form.ActivityData;
 import com.clientproject.soms.wellbeing.form.CreateActivity;
+import com.clientproject.soms.wellbeing.form.CustomizeActivity;
 import com.clientproject.soms.wellbeing.model.ActivityMapper;
+import com.clientproject.soms.wellbeing.model.CustomizeActivityCountMapper;
+import com.clientproject.soms.wellbeing.model.CustomizeActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -60,6 +64,7 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
         return rows>0;
     }
 
+    @Override
     public boolean addActivityData(ActivityData activityData) throws ParseException {
         int[] types1 = new int[] {
                 Types.INTEGER,
@@ -106,6 +111,69 @@ public class ActivityRepositoryJDBC implements ActivityRepository{
         );
     }
 
+    @Override
+    public boolean saveCustomizedActivity(CustomizeActivity customizeActivity) {
+        int[] types = new int[] {
+                Types.INTEGER,
+                Types.INTEGER,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR,
+                Types.VARCHAR
+        };
+
+        int rows = template.update(
+                "INSERT INTO ACTIVITY_CUSTOM (ACTIVITY_ID, SERV_PROV_ID, CUST_METRIC_1, CUST_METRIC_2, CUST_METRIC_3, CUST_METRIC_4, CUST_METRIC_5, CUST_METRIC_6, " +
+                        "CUST_OUTPUT_1, CUST_OUTPUT_2, CUST_OUTPUT_3, CUST_OUTPUT_4, CUST_OUTPUT_5, CUST_OUTPUT_6) " +
+                        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                new Object[]{customizeActivity.getActivityId(),
+                        1,
+                        customizeActivity.getCustMetric1(),
+                        customizeActivity.getCustMetric2(),
+                        customizeActivity.getCustMetric3(),
+                        customizeActivity.getCustMetric4(),
+                        customizeActivity.getCustMetric5(),
+                        customizeActivity.getCustMetric6(),
+                        customizeActivity.getCustOutput1(),
+                        customizeActivity.getCustOutput2(),
+                        customizeActivity.getCustOutput3(),
+                        customizeActivity.getCustOutput4(),
+                        customizeActivity.getCustOutput5(),
+                        customizeActivity.getCustOutput6()}, types);
+
+        return rows > 0;
+    }
+
+    @Override
+    public CustomActivityDTO getCustomMetrics(String activityId) {
+
+        Integer num = (Integer) template.queryForObject("SELECT COUNT(*) COUNT FROM ACTIVITY_CUSTOM WHERE ACTIVITY_ID=?",
+                new Object[]{activityId}, new CustomizeActivityCountMapper());
+
+        // Check if records exist in ACTIVITY_CUSTOM table for the activity id
+        if(num > 0) {
+            CustomActivityDTO customActivityDTO = (CustomActivityDTO) template.queryForObject(
+                    "SELECT CUST_METRIC_1, CUST_METRIC_2, CUST_METRIC_3, CUST_METRIC_4, CUST_METRIC_5, CUST_METRIC_6, " +
+                            "CUST_OUTPUT_1, CUST_OUTPUT_2, CUST_OUTPUT_3, CUST_OUTPUT_4, CUST_OUTPUT_5, CUST_OUTPUT_6 FROM ACTIVITY_CUSTOM WHERE ACTIVITY_ID= ?",
+                    new Object[]{activityId}, new CustomizeActivityMapper());
+            return customActivityDTO;
+        } else {
+            /*  Added only because some activities will not have any records in ACTIVITY_CUSTOM
+                So returning an object with '0' number of records */
+            String numRecords = num.toString();
+            CustomActivityDTO customActivityDTO = new CustomActivityDTO(numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords,numRecords);
+            return customActivityDTO;
+        }
+
+    }
 
     @Override
     public List<ActivityDTO> findAllActivityBySerPro(int serProID){

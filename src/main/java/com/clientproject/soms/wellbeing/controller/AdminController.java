@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
@@ -36,6 +33,7 @@ public class AdminController {
         this.actRepo = actRepo;
     }
 
+    //admin home page - displays all messages and all service providers
     @RequestMapping(value = "/AdminHome", method = RequestMethod.GET)
     public ModelAndView adminPage(){
         ModelAndView mav = new ModelAndView();
@@ -45,18 +43,17 @@ public class AdminController {
         return mav;
     }
 
-
+    //loads service provider inbox page and displays all messages
     @RequestMapping(value = "/ServiceProviderInbox", method = RequestMethod.GET)
     public ModelAndView serProinbox() {
         ModelAndView mav = new ModelAndView();
 
+        //retrieve ser pro ID through authentication
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        ServiceProviderDTO serviceProviderDTO = (ServiceProviderDTO)auth.getDetails();
-//        int serProID = serviceProviderDTO.getSerProID();
         String currentPrincipalName = auth.getName();
         int serProID = SPrepo.findServiceProviderIDByEmail(currentPrincipalName);
 
-        //mav.addObject("allSerPro", SPrepo.findAllSerPro());
+        //displays messages linked to that particular ser pro's ID
         mav.addObject("allMessages", adminRepo.findAllMessages());
         mav.addObject("thisSerPro", serProID);
         System.out.println(currentPrincipalName);
@@ -65,7 +62,7 @@ public class AdminController {
     }
 
 
-
+    //Admin Amend Data Page - loads all activities r.e that service providers ID
     @RequestMapping(path = "/AdminAmendData", method = RequestMethod.GET)
     public ModelAndView getData(@RequestParam(value = "serProID") int serProID,
                                 @RequestParam(value = "serProName") String name){
@@ -77,12 +74,13 @@ public class AdminController {
         return mav;
     }
 
+    //Admin Edit Data Page - loads specific activity on click
     @RequestMapping(path = "/ActBySPID", method = RequestMethod.GET)
     public ModelAndView editActivityData(@RequestParam(value = "activityID") String activityID,
-                                          @RequestParam(value = "activityName") String activityName,
-                                          @RequestParam(value = "date") String activityDate,
-                                          @RequestParam(value = "location") String location,
-                                          @RequestParam(value = "description") String description) {
+                                         @RequestParam(value = "activityName") String activityName,
+                                         @RequestParam(value = "date") String activityDate,
+                                         @RequestParam(value = "location") String location,
+                                         @RequestParam(value = "description") String description) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("activityID", activityID);
         mav.addObject("activityName", activityName);
@@ -93,6 +91,7 @@ public class AdminController {
         return mav;
     }
 
+    //loads contact admin page
     @RequestMapping(value="/ContactAdmin", method = RequestMethod.GET)
     public ModelAndView contactAdmin() {
         ModelAndView mav = new ModelAndView();
@@ -100,6 +99,7 @@ public class AdminController {
         return mav;
     }
 
+    //contact admin page - sends message to admin
     @RequestMapping(value= "/AdminContact", method = RequestMethod.POST)
     public String messageAdmin(@RequestParam(value = "name") String name,
                                @RequestParam(value = "id") int serProID,
@@ -120,10 +120,10 @@ public class AdminController {
     //submitting form on admin reply page
     @RequestMapping(value= "/AdminReply", method = RequestMethod.POST)
     public String sendtoSPinbox(@RequestParam(value = "name") String adminName,
-                               @RequestParam(value = "messageID") int messageID,
-                               @RequestParam(value = "date") String replyDate,
-                               @RequestParam(value = "reply") String replyMessage,
-                               @RequestParam(value = "serProID") int serProID) throws ParseException {
+                                @RequestParam(value = "messageID") int messageID,
+                                @RequestParam(value = "date") String replyDate,
+                                @RequestParam(value = "reply") String replyMessage,
+                                @RequestParam(value = "serProID") int serProID) throws ParseException {
 
         ReplyFromAdmin replyFromAdmin = new ReplyFromAdmin(messageID, adminName, replyMessage, replyDate, true, serProID);
         String response = "";
@@ -138,9 +138,9 @@ public class AdminController {
     //updates activity on admin edit data page
     @RequestMapping(value= "/ChangeValues", method = RequestMethod.POST)
     public String changeActivityValues(@RequestParam(value = "name") String activityName,
-                                    @RequestParam(value = "date") String activityDate,
-                                    @RequestParam(value = "location") String location,
-                                    @RequestParam(value = "description") String description,
+                                       @RequestParam(value = "date") String activityDate,
+                                       @RequestParam(value = "location") String location,
+                                       @RequestParam(value = "description") String description,
                                        @RequestParam(value = "activityID") String activityID) throws ParseException {
 
         CreateActivity createActivity = new CreateActivity(activityName, activityDate, description, location, activityID);
@@ -151,8 +151,6 @@ public class AdminController {
         }
         return response;
     }
-
-
 
     //reply button click on admin home page
     @RequestMapping(path = "/message/reply/{id}/", method = RequestMethod.GET)
@@ -169,26 +167,48 @@ public class AdminController {
         return mav;
     }
 
-
-    @RequestMapping(value="/message/delete/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteMessage(@RequestParam("messageid") int messageID) {
+    //delete button on service provider inbox page
+    @RequestMapping(value="/SPdelete/{id}", method = RequestMethod.DELETE)
+    public ModelAndView SPdeletesMessage(@PathVariable int id) {
         ModelAndView mav = new ModelAndView();
-        ContactAdminDTO contactAdminDTO = adminRepo.findMessageByID(messageID);
-        mav.addObject("deletedMessage", adminRepo.deleteMessage(contactAdminDTO));
-        mav.addObject("allMessages", adminRepo.findAllMessages());
-        mav.addObject("allSerPro", SPrepo.findAllSerPro());
-        mav.setViewName("AdminHome");
-        return mav;
+        ContactAdminDTO contactAdminDTO = adminRepo.findMessageByID(id);
+        if (adminRepo.deleteMessage(contactAdminDTO)) {
+            System.out.println("deleted message");
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = auth.getName();
+            int serProID = SPrepo.findServiceProviderIDByEmail(currentPrincipalName);
+
+            mav.addObject("allMessages", adminRepo.findAllMessages());
+            mav.addObject("thisSerPro", serProID);
+            mav.setViewName("ServiceProviderInbox");
+            return mav;
+        }return mav;
     }
 
+    //delete button on admin home page
+    @RequestMapping(value="/Admindelete/{id}", method = RequestMethod.DELETE)
+    public ModelAndView AdmindeletesMessage(@PathVariable int id) {
+        ModelAndView mav = new ModelAndView();
+        ContactAdminDTO contactAdminDTO = adminRepo.findMessageByID(id);
+        if (adminRepo.deleteMessage(contactAdminDTO)) {
+            System.out.println("deleted message");
+            mav.addObject("allMessages", adminRepo.findAllMessages());
+            mav.addObject("allSerPro", SPrepo.findAllSerPro());
+            mav.setViewName("AdminHome");
+            return mav;
+        }return mav;
+    }
+
+
+    //login functionality for admin email
     @RequestMapping(path= "/checkIfAdmin", method= RequestMethod.POST)
     public String checkIfAdmin(@RequestParam(value="email") String email){
         String response = "";
         if(SPrepo.checkIfServiceProviderExists(email).get(0).getCount() == 0) {
             response = "Login is successful";
         } else {
-        response = "Login failed";
-    }
+            response = "Login failed";
+        }
         System.out.println(response);
         return response;
     }

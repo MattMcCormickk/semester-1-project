@@ -1,17 +1,21 @@
 package com.clientproject.soms.wellbeing.controller;
 
+import com.clientproject.soms.wellbeing.DTO.UserDTO;
 import com.clientproject.soms.wellbeing.form.CaptureUserActivity;
 import com.clientproject.soms.wellbeing.repository.UserRepository;
+import com.opencsv.CSVWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
+
 
 // Important - added RestController so that SaveUserActivity method is working!!
 @RestController
@@ -51,6 +55,50 @@ public class UserController {
             response = "Successfully saved the user activity data!!";
         }
         return response;
+    }
+
+    // Route to get the user name by passing email id as parameter
+    @RequestMapping(path="/GetUserNameByEmail", method = RequestMethod.GET)
+    public String getUserNameByEmail(@RequestParam(value = "email") String email) {
+        String userName = userRepository.getUserByEmail(email).getFirstName() + " " + userRepository.getUserByEmail(email).getLastName();
+        return userName;
+    }
+
+
+    // Route to export all the users in the table as a CSV file
+    @GetMapping("/export/AllUsers")
+    public void exportCSV(HttpServletResponse response) throws IOException {
+
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=AllUsers.csv");
+
+        try {
+            List<UserDTO> allUsers = userRepository.findAllUsers();
+            CSVWriter writer = new CSVWriter(response.getWriter());
+
+            String[] csvTitle = {"User Id", "First Name", "Last Name", "Date of Birth", "Email", "Telephone", "Address", "Postcode"};
+            writer.writeNext(csvTitle);
+
+            for (int i = 0; i < allUsers.size(); i++) {
+
+                String[] eachUser = {String.valueOf(allUsers.get(i).getUserId()),
+                        allUsers.get(i).getFirstName(),
+                        allUsers.get(i).getLastName(),
+                        allUsers.get(i).getDateOfBirth().toString(),
+                        allUsers.get(i).getEmail(),
+                        allUsers.get(i).getTelephone(),
+                        allUsers.get(i).getAddress(),
+                        allUsers.get(i).getPostcode()};
+
+                writer.writeNext(eachUser);
+
+            }
+            writer.close();
+            System.out.println("Successfully exported All Users as a CSV file!");
+
+        } catch (Exception e) {
+            System.out.println("Caught exception while writing the CSV file " + e.getMessage());
+        }
     }
 
 }
