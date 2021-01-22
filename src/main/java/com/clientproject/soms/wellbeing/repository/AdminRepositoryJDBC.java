@@ -27,6 +27,7 @@ public class AdminRepositoryJDBC implements AdminRepository{
         this.template = template;
     }
 
+    //finds all ser pro's in SERVICE_PROVIDER table
     @Override
     public List<ServiceProviderDTO> findAllSerPro() {
         return template.query(
@@ -35,7 +36,7 @@ public class AdminRepositoryJDBC implements AdminRepository{
         );
     }
 
-
+    //inserts ContactAdmin Form data into CONTACT_ADMIN table
     @Override
     public boolean messageAdmin(ContactAdmin contactAdmin) throws ParseException {
         int types[] = new int[] {
@@ -59,6 +60,7 @@ public class AdminRepositoryJDBC implements AdminRepository{
         return rows>0;
     }
 
+    //finds all messages from CONTACT_ADMIN table
     @Override
     public List<ContactAdminDTO> findAllMessages() {
         return template.query(
@@ -67,16 +69,16 @@ public class AdminRepositoryJDBC implements AdminRepository{
         );
     }
 
+    //deletes a message from CONTACT_ADMIN table based on message ID
+    @Override
+    public boolean deleteMessage(ContactAdminDTO contactAdminDTO){
+        int messageID = contactAdminDTO.getMessageID();
+        String sql = "DELETE FROM soms_wellbeing.CONTACT_ADMIN WHERE MESSAGE_ID = ?";
+        Object[] args = new Object[]{messageID};
+        return template.update(sql, args) == 1;
+    }
 
-   @Override
-    public boolean deleteMessage(ContactAdminDTO contactAdminDTO) {
-       int messageID = contactAdminDTO.getMessageID();
-       String sql = "DELETE FROM soms_wellbeing.CONTACT_ADMIN WHERE MESSAGE_ID = ?";
-       Object[] args = new Object[]{contactAdminDTO};
-       return template.update(sql, args) == 1;
-
-   }
-
+    //updates CONTACT_ADMIN table with ReplyFromAdmin Form data based on MessageID
     @Override
     public boolean adminReply(ReplyFromAdmin replyFromAdmin) throws ParseException {
         int types[] = new int[] {
@@ -104,13 +106,13 @@ public class AdminRepositoryJDBC implements AdminRepository{
 
     }
 
+    //finds a message in CONTACT_ADMIN table based on messageID
     @Override
     public ContactAdminDTO findMessageByID(int messageID) {
-        ContactAdminDTO contactAdminDTO=(ContactAdminDTO) template.queryForObject("Select SERV_PROV_NAME, RECEIVED_DATE," +
-                        "SERV_PROV_EMAIL, MESSAGE, PRIORITY from soms_wellbeing.activity where CONTACT_ADMIN = ?",
+        ContactAdminDTO contactAdminDTO=(ContactAdminDTO) template.queryForObject("Select MESSAGE_ID, SERV_PROV_ID, SERV_PROV_NAME, SERV_PROV_EMAIL, MESSAGE, " +
+                        "RECEIVED_DATE, PRIORITY, REPLY_MESSAGE, REPLIED_DATE, ADMIN_NAME, IS_REPLIED from soms_wellbeing.CONTACT_ADMIN where MESSAGE_ID = ?",
                 new Object[]{messageID}, new ContactAdminMapper());
         return contactAdminDTO;
     }
-
 
 }

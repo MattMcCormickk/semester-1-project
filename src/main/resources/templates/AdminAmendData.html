@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="../soms-style.css">
-    <!-- <link rel="stylesheet" th:href="@{soms-style.css}"> -->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+<!-- the plug-in responsible for table sorting, searching and pagination -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
@@ -23,6 +23,7 @@
   <div class="adminTitleDiv">
     <h1 class="adminTitle">Amend Data</h1>
   </div>
+  <!-- displays ser pro details based on selected ser pro from AdminHome.html -->
     <div class="serProSelected"></div>
     <label for="serProName">Service Provider Name</label>
     <input type="text" class="form-control" id="serProName" name="serProName" th:value="${serProName}" readonly>
@@ -46,7 +47,6 @@
             </thead>
             <tbody>
 
-
         <tr th:each="activity: ${allActivity}" th:if="${activity.serProID} == ${serProID}">
             <td th:text="${activity.activityID}"></td>
             <td th:text="${activity.activityName}"></td>
@@ -54,6 +54,7 @@
             <td th:text="${activity.description}"></td>
             <td th:text="${activity.location}"></td>
             <td th:text="${activity.keyWords}"></td>
+            <!-- button carries activity data across to AdminEditData page -->
             <td><a th:href="@{/ActBySPID
                     (activityID=${activity.activityID},
                     activityName=${activity.activityName},
@@ -67,6 +68,7 @@
 </div>
 
 <script type="text/javascript">
+// function allows table to be sorted and provides search bar and pagination
     $(document).ready( function () {
         $('#SP-activity-table').DataTable();
     } );

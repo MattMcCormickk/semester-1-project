@@ -16,7 +16,8 @@ public class ContactAdminDTO {
     private boolean isReplied;
     private int messageID;
 
-    public ContactAdminDTO(int messageID, int  serProID, String SerProName, String serProEmail, String message, Date recievedDate, String priority, String replyMessage, Date replyDate, String adminName, boolean isReplied) {
+    public ContactAdminDTO(int messageID, int  serProID, String SerProName, String serProEmail,
+                           String message, Date recievedDate, String priority, String replyMessage, Date replyDate, String adminName, boolean isReplied) {
         this.SerProName = SerProName;
         this.recievedDate = recievedDate;
         this.serProEmail = serProEmail;
@@ -74,6 +75,8 @@ public class ContactAdminDTO {
     public int getMessageID() {
         return messageID;
     }
+
+    //parameters related to inputted data from ContactAdmin and ReplyFromAdmin Forms
 }
 
 

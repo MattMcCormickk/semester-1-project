@@ -13,6 +13,9 @@ public interface AdminRepository {
     public Object findAllMessages();
     boolean deleteMessage(ContactAdminDTO contactAdminDTO);
     public ContactAdminDTO findMessageByID(int MessageID);
-    //public ContactAdminDTO addReplyToDto(ReplyFromAdmin replyFromAdmin);
+
 }
+
+
+
 
